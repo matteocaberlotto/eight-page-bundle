@@ -1,2 +1,2 @@
 # easy-page-bundle
-EasyPageBundle
+EightPageBundle
