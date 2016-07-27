@@ -1,0 +1,2 @@
+# easy-page-bundle
+EasyPageBundle
