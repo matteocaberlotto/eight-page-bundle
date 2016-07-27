@@ -1,0 +1,52 @@
+services:
+#    eight_page.example:
+#        class: Eight\PageBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
+
+    layout.provider:
+        class: Eight\PageBundle\Provider\Layout
+        arguments: ['@service_container']
+
+    widget.provider:
+        class: Eight\PageBundle\Provider\Widget
+        arguments: ['@service_container']
+
+    variable.provider:
+        class: Eight\PageBundle\Provider\Variable
+        arguments: ['@service_container']
+
+    eight.form_builder:
+        class: Eight\PageBundle\Renderer\FormBuilder
+        arguments: ['@service_container']
+
+    helper.page:
+        class: Eight\PageBundle\Helper\Page
+        arguments: ['@service_container']
+
+    page.renderer:
+        class: Eight\PageBundle\Renderer\Page
+        arguments: ['@service_container']
+
+    eight.seo.listener:
+        class: Eight\PageBundle\HttpKernel\FilterControllerSeoPageEvent
+        arguments: ["@service_container"]
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+
+    eight.page.seo:
+        class: Eight\PageBundle\Seo\SeoPage
+        arguments: [%seo_title%, %seo_description%, %seo_encoding%]
+
+    eight.twig.extension:
+        class: Eight\PageBundle\Twig\Extension
+        arguments: ['@eight.page.seo']
+        calls:
+            - [ setContainer, ["@service_container"]]
+        tags:
+            - { name: twig.extension }
+
+    class_method_form_type:
+        class: Eight\PageBundle\Form\CollectionMethodType
+        tags:
+            - { name: form.type }
+

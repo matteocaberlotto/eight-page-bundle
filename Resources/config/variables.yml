@@ -1,0 +1,47 @@
+services:
+
+    eight.label:
+        class: Eight\PageBundle\Variable\Label
+        tags:
+            - { name: eight_page.variable }
+
+    eight.text:
+        class: Eight\PageBundle\Variable\Text
+        tags:
+            - { name: eight_page.variable }
+
+    eight.entity:
+        class: Eight\PageBundle\Variable\Entity
+        calls:
+            - ['setContainer', ['@service_container']]
+        tags:
+            - { name: eight_page.variable }
+
+    eight.collection:
+        class: Eight\PageBundle\Variable\Collection
+        calls:
+            - ['setContainer', ['@service_container']]
+        tags:
+            - { name: eight_page.variable }
+
+    eight.collection_method:
+        class: Eight\PageBundle\Variable\CollectionMethod
+        calls:
+            - ['setContainer', ['@service_container']]
+        tags:
+            - { name: eight_page.variable }
+
+    eight.url:
+        class: Eight\PageBundle\Variable\Url
+        calls:
+            - ['setContainer', ['@service_container']]
+        tags:
+            - { name: eight_page.variable }
+
+    eight.i18n_url:
+        class: Eight\PageBundle\Variable\i18nUrl
+        calls:
+            - ['setContainer', ['@service_container']]
+        tags:
+            - { name: eight_page.variable }
+

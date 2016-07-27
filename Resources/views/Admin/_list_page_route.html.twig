@@ -1,0 +1,5 @@
+<td class="sonata-ba-list-field sonata-ba-list-field-{{ field_description.type }}" objectId="{{ admin.id(object) }}">
+    {% if object.getRoute() is not null %}
+        {{ object.getRoute().getPath() }}
+    {% endif %}
+</td>

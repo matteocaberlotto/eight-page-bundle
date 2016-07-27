@@ -1,0 +1,17 @@
+services:
+
+    eight.pages:
+        class: Eight\PageBundle\Entity\PageRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Eight\PageBundle\Entity\Page']
+
+    eight.tags:
+        class: Eight\PageBundle\Entity\TagRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Eight\PageBundle\Entity\Tag']
+
+    eight.blocks:
+        class: Eight\PageBundle\Entity\BlockRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Eight\PageBundle\Entity\Block']
+

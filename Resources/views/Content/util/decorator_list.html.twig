@@ -1,0 +1,7 @@
+<span class="block-container" data-label="{{ label }}" data-title="{{ title }}" data-subject-class="{{ subject_class }}" data-subject-id="{{ id }}">
+    {{ html|raw }}
+
+    <a class="add-item{% if is_page(subject) %} add-to-page{% endif %}" href="javascript:;">
+        <span class="glyphicon glyphicon-plus"></span> add block ({{ label }})
+    </a>
+</span>

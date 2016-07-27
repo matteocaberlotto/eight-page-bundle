@@ -1,0 +1,33 @@
+services:
+    sonata.admin.page:
+        class: Eight\PageBundle\Admin\PageAdmin
+        arguments: ['','Eight\PageBundle\Entity\Page', 'EightPageBundle:PageCRUD']
+        calls:
+            - ['setTranslationDomain', ['EightPageBundle']]
+            - ['setContainer', ['@service_container']]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Page, label: Page }
+
+    sonata.admin.page_block:
+        class: Eight\PageBundle\Admin\BlockAdmin
+        arguments: ['','Eight\PageBundle\Entity\Block', 'EightPageBundle:BlockCRUD']
+        calls:
+            - ['setTranslationDomain', ['EightPageBundle']]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Page, label: Block }
+
+    # sonata.admin.page_content:
+    #     class: Eight\PageBundle\Admin\ContentAdmin
+    #     arguments: ['','Eight\PageBundle\Entity\Content', '']
+    #     calls:
+    #         - ['setTranslationDomain', ['EightPageBundle']]
+    #     tags:
+    #         - { name: sonata.admin, manager_type: orm, group: Page, label: Content }
+
+    # sonata.admin.page_tag:
+    #     class: Eight\PageBundle\Admin\TagAdmin
+    #     arguments: ['','Eight\PageBundle\Entity\Tag', '']
+    #     calls:
+    #         - ['setTranslationDomain', ['EightPageBundle']]
+    #     tags:
+    #         - { name: sonata.admin, manager_type: orm, group: Page, label: Tag }

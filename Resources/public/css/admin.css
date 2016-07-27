@@ -1,0 +1,49 @@
+.tab-content {
+    background: #FFF;
+    border-color: #ddd;
+    border-width: 0 1px 1px;
+    border-style: solid;
+}
+
+.box {
+    border-top: none;
+    background: transparent;
+    box-shadow: none;
+}
+
+.layout-iframe-container {
+    /*border: solid 5px #c00;*/
+    margin: 20px 0;
+    box-shadow: 0 0 5px 1px #333;
+}
+
+.btn-close-fullscreen {
+    display: none;
+}
+
+.fullscreen .btn-close-fullscreen {
+    display: block;
+    opacity: 0.2;
+}
+
+
+.fullscreen .btn-close-fullscreen:hover {
+    opacity: 1;
+}
+
+.layout-iframe-container.fullscreen {
+    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2000000;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.layout-iframe-container iframe {
+    min-height: 600px;
+}

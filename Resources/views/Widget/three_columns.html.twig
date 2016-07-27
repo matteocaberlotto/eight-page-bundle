@@ -1,0 +1,11 @@
+<div class="row content {{ current_block.name }} {{ classes }}">
+    <div class="col-md-4">
+        {{ render_inner_blocks(current_block, 'left') }}
+    </div>
+    <div class="col-md-4">
+        {{ render_inner_blocks(current_block, 'center') }}
+    </div>
+    <div class="col-md-4">
+        {{ render_inner_blocks(current_block, 'right') }}
+    </div>
+</div>

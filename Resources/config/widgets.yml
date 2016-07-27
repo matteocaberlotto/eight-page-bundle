@@ -1,0 +1,68 @@
+services:
+
+    text.widget:
+        class: Eight\PageBundle\Widget\Text
+        arguments: ['@service_container']
+        tags:
+            - { name: eight_page.widget }
+
+    label.widget:
+        class: Eight\PageBundle\Widget\Label
+        arguments: ['@service_container']
+        tags:
+            - { name: eight_page.widget }
+
+    header.widget:
+        class: Eight\PageBundle\Widget\Header
+        arguments: ['@service_container']
+        tags:
+            - { name: eight_page.widget }
+
+    one_column.widget:
+        class: Eight\PageBundle\Widget\OneColumn
+        arguments: ['@service_container']
+        tags:
+            - { name: eight_page.widget }
+
+    two_columns.widget:
+        class: Eight\PageBundle\Widget\TwoColumns
+        arguments: ['@service_container']
+        tags:
+            - { name: eight_page.widget }
+
+    two_columns_1_2.widget:
+        class: Eight\PageBundle\Widget\TwoColumns_1_2
+        arguments: ['@service_container']
+        tags:
+            - { name: eight_page.widget }
+
+    three_columns.widget:
+        class: Eight\PageBundle\Widget\ThreeColumns
+        arguments: ['@service_container']
+        tags:
+            - { name: eight_page.widget }
+
+    menu.widget:
+        class: Eight\PageBundle\Widget\Menu
+        arguments: ['@service_container']
+        tags:
+            - { name: eight_page.widget }
+
+    footer.widget:
+        class: Eight\PageBundle\Widget\Footer
+        arguments: ['@service_container']
+        tags:
+            - { name: eight_page.widget }
+
+    template.widget:
+        class: Eight\PageBundle\Widget\Template
+        arguments: ['@service_container']
+        tags:
+            - { name: eight_page.widget }
+
+    controller.widget:
+        class: Eight\PageBundle\Widget\Controller
+        arguments: ['@service_container']
+        tags:
+            - { name: eight_page.widget }
+

@@ -1,0 +1,36 @@
+<span class="block-wrapper block-{{ subject.enabled ? 'enabled' : 'disabled' }}" data-name="{{ subject.name }}" data-label="{{ label }}" data-type="{{ type }}" data-subject="{{ subject_class }}" data-subject-id="{{ id }}">
+
+    <div class="block-wrapper-header">
+        <p title="{{ subject.name }} || {{ subject.layout }}" class="eight-ui-element block-label">{{ subject.name }} || {{ subject.layout }}</p>
+    </div>
+
+    {% if subject.loadsVariables() %}
+        {{ form(form) }}
+
+        <a title="Edit {{ type }} id:{{ id }}" class="eight-ui-element btn btn-default btn-sm btn-edit-variable" onclick="Editor.edit(this)" href="javascript:;" data-toggle="tooltip">
+            <span class="glyphicon glyphicon-pencil"></span>
+        </a>
+    {% endif %}
+
+    {{ html|raw }}
+
+    <a title="Sort blocks" href="javascript:;" class="eight-ui-element btn btn-sm btn-default btn-sort-block" data-toggle="tooltip">
+        <span class="glyphicon glyphicon-resize-vertical"></span>
+    </a>
+
+
+    <a title="Delete block id:{{ id }}" class="eight-ui-element btn btn-default btn-sm btn-remove-block" data-toggle="tooltip">
+        <span class="glyphicon glyphicon-remove"></span>
+    </a>
+
+
+    {% if subject.enabled %}
+        <a class="btn btn-sm btn-default btn-disable-block" href="javascript:;" title="Disable {{ type }} id:{{ id }}" data-toggle="tooltip">
+            <span class="glyphicon glyphicon-ban-circle"></span>
+        </a>
+    {% else %}
+        <a class="btn btn-sm btn-default btn-enable-block" href="javascript:;" title="Enable {{ type }} id:{{ id }}" data-toggle="tooltip">
+            <span class="glyphicon glyphicon-eye-open"></span>
+        </a>
+    {% endif %}
+</span>
