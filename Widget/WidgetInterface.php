@@ -10,6 +10,8 @@ interface WidgetInterface
 
     public function getName();
 
+    public function getLabel();
+
     public function js();
 
     public function css();

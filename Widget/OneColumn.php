@@ -20,4 +20,9 @@ class OneColumn extends AbstractWidget
     {
         return 'one_column';
     }
+
+    public function getLabel()
+    {
+        return 'One column container';
+    }
 }

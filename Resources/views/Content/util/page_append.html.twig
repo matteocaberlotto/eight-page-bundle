@@ -16,7 +16,7 @@
             <div class="modal-body">
                 <select>
                 {% for widget in widgets %}
-                    <option value="{{ widget.layout }}">{{ widget.name }}</option>
+                    <option value="{{ widget.name }}">{{ widget.label }}</option>
                 {% endfor %}
                 </select>
             </div>

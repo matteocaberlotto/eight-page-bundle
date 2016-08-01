@@ -4,6 +4,7 @@
 namespace Eight\PageBundle\Widget;
 
 use Eight\PageBundle\Widget\WidgetInterface;
+use Symfony\Component\DependencyInjection\Container;
 
 abstract class AbstractWidget implements WidgetInterface
 {
@@ -20,6 +21,11 @@ abstract class AbstractWidget implements WidgetInterface
     public function getName()
     {
         return null;
+    }
+
+    public function getLabel()
+    {
+        return Container::camelize($this->getName());
     }
 
     public function js()

@@ -20,4 +20,9 @@ class ThreeColumns extends AbstractWidget
     {
         return 'three_columns';
     }
+
+    public function getLabel()
+    {
+        return 'Three columns container';
+    }
 }

@@ -20,4 +20,9 @@ class TwoColumns_1_2 extends AbstractWidget
     {
         return 'two_columns_one_two';
     }
+
+    public function getLabel()
+    {
+        return 'Two columns container (1:2)';
+    }
 }

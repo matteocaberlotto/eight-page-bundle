@@ -14,7 +14,10 @@ class Page
         $this->container = $container;
     }
 
-    public function append($subject, $id, $name, $template, $type)
+    /**
+     * Append a child block to a page or block
+     */
+    public function append($subject, $id, $name, $label, $type)
     {
         $block = new Block();
         $parent = $this->container->get('doctrine')->getRepository($subject)->find($id);
@@ -33,8 +36,10 @@ class Page
 
         $nextSeq = $this->container->get('eight.blocks')->getNextPosition($subject, $id, $type);
 
+        $widget = $this->container->get('widget.provider')->get($name);
+
         $block->setName($name);
-        $block->setLayout($template);
+        $block->setLayout($widget->getLayout());
         $block->setType($type);
         $block->setSeq($nextSeq);
 

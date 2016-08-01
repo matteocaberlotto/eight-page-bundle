@@ -49,8 +49,13 @@ body.toolkit {
     padding-top: 34px;
 }
 
-.block-wrapper.block-disabled {
+.block-disabled {
+    display: none;
+}
 
+.toolkit .block-wrapper.block-disabled {
+    display: block;
+    opacity: 0.5;
 }
 
 .toolkit span.block-container {
@@ -168,6 +173,7 @@ span.block-wrapper .add-item:hover {
     right: 38px;
     z-index: 2147483647;
     display: none;
+    background: #FFBBBB;
 }
 
 .block-label {

@@ -152,7 +152,7 @@ var Editor = (function () {
                         data: {
                             subject: $el.parent().data('subject-class'),
                             id: $el.parent().data('subject-id'),
-                            name: $('.modal-body select').find('option:selected').html(),
+                            name: $('.modal-body select').find('option:selected').val(),
                             template: $('.modal-body select').val(),
                             label: $el.parent().data('label')
                         },
