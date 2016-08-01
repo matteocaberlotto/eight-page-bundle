@@ -3,7 +3,7 @@
 ### Installation
 
 1. require via composer
-    - composer require eight/page-bundle
+    - composer require matteocaberlotto/eight-page-bundle
 
 
 2. install dependencies
