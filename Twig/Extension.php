@@ -60,7 +60,13 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
             'eight_body_class' => new \Twig_Function_Method($this, 'bodyClass'),
             'is_host' => new \Twig_Function_Method($this, 'isHost'),
             'is_route' => new \Twig_Function_Method($this, 'isRoute'),
+            'get_widget' => new \Twig_Function_Method($this, 'getWidget'),
         );
+    }
+
+    public function getWidget($name)
+    {
+        return $this->container->get('widget.provider')->get($name);
     }
 
     public function isRoute($name) {

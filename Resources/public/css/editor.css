@@ -46,7 +46,6 @@ body.toolkit {
 .block-wrapper {
     display: block;
     position: relative;
-    padding-top: 34px;
 }
 
 .block-disabled {
@@ -59,7 +58,7 @@ body.toolkit {
 }
 
 .toolkit span.block-container {
-    border: 2px dotted #B7CEF4;
+    border: 2px dotted #D7E5F2;
     padding: 0 0 35px 0;
 }
 
@@ -68,12 +67,13 @@ body.toolkit {
     min-height: 34px;
     /*background: rgba(165,255,75,0.7);*/
     border: 2px solid transparent;
+    padding-top: 34px;
 }
 
 .toolkit span.block-wrapper:hover {
     background: #EEE none repeat scroll 0 0;
     z-index: 200;
-    border: 2px dotted #35A065;
+    border: 2px dotted #3C6FC1;
 }
 
 .block-wrapper-header {
@@ -219,4 +219,8 @@ span.block-wrapper .add-item:hover {
 .submit-enable-block-edit {
     margin-top: 10px;
     width: 200px;
+}
+
+.block-label .tooltip-inner {
+    max-width: 400px;
 }
