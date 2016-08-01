@@ -44,7 +44,7 @@ body.toolkit {
 }
 
 .block-wrapper {
-    display: block;
+    display: inline-block;
     position: relative;
 }
 
@@ -53,8 +53,8 @@ body.toolkit {
 }
 
 .toolkit span.block-container {
-    border: 2px dotted #DDD;
-    padding: 0 0 35px;
+    border: 2px dotted #B7CEF4;
+    padding: 35px 0 35px;
 }
 
 .toolkit span.block-wrapper {
@@ -73,7 +73,7 @@ body.toolkit {
     background: rgba(0,0,0,0.5);
     height: 35px;
     position: absolute;
-    top: 0;
+    top: -35px;
     display: none;
     z-index: 100;
 }
@@ -129,7 +129,7 @@ span.block-wrapper .add-item:hover {
 
 .btn-remove-block {
     position: absolute;
-    top: 2px;
+    top: -32px;
     right: 2px;
     z-index: 2147483647;
     display: none;
@@ -137,7 +137,7 @@ span.block-wrapper .add-item:hover {
 
 .btn-edit-variable {
     position: absolute;
-    top: 2px;
+    top: -32px;
     right: 74px;
     z-index: 2147483647;
     display: none;
@@ -145,8 +145,24 @@ span.block-wrapper .add-item:hover {
 
 .btn-sort-block {
     position: absolute;
-    top: 2px;
+    top: -32px;
     left: 2px;
+    z-index: 2147483647;
+    display: none;
+}
+
+.btn-disable-block {
+    position: absolute;
+    top: -32px;
+    right: 38px;
+    z-index: 2147483647;
+    display: none;
+}
+
+.btn-enable-block {
+    position: absolute;
+    top: -32px;
+    right: 38px;
     z-index: 2147483647;
     display: none;
 }
@@ -158,22 +174,6 @@ span.block-wrapper .add-item:hover {
     padding: 0 8px 0 38px;
     text-transform: uppercase;
     z-index: 2147483647;
-}
-
-.btn-disable-block {
-    position: absolute;
-    top: 2px;
-    right: 38px;
-    z-index: 2147483647;
-    display: none;
-}
-
-.btn-enable-block {
-    position: absolute;
-    top: 2px;
-    right: 38px;
-    z-index: 2147483647;
-    display: none;
 }
 /*
 .toolkit span.block-wrapper.edit-content > .block-label {
