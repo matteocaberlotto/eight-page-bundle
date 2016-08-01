@@ -89,10 +89,12 @@ class BlockCRUDController extends CRUDController
 
     public function updateAction()
     {
+        $request = $this->getRequest();
+
         // the key used to lookup the template
         $templateKey = 'edit';
 
-        $id = $this->get('request')->get($this->admin->getIdParameter());
+        $id = $request->get($this->admin->getIdParameter());
         $object = $this->admin->getObject($id);
 
         if (!$object) {
@@ -105,11 +107,11 @@ class BlockCRUDController extends CRUDController
 
         $this->admin->setSubject($object);
 
-        $this->get('page.renderer')->setCurrentPage($this->get('eight.pages')->find($this->get('request')->get('page_id')));
+        $this->get('page.renderer')->setCurrentPage($this->get('eight.pages')->find($request->get('page_id')));
 
         $form = $this->get('page.renderer')->createFormForBlock($object);
 
-        $form->handleRequest($this->get('request'));
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
 
@@ -144,7 +146,7 @@ class BlockCRUDController extends CRUDController
             $this->get('doctrine')->getManager()->flush();
         }
 
-        return $this->redirect($this->generateUrl('admin_eight_page_page_layout', array('id' => $this->get('request')->get('page_id'))));
+        return $this->redirect($this->generateUrl('admin_eight_page_page_layout', array('id' => $request->get('page_id'))));
     }
 
     public function reorderAction(Request $request)
