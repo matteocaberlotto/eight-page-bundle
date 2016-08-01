@@ -11,8 +11,7 @@
     - raindrop routing bundle
     - fos user bundle
 
-3. configure
-inside  add following lines to config.yml for following features:
+3. add following lines to config.yml for following features:
   - general encoding
   - locales
   - homepage redirect after locale has been detected
