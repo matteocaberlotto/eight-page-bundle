@@ -44,8 +44,9 @@ body.toolkit {
 }
 
 .block-wrapper {
-    display: inline-block;
+    display: block;
     position: relative;
+    padding-top: 34px;
 }
 
 .block-wrapper.block-disabled {
@@ -54,26 +55,28 @@ body.toolkit {
 
 .toolkit span.block-container {
     border: 2px dotted #B7CEF4;
-    padding: 35px 0 35px;
+    padding: 0 0 35px 0;
 }
 
 .toolkit span.block-wrapper {
     /*min-height: 42px;*/
     min-height: 34px;
     /*background: rgba(165,255,75,0.7);*/
+    border: 2px solid transparent;
 }
 
 .toolkit span.block-wrapper:hover {
     background: #EEE none repeat scroll 0 0;
     z-index: 200;
+    border: 2px dotted #35A065;
 }
 
 .block-wrapper-header {
     width: 100%;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.1);
     height: 35px;
     position: absolute;
-    top: -35px;
+    top: 0;
     display: none;
     z-index: 100;
 }
@@ -129,7 +132,7 @@ span.block-wrapper .add-item:hover {
 
 .btn-remove-block {
     position: absolute;
-    top: -32px;
+    top: 2px;
     right: 2px;
     z-index: 2147483647;
     display: none;
@@ -137,23 +140,23 @@ span.block-wrapper .add-item:hover {
 
 .btn-edit-variable {
     position: absolute;
-    top: -32px;
-    right: 74px;
+    top: 2px;
+    right: 110px;
     z-index: 2147483647;
     display: none;
 }
 
 .btn-sort-block {
     position: absolute;
-    top: -32px;
-    left: 2px;
+    top: 2px;
+    right: 74px;
     z-index: 2147483647;
     display: none;
 }
 
 .btn-disable-block {
     position: absolute;
-    top: -32px;
+    top: 2px;
     right: 38px;
     z-index: 2147483647;
     display: none;
@@ -161,17 +164,17 @@ span.block-wrapper .add-item:hover {
 
 .btn-enable-block {
     position: absolute;
-    top: -32px;
+    top: 2px;
     right: 38px;
     z-index: 2147483647;
     display: none;
 }
 
 .block-label {
-    color: #fff;
+    color: #333;
     font-weight: bold;
     margin-top: 10px;
-    padding: 0 8px 0 38px;
+    padding: 0 8px;
     text-transform: uppercase;
     z-index: 2147483647;
 }
