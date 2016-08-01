@@ -21,6 +21,7 @@ inside  add following lines to config.yml for following features:
   - assets to be loaded in each page
   - metatags you want to edit in admin area
         
+```yml
         eight_page:
             encoding: utf-8
             locales: [it]
@@ -48,10 +49,10 @@ inside  add following lines to config.yml for following features:
         
                 http_equiv:
                     - ['Content-type', 'text', { required: false }]
-
+```
 
 4. add following parameters (where you want, eg: parameters.yml)
 parameters:
-    seo_title: Maxì Supermercati
-    seo_description: Gruppo Vega - Supermercati Maxì
+    seo_title: My website
+    seo_description: My very cool website
     seo_encoding: utf-8
