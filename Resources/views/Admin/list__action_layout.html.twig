@@ -1,6 +1,6 @@
 {% if admin.isGranted('EDIT', object) and admin.hasRoute('layout') %}
     <a href="{{ admin.generateObjectUrl('layout', object) }}" class="btn btn-sm btn-default edit_link" title="{{ 'layout'|trans({}, 'SonataAdminBundle') }}">
-        <i class="glyphicon glyphicon-eye-open"></i>
-        {{ 'Preview'|trans({}, 'SonataAdminBundle') }}
+        <i class="glyphicon glyphicon-th-large"></i>
+        {{ 'Layout'|trans({}, 'SonataAdminBundle') }}
     </a>
 {% endif %}

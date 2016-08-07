@@ -1,1 +1,5 @@
-{{ menu_link }}
+{% if html_tag is not empty %}
+    <{{ html_tag }} {% if html_id is not empty %}id="{{ html_id }}"{% endif %} {% if html_classes is not empty %}class="{{ html_classes }}"{% endif %}>
+        {{ render_inner_blocks(current_block) }}
+    </{{ html_tag }}>
+{% endif %}

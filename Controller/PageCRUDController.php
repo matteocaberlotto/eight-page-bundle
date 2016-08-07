@@ -110,6 +110,7 @@ class PageCRUDController extends CRUDController
         $page->setEditMode();
         $this->get('page.renderer')->setCurrentPage($page);
         $template = $this->get('layout.provider')->provide($page);
+
         $request->request->set('content', $page);
 
         return $this->render($template);

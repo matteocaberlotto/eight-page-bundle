@@ -48,6 +48,7 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
         return array(
             'i18n_path'      => new \Twig_Function_Method($this, 'i18nPath'),
             'i18n_title'      => new \Twig_Function_Method($this, 'i18nTitle'),
+            'route_name'        => new \Twig_Function_Method($this, 'routeName'),
             'render_title'      => new \Twig_Function_Method($this, 'renderTitle'),
             'render_encoding'      => new \Twig_Function_Method($this, 'renderEncoding'),
             'render_metadatas'  => new \Twig_Function_Method($this, 'renderMetadatas'),
@@ -103,16 +104,16 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
         return $subject instanceof PageInterface;
     }
 
-    public function renderBlocks($block, $type = 'default')
+    public function renderBlocks($subject, $type = 'default')
+    {
+        return $this->container->get('page.renderer')->renderBlockChildren($subject, $type);
+    }
+
+    public function renderPage($type = 'default')
     {
         $page = $this->getPage();
 
-        return $this->container->get('page.renderer')->renderBlockChildren($page, $block, $type);
-    }
-
-    public function renderPage()
-    {
-        return $this->container->get('page.renderer')->render($this->getPage());
+        return $this->container->get('page.renderer')->renderBlockChildren($page, $type);
     }
 
     public function getLocale()
@@ -141,6 +142,13 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
     public function i18nPath($path, $params = array())
     {
         $page = $this->container->get('eight.pages')->findOneByTag($path . '.' . $this->getLocale());
+
+        if ($page && is_object($page->getRoute())) {
+            return $this->container->get('router')->generate($page->getRoute()->getName(), $params);
+        }
+
+        $page = $this->container->get('eight.pages')->findOneByTag($path);
+
         if ($page && is_object($page->getRoute())) {
             return $this->container->get('router')->generate($page->getRoute()->getName(), $params);
         }
@@ -151,6 +159,20 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
         $page = $this->container->get('eight.pages')->findI18nPage($pageTag, $this->getLocale());
         if ($page) {
             return $page->getTitle();
+        }
+
+        $page = $this->container->get('eight.pages')->findOneByTag($pageTag);
+        if ($page) {
+            return $page->getTitle();
+        }
+    }
+
+    public function routeName($tag)
+    {
+
+        $page = $this->container->get('eight.pages')->findOneByTag($tag);
+        if ($page && $page->getRoute()) {
+            return $page->getRoute()->getName();
         }
     }
 

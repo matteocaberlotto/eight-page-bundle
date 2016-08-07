@@ -66,3 +66,9 @@ services:
         tags:
             - { name: eight_page.widget }
 
+    page_link.widget:
+        class: Eight\PageBundle\Widget\PageLink
+        arguments: ['@service_container']
+        tags:
+            - { name: eight_page.widget }
+

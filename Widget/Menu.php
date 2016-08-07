@@ -6,7 +6,11 @@ class Menu extends AbstractWidget
 {
     public function getVars()
     {
-        return array();
+        return array(
+            'html_tag' => array(),
+            'html_classes' => array(),
+            'html_id' => array(),
+            );
     }
 
     public function getLayout()

@@ -48,7 +48,7 @@ class Page
     {
         $html = '';
 
-        foreach ($page->getOrderedBlocks() as $block) {
+        foreach ($page->getOrderedBlocks('default') as $block) {
             $html .= $this->renderBlock($block, $page);
         }
 
@@ -128,19 +128,25 @@ class Page
         }
     }
 
-    public function renderBlockChildren($page, $block, $type)
+    public function renderBlockChildren($subject, $type)
     {
         $page = $this->getPage();
         $html = '';
 
-        foreach ($block->getOrderedBlocks($page) as $sub) {
+        if ($subject instanceof BlockInterface) {
+            $children = $subject->getOrderedBlocks($page);
+        } else {
+            $children = $subject->getOrderedBlocks($type);
+        }
+
+        foreach ($children as $sub) {
             if ($sub->getType() == $type) {
                 $html .= $this->renderBlock($sub, $page);
             }
         }
 
         if ($page->editMode()) {
-            $html = $this->decorateHtml($html, 'list', $block, $type);
+            $html = $this->decorateHtml($html, 'list', $subject, $type);
         }
 
         return $html;
@@ -189,6 +195,7 @@ class Page
 
     public function getVariables($block)
     {
+        // mark block as editable (when required): renders form in edit page
         if ($this->getPage()->editMode() && $this->get('widget.provider')->editable($block)) {
             $block->setLoadsVariables();
         }

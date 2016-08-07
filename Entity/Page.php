@@ -587,18 +587,24 @@ class Page implements PageInterface
         return $this->blocks;
     }
 
-    public function getOrderedBlocks()
+    public function getOrderedBlocks($type = 'default')
     {
         $blocks = $this->getBlocks();
 
+        // filter proper block type
+        $blocks = $blocks->filter(function ($entry) use ($type) {
+            return $entry->getType() == $type;
+        });
+
+        // filter enabled when NOT in editing mode
         if (!$this->editMode()) {
             $blocks = $blocks->filter(function ($entry) {
                 return $entry->isEnabled();
             });
         }
 
+        // sort blocks
         $iterator = $blocks->getIterator();
-
         $iterator->uasort(function ($first, $second) {
             return (int) $first->getSeq() > (int) $second->getSeq() ? 1 : -1;
         });
