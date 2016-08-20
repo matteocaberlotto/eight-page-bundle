@@ -2,9 +2,6 @@
 
 namespace Eight\PageBundle\Provider;
 
-use Eight\PageBundle\Entity\Page;
-use Doctrine\Common\Collections\ArrayCollection;
-
 class Widget
 {
     protected $container;

@@ -5,6 +5,9 @@ namespace Eight\PageBundle\Variable;
 use Eight\PageBundle\Variable\AbstractVariable;
 use Doctrine\Common\Collections\ArrayCollection;
 
+/**
+ * Retrieve a collection by a field/value couple.
+ */
 class Collection extends AbstractVariable
 {
     protected $container;
@@ -44,6 +47,10 @@ class Collection extends AbstractVariable
 
     public function getDefaultValue($config)
     {
+        if (isset($config['default_value'])) {
+            return $config['default_value'];
+        }
+
         return new ArrayCollection();
     }
 

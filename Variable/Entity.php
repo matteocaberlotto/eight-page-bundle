@@ -5,6 +5,10 @@ namespace Eight\PageBundle\Variable;
 use Eight\PageBundle\Variable\AbstractVariable;
 use Doctrine\Common\Collections\ArrayCollection;
 
+/**
+ * Retrieve an entity by a field/value couple.
+ */
+
 class Entity extends AbstractVariable
 {
     protected $container;
@@ -50,6 +54,10 @@ class Entity extends AbstractVariable
 
     public function getDefaultValue($config)
     {
+        if (isset($config['default_value'])) {
+            return $config['default_value'];
+        }
+
         return new $config['class']();
     }
 

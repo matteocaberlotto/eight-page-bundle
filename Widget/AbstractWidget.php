@@ -18,10 +18,7 @@ abstract class AbstractWidget implements WidgetInterface
         return '';
     }
 
-    public function getName()
-    {
-        return null;
-    }
+    abstract public function getName();
 
     public function getLabel()
     {

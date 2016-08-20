@@ -147,7 +147,7 @@ span.block-wrapper .add-item:hover {
 .btn-edit-variable {
     position: absolute;
     top: 2px;
-    right: 110px;
+    right: 80px;
     z-index: 2147483647;
     display: none;
 }
@@ -155,7 +155,7 @@ span.block-wrapper .add-item:hover {
 .btn-sort-block {
     position: absolute;
     top: 2px;
-    right: 74px;
+    right: 54px;
     z-index: 2147483647;
     display: none;
 }
@@ -163,7 +163,7 @@ span.block-wrapper .add-item:hover {
 .btn-disable-block {
     position: absolute;
     top: 2px;
-    right: 38px;
+    right: 28px;
     z-index: 2147483647;
     display: none;
 }
@@ -171,7 +171,7 @@ span.block-wrapper .add-item:hover {
 .btn-enable-block {
     position: absolute;
     top: 2px;
-    right: 38px;
+    right: 28px;
     z-index: 2147483647;
     display: none;
     background: #FFBBBB;
@@ -214,12 +214,12 @@ span.block-wrapper .add-item:hover {
 
 .submit-block-edit {
     margin-top: 10px;
-    width: 200px;
+    width: 100%;
 }
 
 .submit-enable-block-edit {
     margin-top: 10px;
-    width: 200px;
+    width: 100%;
 }
 
 .block-label .tooltip-inner {

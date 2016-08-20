@@ -6,6 +6,9 @@ use Eight\PageBundle\Variable\AbstractVariable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Eight\PageBundle\Form\CollectionMethodType;
 
+/**
+ * Retrieve a collection by a class/method couple.
+ */
 class CollectionMethod extends AbstractVariable
 {
     protected $container;
@@ -34,6 +37,10 @@ class CollectionMethod extends AbstractVariable
 
     public function getDefaultValue($config)
     {
+        if (isset($config['default_value'])) {
+            return $config['default_value'];
+        }
+
         return new ArrayCollection();
     }
 
@@ -45,7 +52,11 @@ class CollectionMethod extends AbstractVariable
     public function buildForm($builder, $name, $config)
     {
         $builder
-            ->add($name, CollectionMethodType::class)
+            ->add($name, CollectionMethodType::class, array(
+                'attr' => array(
+                    'class' => ''
+                )
+            ))
             ;
     }
 }

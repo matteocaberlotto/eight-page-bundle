@@ -196,7 +196,7 @@ class Page
     public function getVariables($block)
     {
         // mark block as editable (when required): renders form in edit page
-        if ($this->getPage()->editMode() && $this->get('widget.provider')->editable($block)) {
+        if ($this->editMode() && $this->get('widget.provider')->editable($block)) {
             $block->setLoadsVariables();
         }
 
@@ -238,6 +238,11 @@ class Page
 
     public function descendBlocksAndLoadAssets()
     {
+        if (!$this->getPage()) {
+            $this->assetsLoaded = true;
+            return;
+        }
+
         foreach ($this->getPage()->getOrderedBlocks() as $block) {
             $this->loadAssets($block);
         }
@@ -251,13 +256,13 @@ class Page
 
         $css = array();
 
-        if ($this->getPage()->editMode()) {
+        if ($this->editMode()) {
             $css []= '/bundles/eightpage/css/jquery-ui.css';
         }
 
         $css = $this->appendAssets($css, 'css', $this->container->getParameter('eight_page.css'));
 
-        if ($this->getPage()->editMode()) {
+        if ($this->editMode()) {
             $css []= '/bundles/eightpage/css/editor.css';
         }
 
@@ -272,14 +277,14 @@ class Page
 
         $js = array();
 
-        if ($this->getPage()->editMode()) {
+        if ($this->editMode()) {
             $js []= '/bundles/eightpage/js/jquery-ui.js';
             $js []= '/bundles/eightpage/js/ckeditor/ckeditor.js';
         }
 
         $js = $this->appendAssets($js, 'js', $this->container->getParameter('eight_page.js'));
 
-        if ($this->getPage()->editMode()) {
+        if ($this->editMode()) {
             $js []= '/bundles/eightpage/js/editor.js';
         }
 
@@ -287,7 +292,7 @@ class Page
             'js' => $js
             ));
 
-        if ($this->getPage()->editMode()) {
+        if ($this->editMode()) {
             $html .= $this->appendPageEditor();
         }
 
@@ -329,5 +334,16 @@ class Page
         }
 
         return $previous;
+    }
+
+    public function editMode()
+    {
+        $page = $this->getPage();
+
+        if ($page) {
+            return $this->getPage()->editMode();
+        }
+
+        return false;
     }
 }
