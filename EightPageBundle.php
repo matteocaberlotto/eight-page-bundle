@@ -13,5 +13,11 @@ class EightPageBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new WidgetPass());
+
+        $container->loadFromExtension('twig', array(
+            'form_themes' => array(
+                'EightPageBundle:Form:fields.html.twig',
+            ),
+        ));
     }
 }

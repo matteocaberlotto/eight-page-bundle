@@ -112,6 +112,7 @@ class PageAdmin extends Admin implements ContainerAwareInterface
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->add('layout', $this->getRouterIdParameter() . '/layout');
+        $collection->add('clone', $this->getRouterIdParameter() . '/clone');
     }
 
     public function getTemplate($name)

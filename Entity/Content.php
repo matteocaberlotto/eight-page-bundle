@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Content
 {
+    const PRODUCT_IMAGES_FOLDER = '/uploads/images/cms';
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -49,6 +51,11 @@ class Content
      * @ORM\JoinColumn(name="block_id", referencedColumnName="id")
      */
     protected $block;
+
+    /**
+     * helper propery for upload, not mapped.
+     */
+    protected $image_path;
 
     /**
      * Set name
@@ -213,5 +220,72 @@ class Content
     public function getType()
     {
         return $this->type;
+    }
+
+    public function getImage()
+    {
+        return self::PRODUCT_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $this->content;
+    }
+
+    /**
+     * Set image_path
+     *
+     * @param string $image_path
+     *
+     * @return Content
+     */
+    public function setImagePath($image_path)
+    {
+        $this->image_path = $image_path;
+
+        return $this;
+    }
+
+    /**
+     * Get Image
+     *
+     * @return string
+     */
+    public function getImagePath()
+    {
+        return $this->image_path;
+    }
+
+    public function manageFileUpload()
+    {
+        if ($this->getImagePath()) {
+            $this->uploadImage();
+        }
+    }
+
+    /**
+     * Manages the copying of the file to the relevant place on the server
+     */
+    protected function uploadImage()
+    {
+        // the file property can be empty if the field is not required
+        if (null === $this->getImagePath()) {
+            return;
+        }
+
+        // we use the original file name here but you should
+        // sanitize it at least to avoid any security issues
+
+        // move takes the target directory and target filename as params
+        $this->getImagePath()->move(
+            $this->getUploadPath(),
+            $this->getImagePath()->getClientOriginalName()
+        );
+
+        // set the path property to the filename where you've saved the file
+        $this->content = $this->getImagePath()->getClientOriginalName();
+
+        // clean up the file property as you won't need it anymore
+        $this->setImagePath(null);
+    }
+
+    protected function getUploadPath()
+    {
+        return __DIR__ . "/../../../../web" . self::PRODUCT_IMAGES_FOLDER;
     }
 }

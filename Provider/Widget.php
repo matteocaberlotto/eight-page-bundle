@@ -37,6 +37,12 @@ class Widget
         $vars = array();
 
         foreach ($this->_widgets[$name]->getVars() as $name => $config) {
+            if (!is_array($config)) {
+                $name = $config;
+                $config = array(
+                    'type' => 'label',
+                );
+            }
 
             if (!isset($config['type'])) {
                 $config['type'] = 'label';
@@ -58,8 +64,14 @@ class Widget
         $widget = $this->get($widget_name);
 
         foreach ($this->getVariables($widget_name) as $name => $variable) {
-            if ($name == $variable_name) {
-                return isset($variable['type']) ? $variable['type'] : '';
+            if (is_array($variable)) {
+                if ($name == $variable_name) {
+                    return isset($variable['type']) ? $variable['type'] : '';
+                }
+            } else {
+                if ($variable == $variable_name) {
+                    return isset($variable['type']) ? $variable['type'] : '';
+                }
             }
         }
 

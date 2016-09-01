@@ -7,7 +7,9 @@ class Text extends AbstractWidget
     public function getVars()
     {
         return array(
-            'text' => array('type' => 'text')
+            'text' => array(
+                'type' => 'text'
+                )
             );
     }
 

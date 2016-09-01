@@ -58,12 +58,12 @@ body.toolkit {
     opacity: 0.5;
 }
 
-.toolkit span.block-container {
+.toolkit .block-container {
     border: 2px dotted #D7E5F2;
     padding: 0 0 35px 0;
 }
 
-.toolkit span.block-wrapper {
+.toolkit .block-wrapper {
     /*min-height: 42px;*/
     min-height: 34px;
     /*background: rgba(165,255,75,0.7);*/
@@ -71,7 +71,7 @@ body.toolkit {
     padding-top: 34px;
 }
 
-.toolkit span.block-wrapper:hover {
+.toolkit .block-wrapper:hover {
     background: #EEE none repeat scroll 0 0;
     z-index: 200;
     border: 2px dotted #3C6FC1;
@@ -87,19 +87,19 @@ body.toolkit {
     z-index: 100;
 }
 
-.toolkit span.block-wrapper:hover > .block-wrapper-header {
+.toolkit .block-wrapper:hover > .block-wrapper-header {
     display: block;
 }
 
-.toolkit span.block-wrapper.edit-blocks,
-.toolkit span.block-wrapper.edit-content {
+.toolkit .block-wrapper.edit-blocks,
+.toolkit .block-wrapper.edit-content {
     min-height: 120px;
     z-index: 200;
     padding-top: 34px;
 }
 
-span.block-container .add-item,
-span.block-wrapper .add-item {
+.block-container .add-item,
+.block-wrapper .add-item {
     background: #EEE none repeat scroll 0 0;
     font-weight: bold;
     display: none;
@@ -114,25 +114,25 @@ span.block-wrapper .add-item {
     color: #999;
 }
 
-.toolkit span.block-container > .add-to-page,
-.toolkit span.block-container > .add-item {
+.toolkit .block-container > .add-to-page,
+.toolkit .block-container > .add-item {
     display: block;
 }
 
 
-span.block-container .add-item:hover,
-span.block-wrapper .add-item:hover {
+.block-container .add-item:hover,
+.block-wrapper .add-item:hover {
     background-color: #666;
     color: #EEE;
     text-decoration: none;
 }
 
-.toolkit span.block-wrapper:hover > .btn-remove-block,
-.toolkit span.block-wrapper:hover > .btn-edit-variable,
-.toolkit span.block-wrapper:hover > .btn-edit-block-layout,
-.toolkit span.block-wrapper:hover > .btn-sort-block,
-.toolkit span.block-wrapper:hover > .btn-enable-block,
-.toolkit span.block-wrapper:hover > .btn-disable-block {
+.toolkit .block-wrapper:hover > .btn-remove-block,
+.toolkit .block-wrapper:hover > .btn-edit-variable,
+.toolkit .block-wrapper:hover > .btn-edit-block-layout,
+.toolkit .block-wrapper:hover > .btn-sort-block,
+.toolkit .block-wrapper:hover > .btn-enable-block,
+.toolkit .block-wrapper:hover > .btn-disable-block {
     display: block;
 }
 
@@ -186,7 +186,7 @@ span.block-wrapper .add-item:hover {
     z-index: 2147483647;
 }
 /*
-.toolkit span.block-wrapper.edit-content > .block-label {
+.toolkit .block-wrapper.edit-content > .block-label {
     bottom: 0;
     right: 0;
     top: auto;
@@ -201,12 +201,12 @@ span.block-wrapper .add-item:hover {
     height: 100%;
 }
 
-.toolkit span.block-wrapper.edit-content > .block-wrapper-header,
-.toolkit span.block-wrapper.edit-content > a.btn {
+.toolkit .block-wrapper.edit-content > .block-wrapper-header,
+.toolkit .block-wrapper.edit-content > a.btn {
     display: block;
 }
 
-.toolkit span.block-wrapper.edit-content > form {
+.toolkit .block-wrapper.edit-content > form {
     display: block;
     padding: 20px;
     border: dashed 2px #C00;

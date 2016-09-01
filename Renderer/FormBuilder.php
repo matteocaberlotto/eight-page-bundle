@@ -22,7 +22,6 @@ class FormBuilder
     {
         $widget = $this->container->get('widget.provider')->get($block->getName());
 
-
         $builder = $this->container->get('form.factory')->createNamedBuilder('form_' . $block->getId());
 
         $builder
@@ -32,12 +31,15 @@ class FormBuilder
 
         foreach ($widget->getVars() as $name => $variable) {
 
-            if (isset($variable['edit']) && $variable['edit'] == false) {
-                continue;
+            if (!is_array($variable)) {
+                $name = $variable;
+                $variable = array(
+                    'type' => 'label',
+                    );
             }
 
-            if (!isset($variable['type'])) {
-                $variable['type'] = 'label';
+            if (isset($variable['edit']) && $variable['edit'] == false) {
+                continue;
             }
 
             $this->container->get('variable.provider')->get($variable['type'])->buildForm($builder, $name, $variable);

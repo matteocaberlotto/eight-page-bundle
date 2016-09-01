@@ -7,7 +7,7 @@ class OneColumn extends AbstractWidget
     public function getVars()
     {
         return array(
-            'classes' => array()
+            'classes',
             );
     }
 

@@ -16,13 +16,23 @@ class i18nUrl extends AbstractVariable
     public function resolve($variable)
     {
         $locale = $this->getLocale();
+
         $page = $this->container->get('eight.pages')->findOneByTag($variable->getContent() . '.' . $locale);
-        return $page->getRoute()->getPath();
+
+        if ($page) {
+            return $page->getRoute()->getPath();
+        }
+
+        $page = $this->container->get('eight.pages')->findOneByTag($variable->getContent());
+
+        if ($page) {
+            return $page->getRoute()->getPath();
+        }
     }
 
     public function getLocale()
     {
-        return $this->container->get('request')->get('_locale');
+        return $this->container->get('request_stack')->getCurrentRequest()->get('_locale');
     }
 
     public function getName()

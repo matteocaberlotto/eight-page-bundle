@@ -23,6 +23,8 @@ class Page
     public function setCurrentPage($page)
     {
         $this->current_page = $page;
+
+        $this->getRequest()->request->set('content', $page);
     }
 
     public function getRequest()

@@ -7,7 +7,7 @@ class Controller extends AbstractWidget
     public function getVars()
     {
         return array(
-            'controller' => array()
+            'controller',
         );
     }
 

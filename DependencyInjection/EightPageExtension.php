@@ -29,6 +29,7 @@ class EightPageExtension extends Extension
         $loader->load('doctrine.yml');
         $loader->load('widgets.yml');
         $loader->load('variables.yml');
+        $loader->load('icons.yml');
 
         $container->setParameter('eight_page.locales', array_combine($config['locales'], $config['locales']));
 

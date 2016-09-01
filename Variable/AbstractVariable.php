@@ -14,7 +14,7 @@ namespace Eight\PageBundle\Variable;
 abstract class AbstractVariable
 {
     /**
-     * This is performed before the variable gets passed to template
+     * This is performed before the variable gets passed to the template and the admin form
      */
     public function resolve($variable)
     {

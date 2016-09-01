@@ -4,7 +4,11 @@ namespace Eight\PageBundle\Helper;
 
 use Eight\PageBundle\Entity\Block;
 use Eight\PageBundle\Entity\Page as PageEntity;
+use Eight\PageBundle\Entity\PageInterface;
 
+/**
+ * Generic helper to perfrom some common database operations.
+ */
 class Page
 {
     protected $container;
@@ -48,6 +52,9 @@ class Page
         $manager->flush();
     }
 
+    /**
+     * Reorder blocks according to list of ids provided.
+     */
     public function reorder($ids)
     {
         $index = 0;
@@ -59,5 +66,46 @@ class Page
         }
 
         $this->container->get('doctrine')->getManager()->flush();
+    }
+
+    /**
+     * Clone a page to another entity and return it
+     */
+    public function duplicatePage($page)
+    {
+        $cloned = new PageEntity();
+
+        $cloned->setTitle($page->getTitle());
+
+        if ($page->getLayout()) {
+            $cloned->setLayout($page->getLayout());
+        }
+
+        $cloned->setMetasName($page->getMetasName());
+        $cloned->setMetasProperty($page->getMetasProperty());
+        $cloned->setMetasHttpEquiv($page->getMetasHttpEquiv());
+
+        $manager = $this->container->get('doctrine')->getManager();
+        $manager->persist($cloned);
+
+        $route = $page->getRoute();
+
+        $route_clone = clone $route;
+        $route_clone->resetId();
+
+        // manually add resolver
+        $route_clone->setResolver($this->container->get('raindrop_routing.content_resolver'));
+
+        $route_clone->setPath($route->getPath() . '/cloned');
+        $route_clone->setNameFromPath();
+
+        $route->setContent($cloned);
+        $cloned->setRoute($route_clone);
+
+        $manager->persist($route_clone);
+
+        $manager->flush();
+
+        return $cloned;
     }
 }

@@ -7,8 +7,8 @@ class PageLink extends AbstractWidget
     public function getVars()
     {
         return array(
-            'classes' => array(),
-            'page' => array(),
+            'classes',
+            'page',
             );
     }
 

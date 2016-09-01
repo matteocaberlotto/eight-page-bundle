@@ -45,3 +45,17 @@ services:
         tags:
             - { name: eight_page.variable }
 
+    eight.icon:
+        class: Eight\PageBundle\Variable\Icon
+        calls:
+            - ['setContainer', ['@service_container']]
+        tags:
+            - { name: eight_page.variable }
+
+    eight.image:
+        class: Eight\PageBundle\Variable\Image
+        calls:
+            - ['setContainer', ['@service_container']]
+        tags:
+            - { name: eight_page.variable }
+

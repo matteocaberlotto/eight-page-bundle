@@ -7,13 +7,13 @@ class Template extends AbstractWidget
     public function getVars()
     {
         return array(
-            'template' => array(),
-            'title' => array(),
-            'subtitle' => array(),
+            'template',
+            'title',
+            'subtitle',
             'description' => array(
                 'type' => 'text'
                 ),
-            'caption' => array(),
+            'caption',
         );
     }
 

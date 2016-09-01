@@ -141,12 +141,22 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
 
     public function i18nPath($path, $params = array())
     {
+        if ($path instanceof PageInterface) {
+            if ($path->getRoute()) {
+                return $this->container->get('router')->generate($path->getRoute()->getName(), $params);
+            } else {
+                return;
+            }
+        }
+
+        // search for localized tag first (eg: "homepage.it")
         $page = $this->container->get('eight.pages')->findOneByTag($path . '.' . $this->getLocale());
 
         if ($page && is_object($page->getRoute())) {
             return $this->container->get('router')->generate($page->getRoute()->getName(), $params);
         }
 
+        // search for the tag
         $page = $this->container->get('eight.pages')->findOneByTag($path);
 
         if ($page && is_object($page->getRoute())) {

@@ -7,7 +7,7 @@ class Label extends AbstractWidget
     public function getVars()
     {
         return array(
-            'label' => array()
+            'label',
             );
     }
 
