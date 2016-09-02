@@ -224,7 +224,9 @@ class Content
 
     public function getImage()
     {
-        return self::PRODUCT_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $this->content;
+        if (!empty($this->content)) {
+            return self::PRODUCT_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $this->content;
+        }
     }
 
     /**
