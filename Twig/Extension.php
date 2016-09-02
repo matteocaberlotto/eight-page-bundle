@@ -61,8 +61,26 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
             'eight_body_class' => new \Twig_Function_Method($this, 'bodyClass'),
             'is_host' => new \Twig_Function_Method($this, 'isHost'),
             'is_route' => new \Twig_Function_Method($this, 'isRoute'),
+            'if_route' => new \Twig_Function_Method($this, 'showWhenRouteMatch'),
             'get_widget' => new \Twig_Function_Method($this, 'getWidget'),
         );
+    }
+
+    public function showWhenRouteMatch($routes, $string)
+    {
+        if (is_array($routes)) {
+            foreach ($routes as $route) {
+                if ($this->isRoute($route)) {
+                    return $string;
+                }
+            }
+        } else {
+            if ($this->isRoute($routes)) {
+                return $string;
+            }
+        }
+
+        return '';
     }
 
     public function getWidget($name)
@@ -139,6 +157,13 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
         return '';
     }
 
+    /**
+     * This will retrieve a page route using several methods:
+     * - if the argument passed is the page, return the route directly
+     * - search for a page tagged "<label>.<locale>"
+     * - search for a page tagged "<label>"
+     * - search for a route named "<label>"
+     */
     public function i18nPath($path, $params = array())
     {
         if ($path instanceof PageInterface) {
@@ -161,6 +186,13 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
 
         if ($page && is_object($page->getRoute())) {
             return $this->container->get('router')->generate($page->getRoute()->getName(), $params);
+        }
+
+        // search for route name
+        if ($this->container->get('raindrop_routing.route_repository')->findOneBy(array(
+            'name' => $path,
+            ))) {
+            return $this->container->get('router')->generate($path);
         }
     }
 
