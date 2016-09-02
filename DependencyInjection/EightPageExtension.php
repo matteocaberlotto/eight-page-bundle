@@ -39,6 +39,9 @@ class EightPageExtension extends Extension
         $container->setParameter('eight_page.css', $config['css']);
         $container->setParameter('eight_page.js', $config['js']);
 
+        $container->setParameter('eight_page.admin_css', $config['admin_css']);
+        $container->setParameter('eight_page.admin_js', $config['admin_js']);
+
         $container->setParameter('eight_page.redirect_home', $config['redirect_home']);
         $container->setParameter('eight_page.default_layout', $config['default_layout']);
         $container->setParameter('eight_page.default_edit_layout', $config['default_edit_layout']);

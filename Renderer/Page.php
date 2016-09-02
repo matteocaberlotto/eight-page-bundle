@@ -266,6 +266,10 @@ class Page
 
         if ($this->editMode()) {
             $css []= '/bundles/eightpage/css/editor.css';
+
+            foreach ($this->container->getParameter('eight_page.admin_css') as $admin_css) {
+                $css []= $admin_css;
+            }
         }
 
         return $this->get('templating')->render('EightPageBundle:Content:util/css.html.twig', array(
@@ -288,6 +292,10 @@ class Page
 
         if ($this->editMode()) {
             $js []= '/bundles/eightpage/js/editor.js';
+
+            foreach ($this->container->getParameter('eight_page.admin_js') as $admin_js) {
+                $js []= $admin_js;
+            }
         }
 
         $html = $this->get('templating')->render('EightPageBundle:Content:util/js.html.twig', array(
