@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Content
 {
-    const PRODUCT_IMAGES_FOLDER = '/uploads/images/cms';
+    const CMS_IMAGES_FOLDER = '/uploads/images/cms';
 
     /**
      * @ORM\Id
@@ -225,7 +225,7 @@ class Content
     public function getImage()
     {
         if (!empty($this->content)) {
-            return self::PRODUCT_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $this->content;
+            return self::CMS_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $this->content;
         }
     }
 
@@ -288,6 +288,6 @@ class Content
 
     protected function getUploadPath()
     {
-        return __DIR__ . "/../../../../web" . self::PRODUCT_IMAGES_FOLDER;
+        return __DIR__ . "/../../../../web" . self::CMS_IMAGES_FOLDER;
     }
 }
