@@ -1,12 +1,15 @@
 # EightPageBundle
 
+
+### Warning: this is an alpha version.
+
 ### Installation
 
 1. require via composer
-    - composer require matteocaberlotto/eight-page-bundle
+    - composer require eight/page-bundle
 
 
-2. install dependencies
+2. install and configure dependencies
     - sonata admin bundle
     - raindrop routing bundle
     - fos user bundle
@@ -19,7 +22,7 @@
   - default layout
   - assets to be loaded in each page
   - metatags you want to edit in admin area
-        
+
 ```yml
     eight_page:
         encoding: utf-8
@@ -38,14 +41,14 @@
                 - ['keywords', 'text', { required: false }]
                 - ['description', 'text', { required: false }]
                 - ['robots', 'text', { required: false }]
-    
+
             property:
                 - ['og:url', 'text', { required: false }]
                 - ['og:type', 'text', { required: false }]
                 - ['og:image', 'text', { required: false }]
                 - ['og:description', 'text', { required: false }]
                 - ['og:site_name', 'text', { required: false }]
-    
+
             http_equiv:
                 - ['Content-type', 'text', { required: false }]
 ```
