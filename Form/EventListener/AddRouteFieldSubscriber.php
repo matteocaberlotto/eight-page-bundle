@@ -34,6 +34,7 @@ class AddRouteFieldSubscriber implements EventSubscriberInterface
         $url = $this->options['url'];
         $controller = $this->options['controller'];
         $locale = '';
+        $name = '';
 
         if ($data->getRoute()) {
             // obj is not new so retrieve route
@@ -42,12 +43,14 @@ class AddRouteFieldSubscriber implements EventSubscriberInterface
                 $url = $route->getPath();
                 $controller = $route->getController();
                 $locale = $route->getLocale();
+                $name = $route->getName();
             }
         }
 
         $form->add('url', 'text', array(
             'mapped' => false,
             'data' => $url,
+            'sonata_help' => 'Route label: ' . $name,
             'attr' => array(
                 'class' => 'page-url'
             ),

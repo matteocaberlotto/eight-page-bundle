@@ -43,7 +43,8 @@ class PageAdmin extends Admin implements ContainerAwareInterface
                     'data' => $this->getSubject()->getTags(),
                     'data_class' => null,
                     'label' => 'TAGS:',
-                    'required' => false
+                    'required' => false,
+                    'sonata_help' => 'Tagging can be used to retrieve pages',
                 ))->addModelTransformer($tagsTransformer)
             )
             // ->add('blocks', 'sonata_type_collection', array(
