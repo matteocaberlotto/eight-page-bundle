@@ -124,7 +124,7 @@ class Page
         $this->css = $assets;
 
         if ($block->hasChildren()) {
-            foreach ($block->getOrderedBlocks() as $child) {
+            foreach ($block->getBlocks() as $child) {
                 $this->loadAssets($child);
             }
         }
