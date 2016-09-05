@@ -64,7 +64,7 @@ var Editor = (function () {
             $('.btn-enable-block')
                 .click(function (event) {
                     $el = $(event.currentTarget);
-                    if (confirm("Abilitare blocco '" + $el.parent().data('name') + "' ?")) {
+                    if (confirm("Abilitare blocco '" + $el.parent().data('block-label') + "' ?")) {
                         $.ajax({
                             url: globalEnableUrl,
                             data: {
@@ -83,7 +83,7 @@ var Editor = (function () {
             $('.btn-disable-block')
                 .click(function (event) {
                     $el = $(event.currentTarget);
-                    if (confirm("Disabilitare blocco '" + $el.parent().data('name') + "' ?")) {
+                    if (confirm("Disabilitare blocco '" + $el.parent().data('block-label') + "' ?")) {
                         $.ajax({
                             url: globalDisableUrl,
                             data: {
