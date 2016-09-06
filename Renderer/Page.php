@@ -15,8 +15,6 @@ class Page
     protected $added_css = array();
     protected $assetsLoaded = false;
 
-    const ASSET_SLOT = array('head', 'default', 'bottom');
-
     public function __construct($container)
     {
         $this->container = $container;
@@ -398,8 +396,9 @@ class Page
         }
 
         $assets = $this->$type;
+        $positions = array('head', 'default', 'bottom');
 
-        foreach (self::ASSET_SLOT as $position) {
+        foreach ($positions as $position) {
             if (isset($assets[$position])) {
                 foreach ($assets[$position] as $asset) {
                     // avoid asset duplication
