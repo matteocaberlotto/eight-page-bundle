@@ -38,6 +38,10 @@ class FormBuilder
                     );
             }
 
+            if (!isset($variable['type'])) {
+                $variable['type'] = 'label';
+            }
+
             if (isset($variable['edit']) && $variable['edit'] == false) {
                 continue;
             }
