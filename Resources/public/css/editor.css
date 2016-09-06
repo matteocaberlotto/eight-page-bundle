@@ -244,13 +244,17 @@ body.toolkit {
 }
 
 .eight-frame-title {
-    height: 20px;
+    height: 30px;
     border: solid 2px #C00;
     position: absolute;
     background: #FFF;
     z-index: 2147483647;
     text-align: center;
     display: none;
+    text-transform: uppercase;
+    line-height: 30px;
+    color: #333;
+    font-weight: bold;
 }
 
 .eight-block-decorator {
@@ -258,13 +262,23 @@ body.toolkit {
 }
 
 .add-item {
-    border: solid 2px #C00;
-    position: absolute;
-    background: #FFF;
-    z-index: 2147483647;
-    display: none;
+    background: #fff none repeat scroll 0 0;
+    border: 2px solid #c00;
+    border-radius: 1px;
     bottom: 0;
+    display: none;
+    font-weight: bold;
+    padding: 4px 8px;
+    position: absolute;
     right: 0;
+    z-index: 2147483647;
+}
+
+.eight-ui-button {
+    background: #fff none repeat scroll 0 0;
+    border: 2px solid #c00;
+    border-radius: 2px;
+    padding: 2px 4px;
 }
 
 .toolkit .add-item {

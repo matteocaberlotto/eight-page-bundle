@@ -100,7 +100,7 @@ var Editor = (function () {
             $('<div/>', { "class": "eight-frame-title eight-frame-element eight-frame-element-" + blockContent.id})
                 .css({
                     left: element.offset().left,
-                    top: element.offset().top - 20,
+                    top: element.offset().top - 30,
                     width: element.width()
                 })
                 .html(element.data('widget-label'))
@@ -199,6 +199,11 @@ var Editor = (function () {
                 });
 
             $(template).find('.eight-toolbar').appendTo(element);
+
+            // setup tooltip
+            $('[data-toggle="tooltip"]').tooltip({
+                placement: 'bottom'
+            });
         },
 
         hideFrame: function (element) {
