@@ -31,6 +31,7 @@ class FormBuilder
 
         foreach ($widget->getVars() as $name => $variable) {
 
+            // normalize key only entries
             if (!is_array($variable)) {
                 $name = $variable;
                 $variable = array(

@@ -15,11 +15,16 @@ class Page
     protected $added_css = array();
     protected $assetsLoaded = false;
 
+    const ASSET_SLOT = array('head', 'default', 'bottom');
+
     public function __construct($container)
     {
         $this->container = $container;
     }
 
+    /**
+     * Set current page in case of editing, testing or whatever...
+     */
     public function setCurrentPage($page)
     {
         $this->current_page = $page;
@@ -32,6 +37,9 @@ class Page
         return $this->container->get('request_stack')->getCurrentRequest();
     }
 
+    /**
+     * Retrieve current page
+     */
     public function getPage()
     {
         if (!$this->current_page) {
@@ -46,6 +54,9 @@ class Page
         return $this->container->get($service);
     }
 
+    /**
+     * Renders a single block
+     */
     public function renderBlock($block, $page)
     {
         $html = $this->get('templating')->render($this->getTemplate($block), $this->getVariables($block));
@@ -57,6 +68,11 @@ class Page
         return $html;
     }
 
+    /**
+     * Load block assets.
+     * There are 3 positions: head, default, bottom.
+     * If no position is provided default is given.
+     */
     public function loadAssets($block)
     {
         $widget = $this->get('widget.provider')->get($block->getName());
@@ -115,6 +131,10 @@ class Page
         }
     }
 
+    /**
+     * Renders all children of the subject (page or block)
+     * of given type (type = where to append inside the layout).
+     */
     public function renderBlockChildren($subject, $type)
     {
         $page = $this->getPage();
@@ -139,6 +159,9 @@ class Page
         return $html;
     }
 
+    /**
+     * Append edit forms to the page.
+     */
     public function appendEditForms()
     {
         $forms = '';
@@ -151,6 +174,9 @@ class Page
         return $forms;
     }
 
+    /**
+     * Append single block form.
+     */
     public function appendForm($block)
     {
         $forms = '';
@@ -171,6 +197,9 @@ class Page
         return $forms;
     }
 
+    /**
+     * Appends editor markup and utils to the page html.
+     */
     public function appendPageEditor()
     {
         $template = $this->container->getParameter('eight_page.page_append');
@@ -181,7 +210,7 @@ class Page
     }
 
     /**
-     * Decorates a page or block
+     * Decorates a page or block with the editor markup.
      */
     public function decorateHtml($html, $type, $subject, $label = 'default')
     {
@@ -210,6 +239,9 @@ class Page
         return $this->get('layout.provider')->provide($block);
     }
 
+    /**
+     * Loads variables from widget and overrides with database values.
+     */
     public function getVariables($block)
     {
         // mark block as editable (when required): renders form in edit page
@@ -228,6 +260,9 @@ class Page
         return array_merge($vars, $this->getDatabaseVariables($block, true));
     }
 
+    /**
+     * Loads from database the variables bound to a block.
+     */
     public function getDatabaseVariables($block, $resolve = false)
     {
         $vars = array();
@@ -246,6 +281,9 @@ class Page
         return $vars;
     }
 
+    /**
+     * Checks if all assets have been loaded.
+     */
     public function checkAssets()
     {
         if (!$this->assetsLoaded) {
@@ -253,8 +291,15 @@ class Page
         }
     }
 
+    /**
+     * Descend the page tree and loads all assets.
+     */
     public function descendBlocksAndLoadAssets()
     {
+        /** this is the case when the bundle is being used
+         * to populate assets but no page is present.
+         * eg: when using symfony standard pages.
+         */
         if (!$this->getPage()) {
             $this->assetsLoaded = true;
             return;
@@ -267,6 +312,10 @@ class Page
         $this->assetsLoaded = true;
     }
 
+    /**
+     * Renders all css.
+     * In case of editing mode, it will append the editor assets and admin assets.
+     */
     public function css()
     {
         $this->checkAssets();
@@ -330,22 +379,27 @@ class Page
         return $html;
     }
 
+    /**
+     * Appends an asset of a given type to the previous list.
+     * It will check for existing and avoid duplication.
+     */
     public function appendAssets($previous, $type, $defaults)
     {
         $track = array();
 
+        // track defaults first
         foreach ($defaults as $default) {
             $track[$default] = true;
         }
 
+        // track assets already loaded
         foreach ($previous as $prev) {
             $track[$prev] = true;
         }
 
-        $positions = array('head', 'default', 'bottom');
         $assets = $this->$type;
 
-        foreach ($positions as $position) {
+        foreach (self::ASSET_SLOT as $position) {
             if (isset($assets[$position])) {
                 foreach ($assets[$position] as $asset) {
                     // avoid asset duplication
