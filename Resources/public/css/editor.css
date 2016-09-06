@@ -15,6 +15,10 @@ body.toolkit {
     opacity: 0.2;
 }
 
+.toolkit #btn-edit-layout-mode {
+    opacity: 1;
+}
+
 #btn-edit-layout-mode:hover {
     opacity: 1;
 }
@@ -53,7 +57,7 @@ body.toolkit {
     display: none;
 }
 
-.toolkit .block-wrapper.block-disabled {
+.toolkit .block-disabled {
     display: block;
     opacity: 0.5;
 }
@@ -136,12 +140,19 @@ body.toolkit {
     display: block;
 }
 
+.block-enabled .btn-enable-block {
+    display: none;
+}
+
+.block-disabled .btn-disable-block {
+    display: none;
+}
+
 .btn-remove-block {
     position: absolute;
     top: 2px;
     right: 2px;
     z-index: 2147483647;
-    display: none;
 }
 
 .btn-edit-variable {
@@ -149,7 +160,6 @@ body.toolkit {
     top: 2px;
     right: 80px;
     z-index: 2147483647;
-    display: none;
 }
 
 .btn-sort-block {
@@ -157,7 +167,6 @@ body.toolkit {
     top: 2px;
     right: 54px;
     z-index: 2147483647;
-    display: none;
 }
 
 .btn-disable-block {
@@ -165,7 +174,6 @@ body.toolkit {
     top: 2px;
     right: 28px;
     z-index: 2147483647;
-    display: none;
 }
 
 .btn-enable-block {
@@ -173,7 +181,6 @@ body.toolkit {
     top: 2px;
     right: 28px;
     z-index: 2147483647;
-    display: none;
     background: #FFBBBB;
 }
 
@@ -224,4 +231,65 @@ body.toolkit {
 
 .block-label .tooltip-inner {
     max-width: 400px;
+}
+
+.eight-frame-corner {
+    width: 20px;
+    height: 20px;
+    border: solid 2px #C00;
+    position: absolute;
+    background: #FFF;
+    z-index: 2147483647;
+    display: none;
+}
+
+.eight-frame-title {
+    height: 20px;
+    border: solid 2px #C00;
+    position: absolute;
+    background: #FFF;
+    z-index: 2147483647;
+    text-align: center;
+    display: none;
+}
+
+.eight-block-decorator {
+    position: relative;
+}
+
+.add-item {
+    border: solid 2px #C00;
+    position: absolute;
+    background: #FFF;
+    z-index: 2147483647;
+    display: none;
+    bottom: 0;
+    right: 0;
+}
+
+.toolkit .add-item {
+    display: block;
+}
+
+.toolkit .eight-frame-element {
+    display: block;
+}
+
+.eight-toolbar {
+    position: absolute;
+    width: 200px;
+    height: 20px;
+    position: absolute;
+    z-index: 2147483647;
+    display: none;
+    right: 0;
+    top: 0;
+}
+
+.toolkit .eight-toolbar {
+    display: block;
+}
+
+.modal-title {
+    margin-right: 30px;
 }

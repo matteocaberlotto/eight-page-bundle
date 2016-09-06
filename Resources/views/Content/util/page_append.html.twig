@@ -28,10 +28,44 @@
     </div>
 </div>
 
+
+<script type="text/html" id="toolbar-template">
+<div>
+    <div class="eight-toolbar eight-frame-element">
+        <a title="Edit block" class="eight-ui-element btn btn-xs btn-default btn-edit-variable" href="javascript:;" data-toggle="tooltip">
+            <span class="glyphicon glyphicon-pencil"></span>
+        </a>
+
+        <a title="Sort block" href="javascript:;" class="eight-ui-element btn btn-xs btn-default btn-sort-block" data-toggle="tooltip">
+            <span class="glyphicon glyphicon-resize-vertical"></span>
+        </a>
+
+        <a title="Delete block" class="eight-ui-element btn btn-default btn-xs btn-remove-block" data-toggle="tooltip">
+            <span class="glyphicon glyphicon-remove"></span>
+        </a>
+
+        <a title="Disable block" class="btn btn-xs btn-default btn-disable-block eight-ui-element" href="javascript:;" data-toggle="tooltip">
+            <span class="glyphicon glyphicon-ban-circle"></span>
+        </a>
+
+        <a title="Enable block" class="btn btn-xs btn-default btn-enable-block eight-ui-element" href="javascript:;" data-toggle="tooltip">
+            <span class="glyphicon glyphicon-eye-open"></span>
+        </a>
+    </div>
+</div>
+</script>
+
+
+
+
 <script type="text/javascript">
 var globalAppendUrl = '{{ path('admin_eight_page_block_append') }}';
 var globalRemoveUrl = '{{ path('admin_eight_page_block_remove') }}';
 var globalReorderUrl = '{{ path('admin_eight_page_block_reorder') }}';
 var globalEnableUrl = '{{ path('admin_eight_page_block_enable') }}';
 var globalDisableUrl = '{{ path('admin_eight_page_block_disable') }}';
+
+{# this must be called before any plugin starts executing,
+   to allow the library setting up DOM attributes and remove html markers #}
+Editor.setupMarkers();
 </script>

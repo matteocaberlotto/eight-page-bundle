@@ -46,21 +46,6 @@ class Page
         return $this->container->get($service);
     }
 
-    public function render($page)
-    {
-        $html = '';
-
-        foreach ($page->getOrderedBlocks('default') as $block) {
-            $html .= $this->renderBlock($block, $page);
-        }
-
-        if ($page->editMode()) {
-            $html = $this->decorateHtml($html, 'list', $page);
-        }
-
-        return $html;
-    }
-
     public function renderBlock($block, $page)
     {
         $html = $this->get('templating')->render($this->getTemplate($block), $this->getVariables($block));
@@ -154,6 +139,38 @@ class Page
         return $html;
     }
 
+    public function appendEditForms()
+    {
+        $forms = '';
+
+        $page = $this->getPage();
+        foreach ($page->getBlocks() as $block) {
+            $forms .= $this->appendForm($block);
+        }
+
+        return $forms;
+    }
+
+    public function appendForm($block)
+    {
+        $forms = '';
+
+        if ($block->loadsVariables()) {
+            $form = $this->createFormForBlock($block);
+            $forms .= $this->container->get('templating')->render('EightPageBundle:Content:util/form.html.twig', array(
+                'form' => $form->createView(),
+                ));
+        }
+
+        if ($block->hasChildren()) {
+            foreach ($block->getBlocks() as $child) {
+                $forms .= $this->appendForm($child);
+            }
+        }
+
+        return $forms;
+    }
+
     public function appendPageEditor()
     {
         $template = $this->container->getParameter('eight_page.page_append');
@@ -163,6 +180,9 @@ class Page
             ));
     }
 
+    /**
+     * Decorates a page or block
+     */
     public function decorateHtml($html, $type, $subject, $label = 'default')
     {
         $template = $this->container->getParameter('eight_page.decorator_' . $type);
@@ -176,11 +196,6 @@ class Page
             'label' => $label,
             'title' => $subject instanceof BlockInterface ? $subject->getName() : 'main page'
         );
-
-        if ($subject instanceof BlockInterface) {
-            $form = $this->createFormForBlock($subject);
-            $variables['form'] = $form->createView();
-        }
 
         return $this->get('templating')->render($template, $variables);
     }
@@ -277,6 +292,11 @@ class Page
             ));
     }
 
+    /**
+     * This function will render all js as stated by configuration and blocks.
+     * This also append page decorator (needed for the frontpage editing) and the
+     * block editing forms.
+     */
     public function js()
     {
         $this->checkAssets();
@@ -304,6 +324,7 @@ class Page
 
         if ($this->editMode()) {
             $html .= $this->appendPageEditor();
+            $html .= $this->appendEditForms();
         }
 
         return $html;

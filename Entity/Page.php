@@ -611,4 +611,11 @@ class Page implements PageInterface
 
         return $iterator;
     }
+
+    public function toArray()
+    {
+        return array(
+            'id' => $this->getId(),
+            );
+    }
 }

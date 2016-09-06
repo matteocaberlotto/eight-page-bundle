@@ -386,4 +386,18 @@ class Block implements BlockInterface
     {
         return $this->getEnabled();
     }
+
+    public function toArray()
+    {
+        return array(
+            'id' => $this->getId(),
+            'page_id' => $this->getPage() ? $this->getPage()->getId() : null,
+            'block_id' => $this->getBlock() ? $this->getBlock()->getId() : null,
+            'name' => $this->getName(),
+            'type' => $this->getType(),
+            'seq' => $this->getSeq(),
+            'layout' => $this->getLayout(),
+            'enabled' => $this->getEnabled(),
+            );
+    }
 }

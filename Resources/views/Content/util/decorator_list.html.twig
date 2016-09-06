@@ -1,7 +1,10 @@
-<div class="block-container" data-label="{{ label }}" data-title="{{ title }}" data-subject-class="{{ subject_class }}" data-subject-id="{{ id }}">
-    {{ html|raw }}
+<span
+    class="eight-list-marker"
+    data-add-classes="eight-list-decorator"
+    data-subject-class="{{ subject_class }}"
+    data-add-variables='{"subject-label":"{{ label }}","title":"{{ title }}"}'
+    data-add-content='{{ subject.toArray|json_encode }}'
+    >
+</span>
 
-    <a class="add-item{% if is_page(subject) %} add-to-page{% endif %}" href="javascript:;">
-        <span class="glyphicon glyphicon-plus"></span> ({{ title }} : {{ label }})
-    </a>
-</div>
+{{ html|raw }}

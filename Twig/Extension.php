@@ -66,6 +66,13 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
         );
     }
 
+    public function getFilters()
+    {
+        return array(
+            new \Twig_SimpleFilter('json_encode', 'json_encode'),
+            );
+    }
+
     public function showWhenRouteMatch($routes, $string)
     {
         if (is_array($routes)) {

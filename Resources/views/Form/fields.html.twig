@@ -1,7 +1,6 @@
 {% block icon_choice_widget %}
     {% spaceless %}
         {% if expanded %}
-        <script type="text/javascript">alert('qui')</script>
             <ul {{ block('widget_container_attributes') }}>
             {% for child in form %}
                 <li>
@@ -11,7 +10,6 @@
             {% endfor %}
             </ul>
         {% else %}
-        <script type="text/javascript">alert('quo')</script>
             {# just let the choice widget render the select tag #}
             {{ block('choice_widget') }}
         {% endif %}

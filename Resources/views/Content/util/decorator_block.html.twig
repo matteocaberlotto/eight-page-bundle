@@ -1,39 +1,11 @@
-<div class="block-wrapper block-{{ subject.enabled ? 'enabled' : 'disabled' }}" data-name="{{ subject.name }}" data-label="{{ label }}" data-type="{{ type }}" data-subject="{{ subject_class }}" data-subject-id="{{ id }}" data-block-label="{{ get_widget(subject.name).label }}">
+<span
+    class="eight-marker-start"
+    data-add-classes="eight-block-decorator"
+    data-add-variables='{"widget-label":"{{ get_widget(subject.name).label }}","load-variables":"{{ subject.loadsVariables() ? 'true' : 'false' }}"}'
+    data-add-content='{{ subject.toArray|json_encode|raw }}'
+    >
+</span>
 
-    <div class="block-wrapper-header">
-        <p class="eight-ui-element block-label">
-            <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" title="Name: '{{ get_widget(subject.name).label }}' - ID: {{ subject.id }} - Pos: {{ subject.type }} - Tpl: {{ subject.layout }}"></span>
-            {{ get_widget(subject.name).label }}
-        </p>
-    </div>
+{{ html|raw }}
 
-    {% if subject.loadsVariables() %}
-        {{ form(form) }}
-
-        <a title="Edit {{ type }} id:{{ id }}" class="eight-ui-element btn btn-xs btn-default btn-edit-variable" onclick="Editor.edit(this)" href="javascript:;" data-toggle="tooltip">
-            <span class="glyphicon glyphicon-pencil"></span>
-        </a>
-    {% endif %}
-
-    {{ html|raw }}
-
-    <a title="Sort blocks" href="javascript:;" class="eight-ui-element btn btn-xs btn-default btn-sort-block" data-toggle="tooltip">
-        <span class="glyphicon glyphicon-resize-vertical"></span>
-    </a>
-
-
-    <a title="Delete block id:{{ id }}" class="eight-ui-element btn btn-default btn-xs btn-remove-block" data-toggle="tooltip">
-        <span class="glyphicon glyphicon-remove"></span>
-    </a>
-
-
-    {% if subject.enabled %}
-        <a class="btn btn-xs btn-default btn-disable-block" href="javascript:;" title="Disable {{ type }} id:{{ id }}" data-toggle="tooltip">
-            <span class="glyphicon glyphicon-ban-circle"></span>
-        </a>
-    {% else %}
-        <a class="btn btn-xs btn-default btn-enable-block" href="javascript:;" title="Enable {{ type }} id:{{ id }}" data-toggle="tooltip">
-            <span class="glyphicon glyphicon-eye-open"></span>
-        </a>
-    {% endif %}
-</div>
+<span class="eight-marker-end"></span>
