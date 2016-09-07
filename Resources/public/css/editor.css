@@ -3,8 +3,14 @@ body.toolkit {
     padding-bottom: 40px;
 }
 
-.btn {
-    border-radius: 3px;
+.modal-dialog {
+    width: 70%;
+}
+
+@media(max-width: 1024px) {
+    .modal-dialog {
+        width: 100%;
+    }
 }
 
 #btn-edit-layout-mode {
@@ -13,6 +19,7 @@ body.toolkit {
     top: 10px;
     z-index: 2147483647;
     opacity: 0.2;
+    background: #1447E0;
 }
 
 .toolkit #btn-edit-layout-mode {
@@ -24,7 +31,7 @@ body.toolkit {
 }
 
 .toolkit #btn-edit-layout-mode {
-    background: #95A2C9;
+    background: #1447E0;
 }
 
 #page-specs {
@@ -208,7 +215,7 @@ body.toolkit {
 .toolkit .block-wrapper.edit-content > form {
     display: block;
     padding: 20px;
-    border: dashed 2px #E7604A;
+    border: dashed 2px #1447E0;
 }
 
 .submit-block-edit {
@@ -228,20 +235,21 @@ body.toolkit {
 .eight-frame-side {
     width: 2px;
     position: absolute;
-    background: #E7604A;
+    background: #1447E0;
     z-index: 2147483647;
     display: none;
 }
 
 .eight-frame-bottom {
     height: 2px;
-    background: #E7604A;
+    background: #1447E0;
     position: absolute;
+    display: none;
 }
 
 .eight-frame-title {
     height: 30px;
-    border: solid 2px #E7604A;
+    border: solid 2px #1447E0;
     position: absolute;
     background: #FFF;
     z-index: 2147483647;
@@ -250,6 +258,7 @@ body.toolkit {
     line-height: 30px;
     color: #333;
     font-weight: bold;
+    display: none;
 }
 
 .eight-block-decorator {
@@ -258,7 +267,7 @@ body.toolkit {
 
 .add-item {
     background: #fff none repeat scroll 0 0;
-    border: 2px solid #E7604A;
+    border: 2px solid #1447E0;
     border-radius: 1px;
     bottom: 0;
     display: none;
@@ -267,21 +276,15 @@ body.toolkit {
     position: absolute;
     right: 0;
     z-index: 2147483647;
+    color: #1447E0;
 }
 
 .eight-ui-button {
     background: #fff none repeat scroll 0 0;
-    border: 2px solid #E7604A;
+    border: 2px solid #1447E0;
     border-radius: 2px;
     padding: 2px 4px;
-}
-
-.toolkit .add-item {
-    display: block;
-}
-
-.toolkit .eight-frame-element {
-    display: block;
+    color: #1447E0;
 }
 
 .eight-toolbar {
@@ -295,6 +298,11 @@ body.toolkit {
     top: 0;
 }
 
+.toolkit .add-item,
+.toolkit .eight-frame-element,
+.toolkit .eight-frame-title,
+.toolkit .eight-frame-side,
+.toolkit .eight-frame-bottom,
 .toolkit .eight-toolbar {
     display: block;
 }
