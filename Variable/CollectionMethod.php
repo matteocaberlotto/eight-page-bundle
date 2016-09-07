@@ -4,7 +4,7 @@ namespace Eight\PageBundle\Variable;
 
 use Eight\PageBundle\Variable\AbstractVariable;
 use Doctrine\Common\Collections\ArrayCollection;
-use Eight\PageBundle\Form\CollectionMethodType;
+use Eight\PageBundle\Form\Type\CollectionMethodType;
 
 /**
  * Retrieve a collection by a class/method couple.
