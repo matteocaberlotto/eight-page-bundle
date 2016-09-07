@@ -59,3 +59,8 @@ services:
         tags:
             - { name: eight_page.variable }
 
+    eight.checkbox:
+        class: Eight\PageBundle\Variable\Checkbox
+        tags:
+            - { name: eight_page.variable }
+
