@@ -84,9 +84,9 @@ var Editor = (function () {
             // header
             $('<div/>', { "class": "eight-frame-title eight-frame-element eight-frame-element-" + blockContent.id})
                 .css({
-                    left: element.offset().left - 2,
+                    left: element.offset().left,
                     top: element.offset().top - 30,
-                    width: element.width() + 4
+                    width: element.width()
                 })
                 .html(element.data('widget-label'))
                 .appendTo('body')
@@ -95,27 +95,27 @@ var Editor = (function () {
             // left
             $('<div/>', { "class": "eight-frame-side eight-frame-element eight-frame-element-" + blockContent.id })
                 .css({
-                    left: element.offset().left - 2,
-                    top: element.offset().top - 2,
-                    height: element.height() + 4
+                    left: element.offset().left,
+                    top: element.offset().top,
+                    height: element.height()
                 })
                 .appendTo($('body'));
 
             // right
             $('<div/>', { "class": "eight-frame-side eight-frame-element eight-frame-element-" + blockContent.id })
                 .css({
-                    right: $(window).width() - element.offset().left - element.outerWidth() - 2,
-                    top: element.offset().top - 2,
-                    height: element.height() + 4
+                    right: $(window).width() - element.offset().left - element.outerWidth(),
+                    top: element.offset().top,
+                    height: element.height()
                 })
                 .appendTo($('body'));
 
             // bottom
             $('<div/>', { "class": "eight-frame-bottom eight-frame-element eight-frame-element-" + blockContent.id })
                 .css({
-                    left: element.offset().left - 2,
+                    left: element.offset().left,
                     top: element.offset().top + element.outerHeight(),
-                    width: element.width() + 4
+                    width: element.width()
                 })
                 .appendTo($('body'));
 
