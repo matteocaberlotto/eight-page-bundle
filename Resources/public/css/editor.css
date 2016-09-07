@@ -208,7 +208,7 @@ body.toolkit {
 .toolkit .block-wrapper.edit-content > form {
     display: block;
     padding: 20px;
-    border: dashed 2px #C00;
+    border: dashed 2px #E7604A;
 }
 
 .submit-block-edit {
@@ -225,24 +225,27 @@ body.toolkit {
     max-width: 400px;
 }
 
-.eight-frame-corner {
-    width: 20px;
-    height: 20px;
-    border: solid 2px #C00;
+.eight-frame-side {
+    width: 2px;
     position: absolute;
-    background: #FFF;
+    background: #E7604A;
     z-index: 2147483647;
     display: none;
 }
 
+.eight-frame-bottom {
+    height: 2px;
+    background: #E7604A;
+    position: absolute;
+}
+
 .eight-frame-title {
     height: 30px;
-    border: solid 2px #C00;
+    border: solid 2px #E7604A;
     position: absolute;
     background: #FFF;
     z-index: 2147483647;
     text-align: center;
-    display: none;
     text-transform: uppercase;
     line-height: 30px;
     color: #333;
@@ -255,7 +258,7 @@ body.toolkit {
 
 .add-item {
     background: #fff none repeat scroll 0 0;
-    border: 2px solid #c00;
+    border: 2px solid #E7604A;
     border-radius: 1px;
     bottom: 0;
     display: none;
@@ -268,7 +271,7 @@ body.toolkit {
 
 .eight-ui-button {
     background: #fff none repeat scroll 0 0;
-    border: 2px solid #c00;
+    border: 2px solid #E7604A;
     border-radius: 2px;
     padding: 2px 4px;
 }

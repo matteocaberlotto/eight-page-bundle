@@ -78,49 +78,43 @@ var Editor = (function () {
 
             var blockContent = $(element).data('editor-content');
 
-            // upper left
-            $('<div/>', { "class": "eight-frame-corner eight-frame-element eight-frame-element-" + blockContent.id })
-                .css({
-                    left: element.offset().left - 20,
-                    top: element.offset().top - 20
-                })
-                .appendTo($('body'));
-
-            // upper right
-            $('<div/>', { "class": "eight-frame-corner eight-frame-element eight-frame-element-" + blockContent.id })
-                .css({
-                    right: $(window).width() - element.offset().left - element.outerWidth() - 20,
-                    top: element.offset().top - 20
-                })
-                .appendTo($('body'));
-
-            // lower left
-            $('<div/>', { "class": "eight-frame-corner eight-frame-element eight-frame-element-" + blockContent.id })
-                .css({
-                    left: element.offset().left - 20,
-                    top: element.offset().top + element.outerHeight()
-                })
-                .appendTo($('body'));
-
-            // lower right
-            $('<div/>', { "class": "eight-frame-corner eight-frame-element eight-frame-element-" + blockContent.id })
-                .css({
-                    right: $(window).width() - element.offset().left - element.outerWidth() - 20,
-                    top: element.offset().top + element.outerHeight()
-                })
-                .appendTo($('body'))
-                ;
-
             // header
             $('<div/>', { "class": "eight-frame-title eight-frame-element eight-frame-element-" + blockContent.id})
                 .css({
-                    left: element.offset().left,
+                    left: element.offset().left - 2,
                     top: element.offset().top - 30,
-                    width: element.width()
+                    width: element.width() + 4
                 })
                 .html(element.data('widget-label'))
                 .appendTo('body')
                 ;
+
+            // left
+            $('<div/>', { "class": "eight-frame-side eight-frame-element eight-frame-element-" + blockContent.id })
+                .css({
+                    left: element.offset().left - 2,
+                    top: element.offset().top - 2,
+                    height: element.height() + 2
+                })
+                .appendTo($('body'));
+
+            // right
+            $('<div/>', { "class": "eight-frame-side eight-frame-element eight-frame-element-" + blockContent.id })
+                .css({
+                    right: $(window).width() - element.offset().left - element.outerWidth() - 2,
+                    top: element.offset().top - 2,
+                    height: element.height() + 2
+                })
+                .appendTo($('body'));
+
+            // bottom
+            $('<div/>', { "class": "eight-frame-bottom eight-frame-element eight-frame-element-" + blockContent.id })
+                .css({
+                    left: element.offset().left - 2,
+                    top: element.offset().top + element.outerHeight(),
+                    width: element.width() + 4
+                })
+                .appendTo($('body'));
 
             // toolbar
             var template = $($('#toolbar-template').html()).clone();
