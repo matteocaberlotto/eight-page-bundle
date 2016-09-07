@@ -40,6 +40,9 @@ var Editor = (function () {
 
             $('.eight-block-decorator')
                 .mouseenter(function () {
+                    if ($('body').hasClass('eight-is-sorting')) {
+                        return;
+                    }
                     Editor.showFrame($(this));
                 })
                 .mouseleave(function () {
@@ -204,11 +207,18 @@ var Editor = (function () {
                 template.find('.btn-disable-block').remove();
             }
 
-            $('.eight-block-decorator')
+            $('.eight-list-decorator')
                 .sortable({
                     items: '.eight-block-decorator',
                     handle: ".btn-sort-block",
+                    start: function (event, ui) {
+                        $('body').addClass('eight-is-sorting');
+                    },
                     stop: function (event, ui) {
+                        $('body').removeClass('eight-is-sorting');
+
+                        $('.eight-frame-element').remove();
+
                         Editor.updateBlocksOrder(ui.item.parent());
 
                         Editor.reloadPlugins();
