@@ -49,7 +49,7 @@ class CollectionMethod extends AbstractVariable
         return 'collection_method';
     }
 
-    public function buildForm($builder, $name, $config)
+    public function buildForm($builder, $name, $config, $variable = null)
     {
         $builder
             ->add($name, CollectionMethodType::class, array(

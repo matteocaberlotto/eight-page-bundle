@@ -14,7 +14,7 @@ class Icon extends AbstractVariable
         $this->container = $container;
     }
 
-    public function buildForm($builder, $name, $config)
+    public function buildForm($builder, $name, $config, $variable = null)
     {
         $builder
             ->add($name, IconChoiceType::class, array(

@@ -57,7 +57,7 @@ abstract class AbstractVariable
     /**
      * Tells the builder how to edit this variable in admin mode.
      */
-    public function buildForm($builder, $name, $config)
+    public function buildForm($builder, $name, $config, $variable = null)
     {
         $builder
             ->add($name, null, array(

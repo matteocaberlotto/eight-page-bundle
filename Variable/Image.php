@@ -5,6 +5,8 @@ namespace Eight\PageBundle\Variable;
 use Eight\PageBundle\Variable\AbstractVariable;
 use Eight\PageBundle\Entity\Content;
 
+use Eight\PageBundle\Form\Type\ImagePreviewType;
+
 /**
  * A variable type to handle file upload
  */
@@ -17,7 +19,7 @@ class Image extends AbstractVariable
         $this->container = $container;
     }
 
-    public function buildForm($builder, $name, $variable)
+    public function buildForm($builder, $name, $config, $variable = null)
     {
         $builder
             ->add($name, 'file', array(
@@ -25,9 +27,15 @@ class Image extends AbstractVariable
                 'required' => false,
                 'attr' => array(
                     'class' => 'form-control'
-                    )
+                    ),
                 ))
             ;
+
+        if ($variable) {
+            $builder->add('preview', ImagePreviewType::class, array(
+                'src' => $variable->getImage(),
+                ));
+        }
     }
 
     public function resolve($variable)

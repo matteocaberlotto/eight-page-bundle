@@ -59,7 +59,7 @@ class Collection extends AbstractVariable
         return 'collection';
     }
 
-    public function buildForm($builder, $name, $config)
+    public function buildForm($builder, $name, $config, $variable = null)
     {
         $builder
             ->add($name, null, array(

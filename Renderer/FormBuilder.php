@@ -29,25 +29,27 @@ class FormBuilder
             ->setAction($this->container->get('router')->generate('admin_eight_page_block_update', array('id' => $block->getId(), 'page_id' => $this->getCurrentPage()->getId())))
             ;
 
-        foreach ($widget->getVars() as $name => $variable) {
+        foreach ($widget->getVars() as $name => $config) {
 
             // normalize key only entries
-            if (!is_array($variable)) {
-                $name = $variable;
-                $variable = array(
+            if (!is_array($config)) {
+                $name = $config;
+                $config = array(
                     'type' => 'label',
                     );
             }
 
-            if (!isset($variable['type'])) {
-                $variable['type'] = 'label';
+            if (!isset($config['type'])) {
+                $config['type'] = 'label';
             }
 
-            if (isset($variable['edit']) && $variable['edit'] == false) {
+            if (isset($config['edit']) && $config['edit'] == false) {
                 continue;
             }
 
-            $this->container->get('variable.provider')->get($variable['type'])->buildForm($builder, $name, $variable);
+            $variable = $this->getDbVariable($block, $config);
+
+            $this->container->get('variable.provider')->get($config['type'])->buildForm($builder, $name, $config, $variable);
         }
 
         $builder
@@ -73,5 +75,14 @@ class FormBuilder
         $form->setData($this->container->get('page.renderer')->getDatabaseVariables($block));
 
         return $form;
+    }
+
+    public function getDbVariable($block, $config)
+    {
+        // ...
+        return $this->container->get('eight.content')->findOneBy(array(
+            'block' => $block,
+            'type' => $config['type'],
+            ));
     }
 }

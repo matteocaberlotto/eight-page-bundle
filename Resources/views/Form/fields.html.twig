@@ -15,3 +15,9 @@
         {% endif %}
     {% endspaceless %}
 {% endblock %}
+
+{% block image_preview_widget %}
+    {% if src is not empty %}
+        <img style="width:120px" src="{{ src }}">
+    {% endif %}
+{% endblock %}

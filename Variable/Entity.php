@@ -66,7 +66,7 @@ class Entity extends AbstractVariable
         return 'entity';
     }
 
-    public function buildForm($builder, $name, $config)
+    public function buildForm($builder, $name, $config, $variable = null)
     {
         $builder
             ->add($name, 'entity', array(

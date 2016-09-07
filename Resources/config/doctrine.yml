@@ -15,3 +15,8 @@ services:
         factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments: ['Eight\PageBundle\Entity\Block']
 
+    eight.content:
+        class: Eight\PageBundle\Entity\BlockRepository
+        factory: ["@doctrine.orm.default_entity_manager", getRepository]
+        arguments: ['Eight\PageBundle\Entity\Content']
+
