@@ -15,7 +15,11 @@ class Variable
 
     public function get($name)
     {
-        return $this->_variables[$name];
+        if (isset($this->_variables[$name])) {
+            return $this->_variables[$name];
+        }
+
+        throw new InvalidArgumentException("Variable \"{$name}\" has not been defined or has not been properly added.");
     }
 
     public function addVariable($variable)

@@ -19,7 +19,7 @@ class Widget
             return $this->_widgets[$name];
         }
 
-        throw new \Exception("Widget \"{$name}\" has not been defined or has not been added properly.");
+        throw new InvalidArgumentException("Widget \"{$name}\" has not been defined or has not been properly added.");
     }
 
     public function addWidget($widget)
