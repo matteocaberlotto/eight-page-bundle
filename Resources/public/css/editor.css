@@ -7,6 +7,10 @@ body.toolkit {
     width: 70%;
 }
 
+.ui-sortable-helper {
+    box-shadow: 0 0 3px 1px #777;
+}
+
 @media(max-width: 1024px) {
     .modal-dialog {
         width: 100%;
@@ -109,33 +113,16 @@ body.toolkit {
     padding-top: 34px;
 }
 
-.block-container .add-item,
-.block-wrapper .add-item {
-    background: #EEE none repeat scroll 0 0;
-    font-weight: bold;
-    display: none;
-    left: 17px;
-    right: 17px;
-    margin: 0 auto;
-    padding: 5px 0;
-    position: absolute;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 18px;
-    color: #999;
-}
-
-.toolkit .block-container > .add-to-page,
-.toolkit .block-container > .add-item {
+.toolkit .eight-list-decorator > .add-item {
     display: block;
 }
 
 
-.block-container .add-item:hover,
-.block-wrapper .add-item:hover {
-    background-color: #666;
-    color: #EEE;
+.add-item:hover,
+.add-item:hover {
+    background-color: #ddd;
     text-decoration: none;
+    color: #333;
 }
 
 .toolkit .block-wrapper:hover > .btn-remove-block,
