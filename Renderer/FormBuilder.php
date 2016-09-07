@@ -47,7 +47,7 @@ class FormBuilder
                 continue;
             }
 
-            $variable = $this->getDbVariable($block, $config);
+            $variable = $this->getDbVariable($block, $name, $config);
 
             $this->container->get('variable.provider')->get($config['type'])->buildForm($builder, $name, $config, $variable);
         }
@@ -77,11 +77,11 @@ class FormBuilder
         return $form;
     }
 
-    public function getDbVariable($block, $config)
+    public function getDbVariable($block, $name, $config)
     {
-        // ...
         return $this->container->get('eight.content')->findOneBy(array(
             'block' => $block,
+            'name' => $name,
             'type' => $config['type'],
             ));
     }
