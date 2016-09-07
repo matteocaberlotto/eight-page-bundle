@@ -94,7 +94,7 @@ var Editor = (function () {
                 .css({
                     left: element.offset().left - 2,
                     top: element.offset().top - 2,
-                    height: element.height() + 2
+                    height: element.height() + 4
                 })
                 .appendTo($('body'));
 
@@ -103,7 +103,7 @@ var Editor = (function () {
                 .css({
                     right: $(window).width() - element.offset().left - element.outerWidth() - 2,
                     top: element.offset().top - 2,
-                    height: element.height() + 2
+                    height: element.height() + 4
                 })
                 .appendTo($('body'));
 
