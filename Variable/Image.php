@@ -32,8 +32,9 @@ class Image extends AbstractVariable
             ;
 
         if ($variable) {
-            $builder->add('preview', ImagePreviewType::class, array(
-                'src' => $variable->getImage(),
+            $builder
+                ->add('preview', ImagePreviewType::class, array(
+                    'src' => $variable->getImage(),
                 ));
         }
     }
