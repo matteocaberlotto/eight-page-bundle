@@ -140,14 +140,6 @@ body.toolkit {
     display: block;
 }
 
-.block-enabled .btn-enable-block {
-    display: none;
-}
-
-.block-disabled .btn-disable-block {
-    display: none;
-}
-
 .btn-remove-block {
     position: absolute;
     top: 2px;
@@ -302,6 +294,10 @@ body.toolkit {
 
 .toolkit .eight-toolbar {
     display: block;
+}
+
+.toolkit .eight-list-decorator {
+    padding-bottom: 40px;
 }
 
 .modal-title {

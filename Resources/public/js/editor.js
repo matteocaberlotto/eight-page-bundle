@@ -1,4 +1,7 @@
 var Editor = (function () {
+
+    var plugins = [];
+
     var api = {
         init: function () {
 
@@ -57,6 +60,18 @@ var Editor = (function () {
                 CKEDITOR.replace($(this).attr('id'));
             });
 
+            Editor.reloadPlugins();
+
+        },
+
+        addPlugin: function (callback) {
+            plugins.push(callback);
+        },
+
+        reloadPlugins: function () {
+            $.each(plugins, function (context) {
+                this(context);
+            });
         },
 
         showFrame: function (element) {
@@ -147,54 +162,62 @@ var Editor = (function () {
                 });
 
 
-            template.find('.btn-disable-block')
-                .click(function (event) {
-                    if (confirm("Disable block '" + element.data('widget-label') + "' ?")) {
-                        $.ajax({
-                            url: globalDisableUrl,
-                            data: {
-                                block_id: blockContent.id
-                            },
-                            success: function () {
-                                window.location.reload();
-                            },
-                            error: function () {
-                                alert('error');
-                            }
-                        });
-                    }
-                });
 
-            template.find('.btn-enable-block')
-                .click(function (event) {
-                    if (confirm("Enable block '" + element.data('widget-label') + "' ?")) {
-                        $.ajax({
-                            url: globalEnableUrl,
-                            data: {
-                                block_id: blockContent.id
-                            },
-                            success: function () {
-                                window.location.reload();
-                            },
-                            error: function () {
-                                alert('error');
-                            }
-                        });
-                    }
-                });
 
             if (blockContent.enabled) {
                 element.addClass('block-enabled');
+
+                template.find('.btn-disable-block')
+                    .click(function (event) {
+                        if (confirm("Disable block '" + element.data('widget-label') + "' ?")) {
+                            $.ajax({
+                                url: globalDisableUrl,
+                                data: {
+                                    block_id: blockContent.id
+                                },
+                                success: function () {
+                                    window.location.reload();
+                                },
+                                error: function () {
+                                    alert('error');
+                                }
+                            });
+                        }
+                    });
+
+                template.find('.btn-enable-block').remove();
             } else {
                 element.addClass('block-disabled');
+
+                template.find('.btn-enable-block')
+                    .click(function (event) {
+                        if (confirm("Enable block '" + element.data('widget-label') + "' ?")) {
+                            $.ajax({
+                                url: globalEnableUrl,
+                                data: {
+                                    block_id: blockContent.id
+                                },
+                                success: function () {
+                                    window.location.reload();
+                                },
+                                error: function () {
+                                    alert('error');
+                                }
+                            });
+                        }
+                    });
+
+                template.find('.btn-disable-block').remove();
             }
 
-
-            $('.eight-list-decorator')
+            $('.eight-block-decorator')
                 .sortable({
+                    items: '.eight-block-decorator',
                     handle: ".btn-sort-block",
                     stop: function (event, ui) {
                         Editor.updateBlocksOrder(ui.item.parent());
+
+                        Editor.reloadPlugins();
                     }
                 });
 
@@ -301,8 +324,9 @@ var Editor = (function () {
         addItemDialog: function (el) {
 
             var $el = $(el);
-            var variables = $(el).parent().data('variables');
-            var content = $(el).parent().data('editor-content');
+            var parent = $(el).parents('.eight-list-decorator').first();
+            var variables = parent.data('variables');
+            var content = parent.data('editor-content');
 
             $('.modal-title').html("Add new block to " + variables['title'] + " at position " + variables['subject-label']);
 
@@ -312,11 +336,11 @@ var Editor = (function () {
                     $.ajax({
                         url: globalAppendUrl,
                         data: {
-                            subject: $el.parent().data('subject-class'),
+                            subject: parent.data('subject-class'),
                             id: content.id,
                             name: $('.modal-body select').find('option:selected').val(),
                             template: $('.modal-body select').val(),
-                            label: variables['title']
+                            label: variables['subject-label']
                         },
                         success: function () {
                             window.location.reload();
