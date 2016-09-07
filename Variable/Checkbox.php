@@ -10,7 +10,7 @@ class Checkbox extends AbstractVariable
     {
         $builder
             ->add($name, 'checkbox', array(
-                'data' => $variable->getContent() ? true : false,
+                'data' => $variable ? ($variable->getContent() ? true : false) : false,
                 ))
             ;
     }
