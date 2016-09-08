@@ -11,6 +11,11 @@ body.toolkit {
     box-shadow: 0 0 3px 1px #777;
 }
 
+.eight-is-sorting .eight-block-decorator {
+    border: solid 2px #B8C6ED;
+}
+
+
 @media(max-width: 1024px) {
     .modal-dialog {
         width: 100%;
