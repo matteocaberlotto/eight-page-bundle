@@ -2,8 +2,11 @@
 
 namespace Eight\PageBundle\Variable;
 
-use Eight\PageBundle\Variable\AbstractVariable;
+use Symfony\Component\Form\FormBuilderInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+
+use Eight\PageBundle\Entity\Content;
+use Eight\PageBundle\Variable\AbstractVariable;
 
 /**
  * Retrieve an entity by a field/value couple.
@@ -18,7 +21,7 @@ class Entity extends AbstractVariable
         $this->container = $container;
     }
 
-    public function resolve($variable)
+    public function resolve(Content $variable)
     {
         list($class, $field, $value) = explode(':', $variable->getContent());
 
@@ -36,12 +39,12 @@ class Entity extends AbstractVariable
         }
     }
 
-    public function getValue($variable)
+    public function getValue(Content $variable)
     {
         return $this->resolve($variable);
     }
 
-    public function saveValue($variable, $content)
+    public function saveValue(Content $variable, $content, $config)
     {
         $values = array(
             get_class($content),
@@ -66,7 +69,7 @@ class Entity extends AbstractVariable
         return 'entity';
     }
 
-    public function buildForm($builder, $name, $config, $variable = null)
+    public function buildForm(FormBuilderInterface $builder, $name, $config, Content $variable = null)
     {
         $builder
             ->add($name, 'entity', array(

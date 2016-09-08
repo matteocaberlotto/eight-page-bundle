@@ -19,7 +19,7 @@ class Widget
             return $this->_widgets[$name];
         }
 
-        throw new InvalidArgumentException("Widget \"{$name}\" has not been defined or has not been properly added.");
+        throw new InvalidArgumentException("Widget \"{$name}\" has not been defined or properly added.");
     }
 
     public function addWidget($widget)
@@ -76,6 +76,25 @@ class Widget
         }
 
         return false;
+    }
+
+    public function getConfigFor($widget_name, $variable_name)
+    {
+        $widget = $this->get($widget_name);
+
+        foreach ($this->getVariables($widget_name) as $name => $variable) {
+            if (is_array($variable)) {
+                if ($name == $variable_name) {
+                    return $variable;
+                }
+            } else {
+                if ($variable == $variable_name) {
+                    return array();
+                }
+            }
+        }
+
+        throw new Exception("Variable {$variable_name} is not present in the widget {$widget_name}");
     }
 
     public function editable($block)

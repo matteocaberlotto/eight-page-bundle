@@ -2,6 +2,8 @@
 
 namespace Eight\PageBundle\Variable;
 
+use Symfony\Component\Form\FormBuilderInterface;
+
 use Eight\PageBundle\Variable\AbstractVariable;
 use Eight\PageBundle\Entity\Content;
 
@@ -19,7 +21,7 @@ class Image extends AbstractVariable
         $this->container = $container;
     }
 
-    public function buildForm($builder, $name, $config, $variable = null)
+    public function buildForm(FormBuilderInterface $builder, $name, $config, Content $variable = null)
     {
         $builder
             ->add($name, 'file', array(
@@ -39,12 +41,12 @@ class Image extends AbstractVariable
         }
     }
 
-    public function resolve($variable)
+    public function resolve(Content $variable)
     {
         return $variable->getImage();
     }
 
-    public function saveValue($variable, $content)
+    public function saveValue(Content $variable, $content, $config)
     {
         $variable->setImagePath($content);
         $variable->manageFileUpload();

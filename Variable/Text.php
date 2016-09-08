@@ -2,11 +2,14 @@
 
 namespace Eight\PageBundle\Variable;
 
+use Symfony\Component\Form\FormBuilderInterface;
+
+use Eight\PageBundle\Entity\Content;
 use Eight\PageBundle\Variable\AbstractVariable;
 
 class Text extends AbstractVariable
 {
-    public function buildForm($builder, $name, $config, $variable = null)
+    public function buildForm(FormBuilderInterface $builder, $name, $config, Content $variable = null)
     {
         $builder
             ->add($name, 'textarea', array(

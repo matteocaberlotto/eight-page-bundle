@@ -2,8 +2,11 @@
 
 namespace Eight\PageBundle\Variable;
 
-use Eight\PageBundle\Variable\AbstractVariable;
+use Symfony\Component\Form\FormBuilderInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+
+use Eight\PageBundle\Entity\Content;
+use Eight\PageBundle\Variable\AbstractVariable;
 use Eight\PageBundle\Form\Type\CollectionMethodType;
 
 /**
@@ -18,19 +21,19 @@ class CollectionMethod extends AbstractVariable
         $this->container = $container;
     }
 
-    public function resolve($variable)
+    public function resolve(Content $variable)
     {
         $config = $this->getValue($variable);
         $method = $config['method'];
         return $this->container->get('doctrine')->getRepository($config['class'])->$method();
     }
 
-    public function getValue($variable)
+    public function getValue(Content $variable)
     {
         return unserialize($variable->getContent());
     }
 
-    public function saveValue($variable, $content)
+    public function saveValue(Content $variable, $content, $config)
     {
         $variable->setContent(serialize($content));
     }
@@ -49,7 +52,7 @@ class CollectionMethod extends AbstractVariable
         return 'collection_method';
     }
 
-    public function buildForm($builder, $name, $config, $variable = null)
+    public function buildForm(FormBuilderInterface $builder, $name, $config, Content $variable = null)
     {
         $builder
             ->add($name, CollectionMethodType::class, array(

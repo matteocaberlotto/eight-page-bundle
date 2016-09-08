@@ -140,7 +140,9 @@ class BlockCRUDController extends CRUDController
                     $this->get('doctrine')->getManager()->persist($prev);
                 }
 
-                $this->get('variable.provider')->get($prev->getType())->saveValue($prev, $value);
+                $config = $this->get('widget.provider')->getConfigFor($object->getName(), $name);
+
+                $this->get('variable.provider')->get($prev->getType())->saveValue($prev, $value, $config);
             }
 
             $this->get('doctrine')->getManager()->flush();

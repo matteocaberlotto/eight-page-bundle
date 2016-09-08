@@ -274,7 +274,7 @@ class LoadPagesCommand extends ContainerAwareCommand
                     ));
             }
 
-            $this->getContainer()->get('variable.provider')->get($c['type'])->saveValue($content, $c['content']);
+            $this->getContainer()->get('variable.provider')->get($c['type'])->saveValue($content, $c['content'], $c);
         }
     }
 }
