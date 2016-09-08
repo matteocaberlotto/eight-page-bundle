@@ -86,7 +86,7 @@ var Editor = (function () {
                 .css({
                     left: element.offset().left,
                     top: element.offset().top - 30,
-                    width: element.width()
+                    width: element.outerWidth()
                 })
                 .html(element.data('widget-label'))
                 .appendTo('body')
@@ -97,7 +97,7 @@ var Editor = (function () {
                 .css({
                     left: element.offset().left,
                     top: element.offset().top,
-                    height: element.height()
+                    height: element.outerHeight()
                 })
                 .appendTo($('body'));
 
@@ -106,7 +106,7 @@ var Editor = (function () {
                 .css({
                     right: $(window).width() - element.offset().left - element.outerWidth(),
                     top: element.offset().top,
-                    height: element.height()
+                    height: element.outerHeight()
                 })
                 .appendTo($('body'));
 
@@ -115,7 +115,7 @@ var Editor = (function () {
                 .css({
                     left: element.offset().left,
                     top: element.offset().top + element.outerHeight(),
-                    width: element.width()
+                    width: element.outerWidth()
                 })
                 .appendTo($('body'));
 
