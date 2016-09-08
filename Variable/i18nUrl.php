@@ -2,7 +2,7 @@
 
 namespace Eight\PageBundle\Variable;
 
-use Eight\PageBundle\Entity\Content;
+use Eight\PageBundle\Model\ContentInterface;
 use Eight\PageBundle\Variable\AbstractVariable;
 
 class i18nUrl extends AbstractVariable
@@ -14,7 +14,7 @@ class i18nUrl extends AbstractVariable
         $this->container = $container;
     }
 
-    public function resolve(Content $variable)
+    public function resolve(ContentInterface $variable)
     {
         $locale = $this->getLocale();
 

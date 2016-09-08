@@ -3,7 +3,7 @@
 namespace Eight\PageBundle\Variable;
 
 use Symfony\Component\Form\FormBuilderInterface;
-use Eight\PageBundle\Entity\Content;
+use Eight\PageBundle\Model\ContentInterface;
 
 /**
  *
@@ -19,9 +19,9 @@ abstract class AbstractVariable
     /**
      * This is performed before the variable gets passed to the template and the admin form
      *
-     * @param Content $variable
+     * @param ContentInterface $variable
      */
-    public function resolve(Content $variable)
+    public function resolve(ContentInterface $variable)
     {
         return $this->getValue($variable);
     }
@@ -29,11 +29,11 @@ abstract class AbstractVariable
     /**
      * This is performed before saving the value to db.
      *
-     * @param Content $variable
+     * @param ContentInterface $variable
      * @param mixed $content
      * @param array $config
      */
-    public function saveValue(Content $variable, $content, $config)
+    public function saveValue(ContentInterface $variable, $content, $config)
     {
         $variable->setContent($content);
     }
@@ -41,9 +41,9 @@ abstract class AbstractVariable
     /**
      * Returns the raw variable content (eg: for form building)
      *
-     * @param Content $variable
+     * @param ContentInterface $variable
      */
-    public function getValue(Content $variable)
+    public function getValue(ContentInterface $variable)
     {
         return $variable->getContent();
     }
@@ -73,9 +73,9 @@ abstract class AbstractVariable
      * @param FormBuilderInterface $builder
      * @param strong $name
      * @param array $config
-     * @param Content $variable
+     * @param ContentInterface $variable
      */
-    public function buildForm(FormBuilderInterface $builder, $name, $config, Content $variable = null)
+    public function buildForm(FormBuilderInterface $builder, $name, $config, ContentInterface $variable = null)
     {
         $builder
             ->add($name, null, array(

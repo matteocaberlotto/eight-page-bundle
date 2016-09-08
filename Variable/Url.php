@@ -3,7 +3,7 @@
 namespace Eight\PageBundle\Variable;
 
 use Eight\PageBundle\Variable\AbstractVariable;
-use Eight\PageBundle\Entity\Content;
+use Eight\PageBundle\Model\ContentInterface;
 
 class Url extends AbstractVariable
 {
@@ -14,7 +14,7 @@ class Url extends AbstractVariable
         $this->container = $container;
     }
 
-    public function resolve(Content $variable)
+    public function resolve(ContentInterface $variable)
     {
         $content = unserialize($variable->getContent());
         return $this->container->get('router')->generateUrl($content['url'], $content['variables'], $content['absolute']);

@@ -5,7 +5,7 @@ namespace Eight\PageBundle\Variable;
 use Symfony\Component\Form\FormBuilderInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 
-use Eight\PageBundle\Entity\Content;
+use Eight\PageBundle\Model\ContentInterface;
 use Eight\PageBundle\Variable\AbstractVariable;
 
 /**
@@ -20,7 +20,7 @@ class Collection extends AbstractVariable
         $this->container = $container;
     }
 
-    public function resolve(Content $variable)
+    public function resolve(ContentInterface $variable)
     {
         list($class, $field, $value) = $this->getContent($variable);
 
@@ -38,12 +38,12 @@ class Collection extends AbstractVariable
         }
     }
 
-    public function getValue(Content $variable)
+    public function getValue(ContentInterface $variable)
     {
         return explode(':', $variable->getContent());
     }
 
-    public function saveValue(Content $variable, $content, $config)
+    public function saveValue(ContentInterface $variable, $content, $config)
     {
         $variable->setContent(implode(':', $content));
     }
@@ -62,7 +62,7 @@ class Collection extends AbstractVariable
         return 'collection';
     }
 
-    public function buildForm(FormBuilderInterface $builder, $name, $config, Content $variable = null)
+    public function buildForm(FormBuilderInterface $builder, $name, $config, ContentInterface $variable = null)
     {
         $builder
             ->add($name, null, array(
