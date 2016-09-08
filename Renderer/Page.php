@@ -2,8 +2,7 @@
 
 namespace Eight\PageBundle\Renderer;
 
-use Eight\PageBundle\Entity\Content;
-use Eight\PageBundle\Entity\BlockInterface;
+use Eight\PageBundle\Model\BlockInterface;
 
 class Page
 {

@@ -1,5 +1,5 @@
 <?php
 
-namespace Eight\PageBundle\Entity;
+namespace Eight\PageBundle\Model;
 
 interface BlockInterface {}

@@ -2,6 +2,8 @@
 
 namespace Eight\PageBundle\Entity;
 
+use Eight\PageBundle\Model\BlockInterface;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**

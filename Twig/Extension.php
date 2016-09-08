@@ -4,7 +4,7 @@ namespace Eight\PageBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Eight\PageBundle\Entity\PageInterface;
+use Eight\PageBundle\Model\PageInterface;
 
 class Extension extends \Twig_Extension implements ContainerAwareInterface
 {

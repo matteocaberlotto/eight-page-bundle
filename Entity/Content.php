@@ -2,6 +2,7 @@
 
 namespace Eight\PageBundle\Entity;
 
+use Eight\PageBundle\Model\ContentInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Eight\PageBundle\Entity\ContentRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class Content
+class Content implements ContentInterface
 {
     const CMS_IMAGES_FOLDER = '/uploads/images/cms';
 

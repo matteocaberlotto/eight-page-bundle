@@ -2,9 +2,10 @@
 
 namespace Eight\PageBundle\Helper;
 
+use Eight\PageBundle\Model\PageInterface;
 use Eight\PageBundle\Entity\Block;
 use Eight\PageBundle\Entity\Page as PageEntity;
-use Eight\PageBundle\Entity\PageInterface;
+
 
 /**
  * Generic helper to perfrom some common database operations.
