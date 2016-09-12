@@ -46,16 +46,24 @@ body.toolkit {
     background: #1447E0;
 }
 
+#back-to-list-button {
+    right: 10px;
+    position: fixed;
+    top: 10px;
+    z-index: 2147483647;
+    opacity: 0.2;
+    background: #1447E0;
+}
+
+
+.toolkit #back-to-list-button,
 .toolkit #btn-edit-layout-mode {
     opacity: 1;
 }
 
+#back-to-list-button:hover,
 #btn-edit-layout-mode:hover {
     opacity: 1;
-}
-
-.toolkit #btn-edit-layout-mode {
-    background: #1447E0;
 }
 
 #page-specs {
