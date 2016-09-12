@@ -89,6 +89,8 @@ class Page
         $manager = $this->container->get('doctrine')->getManager();
         $manager->persist($cloned);
 
+        $manager->flush();
+
         $route = $page->getRoute();
 
         $route_clone = clone $route;
