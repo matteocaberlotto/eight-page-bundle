@@ -94,7 +94,7 @@ class Widget
             }
         }
 
-        throw new Exception("Variable {$variable_name} is not present in the widget {$widget_name}");
+        throw new \InvalidArgumentException("Variable {$variable_name} is not present in the widget {$widget_name}");
     }
 
     public function editable($block)
