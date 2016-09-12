@@ -19,7 +19,7 @@ class Variable
             return $this->_variables[$name];
         }
 
-        throw new InvalidArgumentException("Variable \"{$name}\" has not been defined or properly added.");
+        throw new \InvalidArgumentException("Variable \"{$name}\" has not been defined or properly added.");
     }
 
     public function addVariable($variable)
