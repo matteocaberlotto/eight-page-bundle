@@ -63,6 +63,7 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
             'is_route' => new \Twig_Function_Method($this, 'isRoute'),
             'if_route' => new \Twig_Function_Method($this, 'showWhenRouteMatch'),
             'get_widget' => new \Twig_Function_Method($this, 'getWidget'),
+            'get_page' => new \Twig_Function_Method($this, 'findPage'),
         );
     }
 
@@ -77,12 +78,12 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
     {
         if (is_array($routes)) {
             foreach ($routes as $route) {
-                if ($this->isRoute($route)) {
+                if ($this->findPage($route) == $this->getPage()) {
                     return $string;
                 }
             }
         } else {
-            if ($this->isRoute($routes)) {
+            if ($this->findPage($routes) == $this->getPage()) {
                 return $string;
             }
         }
@@ -95,8 +96,8 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
         return $this->container->get('widget.provider')->get($name);
     }
 
-    public function isRoute($name) {
-        return $this->getRequest()->get('_route') == $name;
+    public function isRoute($path) {
+        return ($this->findPage($path) == $this->getPage());
     }
 
     public function isHost($test)
@@ -164,6 +165,38 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
         return '';
     }
 
+    public function findPage($path)
+    {
+        if ($path instanceof PageInterface) {
+            return $path;
+        }
+
+        // search for localized tag first (eg: "homepage.it")
+        $page = $this->container->get('eight.pages')->findOneByTag($path . '.' . $this->getLocale());
+
+        if ($page && is_object($page->getRoute())) {
+            return $page;
+        }
+
+        // search for the tag
+        $page = $this->container->get('eight.pages')->findOneByTag($path);
+
+        if ($page && is_object($page->getRoute())) {
+            return $page;
+        }
+
+        // search for route name
+        $route = $this->container->get('raindrop_routing.route_repository')->findOneBy(array(
+            'name' => $path,
+            ));
+
+        if ($route && $route->getContent() instanceof PageInterface) {
+            return $route->getContent();
+        }
+
+        return false;
+    }
+
     /**
      * This will retrieve a page route using several methods:
      * - if the argument passed is the page, return the route directly
@@ -173,33 +206,10 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
      */
     public function i18nPath($path, $params = array())
     {
-        if ($path instanceof PageInterface) {
-            if ($path->getRoute()) {
-                return $this->container->get('router')->generate($path->getRoute()->getName(), $params);
-            } else {
-                return;
-            }
-        }
+        $page = $this->findPage($path);
 
-        // search for localized tag first (eg: "homepage.it")
-        $page = $this->container->get('eight.pages')->findOneByTag($path . '.' . $this->getLocale());
-
-        if ($page && is_object($page->getRoute())) {
+        if ($page) {
             return $this->container->get('router')->generate($page->getRoute()->getName(), $params);
-        }
-
-        // search for the tag
-        $page = $this->container->get('eight.pages')->findOneByTag($path);
-
-        if ($page && is_object($page->getRoute())) {
-            return $this->container->get('router')->generate($page->getRoute()->getName(), $params);
-        }
-
-        // search for route name
-        if ($this->container->get('raindrop_routing.route_repository')->findOneBy(array(
-            'name' => $path,
-            ))) {
-            return $this->container->get('router')->generate($path);
         }
     }
 
