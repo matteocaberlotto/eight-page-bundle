@@ -332,6 +332,11 @@ var Editor = (function () {
             });
         },
 
+        selectWidget: function (el) {
+            $('.single-block-button').removeClass('selected');
+            $(el).addClass('selected');
+        },
+
         addItemDialog: function (el) {
 
             var $el = $(el);
@@ -349,8 +354,7 @@ var Editor = (function () {
                         data: {
                             subject: parent.data('subject-class'),
                             id: content.id,
-                            name: $('.modal-body select').find('option:selected').val(),
-                            template: $('.modal-body select').val(),
+                            name: $('.single-block-button.selected').data('name'),
                             slot_label: variables['slot-label']
                         },
                         success: function () {

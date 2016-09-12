@@ -22,7 +22,7 @@ class Page
     /**
      * Append a child block to a page or block
      */
-    public function append($subject, $id, $name, $label, $slot_label)
+    public function append($subject, $id, $name, $slot_label)
     {
         $block = new Block();
         $parent = $this->container->get('doctrine')->getRepository($subject)->find($id);

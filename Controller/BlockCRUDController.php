@@ -17,7 +17,7 @@ class BlockCRUDController extends CRUDController
             throw new AccessDeniedException();
         }
 
-        $this->get('helper.page')->append($request->get('subject'), $request->get('id'), $request->get('name'), $request->get('template'), $request->get('slot_label'));
+        $this->get('helper.page')->append($request->get('subject'), $request->get('id'), $request->get('name'), $request->get('slot_label'));
 
         return new JsonResponse(array(
             'status' => 'OK'

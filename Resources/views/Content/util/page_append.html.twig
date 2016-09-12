@@ -14,11 +14,12 @@
                 <h4 class="modal-title">Add new block</h4>
             </div>
             <div class="modal-body">
-                <select>
                 {% for widget in widgets %}
-                    <option value="{{ widget.name }}">{{ widget.label }}</option>
+                    <a class="single-block-button" href="javascript:;" onclick="Editor.selectWidget(this)" data-template="{{ widget.layout }}" data-name="{{ widget.name }}">
+                        <span class="{{ widget.icon }}"></span>
+                        {{ widget.label }}
+                    </a>
                 {% endfor %}
-                </select>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

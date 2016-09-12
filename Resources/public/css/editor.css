@@ -7,6 +7,21 @@ body.toolkit {
     width: 70%;
 }
 
+#add-block-modal .single-block-button {
+    border: 1px solid #eee;
+    color: #333;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    padding: 10px;
+    text-transform: uppercase;
+}
+
+#add-block-modal .single-block-button.selected {
+    border: 1px solid #C00;
+    box-shadow: 0 0 10px 1px #C00;
+}
+
 .ui-sortable-helper {
     box-shadow: 0 0 3px 1px #777;
 }

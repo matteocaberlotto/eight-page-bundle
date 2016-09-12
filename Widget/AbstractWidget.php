@@ -25,6 +25,11 @@ abstract class AbstractWidget implements WidgetInterface
         return Container::camelize($this->getName());
     }
 
+    public function getIcon()
+    {
+        return 'fa fa-cubes';
+    }
+
     public function js()
     {
         return array();
