@@ -22,7 +22,7 @@ class Page
     /**
      * Append a child block to a page or block
      */
-    public function append($subject, $id, $name, $label, $type)
+    public function append($subject, $id, $name, $label, $slot_label)
     {
         $block = new Block();
         $parent = $this->container->get('doctrine')->getRepository($subject)->find($id);
@@ -39,13 +39,13 @@ class Page
                 break;
         }
 
-        $nextSeq = $this->container->get('eight.blocks')->getNextPosition($subject, $id, $type);
+        $nextSeq = $this->container->get('eight.blocks')->getNextPosition($subject, $id, $slot_label);
 
         $widget = $this->container->get('widget.provider')->get($name);
 
         $block->setName($name);
         $block->setLayout($widget->getLayout());
-        $block->setType($type);
+        $block->setType($slot_label);
         $block->setSeq($nextSeq);
 
         $manager = $this->container->get('doctrine')->getManager();

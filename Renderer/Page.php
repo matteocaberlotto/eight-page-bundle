@@ -130,9 +130,9 @@ class Page
 
     /**
      * Renders all children of the subject (page or block)
-     * of given type (type = where to append inside the layout).
+     * of given type (slot_label = where to append inside the layout).
      */
-    public function renderBlockChildren($subject, $type)
+    public function renderBlockChildren($subject, $slot_label)
     {
         $page = $this->getPage();
         $html = '';
@@ -140,17 +140,17 @@ class Page
         if ($subject instanceof BlockInterface) {
             $children = $subject->getOrderedBlocks($page);
         } else {
-            $children = $subject->getOrderedBlocks($type);
+            $children = $subject->getOrderedBlocks($slot_label);
         }
 
         foreach ($children as $sub) {
-            if ($sub->getType() == $type) {
+            if ($sub->getType() == $slot_label) {
                 $html .= $this->renderBlock($sub, $page);
             }
         }
 
         if ($page->editMode()) {
-            $html = $this->decorateHtml($html, 'list', $subject, $type);
+            $html = $this->decorateHtml($html, 'list', $subject, $slot_label);
         }
 
         return $html;
@@ -209,7 +209,7 @@ class Page
     /**
      * Decorates a page or block with the editor markup.
      */
-    public function decorateHtml($html, $type, $subject, $label = 'default')
+    public function decorateHtml($html, $type, $subject, $slot_label = 'default')
     {
         $template = $this->container->getParameter('eight_page.decorator_' . $type);
 
@@ -219,8 +219,9 @@ class Page
             'subject_class' => get_class($subject),
             'subject' => $subject,
             'id' => $subject->getId(),
-            'label' => $label,
-            'title' => $subject instanceof BlockInterface ? $subject->getName() : 'main page'
+            'slot_label' => $slot_label,
+            'title' => $subject instanceof BlockInterface ? $subject->getName() : 'main page',
+            'subject_label' => $subject instanceof BlockInterface ? $this->get('widget.provider')->get($subject->getName())->getLabel() : 'Main page',
         );
 
         return $this->get('templating')->render($template, $variables);

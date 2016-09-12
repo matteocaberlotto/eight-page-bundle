@@ -292,10 +292,17 @@ var Editor = (function () {
                     }
                 }
 
+                var label;
+                if ($el.data('subject-class').indexOf('Block') !== -1) {
+                    label = variables['subject-label'];
+                } else {
+                    label = 'Main Page';
+                }
+
                 $('<a/>', {
                         "href": "javascript:;",
                         "class": "add-item",
-                        "html": '<span class="glyphicon glyphicon-plus"></span>Add to ' + variables['title'] + ' (pos: ' + variables['subject-label'] + ')'
+                        "html": '<span class="glyphicon glyphicon-plus"></span>Add to ' + label + ' (pos: ' + variables['slot-label'] + ')'
                     })
                     .appendTo(parent)
                     ;
@@ -332,7 +339,7 @@ var Editor = (function () {
             var variables = parent.data('variables');
             var content = parent.data('editor-content');
 
-            $('.modal-title').html("Add new block to " + variables['title'] + " at position " + variables['subject-label']);
+            $('.modal-title').html("Add new block to " + variables['subject-label'] + " at position " + variables['slot-label']);
 
             $('#add-block-modal .modal-footer .add-block-btn')
                 .unbind('click')
@@ -344,7 +351,7 @@ var Editor = (function () {
                             id: content.id,
                             name: $('.modal-body select').find('option:selected').val(),
                             template: $('.modal-body select').val(),
-                            label: variables['subject-label']
+                            slot_label: variables['slot-label']
                         },
                         success: function () {
                             window.location.reload();

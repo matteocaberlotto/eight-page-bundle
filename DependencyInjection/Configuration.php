@@ -22,6 +22,9 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->scalarNode('use_default_widgets')
+                    ->defaultValue(false)
+                ->end()
                 ->arrayNode('controller_map')
                     ->prototype('variable')->end()
                 ->end()
