@@ -196,6 +196,12 @@ class PageAdmin extends Admin implements ContainerAwareInterface
                     $this->modelManager->getEntityManager($route)->flush();
                 }
 
+                // make sure page is bound to route
+                if (!$route->getContent() || $route->getContent() !== $page) {
+                    $route->setContent($page);
+                    $this->modelManager->getEntityManager($route)->flush();
+                }
+
                 return;
             }
 
