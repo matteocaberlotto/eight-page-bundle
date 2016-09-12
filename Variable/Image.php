@@ -37,6 +37,7 @@ class Image extends AbstractVariable
             $builder
                 ->add($name . '_preview', ImagePreviewType::class, array(
                     'src' => $variable->getImage(),
+                    'mapped' => false,
                 ));
         }
     }
