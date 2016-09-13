@@ -1,7 +1,7 @@
 <span
     class="eight-marker-start"
     data-add-classes="eight-block-decorator"
-    data-add-variables='{"widget-label":"{{ get_widget(subject.name).label }}","load-variables":"{{ subject.loadsVariables() ? 'true' : 'false' }}"}'
+    data-add-variables='{"widget-label":"{{ get_widget(subject.name).label }}","load-variables":"{{ subject.loadsVariables() ? 'true' : 'false' }}","icon":"{{ get_widget(subject.name).icon }}"}'
     data-add-content='{{ subject.toArray|json_encode|raw }}'
     >
 </span>

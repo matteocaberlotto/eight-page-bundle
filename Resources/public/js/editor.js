@@ -88,7 +88,7 @@ var Editor = (function () {
                     top: element.offset().top - 30,
                     width: element.outerWidth()
                 })
-                .html(element.data('widget-label'))
+                .html('<span class="' + element.data('icon') + '"></span> ' + element.data('widget-label'))
                 .appendTo('body')
                 ;
 
