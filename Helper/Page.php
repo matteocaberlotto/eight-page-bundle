@@ -51,6 +51,8 @@ class Page
         $manager = $this->container->get('doctrine')->getManager();
         $manager->persist($block);
         $manager->flush();
+
+        return $block;
     }
 
     /**

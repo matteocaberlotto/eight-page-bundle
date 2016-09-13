@@ -17,10 +17,11 @@ class BlockCRUDController extends CRUDController
             throw new AccessDeniedException();
         }
 
-        $this->get('helper.page')->append($request->get('subject'), $request->get('id'), $request->get('name'), $request->get('slot_label'));
+        $block = $this->get('helper.page')->append($request->get('subject'), $request->get('id'), $request->get('name'), $request->get('slot_label'));
 
         return new JsonResponse(array(
-            'status' => 'OK'
+            'status' => 'OK',
+            'html' => $this->get('page.renderer')->renderBlock($block, true),
             ));
     }
 
@@ -62,7 +63,8 @@ class BlockCRUDController extends CRUDController
         $manager->flush();
 
         return new JsonResponse(array(
-            'status' => 'OK'
+            'status' => 'OK',
+            'html' => $this->get('page.renderer')->renderBlock($block, true),
             ));
     }
 
@@ -83,7 +85,8 @@ class BlockCRUDController extends CRUDController
         $manager->flush();
 
         return new JsonResponse(array(
-            'status' => 'OK'
+            'status' => 'OK',
+            'html' => $this->get('page.renderer')->renderBlock($block, true),
             ));
     }
 

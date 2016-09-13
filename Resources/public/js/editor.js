@@ -38,7 +38,19 @@ var Editor = (function () {
 
             $('body').addClass('toolkit');
 
-            $('.eight-block-decorator')
+            Editor.setup();
+        },
+
+        reload: function () {
+            Editor.setupMarkers();
+            Editor.setup();
+        },
+
+        setup: function () {
+
+            $('.eight-frame-element').remove();
+
+            $('.eight-block-decorator:not(.eight-ui-bound)')
                 .mouseenter(function () {
                     if ($('body').hasClass('eight-is-sorting')) {
                         return;
@@ -48,23 +60,28 @@ var Editor = (function () {
                 .mouseleave(function () {
                     Editor.hideFrame($(this));
                 })
+                .addClass('eight-ui-bound')
                 ;
 
-            $('.add-item')
+            $('.add-item:not(.eight-ui-bound)')
                 .click(function (event) {
                     Editor.addItemDialog(event.currentTarget);
-                });
+                })
+                .addClass('eight-ui-bound')
+                ;
+
+            $('.eight-page-textarea:not(.eight-rich-editor-bound)')
+                .each(function () {
+                    CKEDITOR.replace($(this).attr('id'));
+                })
+                .addClass('eight-rich-editor-bound')
+            ;
 
             $('[data-toggle="tooltip"]').tooltip({
                 placement: 'bottom'
             });
 
-            $('.eight-page-textarea').each(function () {
-                CKEDITOR.replace($(this).attr('id'));
-            });
-
             Editor.reloadPlugins();
-
         },
 
         addPlugin: function (callback) {
@@ -75,6 +92,105 @@ var Editor = (function () {
             $.each(plugins, function (context) {
                 this(context);
             });
+        },
+
+        setupToolbar: function (element) {
+
+            element.find('.eight-toolbar').remove();
+
+            var blockContent = $(element).data('editor-content');
+
+            // toolbar
+            var template = $($('#toolbar-template').html()).clone();
+
+            template.find('.eight-toolbar')
+                .addClass("eight-frame-element-" + blockContent.id);
+
+            // bind toolbar functioning
+
+            if (element.data('load-variables')) {
+                template.find('.btn-edit-variable')
+                    .click(function () {
+                        Editor.edit(element);
+                    });
+            } else {
+                template.find('.btn-edit-variable').remove();
+            }
+
+            template.find('.btn-remove-block')
+                .click(function (event) {
+                    if (confirm("Delete block '" + element.data('widget-label') + "' ?")) {
+                        $.ajax({
+                            url: globalRemoveUrl,
+                            data: {
+                                block_id: blockContent.id
+                            },
+                            success: function () {
+                                element.remove();
+                            },
+                            error: function () {
+                                alert('error');
+                            }
+                        });
+                    }
+                });
+
+
+            if (blockContent.enabled) {
+                element.addClass('block-enabled');
+
+                template.find('.btn-disable-block')
+                    .click(function (event) {
+                        if (confirm("Disable block '" + element.data('widget-label') + "' ?")) {
+                            $.ajax({
+                                url: globalDisableUrl,
+                                data: {
+                                    block_id: blockContent.id
+                                },
+                                success: function (response) {
+                                    $(response.html).insertAfter(element.prev());
+                                    Editor.hideFrame(element);
+                                    element.remove();
+
+                                    Editor.reload();
+                                },
+                                error: function () {
+                                    alert('error');
+                                }
+                            });
+                        }
+                    });
+
+                template.find('.btn-enable-block').remove();
+            } else {
+                element.addClass('block-disabled');
+
+                template.find('.btn-enable-block')
+                    .click(function (event) {
+                        if (confirm("Enable block '" + element.data('widget-label') + "' ?")) {
+                            $.ajax({
+                                url: globalEnableUrl,
+                                data: {
+                                    block_id: blockContent.id
+                                },
+                                success: function (response) {
+                                    $(response.html).insertAfter(element.prev());
+                                    Editor.hideFrame(element);
+                                    element.remove();
+
+                                    Editor.reload();
+                                },
+                                error: function () {
+                                    alert('error');
+                                }
+                            });
+                        }
+                    });
+
+                template.find('.btn-disable-block').remove();
+            }
+
+            $(template).find('.eight-toolbar').appendTo(element);
         },
 
         showFrame: function (element) {
@@ -119,93 +235,7 @@ var Editor = (function () {
                 })
                 .appendTo($('body'));
 
-            // toolbar
-            var template = $($('#toolbar-template').html()).clone();
-
-            template.find('.eight-toolbar')
-                // .css({
-                //     right: $(window).width() - element.offset().left - element.outerWidth(),
-                //     top: element.offset().top
-                // })
-                .addClass("eight-frame-element-" + blockContent.id);
-
-            // bind toolbar functioning
-
-            if (element.data('load-variables')) {
-                template.find('.btn-edit-variable')
-                    .click(function () {
-                        Editor.edit(element);
-                    });
-            } else {
-                template.find('.btn-edit-variable').remove();
-            }
-
-            template.find('.btn-remove-block')
-                .click(function (event) {
-                    if (confirm("Delete block '" + element.data('widget-label') + "' ?")) {
-                        $.ajax({
-                            url: globalRemoveUrl,
-                            data: {
-                                block_id: blockContent.id
-                            },
-                            success: function () {
-                                window.location.reload();
-                            },
-                            error: function () {
-                                alert('error');
-                            }
-                        });
-                    }
-                });
-
-
-
-
-            if (blockContent.enabled) {
-                element.addClass('block-enabled');
-
-                template.find('.btn-disable-block')
-                    .click(function (event) {
-                        if (confirm("Disable block '" + element.data('widget-label') + "' ?")) {
-                            $.ajax({
-                                url: globalDisableUrl,
-                                data: {
-                                    block_id: blockContent.id
-                                },
-                                success: function () {
-                                    window.location.reload();
-                                },
-                                error: function () {
-                                    alert('error');
-                                }
-                            });
-                        }
-                    });
-
-                template.find('.btn-enable-block').remove();
-            } else {
-                element.addClass('block-disabled');
-
-                template.find('.btn-enable-block')
-                    .click(function (event) {
-                        if (confirm("Enable block '" + element.data('widget-label') + "' ?")) {
-                            $.ajax({
-                                url: globalEnableUrl,
-                                data: {
-                                    block_id: blockContent.id
-                                },
-                                success: function () {
-                                    window.location.reload();
-                                },
-                                error: function () {
-                                    alert('error');
-                                }
-                            });
-                        }
-                    });
-
-                template.find('.btn-disable-block').remove();
-            }
+            this.setupToolbar(element);
 
             $('.eight-list-decorator')
                 .sortable({
@@ -224,8 +254,6 @@ var Editor = (function () {
                         Editor.reloadPlugins();
                     }
                 });
-
-            $(template).find('.eight-toolbar').appendTo(element);
 
             // setup tooltip
             $('[data-toggle="tooltip"]').tooltip({
@@ -357,8 +385,10 @@ var Editor = (function () {
                             name: $('.single-block-button.selected').data('name'),
                             slot_label: variables['slot-label']
                         },
-                        success: function () {
-                            window.location.reload();
+                        success: function (response) {
+                            parent.append(response.html);
+                            Editor.reload();
+                            $('#add-block-modal').modal('hide');
                         },
                         error: function () {
                             $('#add-block-modal').modal('hide');

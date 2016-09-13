@@ -54,11 +54,11 @@ class Page
     /**
      * Renders a single block
      */
-    public function renderBlock($block, $page)
+    public function renderBlock($block, $edit_mode = false)
     {
         $html = $this->get('templating')->render($this->getTemplate($block), $this->getVariables($block));
 
-        if ($page->editMode()) {
+        if ($edit_mode) {
             $html = $this->decorateHtml($html, 'block', $block);
         }
 
@@ -145,7 +145,7 @@ class Page
 
         foreach ($children as $sub) {
             if ($sub->getType() == $slot_label) {
-                $html .= $this->renderBlock($sub, $page);
+                $html .= $this->renderBlock($sub, $page->editMode());
             }
         }
 
