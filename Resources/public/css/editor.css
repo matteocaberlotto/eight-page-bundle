@@ -342,6 +342,8 @@ body.toolkit {
 }
 
 .toolkit .eight-list-decorator {
+    padding-top: 40px !important;
+    margin-top: 40px !important;
     padding-bottom: 40px !important;
     margin-bottom: 40px !important;
 }
