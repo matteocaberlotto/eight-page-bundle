@@ -304,7 +304,7 @@ var Editor = (function () {
                         "class": "add-item",
                         "html": '<span class="glyphicon glyphicon-plus"></span>Add to ' + label + ' (pos: ' + variables['slot-label'] + ')'
                     })
-                    .appendTo(parent)
+                    .insertAfter(parent)
                     ;
 
                 $el.remove();
@@ -340,7 +340,7 @@ var Editor = (function () {
         addItemDialog: function (el) {
 
             var $el = $(el);
-            var parent = $(el).parents('.eight-list-decorator').first();
+            var parent = $(el).prev();
             var variables = parent.data('variables');
             var content = parent.data('editor-content');
 
