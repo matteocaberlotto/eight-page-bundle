@@ -22,8 +22,8 @@
             <div class="modal-body">
                 {% for widget in widgets %}
                     <a class="single-block-button" href="javascript:;" onclick="Editor.selectWidget(this)" data-template="{{ widget.layout }}" data-name="{{ widget.name }}">
-                        <span class="{{ widget.icon }}"></span>
-                        {{ widget.label }}
+                        <span class="widget-icon {{ widget.icon }}"></span>
+                        <span class="widget-label">{{ widget.label }}</span>
                     </a>
                 {% endfor %}
             </div>

@@ -29,6 +29,14 @@ body.toolkit {
     box-shadow: 0 0 10px 1px #C00;
 }
 
+#add-block-modal .single-block-button .widget-icon {
+    font-size: 52px;
+}
+
+#add-block-modal .single-block-button .widget-label {
+    display: block;
+}
+
 .ui-sortable-helper {
     box-shadow: 0 0 3px 1px #777;
 }
@@ -66,7 +74,6 @@ body.toolkit {
     opacity: 0.2;
     background: #1447E0;
 }
-
 
 .toolkit #back-to-list-button,
 .toolkit #btn-edit-layout-mode {
