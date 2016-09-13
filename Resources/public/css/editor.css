@@ -310,7 +310,7 @@ body.toolkit {
     padding: 4px 8px;
     position: absolute;
     right: 0;
-    z-index: 2147483647;
+    z-index: 100;
     color: #1447E0;
 }
 
