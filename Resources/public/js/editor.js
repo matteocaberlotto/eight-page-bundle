@@ -96,8 +96,6 @@ var Editor = (function () {
 
         setupToolbar: function (element) {
 
-            element.find('.eight-toolbar').remove();
-
             var blockContent = $(element).data('editor-content');
 
             // toolbar
