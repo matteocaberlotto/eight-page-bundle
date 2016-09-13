@@ -1,10 +1,10 @@
 <div class="page-toolkit">
-    <a data-toggle="tooltip" title="Show/Hide widget editor" id="btn-edit-layout-mode" class="btn btn-primary" onclick="$('body').toggleClass('toolkit');" href="javascript:;">
+    <a title="Show/Hide widget editor" id="btn-edit-layout-mode" class="btn btn-primary" onclick="$('body').toggleClass('toolkit');" href="javascript:;">
         <span class="glyphicon glyphicon-wrench"></span>
     </a>
 
     <a data-toggle="tooltip" title="Back to pages listing" id="back-to-list-button" class="btn btn-primary" href="{{ path('admin_eight_page_page_list') }}">
-        <span class="glyphicon glyphicon-th-list"></span>
+        <span class="glyphicon glyphicon-backward"></span>
     </a>
 
     <span id="page-specs">{{ page|raw }} || path: {{ page.route.path }} || controller: {{ page.route.controller }} || layout: {{ page.layout ? page.layout : 'default' }}</span>
@@ -14,7 +14,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
                 <h4 class="modal-title">Add new block</h4>
             </div>
             <div class="modal-body">

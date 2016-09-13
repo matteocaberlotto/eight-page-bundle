@@ -14,7 +14,14 @@ body.toolkit {
     font-size: 16px;
     margin: 10px;
     padding: 10px;
+    text-align: center;
     text-transform: uppercase;
+    width: 22%;
+}
+
+#add-block-modal .single-block-button:hover {
+    color: #FFFFFF;
+    background: #333333;
 }
 
 #add-block-modal .single-block-button.selected {
@@ -34,6 +41,11 @@ body.toolkit {
 @media(max-width: 1024px) {
     .modal-dialog {
         width: 100%;
+        margin: 0;
+    }
+
+    #add-block-modal .single-block-button {
+        width: 42%;
     }
 }
 
@@ -47,7 +59,7 @@ body.toolkit {
 }
 
 #back-to-list-button {
-    right: 10px;
+    left: 60px;
     position: fixed;
     top: 10px;
     z-index: 2147483647;
@@ -294,7 +306,7 @@ body.toolkit {
     color: #1447E0;
 }
 
-.eight-ui-button {
+.eight-block-decorator .eight-ui-button {
     background: #fff none repeat scroll 0 0;
     border: 2px solid #1447E0;
     border-radius: 2px;
