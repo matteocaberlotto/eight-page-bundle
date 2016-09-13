@@ -35,6 +35,7 @@ body.toolkit {
 
 #add-block-modal .single-block-button .widget-label {
     display: block;
+    margin-top: 6px;
 }
 
 .ui-sortable-helper {
