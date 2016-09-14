@@ -146,7 +146,7 @@ var Editor = (function () {
                                     block_id: blockContent.id
                                 },
                                 success: function (response) {
-                                    $(response.html).insertAfter(element.prev());
+                                    $(response.html).insertAfter(element);
                                     Editor.hideFrame(element);
                                     element.remove();
 
@@ -172,7 +172,7 @@ var Editor = (function () {
                                     block_id: blockContent.id
                                 },
                                 success: function (response) {
-                                    $(response.html).insertAfter(element.prev());
+                                    $(response.html).insertAfter(element);
                                     Editor.hideFrame(element);
                                     element.remove();
 
