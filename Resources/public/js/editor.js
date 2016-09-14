@@ -124,6 +124,7 @@ var Editor = (function () {
                                 block_id: blockContent.id
                             },
                             success: function () {
+                                Editor.hideFrame(element);
                                 element.remove();
                             },
                             error: function () {
