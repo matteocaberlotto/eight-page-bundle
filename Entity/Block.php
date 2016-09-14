@@ -337,11 +337,11 @@ class Block implements BlockInterface
         return count($this->blocks) > 0;
     }
 
-    public function getOrderedBlocks($page)
+    public function getOrderedBlocks($edit_mode = false)
     {
         $blocks = $this->getBlocks();
 
-        if (!$page->editMode()) {
+        if (!$edit_mode) {
             $blocks = $blocks->filter(function ($entry) {
                 return $entry->isEnabled();
             });

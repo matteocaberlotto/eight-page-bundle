@@ -145,7 +145,7 @@ class Page
         $html = '';
 
         if ($subject instanceof BlockInterface) {
-            $children = $subject->getOrderedBlocks($page);
+            $children = $subject->getOrderedBlocks($page->editMode());
         } else {
             $children = $subject->getOrderedBlocks($slot_label);
         }
@@ -298,6 +298,7 @@ class Page
 
     /**
      * Descend the page tree and loads all assets.
+     * TODO: BUG: let the loader load from all base slots (not only default).
      */
     public function descendBlocksAndLoadAssets()
     {
