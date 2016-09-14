@@ -131,10 +131,17 @@ class Page
     /**
      * Renders all children of the subject (page or block)
      * of given type (slot_label = where to append inside the layout).
+     * If current page is not found, it is the case of rendering a template after
+     * a block has been created, so no need to render children (plus it gives error).
      */
     public function renderBlockChildren($subject, $slot_label)
     {
         $page = $this->getPage();
+
+        if (!$page) {
+            return;
+        }
+
         $html = '';
 
         if ($subject instanceof BlockInterface) {
