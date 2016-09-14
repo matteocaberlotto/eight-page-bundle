@@ -17,11 +17,19 @@ class BlockCRUDController extends CRUDController
             throw new AccessDeniedException();
         }
 
+        $page = $this->get('eight.pages')->find($request->get('page_id'));
+        $page->setEditMode();
+        $this->get('page.renderer')->setCurrentPage($page);
+
         $block = $this->get('helper.page')->append($request->get('subject'), $request->get('id'), $request->get('name'), $request->get('slot_label'));
+        $form = $this->container->get('templating')->render('EightPageBundle:Content:util/form.html.twig', array(
+            'form' =>  $this->get('page.renderer')->createFormForBlock($block)->createView(),
+            ));
 
         return new JsonResponse(array(
             'status' => 'OK',
             'html' => $this->get('page.renderer')->renderBlock($block, true),
+            'form' => $form,
             ));
     }
 

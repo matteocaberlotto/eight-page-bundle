@@ -382,10 +382,12 @@ var Editor = (function () {
                             subject: parent.data('subject-class'),
                             id: content.id,
                             name: $('.single-block-button.selected').data('name'),
-                            slot_label: variables['slot-label']
+                            slot_label: variables['slot-label'],
+                            page_id: variables['page-id']
                         },
                         success: function (response) {
                             parent.append(response.html);
+                            $('body').append(response.form);
                             Editor.reload();
                             $('#add-block-modal').modal('hide');
                         },
