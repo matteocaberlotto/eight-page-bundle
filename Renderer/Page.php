@@ -139,7 +139,8 @@ class Page
         $page = $this->getPage();
 
         if (!$page) {
-            return;
+            // page not given: rendering template from helper(= new block)
+            return $this->decorateHtml('', 'list', $subject, $slot_label);
         }
 
         $html = '';
