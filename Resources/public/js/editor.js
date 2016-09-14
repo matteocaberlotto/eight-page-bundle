@@ -144,7 +144,8 @@ var Editor = (function () {
                             $.ajax({
                                 url: globalDisableUrl,
                                 data: {
-                                    block_id: blockContent.id
+                                    block_id: blockContent.id,
+                                    page_id: element.data('page-id')
                                 },
                                 success: function (response) {
                                     $(response.html).insertAfter(element);
@@ -170,7 +171,8 @@ var Editor = (function () {
                             $.ajax({
                                 url: globalEnableUrl,
                                 data: {
-                                    block_id: blockContent.id
+                                    block_id: blockContent.id,
+                                    page_id: element.data('page-id')
                                 },
                                 success: function (response) {
                                     $(response.html).insertAfter(element);

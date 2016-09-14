@@ -66,6 +66,10 @@ class BlockCRUDController extends CRUDController
             throw new AccessDeniedException();
         }
 
+        $page = $this->get('eight.pages')->find($request->get('page_id'));
+        $page->setEditMode();
+        $this->get('page.renderer')->setCurrentPage($page);
+
         $block->setEnabled(true);
         $manager = $this->get('doctrine')->getManager();
         $manager->flush();
@@ -87,6 +91,10 @@ class BlockCRUDController extends CRUDController
         if (false === $this->admin->isGranted('EDIT', $block)) {
             throw new AccessDeniedException();
         }
+
+        $page = $this->get('eight.pages')->find($request->get('page_id'));
+        $page->setEditMode();
+        $this->get('page.renderer')->setCurrentPage($page);
 
         $block->setEnabled(false);
         $manager = $this->get('doctrine')->getManager();
