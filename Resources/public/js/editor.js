@@ -406,6 +406,42 @@ var Editor = (function () {
         edit: function (element) {
             var blockContent = $(element).data('editor-content');
             $('#edit-block-modal-form_' + blockContent.id).modal('show');
+        },
+
+        selectIconWindow: function (element) {
+            var selectionWindow = $(element).parent().find('.icon-selection-list');
+
+            if (!selectionWindow.hasClass('hide')) {
+                selectionWindow.addClass('hide');
+                return;
+            }
+
+            selectionWindow.css({
+                top: $(element).position().top,
+                left: $(element).position().left + 160,
+            });
+
+            selectionWindow.removeClass('hide');
+        },
+
+        selectIcon: function (element) {
+            $($(element).data('target')).val($(element).data('value'));
+
+            $(element).parents('.select-icon-container').find('.icon-preview')
+                .removeClass (function (index, css) {
+                    return (css.match (/(^|\s)fa[\-]?\S+/g) || []).join(' ');
+                });
+            $(element).parents('.select-icon-container').find('.icon-preview').addClass($(element).data('value'));
+
+            var selectionWindow = $(element).parents('.select-icon-container').find('.icon-selection-list');
+
+            selectionWindow.addClass('hide');
+        },
+
+        closeIconWindow: function (element) {
+            var selectionWindow = $(element).parents('.select-icon-container').find('.icon-selection-list');
+
+            selectionWindow.addClass('hide');
         }
     };
 

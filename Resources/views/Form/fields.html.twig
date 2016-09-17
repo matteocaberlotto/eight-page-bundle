@@ -1,18 +1,23 @@
 {% block icon_choice_widget %}
     {% spaceless %}
-        {% if expanded %}
-            <ul {{ block('widget_container_attributes') }}>
-            {% for child in form %}
-                <li>
-                    {{ form_widget(child) }}
-                    {{ form_label(child) }}
-                </li>
-            {% endfor %}
-            </ul>
-        {% else %}
-            {# just let the choice widget render the select tag #}
-            {{ block('choice_widget') }}
-        {% endif %}
+        <div class="select-icon-container">
+            <span class="icon-preview {{ value }}"></span>
+            <a onclick="Editor.selectIconWindow(this)" class="btn btn-default btn-sm select-icon-btn" href="javascript:;">Select icon</a>
+            <div class="icon-selection-list hide">
+                <a class="selection-close" href="javascript:;" onclick="Editor.closeIconWindow(this)">
+                    &times;
+                </a>
+                <div class="icon-selection-list-inner">
+                    {% for group_label, choice in choices %}
+                        <a class="icon-choice" href="javascript:;" onclick="Editor.selectIcon(this)" data-value="{{ choice.value }}" data-target="#{{ form.vars.id }}">
+                            <span class="{{ choice.value }}"></span>
+                            {{ choice.label }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="{{ full_name }}" id="{{ form.vars.id }}" value="{{ value }}" />
     {% endspaceless %}
 {% endblock %}
 
