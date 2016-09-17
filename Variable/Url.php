@@ -14,7 +14,7 @@ class Url extends AbstractVariable
         $this->container = $container;
     }
 
-    public function resolve(ContentInterface $variable)
+    public function resolve(ContentInterface $variable, $config)
     {
         $content = unserialize($variable->getContent());
         return $this->container->get('router')->generateUrl($content['url'], $content['variables'], $content['absolute']);

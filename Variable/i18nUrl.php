@@ -14,7 +14,7 @@ class i18nUrl extends AbstractVariable
         $this->container = $container;
     }
 
-    public function resolve(ContentInterface $variable)
+    public function resolve(ContentInterface $variable, $config)
     {
         $locale = $this->getLocale();
 

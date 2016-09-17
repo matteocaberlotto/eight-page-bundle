@@ -64,3 +64,8 @@ services:
         tags:
             - { name: eight_page.variable }
 
+    eight.choices:
+        class: Eight\PageBundle\Variable\Choices
+        tags:
+            - { name: eight_page.variable }
+

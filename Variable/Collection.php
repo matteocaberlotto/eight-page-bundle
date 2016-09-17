@@ -20,7 +20,7 @@ class Collection extends AbstractVariable
         $this->container = $container;
     }
 
-    public function resolve(ContentInterface $variable)
+    public function resolve(ContentInterface $variable, $config)
     {
         list($class, $field, $value) = $this->getContent($variable);
 
@@ -38,7 +38,7 @@ class Collection extends AbstractVariable
         }
     }
 
-    public function getValue(ContentInterface $variable)
+    public function getValue(ContentInterface $variable, $config)
     {
         return explode(':', $variable->getContent());
     }

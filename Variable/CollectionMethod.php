@@ -21,14 +21,14 @@ class CollectionMethod extends AbstractVariable
         $this->container = $container;
     }
 
-    public function resolve(ContentInterface $variable)
+    public function resolve(ContentInterface $variable, $config)
     {
         $config = $this->getValue($variable);
         $method = $config['method'];
         return $this->container->get('doctrine')->getRepository($config['class'])->$method();
     }
 
-    public function getValue(ContentInterface $variable)
+    public function getValue(ContentInterface $variable, $config)
     {
         return unserialize($variable->getContent());
     }

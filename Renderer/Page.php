@@ -268,13 +268,17 @@ class Page
         $vars = array();
 
         foreach ($block->getContents() as $variable) {
+
+            $variableHandler = $this->container->get('variable.provider')->get($variable->getType());
+            $config = $this->container->get('widget.provider')->getConfigFor($block->getName(), $variable->getName());
+
             if ($resolve) {
                 // the frontend requires resolved variables (eg: an entity FQDN + id becames the entity itself)
-                $vars[$variable->getName()] = $this->container->get('variable.provider')->get($variable->getType())->resolve($variable);
+                $vars[$variable->getName()] = $variableHandler->resolve($variable, $config);
             } else {
                 // the backend requires only low level 'resolution' (eg: a serialized array get unserialized).
                 // since we store all variables in a single field, we need a bit of hacks.
-                $vars[$variable->getName()] = $this->container->get('variable.provider')->get($variable->getType())->getValue($variable);
+                $vars[$variable->getName()] = $variableHandler->getValue($variable, $config);
             }
         }
 

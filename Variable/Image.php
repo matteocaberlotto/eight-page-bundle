@@ -42,7 +42,7 @@ class Image extends AbstractVariable
         }
     }
 
-    public function resolve(ContentInterface $variable)
+    public function resolve(ContentInterface $variable, $config)
     {
         return $variable->getImage();
     }

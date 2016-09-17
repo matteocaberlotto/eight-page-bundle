@@ -21,7 +21,7 @@ class Entity extends AbstractVariable
         $this->container = $container;
     }
 
-    public function resolve(ContentInterface $variable)
+    public function resolve(ContentInterface $variable, $config)
     {
         list($class, $field, $value) = explode(':', $variable->getContent());
 
@@ -39,9 +39,9 @@ class Entity extends AbstractVariable
         }
     }
 
-    public function getValue(ContentInterface $variable)
+    public function getValue(ContentInterface $variable, $config)
     {
-        return $this->resolve($variable);
+        return $this->resolve($variable, $config);
     }
 
     public function saveValue(ContentInterface $variable, $content, $config)

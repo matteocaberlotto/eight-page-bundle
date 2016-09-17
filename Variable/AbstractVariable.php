@@ -20,10 +20,11 @@ abstract class AbstractVariable
      * This is performed before the variable gets passed to the template and the admin form
      *
      * @param ContentInterface $variable
+     * @param array $config
      */
-    public function resolve(ContentInterface $variable)
+    public function resolve(ContentInterface $variable, $config)
     {
-        return $this->getValue($variable);
+        return $this->getValue($variable, $config);
     }
 
     /**
@@ -42,8 +43,9 @@ abstract class AbstractVariable
      * Returns the raw variable content (eg: for form building)
      *
      * @param ContentInterface $variable
+     * @param array $config
      */
-    public function getValue(ContentInterface $variable)
+    public function getValue(ContentInterface $variable, $config)
     {
         return $variable->getContent();
     }
