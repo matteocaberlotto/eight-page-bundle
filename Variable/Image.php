@@ -49,8 +49,12 @@ class Image extends AbstractVariable
 
     public function saveValue(ContentInterface $variable, $content, $config)
     {
+        if (!isset($config['folder'])) {
+            $config['folder'] = 'default';
+        }
+
         $variable->setImagePath($content);
-        $variable->manageFileUpload();
+        $variable->manageFileUpload($config);
     }
 
     public function getName()

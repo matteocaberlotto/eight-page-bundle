@@ -226,7 +226,7 @@ class Content implements ContentInterface
     public function getImage()
     {
         if (!empty($this->content)) {
-            return self::CMS_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $this->content;
+            return $this->content;
         }
     }
 
@@ -254,17 +254,17 @@ class Content implements ContentInterface
         return $this->image_path;
     }
 
-    public function manageFileUpload()
+    public function manageFileUpload($config)
     {
         if ($this->getImagePath()) {
-            $this->uploadImage();
+            $this->uploadImage($config);
         }
     }
 
     /**
      * Manages the copying of the file to the relevant place on the server
      */
-    protected function uploadImage()
+    protected function uploadImage($config)
     {
         // the file property can be empty if the field is not required
         if (null === $this->getImagePath()) {
@@ -276,19 +276,19 @@ class Content implements ContentInterface
 
         // move takes the target directory and target filename as params
         $this->getImagePath()->move(
-            $this->getUploadPath(),
+            $this->getUploadPath($config),
             $this->getImagePath()->getClientOriginalName()
         );
 
         // set the path property to the filename where you've saved the file
-        $this->content = $this->getImagePath()->getClientOriginalName();
+        $this->content = self::CMS_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $config['folder'] . DIRECTORY_SEPARATOR . $this->getImagePath()->getClientOriginalName();
 
         // clean up the file property as you won't need it anymore
         $this->setImagePath(null);
     }
 
-    protected function getUploadPath()
+    protected function getUploadPath($config)
     {
-        return __DIR__ . "/../../../../web" . self::CMS_IMAGES_FOLDER;
+        return __DIR__ . "/../../../../web" . self::CMS_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $config['folder'];
     }
 }
