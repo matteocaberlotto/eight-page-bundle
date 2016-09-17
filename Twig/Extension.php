@@ -64,6 +64,7 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
             'if_route' => new \Twig_Function_Method($this, 'showWhenRouteMatch'),
             'get_widget' => new \Twig_Function_Method($this, 'getWidget'),
             'get_page' => new \Twig_Function_Method($this, 'findPage'),
+            'get_breadcrumbs' => new \Twig_Function_Method($this, 'getBreadcrumbs'),
         );
     }
 
@@ -72,6 +73,42 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
         return array(
             new \Twig_SimpleFilter('json_encode', 'json_encode'),
             );
+    }
+
+    public function getBreadcrumbs()
+    {
+        $candidates = array();
+
+        $path = $this->getCurrentPath();
+
+        $fragments = explode(DIRECTORY_SEPARATOR, $path);
+
+        $url = array();
+        foreach ($fragments as $url_part) {
+            $url []= $url_part;
+            $parent_url = implode(DIRECTORY_SEPARATOR, $url);
+
+            $route = $this->container->get('raindrop_routing.route_repository')->findOneBy(array(
+                'path' => $parent_url
+                ));
+
+            if ($route && $route->getContent()) {
+                $candidates []= $route->getContent();
+            }
+        }
+
+        return $candidates;
+    }
+
+    public function getCurrentPath()
+    {
+        $page = $this->getPage();
+
+        if ($page) {
+            return $page->getRoute()->getPath();
+        }
+
+        return $this->container->get('router')->generate($this->getRequest()->get('_route'));
     }
 
     public function showWhenRouteMatch($routes, $string)
@@ -165,21 +202,29 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
         return '';
     }
 
-    public function findPage($path)
+    /**
+     * This will retrieve a page route using several methods:
+     * - if the argument passed is the page, return the route directly
+     * - search for a page tagged "<name>.<locale>"
+     * - search for a page tagged "<name>"
+     * - search for a route named "<name>"
+     */
+    public function findPage($name)
     {
-        if ($path instanceof PageInterface) {
-            return $path;
+        // if it is a page, simply return it
+        if ($name instanceof PageInterface) {
+            return $name;
         }
 
         // search for localized tag first (eg: "homepage.it")
-        $page = $this->container->get('eight.pages')->findOneByTag($path . '.' . $this->getLocale());
+        $page = $this->container->get('eight.pages')->findOneByTag($name . '.' . $this->getLocale());
 
         if ($page && is_object($page->getRoute())) {
             return $page;
         }
 
         // search for the tag
-        $page = $this->container->get('eight.pages')->findOneByTag($path);
+        $page = $this->container->get('eight.pages')->findOneByTag($name);
 
         if ($page && is_object($page->getRoute())) {
             return $page;
@@ -187,7 +232,7 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
 
         // search for route name
         $route = $this->container->get('raindrop_routing.route_repository')->findOneBy(array(
-            'name' => $path,
+            'name' => $name,
             ));
 
         if ($route && $route->getContent() instanceof PageInterface) {
@@ -197,13 +242,6 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
         return false;
     }
 
-    /**
-     * This will retrieve a page route using several methods:
-     * - if the argument passed is the page, return the route directly
-     * - search for a page tagged "<label>.<locale>"
-     * - search for a page tagged "<label>"
-     * - search for a route named "<label>"
-     */
     public function i18nPath($path, $params = array())
     {
         $page = $this->findPage($path);
@@ -213,14 +251,10 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
         }
     }
 
-    public function i18nTitle($pageTag)
+    public function i18nTitle($path)
     {
-        $page = $this->container->get('eight.pages')->findI18nPage($pageTag, $this->getLocale());
-        if ($page) {
-            return $page->getTitle();
-        }
+        $page = $this->findPage($path);
 
-        $page = $this->container->get('eight.pages')->findOneByTag($pageTag);
         if ($page) {
             return $page->getTitle();
         }
