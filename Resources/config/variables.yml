@@ -69,3 +69,8 @@ services:
         tags:
             - { name: eight_page.variable }
 
+    eight.multiple_labels:
+        class: Eight\PageBundle\Variable\MultipleLabels
+        tags:
+            - { name: eight_page.variable }
+

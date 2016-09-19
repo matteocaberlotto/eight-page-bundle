@@ -26,3 +26,21 @@
         <img style="width:120px" src="{{ src }}">
     {% endif %}
 {% endblock %}
+
+
+{% block multiple_text_widget %}
+    {% spaceless %}
+        <br>
+        {% for val in value %}
+            <div class="form-group">
+                <input type="text" {{ block('widget_attributes') }} {% if val is not empty %}value="{{ val }}" {% endif %} />
+                <a href="javascript:;" onclick="$(this).parent().remove()" class="btn btn-danger">&times;</a>
+            </div>
+        {% endfor %}
+        <div class="form-group">
+            <input type="text" {{ block('widget_attributes') }} />
+            <a href="javascript:;" onclick="$(this).parent().remove()" class="btn btn-danger">&times;</a>
+        </div>
+        <a class="btn btn-primary" href="javascript:;" onclick="$(this).prev().clone().insertAfter($(this).prev());">&plus;</a>
+    {% endspaceless %}
+{% endblock %}
