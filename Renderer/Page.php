@@ -249,7 +249,7 @@ class Page
             $block->setLoadsVariables();
         }
 
-        $defaults = $this->get('widget.provider')->getDefaultVariables($block->getName());
+        $defaults = $this->get('widget.provider')->getDefaultVariables($block);
 
         $vars = array_merge($defaults, array(
             'current_block' => $block

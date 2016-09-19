@@ -32,11 +32,11 @@ class Widget
         return $this->_widgets;
     }
 
-    public function getDefaultVariables($name)
+    public function getDefaultVariables($block)
     {
         $vars = array();
 
-        foreach ($this->_widgets[$name]->getVars() as $name => $config) {
+        foreach ($this->_widgets[$block->getName()]->getVars($block) as $name => $config) {
             if (!is_array($config)) {
                 $name = $config;
                 $config = array(
