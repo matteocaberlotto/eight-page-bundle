@@ -20,6 +20,16 @@ class BlockAdmin extends Admin
         ;
     }
 
+    // Fields to be shown on filter forms
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        $datagridMapper
+            ->add('page')
+            ->add('type')
+            ->add('layout')
+        ;
+    }
+
     // Fields to be shown on lists
     protected function configureListFields(ListMapper $listMapper)
     {
@@ -28,16 +38,10 @@ class BlockAdmin extends Admin
             ->add('block')
             ->add('type')
             ->add('layout')
-        ;
-    }
-
-    // Fields to be shown on filter forms
-    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
-    {
-        $datagridMapper
-            ->add('page')
-            ->add('type')
-            ->add('layout')
+            ->add('_action', 'actions', array(
+                'actions' => array(
+                    'edit' => array(),
+                )))
         ;
     }
 
