@@ -32,10 +32,24 @@ class FormBuilder
         foreach ($widget->getVars() as $name => $config) {
 
             // normalize key only entries
-            if (!is_array($config)) {
+            if (is_numeric($name)) {
                 $name = $config;
+                $config = array();
+            } else {
+                // config is an array but it doesnt looks like a config array => declared variable (not to be overridden)
+                if (is_array($config) && !isset($config['type']) && !isset($config['default_value']) && !isset($config['edit'])) {
+                    $config = array(
+                        'default_value' => $config,
+                        'edit' => false,
+                    );
+                }
+            }
+
+            // if value is nothing the cases above, it is variable declared inside the widget
+            if (!is_array($config)) {
                 $config = array(
-                    'type' => 'label',
+                    'default_value' => $config,
+                    'edit' => false,
                     );
             }
 
