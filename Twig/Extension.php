@@ -6,7 +6,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Eight\PageBundle\Model\PageInterface;
 
-class Extension extends \Twig_Extension implements ContainerAwareInterface
+class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface, ContainerAwareInterface
 {
     protected $seopage;
 
@@ -46,26 +46,26 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
     public function getFunctions()
     {
         return array(
-            'i18n_path'      => new \Twig_Function_Method($this, 'i18nPath'),
-            'i18n_title'      => new \Twig_Function_Method($this, 'i18nTitle'),
-            'route_name'        => new \Twig_Function_Method($this, 'routeName'),
-            'render_title'      => new \Twig_Function_Method($this, 'renderTitle'),
-            'render_encoding'      => new \Twig_Function_Method($this, 'renderEncoding'),
-            'render_metadatas'  => new \Twig_Function_Method($this, 'renderMetadatas'),
-            'is_current_path' => new \Twig_Function_Method($this, 'isCurrentPath'),
-            'render_page_content' => new \Twig_Function_Method($this, 'renderPage', array('is_safe' => array('html'))),
-            'render_inner_blocks' => new \Twig_Function_Method($this, 'renderBlocks', array('is_safe' => array('html'))),
-            'render_static_blocks' => new \Twig_Function_Method($this, 'renderStaticBlocks', array('is_safe' => array('html'))),
-            'is_page' => new \Twig_Function_Method($this, 'isPage'),
-            'eight_stylesheets' => new \Twig_Function_Method($this, 'stylesheets', array('is_safe' => array('html'))),
-            'eight_javascripts' => new \Twig_Function_Method($this, 'javascripts', array('is_safe' => array('html'))),
-            'eight_body_class' => new \Twig_Function_Method($this, 'bodyClass'),
-            'is_host' => new \Twig_Function_Method($this, 'isHost'),
-            'is_route' => new \Twig_Function_Method($this, 'isRoute'),
-            'if_route' => new \Twig_Function_Method($this, 'showWhenRouteMatch'),
-            'get_widget' => new \Twig_Function_Method($this, 'getWidget'),
-            'get_page' => new \Twig_Function_Method($this, 'findPage'),
-            'get_breadcrumbs' => new \Twig_Function_Method($this, 'getBreadcrumbs'),
+            'i18n_path'      => new \Twig_SimpleFunction($this, 'i18nPath'),
+            'i18n_title'      => new \Twig_SimpleFunction($this, 'i18nTitle'),
+            'route_name'        => new \Twig_SimpleFunction($this, 'routeName'),
+            'render_title'      => new \Twig_SimpleFunction($this, 'renderTitle'),
+            'render_encoding'      => new \Twig_SimpleFunction($this, 'renderEncoding'),
+            'render_metadatas'  => new \Twig_SimpleFunction($this, 'renderMetadatas'),
+            'is_current_path' => new \Twig_SimpleFunction($this, 'isCurrentPath'),
+            'render_page_content' => new \Twig_SimpleFunction($this, 'renderPage', array('is_safe' => array('html'))),
+            'render_inner_blocks' => new \Twig_SimpleFunction($this, 'renderBlocks', array('is_safe' => array('html'))),
+            'render_static_blocks' => new \Twig_SimpleFunction($this, 'renderStaticBlocks', array('is_safe' => array('html'))),
+            'is_page' => new \Twig_SimpleFunction($this, 'isPage'),
+            'eight_stylesheets' => new \Twig_SimpleFunction($this, 'stylesheets', array('is_safe' => array('html'))),
+            'eight_javascripts' => new \Twig_SimpleFunction($this, 'javascripts', array('is_safe' => array('html'))),
+            'eight_body_class' => new \Twig_SimpleFunction($this, 'bodyClass'),
+            'is_host' => new \Twig_SimpleFunction($this, 'isHost'),
+            'is_route' => new \Twig_SimpleFunction($this, 'isRoute'),
+            'if_route' => new \Twig_SimpleFunction($this, 'showWhenRouteMatch'),
+            'get_widget' => new \Twig_SimpleFunction($this, 'getWidget'),
+            'get_page' => new \Twig_SimpleFunction($this, 'findPage'),
+            'get_breadcrumbs' => new \Twig_SimpleFunction($this, 'getBreadcrumbs'),
         );
     }
 
