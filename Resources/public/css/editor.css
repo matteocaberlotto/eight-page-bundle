@@ -312,6 +312,7 @@ body.toolkit {
     color: #165684;
     font-weight: bold;
     display: none;
+    overflow-y: hidden;
 }
 
 .eight-block-decorator {
@@ -387,6 +388,7 @@ body.toolkit {
 
 .select-icon-container {
     position: relative;
+    margin-bottom: 10px;
 }
 
 .icon-selection-list {
