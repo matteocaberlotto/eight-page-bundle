@@ -148,13 +148,22 @@ class BlockCRUDController extends CRUDController
 
             foreach ($data as $name => $value) {
                 $prev = $object->getContent($name);
+                $type = $this->get('widget.provider')->getContentType($object->getName(), $name);
+
+                // if there is no value nor images attached, skip or delete if existing.
+                // TODO: find a way to delete images
+                if (empty($value)) {
+                    if ($prev && $type != 'image') {
+                        $this->get('doctrine')->getManager()->remove($prev);
+                    }
+
+                    continue;
+                }
 
                 if (!$prev) {
                     $prev = new Content();
                     $prev->setBlock($object);
                     $prev->setName($name);
-
-                    $type = $this->get('widget.provider')->getContentType($object->getName(), $name);
 
                     if (empty($type)) {
                         $type = 'label';
