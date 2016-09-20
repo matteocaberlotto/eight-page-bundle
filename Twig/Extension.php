@@ -55,6 +55,7 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
             'is_current_path' => new \Twig_Function_Method($this, 'isCurrentPath'),
             'render_page_content' => new \Twig_Function_Method($this, 'renderPage', array('is_safe' => array('html'))),
             'render_inner_blocks' => new \Twig_Function_Method($this, 'renderBlocks', array('is_safe' => array('html'))),
+            'render_static_blocks' => new \Twig_Function_Method($this, 'renderStaticBlocks', array('is_safe' => array('html'))),
             'is_page' => new \Twig_Function_Method($this, 'isPage'),
             'eight_stylesheets' => new \Twig_Function_Method($this, 'stylesheets', array('is_safe' => array('html'))),
             'eight_javascripts' => new \Twig_Function_Method($this, 'javascripts', array('is_safe' => array('html'))),
@@ -165,6 +166,11 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
     public function isPage($subject)
     {
         return $subject instanceof PageInterface;
+    }
+
+    public function renderStaticBlocks($type = 'default')
+    {
+        return $this->container->get('page.renderer')->renderStaticBlocks($type);
     }
 
     public function renderBlocks($subject, $type = 'default')

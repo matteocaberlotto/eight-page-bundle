@@ -328,10 +328,18 @@ var Editor = (function () {
                     label = 'Main Page';
                 }
 
+                if (variables['is_static']) {
+                    var class_name = "add-item add-item-static";
+                    var html_content = 'STATIC (pos: ' + variables['slot-label'] + ')';
+                } else {
+                    var class_name = "add-item";
+                    var html_content = 'Add to ' + label + ' (pos: ' + variables['slot-label'] + ')';
+                }
+
                 $('<a/>', {
                         "href": "javascript:;",
-                        "class": "add-item",
-                        "html": '<span class="glyphicon glyphicon-plus"></span>Add to ' + label + ' (pos: ' + variables['slot-label'] + ')'
+                        "class": class_name,
+                        "html": '<span class="glyphicon glyphicon-plus"></span>' + html_content
                     })
                     .insertAfter(parent)
                     ;
@@ -385,7 +393,8 @@ var Editor = (function () {
                             id: content.id,
                             name: $('.single-block-button.selected').data('name'),
                             slot_label: variables['slot-label'],
-                            page_id: variables['page-id']
+                            page_id: variables['page-id'],
+                            is_static: variables['is_static']
                         },
                         success: function (response) {
                             parent.append(response.html);

@@ -11,17 +11,23 @@ class BlockCRUDController extends CRUDController
 {
     public function appendAction(Request $request)
     {
-        $subject = $this->get('doctrine')->getRepository($request->get('subject'))->find($request->get('id'));
+        $page = $this->get('eight.pages')->find($request->get('page_id'));
+
+        if (!$request->get('is_static')) {
+            $subject = $this->get('doctrine')->getRepository($request->get('subject'))->find($request->get('id'));
+        } else {
+            $subject = $page;
+        }
 
         if (false === $this->admin->isGranted('EDIT', $subject)) {
             throw new AccessDeniedException();
         }
 
-        $page = $this->get('eight.pages')->find($request->get('page_id'));
         $page->setEditMode();
         $this->get('page.renderer')->setCurrentPage($page);
 
-        $block = $this->get('helper.page')->append($request->get('subject'), $request->get('id'), $request->get('name'), $request->get('slot_label'));
+        $block = $this->get('helper.page')->append($request->get('subject'), $request->get('id'), $request->get('name'), $request->get('slot_label'), $request->get('is_static'));
+
         $form = $this->container->get('templating')->render('EightPageBundle:Content:util/form.html.twig', array(
             'form' =>  $this->get('page.renderer')->createFormForBlock($block)->createView(),
             ));

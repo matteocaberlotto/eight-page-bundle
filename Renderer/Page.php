@@ -158,6 +158,34 @@ class Page
     }
 
     /**
+     * Renders all static blocks of given type
+     * (slot_label = where to append inside the layout).
+     */
+    public function renderStaticBlocks($slot_label)
+    {
+        $page = $this->getPage();
+
+        $html = '';
+
+        $children = $this->getStaticBlocks($slot_label);
+
+        foreach ($children as $child) {
+            $html .= $this->renderBlock($child, $page->editMode());
+        }
+
+        if ($page->editMode()) {
+            $html = $this->decorateHtml($html, 'static', null, $slot_label);
+        }
+
+        return $html;
+    }
+
+    public function getStaticBlocks($slot_label = null)
+    {
+        return $this->container->get('eight.blocks')->getStatic($slot_label);
+    }
+
+    /**
      * Append edit forms to the page.
      */
     public function appendEditForms()
@@ -166,6 +194,10 @@ class Page
 
         $page = $this->getPage();
         foreach ($page->getBlocks() as $block) {
+            $forms .= $this->appendForm($block);
+        }
+
+        foreach ($this->getStaticBlocks() as $block) {
             $forms .= $this->appendForm($block);
         }
 
@@ -217,9 +249,9 @@ class Page
         $variables = array(
             'html' => $html,
             'type' => $type,
-            'subject_class' => get_class($subject),
+            'subject_class' => $subject ? get_class($subject) : null,
             'subject' => $subject,
-            'id' => $subject->getId(),
+            'id' => $subject ? $subject->getId() : null,
             'page_id' => $this->getPage()->getId(),
             'slot_label' => $slot_label,
             'title' => $subject instanceof BlockInterface ? $subject->getName() : 'main page',
@@ -256,7 +288,6 @@ class Page
         ));
 
         // override with database values
-
         return array_merge($vars, $this->getDatabaseVariables($block, true));
     }
 
@@ -268,7 +299,6 @@ class Page
         $vars = array();
 
         foreach ($block->getContents() as $variable) {
-
             $variableHandler = $this->container->get('variable.provider')->get($variable->getType());
             $config = $this->container->get('widget.provider')->getConfigFor($block->getName(), $variable->getName());
 

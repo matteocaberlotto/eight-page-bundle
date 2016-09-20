@@ -22,24 +22,31 @@ class Page
     /**
      * Append a child block to a page or block
      */
-    public function append($subject, $id, $name, $slot_label)
+    public function append($subject, $id, $name, $slot_label, $static = false)
     {
         $block = new Block();
-        $parent = $this->container->get('doctrine')->getRepository($subject)->find($id);
 
-        switch ($subject) {
-            case 'Eight\PageBundle\Entity\Page':
-                $block->setPage($parent);
-                break;
-            case 'Eight\PageBundle\Entity\Block':
-                $block->setBlock($parent);
-                break;
-            default:
-                throw new \Exception("Class {$subject} not supported");
-                break;
+        if ($static) {
+            $nextSeq = $this->container->get('eight.blocks')->getNextStaticPosition($slot_label);
+            $block->setStatic(true);
+        } else {
+            $parent = $this->container->get('doctrine')->getRepository($subject)->find($id);
+
+            switch ($subject) {
+                case 'Eight\PageBundle\Entity\Page':
+                    $block->setPage($parent);
+                    break;
+                case 'Eight\PageBundle\Entity\Block':
+                    $block->setBlock($parent);
+                    break;
+                default:
+                    throw new \Exception("Class {$subject} not supported");
+                    break;
+            }
+
+            $nextSeq = $this->container->get('eight.blocks')->getNextPosition($subject, $id, $slot_label);
         }
 
-        $nextSeq = $this->container->get('eight.blocks')->getNextPosition($subject, $id, $slot_label);
 
         $widget = $this->container->get('widget.provider')->get($name);
 

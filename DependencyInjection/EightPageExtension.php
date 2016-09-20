@@ -51,6 +51,7 @@ class EightPageExtension extends Extension
         $container->setParameter('eight_page.default_controller', $config['default_controller']);
 
         $container->setParameter('eight_page.page_append', $config['page_append']);
+        $container->setParameter('eight_page.decorator_static', $config['decorator_static']);
         $container->setParameter('eight_page.decorator_list', $config['decorator_list']);
         $container->setParameter('eight_page.decorator_block', $config['decorator_block']);
     }

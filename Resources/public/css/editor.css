@@ -43,7 +43,7 @@ body.toolkit {
 }
 
 .eight-is-sorting .eight-block-decorator {
-    border: solid 2px #B8C6ED;
+    border: solid 2px #FFCECE;
 }
 
 
@@ -64,7 +64,9 @@ body.toolkit {
     top: 10px;
     z-index: 2147483647;
     opacity: 0.2;
-    background: #1447E0;
+    background: #C9FFD6;
+    border: solid 2px #0B844C;
+    color: #333;
 }
 
 #back-to-list-button {
@@ -73,7 +75,9 @@ body.toolkit {
     top: 10px;
     z-index: 2147483647;
     opacity: 0.2;
-    background: #1447E0;
+    background: #C9FFD6;
+    border: solid 2px #0B844C;
+    color: #333;
 }
 
 .toolkit #back-to-list-button,
@@ -102,7 +106,7 @@ body.toolkit {
 .toolkit #page-specs {
     display: block;
 }
-
+/*
 .block-container {
     display: block;
 }
@@ -110,7 +114,7 @@ body.toolkit {
 .block-wrapper {
     display: block;
     position: relative;
-}
+}*/
 
 .block-disabled {
     display: none;
@@ -120,16 +124,14 @@ body.toolkit {
     display: block;
     opacity: 0.5;
 }
-
+/*
 .toolkit .block-container {
     border: 2px dotted #D7E5F2;
     padding: 0 0 35px 0;
 }
 
 .toolkit .block-wrapper {
-    /*min-height: 42px;*/
     min-height: 34px;
-    /*background: rgba(165,255,75,0.7);*/
     border: 2px solid transparent;
     padding-top: 34px;
 }
@@ -159,7 +161,7 @@ body.toolkit {
     min-height: 120px;
     z-index: 200;
     padding-top: 34px;
-}
+}*/
 
 .toolkit .eight-list-decorator > .add-item {
     display: block;
@@ -167,8 +169,9 @@ body.toolkit {
 
 
 .add-item:hover,
-.add-item:hover {
-    background-color: #ddd;
+.add-item:hover,
+.add-item.add-item-static:hover {
+    background-color: #DDDDDD;
     text-decoration: none;
     color: #333;
 }
@@ -233,7 +236,7 @@ body.toolkit {
     top: auto;
     left: auto;
 }*/
-
+/*
 .block-wrapper > form {
     display: none;
     position: relative;
@@ -250,8 +253,8 @@ body.toolkit {
 .toolkit .block-wrapper.edit-content > form {
     display: block;
     padding: 20px;
-    border: dashed 2px #1447E0;
-}
+    border: dashed 2px #0B844C;
+}*/
 
 .submit-block-edit {
     margin-top: 10px;
@@ -270,28 +273,28 @@ body.toolkit {
 .eight-frame-side {
     width: 2px;
     position: absolute;
-    background: #1447E0;
+    background: #0B844C;
     z-index: 2147483647;
     display: none;
 }
 
 .eight-frame-bottom {
     height: 2px;
-    background: #1447E0;
+    background: #0B844C;
     position: absolute;
     display: none;
 }
 
 .eight-frame-title {
     height: 30px;
-    border: solid 2px #1447E0;
+    border: solid 2px #0B844C;
     position: absolute;
-    background: #FFF;
+    background: #C9FFD6;
     z-index: 2147483647;
     text-align: center;
     text-transform: uppercase;
     line-height: 30px;
-    color: #1447E0;
+    color: #333;
     font-weight: bold;
     display: none;
 }
@@ -301,25 +304,28 @@ body.toolkit {
 }
 
 .add-item {
-    background: #fff none repeat scroll 0 0;
-    border: 2px solid #1447E0;
+    background: #C9FFD6 none repeat scroll 0 0;
+    border: 2px solid #0B844C;
     border-radius: 1px;
-    bottom: 0;
     display: none;
     font-weight: bold;
     padding: 4px 8px;
-    position: absolute;
-    right: 0;
     z-index: 100;
-    color: #1447E0;
+    color: #333;
+    clear: both;
+}
+
+.add-item.add-item-static {
+    border-color: #3C6FC1;
+    background: #C1DAFF none repeat scroll 0 0;
 }
 
 .eight-block-decorator .eight-ui-button {
-    background: #fff none repeat scroll 0 0;
-    border: 2px solid #1447E0;
+    background: #C9FFD6 none repeat scroll 0 0;
+    border: 2px solid #0B844C;
     border-radius: 2px;
     padding: 2px 4px;
-    color: #1447E0;
+    color: #333;
 }
 
 .eight-toolbar {
@@ -332,7 +338,6 @@ body.toolkit {
     top: 0;
 }
 
-.toolkit .add-item,
 .toolkit .eight-frame-element,
 .toolkit .eight-frame-title,
 .toolkit .eight-frame-side,
@@ -341,11 +346,15 @@ body.toolkit {
     display: block;
 }
 
+.toolkit .add-item {
+    display: inline-block;
+}
+
 .toolkit .eight-list-decorator {
-    padding-top: 40px !important;
+/*    padding-top: 40px !important;
     margin-top: 40px !important;
     padding-bottom: 40px !important;
-    margin-bottom: 40px !important;
+    margin-bottom: 40px !important;*/
 }
 
 .modal-title {

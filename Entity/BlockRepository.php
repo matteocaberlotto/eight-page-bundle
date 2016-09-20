@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class BlockRepository extends EntityRepository
 {
-    public function getNextPosition($subject, $id, $type = 'default')
+    public function getNextPosition($subject, $id, $slot_label = 'default')
     {
         $q = $this->createQueryBuilder('b');
 
@@ -22,7 +22,7 @@ class BlockRepository extends EntityRepository
             ->orderBy('b.seq', 'DESC')
             ->setMaxResults(1)
             ->setParameters(array(
-                'type' => $type
+                'type' => $slot_label
                 ))
             ;
 
@@ -34,5 +34,60 @@ class BlockRepository extends EntityRepository
         }
 
         return 0;
+    }
+
+    public function getNextStaticPosition($slot_label = 'default')
+    {
+        $q = $this->createQueryBuilder('b');
+
+        $q
+            ->select('b.seq')
+            ->where('b.type = :type AND b.static = :static')
+            ->orderBy('b.seq', 'DESC')
+            ->setMaxResults(1)
+            ->setParameters(array(
+                'static' => true,
+                'type' => $slot_label
+                ))
+            ;
+
+        $current = $q->getQuery()->getScalarResult();
+
+        if (count($current)) {
+            $next = (int) $current[0]['seq'];
+            return $next + 1;
+        }
+
+        return 0;
+    }
+
+    public function getStatic($slot_label = null)
+    {
+        $q = $this->createQueryBuilder('b');
+
+        $q
+            ->select('b')
+            ;
+
+        if ($slot_label) {
+            $q
+                ->where('b.type = :type AND b.static = :static')
+                ->orderBy('b.seq', 'ASC')
+                ->setParameters(array(
+                    'static' => true,
+                    'type' => $slot_label,
+                    ))
+                ;
+        } else {
+            $q
+                ->where('b.static = :static')
+                ->orderBy('b.seq', 'ASC')
+                ->setParameters(array(
+                    'static' => true,
+                    ))
+                ;
+        }
+
+        return $q->getQuery()->getResult();
     }
 }

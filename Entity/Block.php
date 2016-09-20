@@ -32,6 +32,11 @@ class Block implements BlockInterface
     protected $type;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    protected $static;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     protected $seq;
@@ -330,6 +335,29 @@ class Block implements BlockInterface
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Set static
+     *
+     * @param string $static
+     * @return Block
+     */
+    public function setStatic($static)
+    {
+        $this->static = $static;
+
+        return $this;
+    }
+
+    /**
+     * Get static
+     *
+     * @return string
+     */
+    public function getStatic()
+    {
+        return $this->static;
     }
 
     public function hasChildren()
