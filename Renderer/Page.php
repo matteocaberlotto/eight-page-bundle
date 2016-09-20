@@ -167,7 +167,7 @@ class Page
 
         $html = '';
 
-        $children = $this->getStaticBlocks($slot_label);
+        $children = $this->getStaticBlocks($slot_label, !$page->editMode());
 
         foreach ($children as $child) {
             $html .= $this->renderBlock($child, $page->editMode());
@@ -180,9 +180,9 @@ class Page
         return $html;
     }
 
-    public function getStaticBlocks($slot_label = null)
+    public function getStaticBlocks($slot_label = null, $enabled = false)
     {
-        return $this->container->get('eight.blocks')->getStatic($slot_label);
+        return $this->container->get('eight.blocks')->getStatic($slot_label, $enabled);
     }
 
     /**

@@ -61,7 +61,7 @@ class BlockRepository extends EntityRepository
         return 0;
     }
 
-    public function getStatic($slot_label = null)
+    public function getStatic($slot_label = null, $enabled = false)
     {
         $q = $this->createQueryBuilder('b');
 
@@ -85,6 +85,13 @@ class BlockRepository extends EntityRepository
                 ->setParameters(array(
                     'static' => true,
                     ))
+                ;
+        }
+
+        if ($enabled) {
+            $q
+                ->andWhere('b.enabled = :enabled')
+                ->setParameter('enabled', true)
                 ;
         }
 
