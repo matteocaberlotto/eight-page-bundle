@@ -253,7 +253,11 @@ class Extension extends \Twig_Extension implements ContainerAwareInterface
         $page = $this->findPage($path);
 
         if ($page) {
-            return $this->container->get('router')->generate($page->getRoute()->getName(), $params);
+            if ($this->getPage()->editMode()) {
+                return $this->container->get('router')->generate($this->container->getParameter('eight_page.edit_page_url'), array('id' => $page->getId()));
+            } else {
+                return $this->container->get('router')->generate($page->getRoute()->getName(), $params);
+            }
         }
     }
 
