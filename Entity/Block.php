@@ -428,6 +428,7 @@ class Block implements BlockInterface
             'seq' => $this->getSeq(),
             'layout' => $this->getLayout(),
             'enabled' => $this->getEnabled(),
+            'static' => $this->getStatic(),
             );
     }
 }

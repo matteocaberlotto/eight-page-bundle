@@ -199,7 +199,7 @@ var Editor = (function () {
             var blockContent = $(element).data('editor-content');
 
             // header
-            $('<div/>', { "class": "eight-frame-title eight-frame-element eight-frame-element-" + blockContent.id})
+            $('<div/>', { "class": "eight-frame-title " + (blockContent.static ? 'eight-static-frame-title' : '') + " eight-frame-element eight-frame-element-" + blockContent.id})
                 .css({
                     left: element.offset().left,
                     top: element.offset().top - 30,

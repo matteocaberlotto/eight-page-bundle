@@ -315,6 +315,10 @@ body.toolkit {
     overflow-y: hidden;
 }
 
+.eight-frame-title.eight-static-frame-title {
+    background: #C4FFC9;
+}
+
 .eight-block-decorator {
     position: relative;
 }
