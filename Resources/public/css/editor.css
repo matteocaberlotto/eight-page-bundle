@@ -8,8 +8,10 @@ body.toolkit {
 }
 
 #add-block-modal .single-block-button {
-    border: 1px solid #eee;
-    color: #333;
+    background: #f4f3dc none repeat scroll 0 0;
+    border: 3px solid #165684;
+    border-radius: 3px;
+    color: #165684;
     display: inline-block;
     font-size: 16px;
     margin: 10px;
@@ -64,9 +66,10 @@ body.toolkit {
     top: 10px;
     z-index: 2147483647;
     opacity: 0.2;
-    background: #C9FFD6;
-    border: solid 2px #0B844C;
-    color: #333;
+    background: #F4F3DC;
+    border: solid 2px #165684;
+    color: #165684;
+    border-radius: 3px;
 }
 
 #back-to-list-button {
@@ -75,9 +78,10 @@ body.toolkit {
     top: 10px;
     z-index: 2147483647;
     opacity: 0.2;
-    background: #C9FFD6;
-    border: solid 2px #0B844C;
-    color: #333;
+    background: #F4F3DC;
+    border: solid 2px #165684;
+    color: #165684;
+    border-radius: 3px;
 }
 
 .toolkit #back-to-list-button,
@@ -88,6 +92,10 @@ body.toolkit {
 #back-to-list-button:hover,
 #btn-edit-layout-mode:hover {
     opacity: 1;
+    background-color: #BBBBBB;
+    text-decoration: none;
+    color: #333333;
+    border-color: #333;
 }
 
 #page-specs {
@@ -139,7 +147,7 @@ body.toolkit {
 .toolkit .block-wrapper:hover {
     background: #EEE none repeat scroll 0 0;
     z-index: 200;
-    border: 2px dotted #3C6FC1;
+    border: 2px dotted #CCCCCC;
 }
 
 .block-wrapper-header {
@@ -169,11 +177,18 @@ body.toolkit {
 
 
 .add-item:hover,
-.add-item:hover,
-.add-item.add-item-static:hover {
-    background-color: #DDDDDD;
+.add-item:focus {
+    background-color: #BBBBBB;
     text-decoration: none;
-    color: #333;
+    color: #333333;
+    border-color: #333;
+}
+
+.add-item.add-item-static:hover {
+    background-color: #BBBBBB;
+    text-decoration: none;
+    color: #333333;
+    border-color: #333;
 }
 
 .toolkit .block-wrapper:hover > .btn-remove-block,
@@ -273,28 +288,28 @@ body.toolkit {
 .eight-frame-side {
     width: 2px;
     position: absolute;
-    background: #0B844C;
+    background: #165684;
     z-index: 2147483647;
     display: none;
 }
 
 .eight-frame-bottom {
     height: 2px;
-    background: #0B844C;
+    background: #165684;
     position: absolute;
     display: none;
 }
 
 .eight-frame-title {
     height: 30px;
-    border: solid 2px #0B844C;
+    border: solid 2px #165684;
     position: absolute;
-    background: #C9FFD6;
+    background: #F4F3DC;
     z-index: 2147483647;
     text-align: center;
     text-transform: uppercase;
     line-height: 30px;
-    color: #333;
+    color: #165684;
     font-weight: bold;
     display: none;
 }
@@ -304,28 +319,37 @@ body.toolkit {
 }
 
 .add-item {
-    background: #C9FFD6 none repeat scroll 0 0;
-    border: 2px solid #0B844C;
-    border-radius: 1px;
+    border: 2px solid #165684;
+    background: #F4F3DC none repeat scroll 0 0;
+    border-radius: 2px;
     display: none;
     font-weight: bold;
     padding: 4px 8px;
     z-index: 100;
-    color: #333;
+    color: #165684;
     clear: both;
+    font-weight: normal;
+    margin: 4px;
 }
 
 .add-item.add-item-static {
-    border-color: #3C6FC1;
-    background: #C1DAFF none repeat scroll 0 0;
+    border-color: #165684;
+    background: #E5B9BB none repeat scroll 0 0;
 }
 
 .eight-block-decorator .eight-ui-button {
-    background: #C9FFD6 none repeat scroll 0 0;
-    border: 2px solid #0B844C;
-    border-radius: 2px;
+    background: #f4f3dc none repeat scroll 0 0;
+    border: 2px solid #165684;
     padding: 2px 4px;
-    color: #333;
+    color: #165684;
+    border-radius: 3px;
+}
+
+.eight-block-decorator .eight-ui-button:hover {
+    background-color: #BBBBBB;
+    text-decoration: none;
+    color: #333333;
+    border-color: #333;
 }
 
 .eight-toolbar {
@@ -371,7 +395,7 @@ body.toolkit {
     position: absolute;
     width: 80%;
     z-index: 1000;
-    border: solid 1px #DDDDDD;
+    border: solid 1px #165684;
 }
 
 .icon-selection-list:before {
