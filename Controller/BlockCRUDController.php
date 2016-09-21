@@ -9,6 +9,15 @@ use Eight\PageBundle\Entity\Content;
 
 class BlockCRUDController extends CRUDController
 {
+    /**
+     * Upate page last updated for caching invalidation
+     */
+    protected function updatePage($page)
+    {
+        $page->setUpdatedAtValue();
+        $this->container->get('doctrine')->getManager()->flush();
+    }
+
     public function appendAction(Request $request)
     {
         $page = $this->get('eight.pages')->find($request->get('page_id'));
@@ -32,6 +41,8 @@ class BlockCRUDController extends CRUDController
             'form' =>  $this->get('page.renderer')->createFormForBlock($block)->createView(),
             ));
 
+        $this->updatePage($page);
+
         return new JsonResponse(array(
             'status' => 'OK',
             'html' => $this->get('page.renderer')->renderBlock($block, true),
@@ -54,6 +65,8 @@ class BlockCRUDController extends CRUDController
         $manager = $this->get('doctrine')->getManager();
         $manager->remove($block);
         $manager->flush();
+
+        $this->updatePage($page);
 
         return new JsonResponse(array(
             'status' => 'OK'
@@ -80,6 +93,8 @@ class BlockCRUDController extends CRUDController
         $manager = $this->get('doctrine')->getManager();
         $manager->flush();
 
+        $this->updatePage($page);
+
         return new JsonResponse(array(
             'status' => 'OK',
             'html' => $this->get('page.renderer')->renderBlock($block, true),
@@ -105,6 +120,8 @@ class BlockCRUDController extends CRUDController
         $block->setEnabled(false);
         $manager = $this->get('doctrine')->getManager();
         $manager->flush();
+
+        $this->updatePage($page);
 
         return new JsonResponse(array(
             'status' => 'OK',
@@ -180,6 +197,8 @@ class BlockCRUDController extends CRUDController
             }
 
             $this->get('doctrine')->getManager()->flush();
+
+            $this->updatePage($page);
         }
 
         return $this->redirect($this->generateUrl('admin_eight_page_page_layout', array('id' => $request->get('page_id'))));
@@ -188,6 +207,9 @@ class BlockCRUDController extends CRUDController
     public function reorderAction(Request $request)
     {
         $this->get('helper.page')->reorder($request->get('ids'));
+
+        $page = $this->get('eight.pages')->find($request->get('page_id'));
+        $this->updatePage($page);
 
         return new JsonResponse(array(
             'status' => 'OK'

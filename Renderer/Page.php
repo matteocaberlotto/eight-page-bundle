@@ -134,23 +134,24 @@ class Page
      */
     public function renderBlockChildren($subject, $slot_label)
     {
-        $page = $this->getPage();
-
+        $editMode = $this->editMode();
         $html = '';
 
-        if ($subject instanceof BlockInterface) {
-            $children = $subject->getOrderedBlocks($page->editMode());
-        } else {
-            $children = $subject->getOrderedBlocks($slot_label);
-        }
+        if ($subject) {
+            if ($subject instanceof BlockInterface) {
+                $children = $subject->getOrderedBlocks($editMode);
+            } else {
+                $children = $subject->getOrderedBlocks($slot_label);
+            }
 
-        foreach ($children as $sub) {
-            if ($sub->getType() == $slot_label) {
-                $html .= $this->renderBlock($sub, $page->editMode());
+            foreach ($children as $sub) {
+                if ($sub->getType() == $slot_label) {
+                    $html .= $this->renderBlock($sub, $editMode);
+                }
             }
         }
 
-        if ($page->editMode()) {
+        if ($editMode) {
             $html = $this->decorateHtml($html, 'list', $subject, $slot_label);
         }
 
@@ -167,13 +168,13 @@ class Page
 
         $html = '';
 
-        $children = $this->getStaticBlocks($slot_label, !$page->editMode());
+        $children = $this->getStaticBlocks($slot_label, !$this->editMode());
 
         foreach ($children as $child) {
-            $html .= $this->renderBlock($child, $page->editMode());
+            $html .= $this->renderBlock($child, $this->editMode());
         }
 
-        if ($page->editMode()) {
+        if ($this->editMode()) {
             $html = $this->decorateHtml($html, 'static', null, $slot_label);
         }
 

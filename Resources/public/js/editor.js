@@ -355,10 +355,13 @@ var Editor = (function () {
                 ids.push($(this).data('editor-content').id);
             });
 
+            var editorContent = container.data('editor-content');
+
             $.ajax({
                 url: globalReorderUrl,
                 data: {
-                    ids: ids
+                    ids: ids,
+                    page_id: editorContent.page_id
                 },
                 success: function () {
 

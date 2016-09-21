@@ -253,12 +253,17 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
         $page = $this->findPage($path);
 
         if ($page) {
-            if ($this->getPage()->editMode()) {
+            if ($this->editMode()) {
                 return $this->container->get('router')->generate($this->container->getParameter('eight_page.edit_page_url'), array('id' => $page->getId()));
             } else {
                 return $this->container->get('router')->generate($page->getRoute()->getName(), $params);
             }
         }
+    }
+
+    public function editMode()
+    {
+        return $this->container->get('page.renderer')->editMode();
     }
 
     public function i18nTitle($path)
