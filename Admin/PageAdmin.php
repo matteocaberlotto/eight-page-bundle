@@ -2,7 +2,7 @@
 
 namespace Eight\PageBundle\Admin;
 
-use Sonata\AdminBundle\Admin\Admin;
+use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -18,7 +18,7 @@ use Eight\PageBundle\Entity\Content;
 use Eight\PageBundle\Form\DataTransformer\TagsToStringTransformer;
 
 
-class PageAdmin extends Admin implements ContainerAwareInterface
+class PageAdmin extends AbstractAdmin implements ContainerAwareInterface
 {
     protected $container;
 
