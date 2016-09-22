@@ -250,8 +250,8 @@ var Editor = (function () {
                         $('body').removeClass('eight-is-sorting');
 
                         $('.eight-frame-element').remove();
-
-                        Editor.updateBlocksOrder(ui.item.parent());
+                        var parent = ui.item.parents('.eight-list-decorator').first();
+                        Editor.updateBlocksOrder(parent);
 
                         Editor.reloadPlugins();
                     }
@@ -283,7 +283,6 @@ var Editor = (function () {
                         var variables = $el.data('add-variables');
 
                         for (var i in variables) {
-
                             next.attr('data-' + i, variables[i]);
                         }
 
@@ -295,6 +294,8 @@ var Editor = (function () {
                                 next.addClass(classes[i]);
                             }
                         }
+
+                        next.addClass('eight-block-children-' + $el.data('add-content').block_id);
                     }
 
                     next = next.next();
@@ -351,12 +352,13 @@ var Editor = (function () {
 
         updateBlocksOrder: function (container) {
 
+            var editorContent = container.data('editor-content');
+
             var ids = [];
-            container.find('> .eight-block-decorator').each(function () {
+            container.find('.eight-block-children-' + editorContent.id).each(function () {
                 ids.push($(this).data('editor-content').id);
             });
 
-            var editorContent = container.data('editor-content');
 
             $.ajax({
                 url: globalReorderUrl,
