@@ -14,6 +14,9 @@
 !var/cache/.gitkeep
 !var/logs/.gitkeep
 !var/sessions/.gitkeep
+/Tests/cache
+/Tests/logs
+/composer.lock
 
 # Parameters
 /app/config/parameters.yml
