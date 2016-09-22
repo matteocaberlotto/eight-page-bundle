@@ -15,10 +15,9 @@ class SeoPage
     protected $metas = array();
     protected $encoding;
 
-    public function __construct($title, $description, $encoding) {
+    public function __construct($title, $description) {
         $this->title = $title;
         $this->description = $description;
-        $this->encoding = $encoding;
     }
 
     public function setPage($page)

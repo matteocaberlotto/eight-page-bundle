@@ -39,6 +39,9 @@ class EightPageExtension extends Extension
         $container->setParameter('eight_page.http_metas', $config['http_metas']);
         $container->setParameter('eight_page.encoding', $config['encoding']);
 
+        $container->setParameter('eight_page.seo_title', $config['seo_title']);
+        $container->setParameter('eight_page.seo_description', $config['seo_description']);
+
         $container->setParameter('eight_page.css', $config['css']);
         $container->setParameter('eight_page.js', $config['js']);
 

@@ -32,7 +32,7 @@ services:
 
     eight.page.seo:
         class: Eight\PageBundle\Seo\SeoPage
-        arguments: [%seo_title%, %seo_description%, %seo_encoding%]
+        arguments: [%eight_page.seo_title%, %eight_page.seo_description%]
 
     eight.twig.extension:
         class: Eight\PageBundle\Twig\Extension
