@@ -121,7 +121,8 @@ var Editor = (function () {
                         $.ajax({
                             url: globalRemoveUrl,
                             data: {
-                                block_id: blockContent.id
+                                block_id: blockContent.id,
+                                page_id: element.data('page-id')
                             },
                             success: function () {
                                 Editor.hideFrame(element);

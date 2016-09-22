@@ -335,6 +335,7 @@ body.toolkit {
     clear: both;
     font-weight: normal;
     width: 100%;
+    margin: 10px 0 34px;
 }
 
 .add-item.add-item-static {

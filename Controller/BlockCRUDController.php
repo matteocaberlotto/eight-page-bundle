@@ -66,6 +66,7 @@ class BlockCRUDController extends CRUDController
         $manager->remove($block);
         $manager->flush();
 
+        $page = $this->get('eight.pages')->find($request->get('page_id'));
         $this->updatePage($page);
 
         return new JsonResponse(array(
@@ -149,7 +150,8 @@ class BlockCRUDController extends CRUDController
 
         $this->admin->setSubject($object);
 
-        $this->get('page.renderer')->setCurrentPage($this->get('eight.pages')->find($request->get('page_id')));
+        $page = $this->get('eight.pages')->find($request->get('page_id'));
+        $this->get('page.renderer')->setCurrentPage($page);
 
         $form = $this->get('page.renderer')->createFormForBlock($object);
 
