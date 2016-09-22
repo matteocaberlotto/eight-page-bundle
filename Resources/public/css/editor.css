@@ -335,7 +335,7 @@ body.toolkit {
     clear: both;
     font-weight: normal;
     width: 100%;
-    margin: 10px 0 34px;
+    margin: 10px 0;
 }
 
 .add-item.add-item-static {
@@ -381,10 +381,11 @@ body.toolkit {
 }
 
 .toolkit .eight-list-decorator {
-/*    padding-top: 40px !important;
     margin-top: 40px !important;
-    padding-bottom: 40px !important;
-    margin-bottom: 40px !important;*/
+    border: dashed 2px #EEE;
+/*    padding-top: 40px !important;
+    margin-bottom: 40px !important;
+    padding-bottom: 40px !important;*/
 }
 
 .modal-title {
@@ -402,7 +403,7 @@ body.toolkit {
     position: absolute;
     width: 80%;
     z-index: 1000;
-    border: solid 1px #165684;
+    border: solid 1px #CCC;
 }
 
 .icon-selection-list:before {
@@ -410,10 +411,10 @@ body.toolkit {
     position: absolute;
     width: 0;
     height: 0;
-    left: -40px;
+    left: -41px;
     top: 0px;
     border: 20px solid;
-    border-color: transparent #666 transparent transparent;
+    border-color: transparent #CCC transparent transparent;
 }
 
 .icon-selection-list:after {
