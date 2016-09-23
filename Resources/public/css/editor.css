@@ -383,7 +383,8 @@ body.toolkit {
 .toolkit .eight-list-decorator {
     margin-top: 40px !important;
     border: dashed 2px #EEE;
-/*    padding-top: 40px !important;
+    padding-top: 20px !important;
+/*
     margin-bottom: 40px !important;
     padding-bottom: 40px !important;*/
 }
