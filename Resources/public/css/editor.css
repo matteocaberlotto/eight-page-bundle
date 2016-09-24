@@ -334,8 +334,7 @@ body.toolkit {
     color: #165684;
     clear: both;
     font-weight: normal;
-    width: 100%;
-    margin: 10px 0;
+    margin: 10px;
 }
 
 .add-item.add-item-static {
@@ -377,7 +376,7 @@ body.toolkit {
 }
 
 .toolkit .add-item {
-    display: inline-block;
+    display: block;
 }
 
 .toolkit .eight-list-decorator {
