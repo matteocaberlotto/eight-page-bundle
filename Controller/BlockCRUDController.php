@@ -21,8 +21,9 @@ class BlockCRUDController extends CRUDController
     public function appendAction(Request $request)
     {
         $page = $this->get('eight.pages')->find($request->get('page_id'));
+        $static = $request->get('is_static') === 'true' ? true : false;
 
-        if (!$request->get('is_static')) {
+        if (!$static) {
             $subject = $this->get('doctrine')->getRepository($request->get('subject'))->find($request->get('id'));
         } else {
             $subject = $page;
@@ -35,7 +36,7 @@ class BlockCRUDController extends CRUDController
         $page->setEditMode();
         $this->get('page.renderer')->setCurrentPage($page);
 
-        $block = $this->get('helper.page')->append($request->get('subject'), $request->get('id'), $request->get('name'), $request->get('slot_label'), $request->get('is_static'));
+        $block = $this->get('helper.page')->append($request->get('subject'), $request->get('id'), $request->get('name'), $request->get('slot_label'), $static);
 
         $form = $this->container->get('templating')->render('EightPageBundle:Content:util/form.html.twig', array(
             'form' =>  $this->get('page.renderer')->createFormForBlock($block)->createView(),
