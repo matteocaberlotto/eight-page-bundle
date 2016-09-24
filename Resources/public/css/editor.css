@@ -342,12 +342,18 @@ body.toolkit {
     background: #C4FFC9 none repeat scroll 0 0;
 }
 
-.eight-block-decorator .eight-ui-button {
+.toolkit .eight-block-decorator .eight-ui-button {
     background: #f4f3dc none repeat scroll 0 0;
     border: 2px solid #165684;
     padding: 2px 4px;
     color: #165684;
     border-radius: 3px;
+    line-height: 1em;
+}
+
+.toolkit .eight-block-decorator .eight-ui-button span {
+    margin: 0;
+    display: inline-block;
 }
 
 .eight-block-decorator .eight-ui-button:hover {
