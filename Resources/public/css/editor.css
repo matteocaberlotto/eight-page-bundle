@@ -175,6 +175,9 @@ body.toolkit {
     display: block;
 }
 
+.toolkit .eight-block-decorator {
+    min-height: 40px;
+}
 
 .add-item:hover,
 .add-item:focus {
