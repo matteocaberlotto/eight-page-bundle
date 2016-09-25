@@ -211,8 +211,10 @@ class BlockCRUDController extends CRUDController
     {
         $this->get('helper.page')->reorder($request->get('ids'));
 
-        $page = $this->get('eight.pages')->find($request->get('page_id'));
-        $this->updatePage($page);
+        if ($request->get('page_id')) {
+            $page = $this->get('eight.pages')->find($request->get('page_id'));
+            $this->updatePage($page);
+        }
 
         return new JsonResponse(array(
             'status' => 'OK'
