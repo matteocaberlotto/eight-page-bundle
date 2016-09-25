@@ -3,6 +3,7 @@
 namespace Eight\PageBundle\Renderer;
 
 use Eight\PageBundle\Form\CollectionMethodType;
+use Eight\PageBundle\Variable\Config\Normalizer;
 
 class FormBuilder
 {
@@ -31,39 +32,15 @@ class FormBuilder
 
         foreach ($widget->getVars() as $name => $config) {
 
-            // normalize key only entries
-            if (is_numeric($name)) {
-                $name = $config;
-                $config = array();
-            } else {
-                // config is an array but it doesnt looks like a config array => declared variable (not to be overridden)
-                if (is_array($config) && !isset($config['type']) && !isset($config['default_value']) && !isset($config['edit'])) {
-                    $config = array(
-                        'default_value' => $config,
-                        'edit' => false,
-                    );
-                }
-            }
+            list($name, $config) = Normalizer::normalize($name, $config);
 
-            // if value is nothing the cases above, it is variable declared inside the widget
-            if (!is_array($config)) {
-                $config = array(
-                    'default_value' => $config,
-                    'edit' => false,
-                    );
-            }
-
-            if (!isset($config['type'])) {
-                $config['type'] = 'label';
-            }
-
-            if (isset($config['edit']) && $config['edit'] == false) {
+            if (!$config->editable()) {
                 continue;
             }
 
             $variable = $this->getDbVariable($block, $name, $config);
 
-            $this->container->get('variable.provider')->get($config['type'])->buildForm($builder, $name, $config, $variable);
+            $this->container->get('variable.provider')->get($config->getType())->buildForm($builder, $name, $config, $variable);
         }
 
         $builder
@@ -96,7 +73,7 @@ class FormBuilder
         return $this->container->get('eight.content')->findOneBy(array(
             'block' => $block,
             'name' => $name,
-            'type' => $config['type'],
+            'type' => $config->getType(),
             ));
     }
 }

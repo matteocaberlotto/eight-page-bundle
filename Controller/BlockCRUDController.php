@@ -139,6 +139,11 @@ class BlockCRUDController extends CRUDController
         $templateKey = 'edit';
 
         $id = $request->get($this->admin->getIdParameter());
+
+        /**
+         * @var Eight\PageBundle\Entity\Block
+         * Our block being updated.
+         */
         $object = $this->admin->getObject($id);
 
         if (!$object) {
@@ -184,18 +189,12 @@ class BlockCRUDController extends CRUDController
                     $prev = new Content();
                     $prev->setBlock($object);
                     $prev->setName($name);
-
-                    if (empty($type)) {
-                        $type = 'label';
-                    }
-
                     $prev->setType($type);
 
                     $this->get('doctrine')->getManager()->persist($prev);
                 }
 
                 $config = $this->get('widget.provider')->getConfigFor($object->getName(), $name);
-
                 $this->get('variable.provider')->get($prev->getType())->saveValue($prev, $value, $config);
             }
 

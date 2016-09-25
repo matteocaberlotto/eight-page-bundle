@@ -14,9 +14,9 @@ class Choices extends AbstractVariable
         $builder
             ->add($name, 'choice', array(
                 'data' => $variable ? ($variable->getContent() ? $this->getValue($variable, $config) : null) : null,
-                'choices' => $config['choices'],
-                'expanded' => isset($config['expanded']) ? $config['expanded'] : false,
-                'multiple' => isset($config['multiple']) ? $config['multiple'] : false,
+                'choices' => $config->get('choices'),
+                'expanded' => $config->has('expanded') ? $config->get('expanded') : false,
+                'multiple' => $config->has('multiple') ? $config->get('multiple') : false,
                 'attr' => array(
                     'class' => 'form-group',
                     ),

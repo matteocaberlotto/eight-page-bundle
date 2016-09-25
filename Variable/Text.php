@@ -11,18 +11,18 @@ class Text extends AbstractVariable
 {
     public function buildForm(FormBuilderInterface $builder, $name, $config, ContentInterface $variable = null)
     {
-        $editor = '';
+        $editor_class_append = ' eight-page-textarea';
 
-        // prevent rich text editor on demand
-        if (!isset($config['raw'])) {
-            $editor = 'eight-page-textarea';
+        // prevent rich text editor when requested
+        if ($config->has('raw') && $config->get('raw')) {
+            $editor_class_append = '';
         }
 
         $builder
             ->add($name, 'textarea', array(
                 'required' => false,
                 'attr' => array(
-                    'class' => 'form-control ' . $editor
+                    'class' => 'form-control' . $editor_class_append
                     )
                 ))
             ;

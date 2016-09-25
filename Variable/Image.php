@@ -49,8 +49,8 @@ class Image extends AbstractVariable
 
     public function saveValue(ContentInterface $variable, $content, $config)
     {
-        if (!isset($config['folder'])) {
-            $config['folder'] = 'default';
+        if (!$config->has('folder')) {
+            $config->set('folder', 'default');
         }
 
         $variable->setImagePath($content);

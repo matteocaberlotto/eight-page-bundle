@@ -2,6 +2,8 @@
 
 namespace Eight\PageBundle\Widget;
 
+use Eight\PageBundle\Variable\Config\Config;
+
 class Template extends AbstractWidget
 {
     public function getVars()
@@ -10,9 +12,9 @@ class Template extends AbstractWidget
             'template',
             'title',
             'subtitle',
-            'description' => array(
+            'description' => new Config(array(
                 'type' => 'text'
-                ),
+                )),
             'caption',
         );
     }

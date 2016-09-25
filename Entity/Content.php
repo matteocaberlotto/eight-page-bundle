@@ -281,7 +281,7 @@ class Content implements ContentInterface
         );
 
         // set the path property to the filename where you've saved the file
-        $this->content = self::CMS_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $config['folder'] . DIRECTORY_SEPARATOR . $this->getImagePath()->getClientOriginalName();
+        $this->content = self::CMS_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $config->get('folder') . DIRECTORY_SEPARATOR . $this->getImagePath()->getClientOriginalName();
 
         // clean up the file property as you won't need it anymore
         $this->setImagePath(null);

@@ -40,8 +40,8 @@ class CollectionMethod extends AbstractVariable
 
     public function getDefaultValue($config)
     {
-        if (isset($config['default_value'])) {
-            return $config['default_value'];
+        if ($config->hasDefault()) {
+            return $config->getDefault();
         }
 
         return new ArrayCollection();

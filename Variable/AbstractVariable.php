@@ -57,10 +57,14 @@ abstract class AbstractVariable
      */
     public function getDefaultValue($config)
     {
-        if (isset($config['default_value'])) {
-            return $config['default_value'];
+        if ($config->hasDefault()) {
+            return $config->getDefault();
         }
 
+        /**
+         * This makes sure template engine doesn't raise an error
+         * when variable is not populated from database.
+         */
         return '';
     }
 
@@ -73,7 +77,7 @@ abstract class AbstractVariable
      * Tells the builder how to edit this variable in admin mode.
      *
      * @param FormBuilderInterface $builder
-     * @param strong $name
+     * @param string $name
      * @param array $config
      * @param ContentInterface $variable
      */

@@ -2,6 +2,10 @@
 
 namespace Eight\PageBundle\Provider;
 
+use Eight\PageBundle\Variable\Config\Normalizer;
+use Eight\PageBundle\Variable\Config\ConfigInterface;
+use Eight\PageBundle\Variable\Config\Config;
+
 class Widget
 {
     protected $container;
@@ -38,37 +42,14 @@ class Widget
 
         foreach ($this->_widgets[$block->getName()]->getVars($block) as $name => $config) {
 
-            // config array not defined and index is numeric => simple variable
-            if (is_numeric($name)) {
-                $name = $config;
-                $config = array();
-            } else {
-                // config is an array but it doesnt looks like a config array => declared variable (not to be overridden)
-                if (is_array($config) && !isset($config['type']) && !isset($config['default_value']) && !isset($config['edit'])) {
-                    $config = array(
-                        'default_value' => $config,
-                        'edit' => false,
-                    );
-                }
-            }
-
-            if (!is_array($config)) {
-                $config = array(
-                    'default_value' => $config,
-                    'edit' => false,
-                    );
-            }
-
-            if (!isset($config['type'])) {
-                $config['type'] = 'label';
-            }
+            list($name, $config) = Normalizer::normalize($name, $config);
 
             // if default value is contained into configuration, use it (this is the case of a variable declared inside widget)
             // else try resolution from variable handler (this is the case of a database variable).
-            if (isset($config['default_value'])) {
-                $vars[$name] = $config['default_value'];
+            if ($config->hasDefault()) {
+                $vars[$name] = $config->getDefault();
             } else {
-                $vars[$name] = $this->container->get('variable.provider')->get($config['type'])->getDefaultValue($config);
+                $vars[$name] = $this->container->get('variable.provider')->get($config->getType())->getDefaultValue($config);
             }
         }
 
@@ -84,15 +65,12 @@ class Widget
     {
         $widget = $this->get($widget_name);
 
-        foreach ($this->getVariables($widget_name) as $name => $variable) {
-            if (is_array($variable)) {
-                if ($name == $variable_name) {
-                    return isset($variable['type']) ? $variable['type'] : '';
-                }
-            } else {
-                if ($variable == $variable_name) {
-                    return isset($variable['type']) ? $variable['type'] : '';
-                }
+        foreach ($this->getVariables($widget_name) as $name => $config) {
+
+            list($name, $config) = Normalizer::normalize($name, $config);
+
+            if ($name == $variable_name) {
+                return $config->getType();
             }
         }
 
@@ -100,26 +78,18 @@ class Widget
     }
 
     /**
-     * This method is used only to retrieve database overridden contents.
+     * This method is called when loading database variables and
+     * when saving database variables. No "static" variables.
      */
     public function getConfigFor($widget_name, $variable_name)
     {
         $widget = $this->get($widget_name);
 
         foreach ($this->getVariables($widget_name) as $name => $config) {
-            if (is_numeric($name)) {
-                // simple variable (no config)
-                if ($config == $variable_name) {
-                    return array();
-                }
-            }
 
-            // configured variable
-            if (is_array($config)) {
-                return $config;
-            }
+            list($name, $config) = Normalizer::normalize($name, $config);
 
-            return array();
+            return $config;
         }
 
         throw new \InvalidArgumentException("Variable {$variable_name} is not present in the widget {$widget_name}");
@@ -128,7 +98,10 @@ class Widget
     public function editable($block)
     {
         foreach ($this->_widgets[$block->getName()]->getVars() as $name => $config) {
-            if (!isset($config['edit']) || $config['edit'] !== false) {
+
+            list($name, $config) = Normalizer::normalize($name, $config);
+
+            if ($config->editable()) {
                 return true;
             }
         }

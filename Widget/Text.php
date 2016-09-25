@@ -2,14 +2,16 @@
 
 namespace Eight\PageBundle\Widget;
 
+use Eight\PageBundle\Variable\Config\Config;
+
 class Text extends AbstractWidget
 {
     public function getVars()
     {
         return array(
-            'text' => array(
+            'text' => new Config(array(
                 'type' => 'text'
-                )
+                ))
             );
     }
 

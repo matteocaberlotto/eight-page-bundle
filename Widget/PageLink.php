@@ -2,13 +2,21 @@
 
 namespace Eight\PageBundle\Widget;
 
+use Eight\PageBundle\Variable\Config\Config;
+
 class PageLink extends AbstractWidget
 {
     public function getVars()
     {
         return array(
-            'classes',
-            'page',
+            'html_classes',
+            'html_icon_class' => new Config(array(
+                'type' => 'icon',
+                )),
+            'page' => new Config(array(
+                'type' => 'entity',
+                'class' => 'Eight\PageBundle\Entity\Page',
+                )),
             );
     }
 

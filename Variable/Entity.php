@@ -57,11 +57,13 @@ class Entity extends AbstractVariable
 
     public function getDefaultValue($config)
     {
-        if (isset($config['default_value'])) {
-            return $config['default_value'];
+        if ($config->hasDefault()) {
+            return $config->getDefault();
         }
 
-        return new $config['class']();
+        $class = $config->get('class');
+
+        return new $class();
     }
 
     public function getName()
@@ -73,7 +75,10 @@ class Entity extends AbstractVariable
     {
         $builder
             ->add($name, 'entity', array(
-                'class' => $config['class'],
+                'class' => $config->get('class'),
+                'placeholder' => 'Choose a model',
+                'required' => false,
+                'data' => $variable ? $this->getValue($variable, $config) : null,
                 ))
             ;
     }
