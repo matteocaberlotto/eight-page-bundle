@@ -289,6 +289,6 @@ class Content implements ContentInterface
 
     protected function getUploadPath($config)
     {
-        return __DIR__ . "/../../../../web" . self::CMS_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $config['folder'];
+        return __DIR__ . "/../../../../web" . self::CMS_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $config->get('folder');
     }
 }
