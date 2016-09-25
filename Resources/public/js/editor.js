@@ -295,7 +295,11 @@ var Editor = (function () {
                             }
                         }
 
-                        next.addClass('eight-block-children-' + $el.data('add-content').block_id);
+                        if ($el.data('add-content').block_id) {
+                            next.addClass('eight-block-children-' + $el.data('add-content').block_id + '-' + $el.data('add-content')['type']);
+                        } else {
+                            next.addClass('eight-block-children-page-' + ($el.data('add-content').page_id ? $el.data('add-content').page_id : 'static') + '-' + $el.data('add-content')['type']);
+                        }
                     }
 
                     next = next.next();
@@ -353,9 +357,26 @@ var Editor = (function () {
         updateBlocksOrder: function (container) {
 
             var editorContent = container.data('editor-content');
+            var variables = container.data('variables');
 
             var ids = [];
-            container.find('.eight-block-children-' + editorContent.id).each(function () {
+
+            var childrenSelector;
+
+            if (container.data('subject-class') === 'Eight\\PageBundle\\Entity\\Block') {
+                // the container is a block
+                childrenSelector = '.eight-block-children-' + editorContent.id + '-' + variables['slot-label'];
+            } else {
+                // the container is the page
+                if (variables.is_static) {
+                    // this is a static slot
+                    childrenSelector = '.eight-block-children-page-static-' + variables['slot-label'];
+                } else {
+                    childrenSelector = '.eight-block-children-page-' + variables['page-id'] + '-' + variables['slot-label'];
+                }
+            }
+
+            container.find(childrenSelector).each(function () {
                 ids.push($(this).data('editor-content').id);
             });
 
