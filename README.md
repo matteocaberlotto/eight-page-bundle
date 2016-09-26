@@ -13,16 +13,10 @@
 
 
 ### Features:
- - fully editable page properties (title, url, meta ...)
- - customizable tree structure of html blocks
- - automated form building for content editing
- - in page editor with preview and unobtrusive visual editor
+ - fully editable page properties (title, url, meta, og, ...)
+ - fully editable html blocks tree with predefined widgets
+ - auto form building for in-place content editing
  - yml content loader
-
-
-### Objective:
- - ease cms pages creation
- - minimize markup/code overhead
 
 
 
