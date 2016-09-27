@@ -424,10 +424,10 @@ var Editor = (function () {
                             is_static: variables['is_static']
                         },
                         success: function (response) {
+                            $('#add-block-modal').modal('hide');
                             parent.append(response.html);
                             $('body').append(response.form);
                             Editor.reload();
-                            $('#add-block-modal').modal('hide');
                         },
                         error: function () {
                             $('#add-block-modal').modal('hide');
