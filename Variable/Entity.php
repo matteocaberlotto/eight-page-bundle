@@ -79,6 +79,9 @@ class Entity extends AbstractVariable
                 'placeholder' => 'Choose a model',
                 'required' => false,
                 'data' => $variable ? $this->getValue($variable, $config) : null,
+                'attr' => array(
+                    'class' => 'form-control'
+                    )
                 ))
             ;
     }
