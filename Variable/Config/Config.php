@@ -20,11 +20,7 @@ class Config implements ConfigInterface
 
     public function has($index)
     {
-        if (isset($this->config[$index])) {
-            true;
-        }
-
-        return false;
+        return isset($this->config[$index]);
     }
 
     public function get($index)
