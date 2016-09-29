@@ -109,7 +109,7 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
             return $page->getRoute()->getPath();
         }
 
-        return $this->container->get('router')->generate($this->getRequest()->get('_route'));
+        return $this->container->get('router')->generate($this->getRequest()->get('_route'), $this->getRequest()->get('_route_params'));
     }
 
     public function showWhenRouteMatch($routes, $string)
