@@ -67,8 +67,8 @@ body.toolkit {
     z-index: 1000;
     opacity: 0.2;
     background: #F4F3DC;
-    border: solid 2px #165684;
-    color: #165684;
+    border: solid 1px #F2DE9D;
+    color: #777;
     border-radius: 3px;
 }
 
@@ -79,8 +79,8 @@ body.toolkit {
     z-index: 1000;
     opacity: 0.2;
     background: #F4F3DC;
-    border: solid 2px #165684;
-    color: #165684;
+    border: solid 1px #F2DE9D;
+    color: #777;
     border-radius: 3px;
 }
 
@@ -291,28 +291,28 @@ body.toolkit {
 .eight-frame-side {
     width: 2px;
     position: absolute;
-    background: #165684;
+    background: #D6D4B1;
     z-index: 1000;
     display: none;
 }
 
 .eight-frame-bottom {
     height: 2px;
-    background: #165684;
+    background: #D6D4B1;
     position: absolute;
     display: none;
 }
 
 .eight-frame-title {
     height: 30px;
-    border: solid 2px #165684;
+    border: solid 2px #D6D4B1;
     position: absolute;
     background: #F4F3DC;
     z-index: 1000;
     text-align: center;
     text-transform: uppercase;
     line-height: 30px;
-    color: #165684;
+    color: #777;
     font-weight: bold;
     display: none;
     overflow-y: hidden;
@@ -327,29 +327,29 @@ body.toolkit {
 }
 
 .add-item {
-    border: 2px solid #165684;
+    border: 2px solid #D6D4B1;
     background: #F4F3DC none repeat scroll 0 0;
     border-radius: 2px;
     display: none;
     font-weight: bold;
     padding: 4px 8px;
     z-index: 100;
-    color: #165684;
+    color: #777;
     clear: both;
     font-weight: normal;
     margin: 10px;
 }
 
 .add-item.add-item-static {
-    border-color: #165684;
+    border-color: #D6D4B1;
     background: #C4FFC9 none repeat scroll 0 0;
 }
 
 .toolkit .eight-block-decorator .eight-ui-button {
     background: #f4f3dc none repeat scroll 0 0;
-    border: 2px solid #165684;
+    border: 1px solid #F2DE9D;
     padding: 2px 4px;
-    color: #165684;
+    color: #777;
     border-radius: 3px;
     line-height: 1em;
 }
