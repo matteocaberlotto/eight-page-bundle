@@ -10,6 +10,8 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
 {
     protected $seopage;
 
+    protected $counters = array();
+
     protected $container;
 
     public function setContainer(ContainerInterface $container = null)
@@ -66,7 +68,21 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
             new \Twig_SimpleFunction('get_widget', array($this, 'getWidget')),
             new \Twig_SimpleFunction('get_page', array($this, 'findPage')),
             new \Twig_SimpleFunction('get_breadcrumbs', array($this, 'getBreadcrumbs')),
+            new \Twig_SimpleFunction('current_index', array($this, 'currentIndex')),
         );
+    }
+
+    public function currentIndex($label, $increment = true)
+    {
+        if (!isset($this->counters[$label])) {
+            $this->counters[$label] = 0;
+        }
+
+        if ($increment) {
+            $this->counters[$label]++;
+        }
+
+        return $this->counters[$label];
     }
 
     public function getFilters()
