@@ -67,7 +67,7 @@ body.toolkit {
     z-index: 1000;
     opacity: 0.2;
     background: #F4F3DC;
-    border: solid 1px #F2DE9D;
+    border: solid 1px #D6D4B1;
     color: #777;
     border-radius: 3px;
 }
@@ -79,7 +79,7 @@ body.toolkit {
     z-index: 1000;
     opacity: 0.2;
     background: #F4F3DC;
-    border: solid 1px #F2DE9D;
+    border: solid 1px #D6D4B1;
     color: #777;
     border-radius: 3px;
 }
@@ -347,7 +347,7 @@ body.toolkit {
 
 .toolkit .eight-block-decorator .eight-ui-button {
     background: #f4f3dc none repeat scroll 0 0;
-    border: 1px solid #F2DE9D;
+    border: 2px solid #D6D4B1;
     padding: 2px 4px;
     color: #777;
     border-radius: 3px;
