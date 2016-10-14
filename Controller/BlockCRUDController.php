@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Eight\PageBundle\Entity\Content;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BlockCRUDController extends CRUDController
 {
