@@ -64,7 +64,7 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
             new \Twig_SimpleFunction('eight_body_class', array($this, 'bodyClass')),
             new \Twig_SimpleFunction('is_host', array($this, 'isHost')),
             new \Twig_SimpleFunction('is_route', array($this, 'isRoute')),
-            new \Twig_SimpleFunction('if_route', array($this, 'showWhenRouteMatch')),
+            new \Twig_SimpleFunction('if_route', array($this, 'showWhenRouteMatch'), array('is_safe' => array('html'))),
             new \Twig_SimpleFunction('get_widget', array($this, 'getWidget')),
             new \Twig_SimpleFunction('get_page', array($this, 'findPage')),
             new \Twig_SimpleFunction('get_breadcrumbs', array($this, 'getBreadcrumbs')),
