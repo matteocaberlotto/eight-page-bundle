@@ -13,11 +13,12 @@ class Choices extends AbstractVariable
     {
         $builder
             ->add($name, 'choice', array(
-                'required' => false,
+                'required' => $config->has('required') ? $config->get('required') : false,
                 'data' => $variable ? ($variable->getContent() ? $this->getValue($variable, $config) : null) : null,
                 'choices' => $config->get('choices'),
                 'expanded' => $config->has('expanded') ? $config->get('expanded') : null,
                 'multiple' => $config->has('multiple') ? $config->get('multiple') : null,
+                'empty_data' => $config->has('empty_data') ? $config->get('empty_data') : null,
                 'attr' => array(
                     'class' => $config->get('multiple') ? 'form-group' : 'form-control',
                     ),
