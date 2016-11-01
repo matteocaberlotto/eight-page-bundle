@@ -3,6 +3,7 @@
 namespace Eight\PageBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Eight\PageBundle\Model\PageInterface;
 
 /**
  * BlockRepository
@@ -12,17 +13,31 @@ use Doctrine\ORM\EntityRepository;
  */
 class BlockRepository extends EntityRepository
 {
-    public function getNextPosition($subject, $id, $slot_label = 'default')
+    public function getNextPosition($parent, $id, $slot_label = 'default')
     {
         $q = $this->createQueryBuilder('b');
 
         $q
             ->select('b.seq')
             ->where('b.type = :type')
+            ;
+
+        if ($parent instanceof PageInterface) {
+            $q
+                ->andWhere('b.page = :parent')
+                ;
+        } else {
+            $q
+                ->andWhere('b.block = :parent')
+                ;
+        }
+
+        $q
             ->orderBy('b.seq', 'DESC')
             ->setMaxResults(1)
             ->setParameters(array(
-                'type' => $slot_label
+                'type' => $slot_label,
+                'parent' => $parent,
                 ))
             ;
 

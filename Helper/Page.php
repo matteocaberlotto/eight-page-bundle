@@ -44,7 +44,7 @@ class Page
                     break;
             }
 
-            $nextSeq = $this->container->get('eight.blocks')->getNextPosition($subject, $id, $slot_label);
+            $nextSeq = $this->container->get('eight.blocks')->getNextPosition($parent, $id, $slot_label);
         }
 
 
