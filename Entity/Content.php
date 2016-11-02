@@ -273,15 +273,16 @@ class Content implements ContentInterface
 
         // we use the original file name here but you should
         // sanitize it at least to avoid any security issues
+        $filename = md5(uniqid() . mt_rand(0, 10000)) . "." . $this->getImagePath()->getClientOriginalExtension();
 
         // move takes the target directory and target filename as params
         $this->getImagePath()->move(
             $this->getUploadPath($config),
-            $this->getImagePath()->getClientOriginalName()
+            $filename
         );
 
         // set the path property to the filename where you've saved the file
-        $this->content = self::CMS_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $config->get('folder') . DIRECTORY_SEPARATOR . $this->getImagePath()->getClientOriginalName();
+        $this->content = self::CMS_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $config->get('folder') . DIRECTORY_SEPARATOR . $filename;
 
         // clean up the file property as you won't need it anymore
         $this->setImagePath(null);
