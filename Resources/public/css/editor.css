@@ -14,16 +14,20 @@ body.toolkit {
     color: #165684;
     display: inline-block;
     font-size: 16px;
-    margin: 10px;
+    margin: 0 0.3%;
     padding: 10px;
     text-align: center;
-    text-transform: uppercase;
-    width: 22%;
+    width: 24%;
+    height: 80px;
 }
 
 #add-block-modal .single-block-button:hover {
     color: #FFFFFF;
     background: #333333;
+}
+
+#add-block-modal .single-block-button:hover .widget-icon {
+    color: #333;
 }
 
 #add-block-modal .single-block-button.selected {
@@ -32,12 +36,23 @@ body.toolkit {
 }
 
 #add-block-modal .single-block-button .widget-icon {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid;
+    border-radius: 2px;
+    float: left;
     font-size: 52px;
+    padding: 2px;
+    text-align: center;
+    width: 35%;
 }
 
 #add-block-modal .single-block-button .widget-label {
-    display: block;
+    float: left;
+    font-size: 14px;
+    line-height: 1em;
     margin-top: 6px;
+    padding-left: 4px;
+    width: 65%;
 }
 
 .ui-sortable-helper {
