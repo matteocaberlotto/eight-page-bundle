@@ -1,0 +1,5 @@
+<td class="sonata-ba-list-field sonata-ba-list-field-{{ field_description.type }}" objectId="{{ admin.id(object) }}">
+    {% if object.content is not null %}
+        {{ object.content.path }}
+    {% endif %}
+</td>
