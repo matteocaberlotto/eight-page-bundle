@@ -336,10 +336,10 @@ var Editor = (function () {
 
                 if (variables['is_static']) {
                     var class_name = "add-item add-item-static";
-                    var html_content = ' STATIC (pos: ' + variables['slot-label'] + ')';
+                    var html_content = ' STATIC (' + variables['slot-label'] + ')';
                 } else {
                     var class_name = "add-item";
-                    var html_content = ' ' + label + ' (pos: ' + variables['slot-label'] + ')';
+                    var html_content = ' ' + label + ' (' + variables['slot-label'] + ')';
                 }
 
                 $('<a/>', {

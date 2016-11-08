@@ -188,6 +188,11 @@ body.toolkit {
     display: block;
 }
 
+.toolkit a.add-item:after,
+.toolkit a.add-item:before {
+    content: '' !important;
+}
+
 .toolkit .eight-block-decorator {
     min-height: 40px;
 }
@@ -340,7 +345,7 @@ body.toolkit {
 }
 
 .add-item {
-    border: 2px solid #D6D4B1;
+    border: 2px solid #D6D4B1 !important;
     background: #F4F3DC none repeat scroll 0 0;
     border-radius: 2px;
     display: none;
@@ -354,8 +359,8 @@ body.toolkit {
 }
 
 .add-item.add-item-static {
-    border-color: #D6D4B1;
-    background: #C4FFC9 none repeat scroll 0 0;
+    border-color: #D6D4B1 !important;
+    background: #C4FFC9 none repeat scroll 0 0 !important;
 }
 
 .toolkit .eight-block-decorator .eight-ui-button {
