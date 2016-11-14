@@ -348,7 +348,7 @@ body.toolkit {
     border: 2px solid #D6D4B1 !important;
     background: #F4F3DC none repeat scroll 0 0;
     border-radius: 2px;
-    display: none;
+    display: none !important;
     font-weight: bold;
     padding: 4px 8px;
     z-index: 100;
@@ -403,7 +403,7 @@ body.toolkit {
 }
 
 .toolkit .add-item {
-    display: block;
+    display: block !important;
 }
 
 .toolkit .eight-list-decorator {
