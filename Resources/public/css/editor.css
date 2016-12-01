@@ -8,16 +8,15 @@ body.toolkit {
 }
 
 #add-block-modal .single-block-button {
-    background: #f4f3dc none repeat scroll 0 0;
-    border: 3px solid #165684;
-    border-radius: 3px;
+    background: #CCDAE5 none repeat scroll 0 0;
+    border-radius: 2px;
     color: #165684;
     display: inline-block;
     font-size: 16px;
     margin: 0 0.3%;
     text-align: center;
     width: 24%;
-    height: 64px;
+    padding: 4px;
 }
 
 #add-block-modal .single-block-button:hover {
@@ -36,7 +35,6 @@ body.toolkit {
 
 #add-block-modal .single-block-button .widget-icon {
     background: #fff none repeat scroll 0 0;
-    border: 1px solid;
     float: left;
     font-size: 52px;
     padding: 2px;
