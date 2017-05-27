@@ -15,6 +15,7 @@ class BlockAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->add('page')
             ->add('type')
             ->add('layout')
         ;
