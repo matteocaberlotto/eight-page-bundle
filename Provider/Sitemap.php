@@ -34,7 +34,7 @@ class Sitemap
 
             $return []= array(
                 'loc' => substr($page->getRoute()->getPath(), 1),
-                'lastmod' => $page->getUpdated()->format('U'),
+                'lastmod' => $page->getUpdated(),
                 'changefreq' => 'monthly',
                 'priority' => $priority
             );
