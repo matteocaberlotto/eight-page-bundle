@@ -13,8 +13,6 @@ class Sitemap
 
     public function provide()
     {
-        $lastMod = $this->container->getParameter('last_modified');
-
         $pages = array();
 
         $locales = $this->container->getParameter('eight_page.locales');
@@ -36,7 +34,7 @@ class Sitemap
 
             $return []= array(
                 'loc' => substr($page->getRoute()->getPath(), 1),
-                'lastmod' => $lastMod,
+                'lastmod' => $page->getUpdated()->format('U'),
                 'changefreq' => 'monthly',
                 'priority' => $priority
             );

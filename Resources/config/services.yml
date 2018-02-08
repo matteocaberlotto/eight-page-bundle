@@ -30,6 +30,11 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
 
+    eight.sitemap:
+        class: Eight\PageBundle\Provider\Sitemap
+        arguments: ['@service_container']
+
+
     eight.page.seo:
         class: Eight\PageBundle\Seo\SeoPage
         arguments: [%eight_page.seo_title%, %eight_page.seo_description%]
