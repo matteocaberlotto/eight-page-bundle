@@ -4,26 +4,23 @@ namespace Eight\PageBundle\Widget;
 
 use Eight\PageBundle\Variable\Config\Config;
 
-class Text extends AbstractWidget
+class H1 extends AbstractWidget
 {
     public function getVars()
     {
         return array(
-            'id',
             'html_classes',
-            'text' => new Config(array(
-                'type' => 'text'
-                ))
+            'text',
             );
     }
 
     public function getLayout()
     {
-        return 'EightPageBundle:Widget:text.html.twig';
+        return 'EightPageBundle:Widget:h1.html.twig';
     }
 
     public function getName()
     {
-        return 'text';
+        return 'h1';
     }
 }

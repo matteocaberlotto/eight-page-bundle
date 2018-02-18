@@ -5,6 +5,11 @@ services:
         tags:
             - { name: eight_page.widget }
 
+    h1.widget:
+        class: Eight\PageBundle\Widget\H1
+        tags:
+            - { name: eight_page.widget }
+
     label.widget:
         class: Eight\PageBundle\Widget\Label
         tags:

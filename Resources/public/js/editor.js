@@ -342,13 +342,19 @@ var Editor = (function () {
                     var html_content = ' ' + label + ' (' + variables['slot-label'] + ')';
                 }
 
-                $('<a/>', {
+                var addNewItem = $('<a/>', {
                         "href": "javascript:;",
                         "class": class_name,
                         "html": '<span class="fa fa-plus"></span>' + html_content
                     })
-                    .insertAfter(parent)
                     ;
+
+                addNewItem.css({
+                    bottom: 0,
+                    left: parent.offset().left
+                });
+
+                addNewItem.insertAfter(parent);
 
                 $el.remove();
             });
