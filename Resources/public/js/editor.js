@@ -345,7 +345,7 @@ var Editor = (function () {
                 $('<a/>', {
                         "href": "javascript:;",
                         "class": class_name,
-                        "html": '<span class="glyphicon glyphicon-plus"></span>' + html_content
+                        "html": '<span class="fa fa-plus"></span>' + html_content
                     })
                     .insertAfter(parent)
                     ;

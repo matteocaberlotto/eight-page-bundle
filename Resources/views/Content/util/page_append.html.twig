@@ -1,10 +1,10 @@
 <div class="page-toolkit">
     <a title="Show/Hide widget editor" id="btn-edit-layout-mode" class="btn btn-primary" onclick="$('body').toggleClass('toolkit');" href="javascript:;">
-        <span class="glyphicon glyphicon-wrench"></span>
+        <span class="fa fa-wrench"></span>
     </a>
 
     <a data-toggle="tooltip" title="Back to pages listing" id="back-to-list-button" class="btn btn-primary" href="{{ path('admin_eight_page_page_list') }}">
-        <span class="glyphicon glyphicon-backward"></span>
+        <span class="fa fa-backward"></span>
     </a>
 
     <span id="page-specs">{{ page|raw }} || path: {{ page.route.path }} || controller: {{ page.route.controller }} || layout: {{ page.layout ? page.layout : 'default' }}</span>
@@ -40,23 +40,23 @@
 <div>
     <div class="eight-toolbar eight-frame-element">
         <a title="Edit block" class="eight-ui-button btn-edit-variable" href="javascript:;" data-toggle="tooltip">
-            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="fa fa-pencil"></span>
         </a>
 
         <a title="Sort block" href="javascript:;" class="eight-ui-button btn-sort-block" data-toggle="tooltip">
-            <span class="glyphicon glyphicon-resize-vertical"></span>
+            <span class="fa fa-resize-vertical"></span>
         </a>
 
         <a title="Delete block" class="eight-ui-button btn-remove-block" href="javascript:;" data-toggle="tooltip">
-            <span class="glyphicon glyphicon-remove"></span>
+            <span class="fa fa-remove"></span>
         </a>
 
         <a title="Disable block" class="eight-ui-button btn-disable-block" href="javascript:;" data-toggle="tooltip">
-            <span class="glyphicon glyphicon-ban-circle"></span>
+            <span class="fa fa-ban-circle"></span>
         </a>
 
         <a title="Enable block" class="eight-ui-button btn-enable-block" href="javascript:;" data-toggle="tooltip">
-            <span class="glyphicon glyphicon-eye-open"></span>
+            <span class="fa fa-eye-open"></span>
         </a>
     </div>
 </div>

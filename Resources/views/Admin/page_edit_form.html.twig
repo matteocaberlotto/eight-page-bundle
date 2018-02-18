@@ -15,13 +15,13 @@
                     <div class="tabbable box box-success">
                         <ul class="nav nav-tabs">
                             <li {% if not app.request.get('target') %}class="active"{% endif %}>
-                                <a data-toggle="tab" href="#tabLayout"><i class="glyphicon glyphicon-th-list"></i> INFO</a>
+                                <a data-toggle="tab" href="#tabLayout"><i class="fa fa-th-list"></i> INFO</a>
                             </li>
                             <li {% if app.request.get('target') == 'meta' %}class="active"{% endif %}>
-                                <a data-toggle="tab" href="#tabMeta"><i class="glyphicon glyphicon-tag"></i> META</a>
+                                <a data-toggle="tab" href="#tabMeta"><i class="fa fa-tag"></i> META</a>
                             </li>
                             <li {% if app.request.get('target') == 'preview' %}class="active"{% endif %}>
-                                <a data-toggle="tab" href="#tabPreview"><i class="glyphicon glyphicon-eye-open"></i> LAYOUT</a>
+                                <a data-toggle="tab" href="#tabPreview"><i class="fa fa-eye-open"></i> LAYOUT</a>
                             </li>
                         </ul>
 
@@ -124,13 +124,13 @@
                             <div class="tab-pane {% if app.request.get('target') == 'preview' %}active{% endif %}" id="tabPreview">
                                 {% if object.id %}
                                     <a href="javascript:;" onclick="$('.layout-iframe-container').toggleClass('fullscreen')">
-                                        <span class="glyphicon glyphicon-fullscreen"></span>
+                                        <span class="fa fa-fullscreen"></span>
                                         FULLSCREEN
                                     </a>
                                     <div class="layout-iframe-container">
                                         <iframe style="border:none;width:100%;height:100%;" src="{{ path('admin_eight_page_page_layout', { id: object.id }) }}?random={{ random(100000) }}"></iframe>
                                         <a title="Close fullscreen" class="btn btn-primary btn-close-fullscreen" style="position:fixed;top:60px;left:10px;z-index:2000000;border:solid 1px #FFFFFF;" href="javascript:;" onclick="$('.layout-iframe-container').toggleClass('fullscreen')">
-                                            <span class="glyphicon glyphicon-fullscreen"></span>
+                                            <span class="fa fa-fullscreen"></span>
                                         </a>
                                     </div>
                                 {% else %}
