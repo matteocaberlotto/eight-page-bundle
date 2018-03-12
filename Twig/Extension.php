@@ -203,6 +203,12 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
 
     public function getLocale()
     {
+        $page = $this->getPage();
+
+        if ($page && $page->getLocale()) {
+            return $page->getLocale();
+        }
+
         $locale = $this->getRequest()->get('_locale');
 
         if (empty($locale)) {
