@@ -15,7 +15,7 @@ body.toolkit {
     font-size: 16px;
     margin: 0 0.3%;
     text-align: center;
-    width: 24%;
+    width: 32%;
     padding: 4px;
 }
 
@@ -36,7 +36,7 @@ body.toolkit {
 #add-block-modal .single-block-button .widget-icon {
     background: #fff none repeat scroll 0 0;
     float: left;
-    font-size: 52px;
+    font-size: 34px;
     padding: 2px;
     text-align: center;
     width: 35%;
