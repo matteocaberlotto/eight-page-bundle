@@ -453,8 +453,8 @@ var Editor = (function () {
         selectIconWindow: function (element) {
             var selectionWindow = $(element).parent().find('.icon-selection-list');
 
-            if (!selectionWindow.hasClass('hide')) {
-                selectionWindow.addClass('hide');
+            if (!selectionWindow.hasClass('d-none')) {
+                selectionWindow.addClass('d-none');
                 return;
             }
 
@@ -463,7 +463,7 @@ var Editor = (function () {
                 left: $(element).position().left + 160,
             });
 
-            selectionWindow.removeClass('hide');
+            selectionWindow.removeClass('d-none');
         },
 
         selectIcon: function (element) {
@@ -477,13 +477,13 @@ var Editor = (function () {
 
             var selectionWindow = $(element).parents('.select-icon-container').find('.icon-selection-list');
 
-            selectionWindow.addClass('hide');
+            selectionWindow.addClass('d-none');
         },
 
         closeIconWindow: function (element) {
             var selectionWindow = $(element).parents('.select-icon-container').find('.icon-selection-list');
 
-            selectionWindow.addClass('hide');
+            selectionWindow.addClass('d-none');
         }
     };
 
