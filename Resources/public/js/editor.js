@@ -357,11 +357,6 @@ var Editor = (function () {
                     })
                     ;
 
-                addNewItem.css({
-                    bottom: 0,
-                    left: parent.offset().left
-                });
-
                 addNewItem.insertAfter(parent);
 
                 $el.remove();
