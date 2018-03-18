@@ -1,7 +1,7 @@
 # EightPageBundle
 
 
-### This is a beta version but all the twig API are in a quite stable state.
+### This is a beta version but all the twig API are in a stable state.
 
 Supports Symfony 2+ up to 3.3 (symfony 4.0 is in roadmap). Just be sure to select the proper version. Sorry for the mess in the tagging/versioning, a cleanup is upcoming. The Symfony 3.3 branch is ```feature-3.x```.
 
@@ -85,7 +85,50 @@ Supports Symfony 2+ up to 3.3 (symfony 4.0 is in roadmap). Just be sure to selec
 To create a page you need at least 1 layout and 1 block. A layout is simply a simfony page with at least 1 call to ```render_page_content()``` which is the twig function that dinamically appends blocks.
 You can have multiple insertion points, just be sure to name each one by passing the label as parameter.
 EG: ```render_page_content('head')```.
-Once the insertion point is present, in the admin section you can append one of the widgets defined via configuration. By default no widget is added, but you can use some defaults by simply adding this line to config.yml:
+Once the insertion point is present, in the admin section you can append one of the widgets defined via configuration.
+
+An example layout could look like this:
+```twig
+<html>
+    <head>
+        {{ render_encoding() }}
+
+        {{ render_metadatas() }}
+
+        <title>
+            {% block title %}
+                {% if page is not null %}{{ page.title }}{% else %}My website{% endif %}
+            {% endblock %}
+        </title>
+
+        {{ eight_stylesheets() }}
+    </head>
+    <body>
+        <header id="head">
+            {{ render_static_blocks('head') }}
+        </header>
+
+        <div class="container" id="main-content">
+            {{ render_page_content('default') }}
+        </div>
+
+        <footer class="footer">
+            {{ render_static_blocks('footer') }}
+        </footer>
+
+        {{ eight_javascripts() }}
+    </body>
+</html>
+```
+
+You can use ```render_metadatas()``` to dinamically render metatags edited in the admin section.
+```eight_stylesheets()``` to dinamically append stylesheet assets to the page (just read on to know how to).
+```ender_page_content()``` to dinamically append html editable blocks to the page.
+```render_static_blocks()``` to dinamically append html editable blocks to all of the pages where this slot is rendered.
+```eight_javascripts()``` to dinamically append javascript assets.
+
+
+By default no widget is added, but you can use some defaults by simply adding this line to config.yml:
 ```yml
     - { resource: '@EightPageBundle/Resources/config/widgets.yml' }
 ```
@@ -158,14 +201,23 @@ Whenever you want to add 1 block statically to all pages (or better, all pages s
 
 The only requirement (in order to make the jquery ui sorting work in layout editing) is that every widgets template must have a single html tag as parent (usually a div or a span).
 
-Sometimes you may need to adjust little css in administration in order to handle more complex layout editing situations. The editor adds a lot of custom classes in the admin section you can use to drive your rendering. The "preview" button will remove the editing classes from the page so you can check the page result on the fly. You can also bind your own javascript "plugins" so they will be reloaded on blocks modification, eg:
+Sometimes you may need to adjust little css in administration in order to handle more complex layout editing situations. The editor adds a lot of custom classes in the admin section you can use to drive your rendering. The "preview" button will remove the editing classes from the page so you can check the page result on the fly.
+You can also bind your own javascript "plugins" so they will be reloaded on blocks modification, eg:
 ```js
 Editor.addPlugin(function () {
-    // logic to init your plugin
+    // logic to init your plugin (EG: masonry reset/refresh...)
 });
 ```
 
 Note that everything else works the same as symfony standard so you can mix static contents with CMS ones (just note that the dinamic router of the cms has precedence in case of identical route paths).
+
+
+## More functions
+You can also add js() or css() method to any widget to append assets dynamically. Just return an array of valid assets path.
+
+Use ```i18n_path()``` helper in place of twig ```path()``` function. It does exactly the same but with a little enhancement: you can "search" for a page based on its tagging.
+EG: ```{{ i18n_path('homepage') }}``` will link to a page tagged 'homepage.en' if current route is 'en', 'homepage.it' if current route is 'it' etc... This helper will also link directly to edit mode when editing a page (the link will point to "edit homepage it" instead of the it version of homepage which is quite handy for editors).
+
 
 ## Recommendations
 Try to avoid adding new variables to existing widgets as this could lead to twig errors (though most are handled).
