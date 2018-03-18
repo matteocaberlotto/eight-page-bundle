@@ -404,6 +404,7 @@ body.toolkit {
 
 .toolkit .add-item {
     display: block !important;
+    margin-bottom: 40px;
 }
 
 .toolkit .eight-list-decorator {
