@@ -72,7 +72,15 @@ var Editor = (function () {
 
             $('.eight-page-textarea:not(.eight-rich-editor-bound)')
                 .each(function () {
-                    CKEDITOR.replace($(this).attr('id'));
+
+                    var _curr_id = $(this).attr('id');
+
+                    tinyMCE.init({
+                        selector: '#' + _curr_id,
+                        auto_focus: _curr_id,
+                        theme: 'modern',
+                        plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help'
+                    });
                 })
                 .addClass('eight-rich-editor-bound')
             ;
@@ -486,4 +494,11 @@ var Editor = (function () {
 
 $(function () {
     Editor.init();
+});
+
+// https://stackoverflow.com/questions/18111582/tinymce-4-links-plugin-modal-in-not-editable
+$(document).on('focusin', function(e) {
+    if ($(e.target).closest(".mce-window").length) {
+        e.stopImmediatePropagation();
+    }
 });

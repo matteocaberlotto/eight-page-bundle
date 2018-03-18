@@ -390,7 +390,7 @@ class Page
 
         if ($this->editMode()) {
             $js []= '/bundles/eightpage/js/jquery-ui.js';
-            $js []= '/bundles/eightpage/js/ckeditor/ckeditor.js';
+            $js []= '/bundles/eightpage/js/tinymce/tinymce.min.js';
         }
 
         $js = $this->appendAssets($js, 'js', $this->container->getParameter('eight_page.js'));
