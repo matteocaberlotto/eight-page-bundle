@@ -194,6 +194,7 @@ In order to create a widget you must feature all the abstract methods, a unique 
 - create widget class
 - create widget layout
 - register wiget class with tagging
+
 that's all.
 
 
