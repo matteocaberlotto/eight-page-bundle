@@ -4,6 +4,7 @@ namespace Eight\PageBundle\Helper;
 
 use Eight\PageBundle\Model\PageInterface;
 use Eight\PageBundle\Entity\Block;
+use Eight\PageBundle\Entity\Content;
 use Eight\PageBundle\Entity\Page as PageEntity;
 
 
@@ -83,6 +84,7 @@ class Page
      */
     public function duplicatePage($page)
     {
+        // clone page properties first
         $cloned = new PageEntity();
 
         $cloned->setTitle($page->getTitle());
@@ -111,13 +113,69 @@ class Page
         $route_clone->setPath($route->getPath() . '/cloned');
         $route_clone->setNameFromPath();
 
-        $route->setContent($cloned);
+        $route_clone->setContent($cloned);
         $cloned->setRoute($route_clone);
 
         $manager->persist($route_clone);
 
         $manager->flush();
 
+        // clone page content
+        if (count($page->getBlocks())) {
+            foreach ($page->getBlocks() as $block) {
+                $this->cloneRecursive($cloned, $block);
+            }
+        }
+
         return $cloned;
+    }
+
+    public function cloneRecursive($parent, $source_block)
+    {
+        $manager = $this->container->get('doctrine')->getManager();
+
+        $duplicate_block = new Block();
+
+        $duplicate_block->setName($source_block->getName());
+        $duplicate_block->setType($source_block->getType());
+        $duplicate_block->setStatic($source_block->getStatic());
+        $duplicate_block->setSeq($source_block->getSeq());
+        $duplicate_block->setLayout($source_block->getLayout());
+        $duplicate_block->setEnabled($source_block->getEnabled());
+
+        foreach ($source_block->getContents() as $content) {
+            $duplicate_content = new Content();
+            $duplicate_content->setName($content->getName());
+            $duplicate_content->setType($content->getType());
+            $duplicate_content->setContent($content->getContent());
+            $duplicate_content->setBlock($duplicate_block);
+
+            $manager->persist($duplicate_content);
+        }
+
+        $subject = get_class($parent);
+
+        switch ($subject) {
+            case 'Eight\PageBundle\Entity\Page':
+                $duplicate_block->setPage($parent);
+                break;
+            case 'Eight\PageBundle\Entity\Block':
+                $duplicate_block->setBlock($parent);
+                break;
+            default:
+                throw new \Exception("Class {$subject} not supported");
+                break;
+        }
+
+        $manager->persist($duplicate_block);
+
+        $manager->flush();
+
+        // if source block has children, append them to clone
+        if (count($source_block->getBlocks())) {
+            foreach ($source_block->getBlocks() as $child) {
+                $this->cloneRecursive($duplicate_block, $child);
+            }
+        }
     }
 }
