@@ -151,7 +151,34 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
     }
 
     public function isRoute($path) {
-        return ($this->findPage($path) == $this->getPage());
+        if (!$this->getPage()) {
+            $route = $this->getRequest()->get('_route');
+
+            if (is_array($path)) {
+                foreach ($path as $p) {
+                    if ($this->findPage($p)->getRoute()->getName() == $route) {
+                        return true;
+                    }
+                }
+
+                return false;
+            } else {
+                return ($this->findPage($path)->getRoute()->getPath() == $route);
+            }
+        }
+
+        if (is_array($path)) {
+            foreach ($path as $p) {
+                if ($this->findPage($p) == $this->getPage()) {
+                    return true;
+                }
+            }
+
+            return false;
+        } else {
+            return ($this->findPage($path) == $this->getPage());
+        }
+
     }
 
     public function isHost($test)
