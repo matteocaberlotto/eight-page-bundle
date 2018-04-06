@@ -156,14 +156,14 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
 
             if (is_array($path)) {
                 foreach ($path as $p) {
-                    if ($this->findPage($p)->getRoute()->getName() == $route) {
+                    if ($this->findPage($p) && $this->findPage($p)->getRoute()->getName() == $route) {
                         return true;
                     }
                 }
 
                 return false;
             } else {
-                return ($this->findPage($path)->getRoute()->getPath() == $route);
+                return ($this->findPage($path) && $this->findPage($path)->getRoute()->getPath() == $route);
             }
         }
 
