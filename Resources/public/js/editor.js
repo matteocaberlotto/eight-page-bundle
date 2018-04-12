@@ -286,6 +286,7 @@ var Editor = (function () {
                 // cycle sibling till the end marker is found
                 while (!next.hasClass('eight-marker-end')) {
 
+                    // do not alter <script> tags
                     if (next.prop("tagName") !== 'SCRIPT') {
 
                         var variables = $el.data('add-variables');
@@ -358,6 +359,13 @@ var Editor = (function () {
                     ;
 
                 addNewItem.insertAfter(parent);
+
+                setTimeout(function () {
+                    addNewItem.css({
+                        top: parent.position().top + parent.outerHeight(),
+                        left: parent.position().left
+                    });
+                }, 300);
 
                 $el.remove();
             });
