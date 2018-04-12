@@ -77,10 +77,10 @@ body.toolkit {
     top: 10px;
     z-index: 1000;
     opacity: 0.2;
-    background: #F4F3DC;
-    border: solid 1px #D6D4B1;
-    color: #777;
-    border-radius: 3px;
+    background: #3791d6;
+    color: #fff;
+    border-radius: 2px;
+    font-size: 18px;
 }
 
 #back-to-list-button {
@@ -89,10 +89,10 @@ body.toolkit {
     top: 10px;
     z-index: 1000;
     opacity: 0.2;
-    background: #F4F3DC;
-    border: solid 1px #D6D4B1;
-    color: #777;
-    border-radius: 3px;
+    background: #3791d6;
+    color: #fff;
+    border-radius: 2px;
+    font-size: 18px;
 }
 
 .toolkit #back-to-list-button,
@@ -103,10 +103,9 @@ body.toolkit {
 #back-to-list-button:hover,
 #btn-edit-layout-mode:hover {
     opacity: 1;
-    background-color: #BBBBBB;
+    background-color: #DDDDDD;
     text-decoration: none;
     color: #333333;
-    border-color: #333;
 }
 
 #page-specs {
@@ -199,21 +198,6 @@ body.toolkit {
     min-height: 40px;
 }
 
-.add-item:hover,
-.add-item:focus {
-    background-color: #BBBBBB;
-    text-decoration: none;
-    color: #333333;
-    border-color: #333;
-}
-
-.add-item.add-item-static:hover {
-    background-color: #BBBBBB;
-    text-decoration: none;
-    color: #333333;
-    border-color: #333;
-}
-
 .toolkit .block-wrapper:hover > .btn-remove-block,
 .toolkit .block-wrapper:hover > .btn-edit-variable,
 .toolkit .block-wrapper:hover > .btn-edit-block-layout,
@@ -226,28 +210,28 @@ body.toolkit {
 .btn-edit-variable {
     position: absolute;
     top: 0;
-    right: 87px;
+    right: 103px;
     z-index: 1000;
 }
 
 .btn-sort-block {
     position: absolute;
     top: 0;
-    right: 60px;
+    right: 69px;
     z-index: 1000;
 }
 
 .btn-disable-block {
     position: absolute;
     top: 0;
-    right: 30px;
+    right: 35px;
     z-index: 1000;
 }
 
 .btn-enable-block {
     position: absolute;
     top: 0;
-    right: 30px;
+    right: 35px;
     z-index: 1000;
     background: #FFBBBB;
 }
@@ -309,37 +293,38 @@ body.toolkit {
 }
 
 .eight-frame-side {
-    width: 2px;
+    width: 1px;
     position: absolute;
-    background: #D6D4B1;
+    background: #3791d6;
     z-index: 1000;
     display: none;
 }
 
 .eight-frame-bottom {
-    height: 2px;
-    background: #D6D4B1;
+    height: 1px;
+    background: #3791d6;
     position: absolute;
     display: none;
 }
 
 .eight-frame-title {
     height: 30px;
-    border: solid 2px #D6D4B1;
+    /*border: solid 1px #3791d6;*/
+    /*border-bottom: solid 1px #3791d6;*/
     position: absolute;
-    background: #F4F3DC;
+    background: #3791d6;
     z-index: 1000;
     text-align: center;
     text-transform: uppercase;
     line-height: 30px;
-    color: #777;
+    color: #ffffff;
     font-weight: bold;
     display: none;
     overflow-y: hidden;
 }
 
 .eight-frame-title.eight-static-frame-title {
-    background: #C4FFC9;
+    background: #29a033;
 }
 
 .eight-block-decorator {
@@ -348,22 +333,37 @@ body.toolkit {
 
 .add-item {
     position: absolute;
-    border: 2px solid #D6D4B1 !important;
-    background: #F4F3DC none repeat scroll 0 0;
+    border: 1px solid #3791d6 !important;
+    background: #c9e7ff none repeat scroll 0 0;
     border-radius: 2px;
     display: none !important;
     font-weight: bold;
     padding: 4px 8px;
     z-index: 100;
-    color: #777;
+    color: #005282;
     clear: both;
     font-weight: normal;
     margin: 10px;
 }
 
+.add-item:hover,
+.add-item:focus {
+    background-color: #3791d6 !important;
+    text-decoration: none;
+    color: #ffffff;
+    border-color: #333;
+}
+
 .add-item.add-item-static {
-    border-color: #D6D4B1 !important;
+    border-color: #29a033 !important;
     background: #C4FFC9 none repeat scroll 0 0 !important;
+    color: #29a033;
+}
+
+.add-item.add-item-static:hover {
+    background-color: #29a033 !important;
+    text-decoration: none;
+    color: #ffffff;
 }
 
 .toolkit .eight-block-decorator .eight-ui-button {
@@ -384,8 +384,7 @@ body.toolkit {
 .eight-block-decorator .eight-ui-button:hover {
     background-color: #BBBBBB;
     text-decoration: none;
-    color: #333333;
-    border-color: #333;
+    color: #333;
 }
 
 .eight-toolbar {
