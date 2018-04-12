@@ -286,6 +286,7 @@ var Editor = (function () {
                 // cycle sibling till the end marker is found
                 while (!next.hasClass('eight-marker-end')) {
 
+                    // do not alter <script> tags
                     if (next.prop("tagName") !== 'SCRIPT') {
 
                         var variables = $el.data('add-variables');
@@ -350,13 +351,21 @@ var Editor = (function () {
                     var html_content = ' ' + label + ' (' + variables['slot-label'] + ')';
                 }
 
-                $('<a/>', {
+                var addNewItem = $('<a/>', {
                         "href": "javascript:;",
                         "class": class_name,
-                        "html": '<span class="glyphicon glyphicon-plus"></span>' + html_content
+                        "html": '<span class="fa fa-plus"></span>' + html_content
                     })
-                    .insertAfter(parent)
                     ;
+
+                addNewItem.insertAfter(parent);
+
+                setTimeout(function () {
+                    addNewItem.css({
+                        top: parent.position().top + parent.outerHeight(),
+                        left: parent.position().left
+                    });
+                }, 300);
 
                 $el.remove();
             });
