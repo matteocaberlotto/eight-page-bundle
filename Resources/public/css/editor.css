@@ -5,7 +5,6 @@ html {
 body.toolkit {
     padding: 40px 4px;
     padding-bottom: 40px;
-    position: relative;
 }
 
 body.modal-open {
