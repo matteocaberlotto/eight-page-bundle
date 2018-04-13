@@ -1,6 +1,15 @@
+html {
+    height: 100%;
+}
+
 body.toolkit {
-    /*padding: 40px 4px;*/
+    padding: 40px 4px;
     padding-bottom: 40px;
+    position: relative;
+}
+
+body.modal-open {
+    height: 100%;
 }
 
 .modal-dialog {
