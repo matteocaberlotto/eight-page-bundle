@@ -1,5 +1,5 @@
 body.toolkit {
-    /*padding: 40px 4px;*/
+    padding: 40px 4px;
     padding-bottom: 40px;
 }
 
@@ -84,7 +84,7 @@ body.toolkit {
 }
 
 #back-to-list-button {
-    left: 60px;
+    left: 68px;
     position: fixed;
     top: 10px;
     z-index: 1000;
