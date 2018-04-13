@@ -205,37 +205,37 @@ body.toolkit {
 
 .btn-edit-variable {
     position: absolute;
-    top: 2px;
-    right: 100px;
+    top: 0px;
+    right: 88px;
     z-index: 1000;
 }
 
 .btn-sort-block {
     position: absolute;
-    top: 2px;
-    right: 68px;
+    top: 0px;
+    right: 60px;
     z-index: 1000;
 }
 
 .btn-disable-block {
     position: absolute;
-    top: 2px;
-    right: 35px;
+    top: 0px;
+    right: 30px;
     z-index: 1000;
 }
 
 .btn-enable-block {
     position: absolute;
-    top: 2px;
-    right: 35px;
+    top: 0px;
+    right: 30px;
     z-index: 1000;
     background: #FFBBBB;
 }
 
 .btn-remove-block {
     position: absolute;
-    top: 2px;
-    right: 3px;
+    top: 0px;
+    right: 1px;
     z-index: 1000;
 }
 
@@ -306,21 +306,22 @@ body.toolkit {
 .eight-frame-title {
     height: 30px;
     /*border: solid 1px #3791d6;*/
-    /*border-bottom: solid 1px #3791d6;*/
+    border-bottom: solid 1px #3791d6;
     position: absolute;
-    background: #3791d6;
+    background: #c9e7ff;
     z-index: 1000;
     text-align: center;
     text-transform: uppercase;
     line-height: 30px;
-    color: #ffffff;
+    color: #3791d6;
     font-weight: bold;
     display: none;
     overflow-y: hidden;
 }
 
 .eight-frame-title.eight-static-frame-title {
-    background: #29a033;
+    background: #C4FFC9;
+    color: #29a033;
 }
 
 .eight-block-decorator {
@@ -367,7 +368,6 @@ body.toolkit {
     padding: 6px 8px;
     font-size: 16px;
     color: #ffffff;
-    border-radius: 2px;
     line-height: 1em;
 }
 
