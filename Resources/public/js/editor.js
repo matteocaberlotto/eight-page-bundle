@@ -207,12 +207,18 @@ var Editor = (function () {
 
             var blockContent = $(element).data('editor-content');
 
+            var minWidth = element.outerWidth();
+
+            if (minWidth < 120) {
+                minWidth = 120;
+            }
+
             // header
             $('<div/>', { "class": "eight-frame-title " + (blockContent.static ? 'eight-static-frame-title' : '') + " eight-frame-element eight-frame-element-" + blockContent.id})
                 .css({
                     left: element.offset().left,
                     top: element.offset().top - 30,
-                    width: element.outerWidth()
+                    width: minWidth
                 })
                 .html('<span class="' + element.data('widget-icon') + '"></span> ' + element.data('widget-label') + ' (id:' + blockContent.id + ')')
                 .appendTo('body')
@@ -230,7 +236,7 @@ var Editor = (function () {
             // right
             $('<div/>', { "class": "eight-frame-side eight-frame-element eight-frame-element-" + blockContent.id })
                 .css({
-                    right: $(window).width() - element.offset().left - element.outerWidth(),
+                    right: $(window).width() - element.offset().left - minWidth,
                     top: element.offset().top,
                     height: element.outerHeight()
                 })
@@ -241,7 +247,7 @@ var Editor = (function () {
                 .css({
                     left: element.offset().left,
                     top: element.offset().top + element.outerHeight(),
-                    width: element.outerWidth()
+                    width: minWidth
                 })
                 .appendTo($('body'));
 
