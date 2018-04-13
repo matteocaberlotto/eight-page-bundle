@@ -236,7 +236,8 @@ class Page
         $template = $this->container->getParameter('eight_page.page_append');
 
         return $this->container->get('templating')->render($template, array(
-            'widgets' => $this->get('widget.provider')->all()
+            'update_add_buttons_position' => $this->container->getParameter('eight_page.update_add_buttons_position'),
+            'widgets' => $this->get('widget.provider')->all(),
             ));
     }
 
