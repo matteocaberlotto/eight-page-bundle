@@ -379,6 +379,10 @@ var Editor = (function () {
 
                 $el.remove();
             });
+
+            if (globalUpdateEightAddButtonsPosition) {
+                $('.add-item').css('position', 'absolute');
+            }
         },
 
         updateBlocksOrder: function (container) {
