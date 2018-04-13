@@ -59,5 +59,7 @@ class EightPageExtension extends Extension
         $container->setParameter('eight_page.decorator_block', $config['decorator_block']);
 
         $container->setParameter('eight_page.edit_page_url', $config['edit_page_url']);
+
+        $container->setParameter('eight_page.update_add_buttons_position', $config['update_add_buttons_position']);
     }
 }

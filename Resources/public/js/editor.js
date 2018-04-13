@@ -361,12 +361,14 @@ var Editor = (function () {
 
                 addNewItem.insertAfter(parent);
 
-                setTimeout(function () {
-                    addNewItem.css({
-                        top: parent.position().top + parent.outerHeight(),
-                        left: parent.position().left
-                    });
-                }, 300);
+                if (globalUpdateEightAddButtonsPosition) {
+                    setTimeout(function () {
+                        addNewItem.css({
+                            top: parent.position().top + parent.outerHeight(),
+                            left: parent.position().left
+                        });
+                    }, 300);
+                }
 
                 $el.remove();
             });
