@@ -370,6 +370,7 @@ var Editor = (function () {
                 if (globalUpdateEightAddButtonsPosition) {
                     setTimeout(function () {
                         addNewItem.css({
+                            position: 'absolute',
                             top: parent.position().top + parent.outerHeight(),
                             left: parent.position().left
                         });
