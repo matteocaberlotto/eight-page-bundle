@@ -21,6 +21,7 @@ class Icon extends AbstractVariable
     {
         $builder
             ->add($name, IconChoiceType::class, array(
+                'label' => $config->has('label') ? $config->get('label') : $name,
                 'choices' => $this->getChoices(),
                 ))
             ;

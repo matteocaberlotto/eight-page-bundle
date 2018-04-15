@@ -25,6 +25,7 @@ class Image extends AbstractVariable
     {
         $builder
             ->add($name, 'file', array(
+                'label' => $config->has('label') ? $config->get('label') : $name,
                 'data_class' => null,
                 'required' => false,
                 'attr' => array(

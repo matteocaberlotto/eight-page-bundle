@@ -75,6 +75,7 @@ class Entity extends AbstractVariable
     {
         $builder
             ->add($name, 'entity', array(
+                'label' => $config->has('label') ? $config->get('label') : $name,
                 'class' => $config->get('class'),
                 'placeholder' => 'Choose a model',
                 'required' => false,

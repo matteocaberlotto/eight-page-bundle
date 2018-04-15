@@ -66,6 +66,7 @@ class Collection extends AbstractVariable
     {
         $builder
             ->add($name, null, array(
+                'label' => $config->has('label') ? $config->get('label') : $name,
                 'required' => false,
                 'attr' => array(
                     'class' => 'form-control'

@@ -56,6 +56,7 @@ class CollectionMethod extends AbstractVariable
     {
         $builder
             ->add($name, CollectionMethodType::class, array(
+                'label' => $config->has('label') ? $config->get('label') : $name,
                 'attr' => array(
                     'class' => ''
                 )
