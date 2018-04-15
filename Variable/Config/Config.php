@@ -3,7 +3,8 @@
 namespace Eight\PageBundle\Variable\Config;
 
 /**
- * Wrap configuration array inside convenient class.
+ * This class wraps configuration array of a variable
+ * inside a convenient class.
  */
 class Config implements ConfigInterface
 {

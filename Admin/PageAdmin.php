@@ -47,27 +47,6 @@ class PageAdmin extends AbstractAdmin implements ContainerAwareInterface
                     'sonata_help' => 'Tagging can be used to retrieve pages',
                 ))->addModelTransformer($tagsTransformer)
             )
-            // ->add('blocks', 'sonata_type_collection', array(
-            //     // 'data_class' => 'Eight\PageBundle\Entity\Content',
-            //     'by_reference' => false,
-            //     'type_options' => array(
-            //         'btn_add' => false,
-            //         'btn_catalogue' => false
-            //     )
-            // ), array(
-            //     'edit' => 'inline',
-            //     'inline' => 'table'
-            // ))
-            // ->add('tags', 'sonata_type_collection', array(
-            //     'by_reference' => false,
-            //     'type_options' => array(
-            //         'btn_add' => false,
-            //         'btn_catalogue' => false
-            //     )
-            // ), array(
-            //     'edit' => 'inline',
-            //     'inline' => 'table'
-            // ))
             ->add('title')
         ;
 

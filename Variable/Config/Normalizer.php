@@ -5,6 +5,12 @@ namespace Eight\PageBundle\Variable\Config;
 use Eight\PageBundle\Variable\Config\Config;
 use Eight\PageBundle\Variable\Config\ConfigInterface;
 
+/**
+ * This class is used to "normalize" variables passed from widget
+ * to template.
+ * Simple labels will be converted to database labels with Config class.
+ * Assigned variables are passed as mixed with default value.
+ */
 class Normalizer
 {
     public static function normalize($index, $value)

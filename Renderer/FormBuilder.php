@@ -19,6 +19,9 @@ class FormBuilder
         return $this->container->get('page.renderer')->getPage();
     }
 
+    /**
+     * Builds the form used to edit the widget. All fields are setup according to variable type.
+     */
     public function build($block)
     {
         $widget = $this->container->get('widget.provider')->get($block->getName());
@@ -30,10 +33,16 @@ class FormBuilder
             ->setAction($this->container->get('router')->generate('admin_eight_page_block_update', array('id' => $block->getId(), 'page_id' => $this->getCurrentPage()->getId())))
             ;
 
+        /**
+         * Loop through all variables and append its form field.
+         */
         foreach ($widget->getVars() as $name => $config) {
 
             list($name, $config) = Normalizer::normalize($name, $config);
 
+            /**
+             * Non editable variables (simple values assigned) are ignored.
+             */
             if (!$config->editable()) {
                 continue;
             }
