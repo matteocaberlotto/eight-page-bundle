@@ -224,6 +224,11 @@ class PageAdmin extends AbstractAdmin implements ContainerAwareInterface
                 $route->setLocale($this->getRequestProperty('locale'));
             }
 
+            if (empty($route->getName())) {
+                // set "homepage" name when route name is empty ("/" root path)
+                $route->setName('homepage');
+            }
+
             $page->setRoute($route);
 
             $route->setContent($page);
