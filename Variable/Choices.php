@@ -13,6 +13,7 @@ class Choices extends AbstractVariable
     {
         $builder
             ->add($name, 'choice', array(
+                'label' => $config->has('label') ? $config->get('label') : $name,
                 'required' => $config->has('required') ? $config->get('required') : false,
                 'data' => $variable ? ($variable->getContent() ? $this->getValue($variable, $config) : $this->getDefaultValue($config)) : $this->getDefaultValue($config),
                 'choices' => $config->get('choices'),

@@ -13,6 +13,7 @@ class Checkbox extends AbstractVariable
     {
         $builder
             ->add($name, 'checkbox', array(
+                'label' => $config->has('label') ? $config->get('label') : $name,
                 'data' => $variable ? ($variable->getContent() ? true : false) : false,
                 'required' => false,
                 ))

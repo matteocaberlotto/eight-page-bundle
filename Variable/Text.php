@@ -20,6 +20,7 @@ class Text extends AbstractVariable
 
         $builder
             ->add($name, 'textarea', array(
+                'label' => $config->has('label') ? $config->get('label') : $name,
                 'required' => false,
                 'attr' => array(
                     'class' => 'form-control' . $editor_class_append

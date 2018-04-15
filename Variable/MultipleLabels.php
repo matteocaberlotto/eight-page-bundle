@@ -15,6 +15,7 @@ class MultipleLabels extends AbstractVariable
     {
         $builder
             ->add($name, MultipleTextType::class, array(
+                'label' => $config->has('label') ? $config->get('label') : $name,
                 'data' => $this->getArray($variable),
                 'required' => false,
                 ))
