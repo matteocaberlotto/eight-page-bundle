@@ -8,7 +8,7 @@ body.toolkit {
 }
 
 body.modal-open {
-    height: 100%;
+    position: static;
 }
 
 .modal-dialog {
@@ -218,28 +218,28 @@ body.modal-open {
 .btn-edit-variable {
     position: absolute;
     top: 0px;
-    right: 88px;
+    right: 97px;
     z-index: 1000;
 }
 
 .btn-sort-block {
     position: absolute;
     top: 0px;
-    right: 60px;
+    right: 65px;
     z-index: 1000;
 }
 
 .btn-disable-block {
     position: absolute;
     top: 0px;
-    right: 30px;
+    right: 33px;
     z-index: 1000;
 }
 
 .btn-enable-block {
     position: absolute;
     top: 0px;
-    right: 30px;
+    right: 33px;
     z-index: 1000;
     background: #FFBBBB;
 }
@@ -377,7 +377,6 @@ body.modal-open {
 
 .toolkit .eight-block-decorator .eight-ui-button {
     background: #3791d6 none repeat scroll 0 0;
-    border: solid 1px #3791d6;
     padding: 6px 8px;
     font-size: 16px;
     color: #ffffff;
