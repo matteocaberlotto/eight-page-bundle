@@ -208,7 +208,7 @@ class Page
     /**
      * Append single block form.
      */
-    public function appendForm($block)
+    public function appendForm($block, $recursive = true)
     {
         $forms = '';
 
@@ -216,12 +216,15 @@ class Page
             $form = $this->createFormForBlock($block);
             $forms .= $this->container->get('templating')->render('EightPageBundle:Content:util/form.html.twig', array(
                 'form' => $form->createView(),
+                'current_form_block' => $block,
                 ));
         }
 
-        if ($block->hasChildren()) {
-            foreach ($block->getBlocks() as $child) {
-                $forms .= $this->appendForm($child);
+        if ($recursive) {
+            if ($block->hasChildren()) {
+                foreach ($block->getBlocks() as $child) {
+                    $forms .= $this->appendForm($child);
+                }
             }
         }
 
