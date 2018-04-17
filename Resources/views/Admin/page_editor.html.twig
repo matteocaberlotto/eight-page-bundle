@@ -10,20 +10,6 @@
     <link rel="stylesheet" href="{{ asset('bundles/eightpage/css/admin.css') }}" type="text/css" media="all" />
 {% endblock %}
 
-{% block actions %}
-    <div class="sonata-actions btn-group">
-        {% include 'SonataAdminBundle:Button:show_button.html.twig' %}
-        {% include 'SonataAdminBundle:Button:history_button.html.twig' %}
-        {% include 'SonataAdminBundle:Button:acl_button.html.twig' %}
-        {% include 'SonataAdminBundle:Button:create_button.html.twig' %}
-        <a class="btn sonata-action-element" href="{{ path('admin_eight_page_page_create', { 'clone': admin.getSubject.getId() }) }}">
-            <i class="icon-plus"></i>
-            CLONE
-        </a>
-        {% include 'SonataAdminBundle:Button:list_button.html.twig' %}
-    </div>
-{% endblock %}
-
 {% use 'EightPageBundle:Admin:page_edit_form.html.twig' with form as parentForm %}
 
 {% block form %}
