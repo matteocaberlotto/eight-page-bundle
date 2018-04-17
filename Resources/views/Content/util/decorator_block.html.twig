@@ -1,6 +1,6 @@
 <span
     class="eight-marker-start"
-    data-add-classes="eight-block-decorator{% if subject.static %} eight-static-block-decorator{% endif %}"
+    data-add-classes="eight-block-{{ subject.id }} eight-block-decorator{% if subject.static %} eight-static-block-decorator{% endif %}"
     data-add-variables='{"page-id":"{{ page_id }}","widget-label":"{{ get_widget(subject.name).label }}","load-variables":"{{ subject.loadsVariables() ? 'true' : 'false' }}","widget-icon":"{{ get_widget(subject.name).icon }}"}'
     data-add-content='{{ subject.toArray|json_encode|raw }}'
     >

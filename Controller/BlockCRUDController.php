@@ -204,7 +204,17 @@ class BlockCRUDController extends CRUDController
             $this->updatePage($page);
         }
 
-        return $this->redirect($this->generateUrl('admin_eight_page_page_layout', array('id' => $request->get('page_id'))));
+        $page->setEditMode();
+
+        $this->get('doctrine')->getManager()->clear();
+
+        $block = $this->get('eight.blocks')->find($request->get($this->admin->getIdParameter()));
+
+        return new JsonResponse(array(
+            'status' => 'OK',
+            'html' => $this->get('page.renderer')->renderBlock($object, true), // edit mode true
+            'form' => $this->get('page.renderer')->appendForm($object, false), // recursive form false
+            ));
     }
 
     public function reorderAction(Request $request)

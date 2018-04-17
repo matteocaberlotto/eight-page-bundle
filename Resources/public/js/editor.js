@@ -72,7 +72,6 @@ var Editor = (function () {
 
             $('.eight-page-textarea:not(.eight-rich-editor-bound)')
                 .each(function () {
-
                     var _curr_id = $(this).attr('id');
 
                     tinyMCE.init({
@@ -89,6 +88,45 @@ var Editor = (function () {
             $('[data-toggle="tooltip"]').tooltip({
                 placement: 'bottom'
             });
+
+            $('.eight-block-modal form')
+                .submit(function (e) {
+                    e.preventDefault();
+
+                    var form = $(this);
+                    var parent = form.parents('.eight-block-modal').eq(0);
+                    var block_selector = '.eight-block-' + parent.data('block-id');
+                    var ref = $(block_selector);
+
+                    $.ajax({
+                        type: 'POST',
+                        url: $(this).attr('action'),
+                        data: new FormData(form[0]),
+                        processData: false,
+                        contentType: false,
+                        success: function (rData) {
+                            form.parents('.eight-block-modal').modal('hide');
+                            $(rData.html).insertAfter(ref);
+                            $('body').append(rData.form);
+                            form.find('.eight-rich-editor-bound').each(function () {
+                                var _curr_id = $(this).attr('id');
+                                tinymce.get(_curr_id).remove();
+                            });
+
+                            ref.remove();
+                            parent.remove();
+
+                            setTimeout(function () {
+                                Editor.reload();
+                            }, 100);
+                        },
+                        error: function () {
+                            alert("error");
+                        }
+                    })
+
+                    return false;
+                });
 
             Editor.reloadPlugins();
         },
