@@ -39,16 +39,12 @@ class BlockCRUDController extends CRUDController
 
         $block = $this->get('helper.page')->append($request->get('subject'), $request->get('id'), $request->get('name'), $request->get('slot_label'), $static);
 
-        $form = $this->container->get('templating')->render('EightPageBundle:Content:util/form.html.twig', array(
-            'form' =>  $this->get('page.renderer')->createFormForBlock($block)->createView(),
-            ));
-
         $this->updatePage($page);
 
         return new JsonResponse(array(
             'status' => 'OK',
             'html' => $this->get('page.renderer')->renderBlock($block, true),
-            'form' => $form,
+            'form' => $this->get('page.renderer')->appendForm($block, false), // recursive form false
             ));
     }
 
@@ -212,8 +208,8 @@ class BlockCRUDController extends CRUDController
 
         return new JsonResponse(array(
             'status' => 'OK',
-            'html' => $this->get('page.renderer')->renderBlock($object, true), // edit mode true
-            'form' => $this->get('page.renderer')->appendForm($object, false), // recursive form false
+            'html' => $this->get('page.renderer')->renderBlock($block, true), // edit mode true
+            'form' => $this->get('page.renderer')->appendForm($block, false), // recursive form false
             ));
     }
 
