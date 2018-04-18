@@ -1,7 +1,7 @@
 {
     "name": "eight/page-bundle",
     "type": "symfony-bundle",
-    "description": "Symfony Eight PageBundle",
+    "description": "Symfony CMS Bundle for full page editing",
     "keywords": ["page", "cms"],
     "homepage": "https://github.com/matteocaberlotto",
     "license": "MIT",
