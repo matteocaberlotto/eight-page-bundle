@@ -2,7 +2,11 @@
 
 
 This bundle allows you to build cms editable pages within minutes without changing too much usual symfony development process.
-Supports Symfony 2+ up to 3.3 (symfony 4.0 is in roadmap). Just be sure to select the proper version. Sorry for the mess in the tagging/versioning, a cleanup is upcoming. The Symfony 3.3 branch is ```feature-3.x```.
+Supports Symfony 2+ up to 3.3 (symfony 4.0 is in roadmap). Just be sure to select the proper version.
+
+Versions:
+```1.0.x``` for Symfony ```2.x``` and Twitter Bootstrap ```3.3.x```
+```1.3.x``` for Symfony ```3.x``` and Twitter Bootstrap ```4.x```
 
 ### Roadmap:
  - renderer tests
