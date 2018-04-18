@@ -58,6 +58,14 @@ var Editor = (function () {
             }
         },
 
+        loader: function (dismiss) {
+            if (typeof dismiss !== 'undefined') {
+                $('#loading').addClass('d-none');
+            } else {
+                $('#loading').removeClass('d-none');
+            }
+        },
+
         setup: function () {
 
             $('.eight-frame-element').remove();
@@ -110,6 +118,8 @@ var Editor = (function () {
                     var block_selector = '.eight-block-' + parent.data('block-id');
                     var ref = $(block_selector);
 
+                    Editor.loader();
+
                     $.ajax({
                         type: 'POST',
                         url: $(this).attr('action'),
@@ -117,6 +127,8 @@ var Editor = (function () {
                         processData: false,
                         contentType: false,
                         success: function (rData) {
+                            Editor.loader(true);
+
                             form.parents('.eight-block-modal').modal('hide');
                             $(rData.html).insertAfter(ref);
                             $('body').append(rData.form);
@@ -133,6 +145,7 @@ var Editor = (function () {
                             }, 100);
                         },
                         error: function () {
+                            Editor.loader(true);
                             alert("error");
                         }
                     });
