@@ -58,6 +58,25 @@ var Editor = (function () {
             }
         },
 
+        confirmation: function (message, callback) {
+            $('#confirmation-modal').find('.modal-body .confirmation').html(message);
+
+            $('#confirmation-modal').find('.btn-confirm').unbind().click(function () {
+
+                $('#confirmation-modal').modal('hide');
+
+                if (typeof callback === 'function') {
+                    callback();
+                }
+
+                if (vueApp.hasOwnProperty(callback)) {
+                    vueApp[callback]();
+                }
+            });
+
+            $('#confirmation-modal').modal('show');
+        },
+
         loader: function (dismiss) {
             if (typeof dismiss !== 'undefined') {
                 $('#loading').addClass('hide');
@@ -191,7 +210,7 @@ var Editor = (function () {
 
             template.find('.btn-remove-block')
                 .click(function (event) {
-                    if (confirm("Delete block '" + element.data('widget-label') + "' ?")) {
+                    Editor.confirmation("Delete block '" + element.data('widget-label') + "' ?", function () {
                         Editor.loader();
                         $.ajax({
                             url: globalRemoveUrl,
@@ -210,7 +229,7 @@ var Editor = (function () {
                                 alert('error');
                             }
                         });
-                    }
+                    });
                 });
 
 
@@ -219,7 +238,7 @@ var Editor = (function () {
 
                 template.find('.btn-disable-block')
                     .click(function (event) {
-                        if (confirm("Disable block '" + element.data('widget-label') + "' ?")) {
+                        Editor.confirmation("Disable block '" + element.data('widget-label') + "' ?", function () {
                             Editor.loader();
                             $.ajax({
                                 url: globalDisableUrl,
@@ -241,7 +260,7 @@ var Editor = (function () {
                                     alert('error');
                                 }
                             });
-                        }
+                        });
                     });
 
                 template.find('.btn-enable-block').remove();
@@ -250,7 +269,7 @@ var Editor = (function () {
 
                 template.find('.btn-enable-block')
                     .click(function (event) {
-                        if (confirm("Enable block '" + element.data('widget-label') + "' ?")) {
+                        Editor.confirmation("Enable block '" + element.data('widget-label') + "' ?", function (){
                             Editor.loader();
                             $.ajax({
                                 url: globalEnableUrl,
@@ -271,7 +290,7 @@ var Editor = (function () {
                                     alert('error');
                                 }
                             });
-                        }
+                        });
                     });
 
                 template.find('.btn-disable-block').remove();
