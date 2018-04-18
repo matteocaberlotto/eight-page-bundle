@@ -60,9 +60,9 @@ var Editor = (function () {
 
         loader: function (dismiss) {
             if (typeof dismiss !== 'undefined') {
-                $('#loading').addClass('d-none');
+                $('#loading').addClass('hide');
             } else {
-                $('#loading').removeClass('d-none');
+                $('#loading').removeClass('hide');
             }
         },
 
