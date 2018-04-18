@@ -192,6 +192,7 @@ var Editor = (function () {
             template.find('.btn-remove-block')
                 .click(function (event) {
                     if (confirm("Delete block '" + element.data('widget-label') + "' ?")) {
+                        Editor.loader();
                         $.ajax({
                             url: globalRemoveUrl,
                             data: {
@@ -199,10 +200,13 @@ var Editor = (function () {
                                 page_id: element.data('page-id')
                             },
                             success: function () {
+                                Editor.loader(true);
                                 Editor.hideFrame(element);
                                 element.remove();
+                                Editor.reload();
                             },
                             error: function () {
+                                Editor.loader(true);
                                 alert('error');
                             }
                         });
@@ -216,6 +220,7 @@ var Editor = (function () {
                 template.find('.btn-disable-block')
                     .click(function (event) {
                         if (confirm("Disable block '" + element.data('widget-label') + "' ?")) {
+                            Editor.loader();
                             $.ajax({
                                 url: globalDisableUrl,
                                 data: {
@@ -223,6 +228,8 @@ var Editor = (function () {
                                     page_id: element.data('page-id')
                                 },
                                 success: function (response) {
+                                    Editor.loader(true);
+
                                     $(response.html).insertAfter(element);
                                     Editor.hideFrame(element);
                                     element.remove();
@@ -230,6 +237,7 @@ var Editor = (function () {
                                     Editor.reload();
                                 },
                                 error: function () {
+                                    Editor.loader(true);
                                     alert('error');
                                 }
                             });
@@ -243,6 +251,7 @@ var Editor = (function () {
                 template.find('.btn-enable-block')
                     .click(function (event) {
                         if (confirm("Enable block '" + element.data('widget-label') + "' ?")) {
+                            Editor.loader();
                             $.ajax({
                                 url: globalEnableUrl,
                                 data: {
@@ -250,6 +259,7 @@ var Editor = (function () {
                                     page_id: element.data('page-id')
                                 },
                                 success: function (response) {
+                                    Editor.loader(true);
                                     $(response.html).insertAfter(element);
                                     Editor.hideFrame(element);
                                     element.remove();
@@ -257,6 +267,7 @@ var Editor = (function () {
                                     Editor.reload();
                                 },
                                 error: function () {
+                                    Editor.loader(true);
                                     alert('error');
                                 }
                             });
@@ -505,6 +516,7 @@ var Editor = (function () {
             $('#add-block-modal .modal-footer .add-block-btn')
                 .unbind('click')
                 .click(function () {
+                    Editor.loader();
                     $.ajax({
                         url: globalAppendUrl,
                         data: {
@@ -516,12 +528,14 @@ var Editor = (function () {
                             is_static: variables['is_static']
                         },
                         success: function (response) {
+                            Editor.loader(true);
                             $('#add-block-modal').modal('hide');
                             parent.append(response.html);
                             $('body').append(response.form);
                             Editor.reload();
                         },
                         error: function () {
+                            Editor.loader(true);
                             $('#add-block-modal').modal('hide');
                             alert('Error');
                         }
