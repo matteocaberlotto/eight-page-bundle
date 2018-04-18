@@ -44,6 +44,18 @@ var Editor = (function () {
         reload: function () {
             Editor.setupMarkers();
             Editor.setup();
+
+            if (globalUpdateEightAddButtonsPosition) {
+                setTimeout(function () {
+                    $('.add-item').each(function () {
+                        $(this).css({
+                            position: 'absolute',
+                            top: $(this).prev().position().top + $(this).prev().outerHeight(),
+                            left: $(this).prev().position().left
+                        });
+                    });
+                }, 1000);
+            }
         },
 
         setup: function () {
@@ -89,7 +101,7 @@ var Editor = (function () {
                 placement: 'bottom'
             });
 
-            $('.eight-block-modal form')
+            $('.eight-block-modal form:not(.eight-ui-bound)')
                 .submit(function (e) {
                     e.preventDefault();
 
@@ -123,10 +135,12 @@ var Editor = (function () {
                         error: function () {
                             alert("error");
                         }
-                    })
+                    });
 
                     return false;
-                });
+                })
+                .addClass('eight-ui-bound')
+                ;
 
             Editor.reloadPlugins();
         },
