@@ -20,6 +20,10 @@ services:
         class: Eight\PageBundle\Helper\Page
         arguments: ['@service_container']
 
+    eight.page_generator:
+        class: Eight\PageBundle\Generator\Pages
+        arguments: ['@service_container']
+
     page.renderer:
         class: Eight\PageBundle\Renderer\Page
         arguments: ['@service_container']
