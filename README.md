@@ -76,6 +76,7 @@ Supports Symfony 2+ up to 3.3 (symfony 4.0 is in roadmap). Just be sure to selec
                 - ['google-site-verification', 'text', { required: false }]
 
                 - ['twitter:title', 'text', { required: false }]
+                - ['twitter:image', 'text', { required: false }]
                 - ['twitter:description', 'text', { required: false }]
 
             property:
