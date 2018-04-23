@@ -73,7 +73,13 @@ Supports Symfony 2+ up to 3.3 (symfony 4.0 is in roadmap). Just be sure to selec
                 - ['description', 'text', { required: false }]
                 - ['robots', 'text', { required: false }]
 
+                - ['google-site-verification', 'text', { required: false }]
+
+                - ['twitter:title', 'text', { required: false }]
+                - ['twitter:description', 'text', { required: false }]
+
             property:
+                - ['og:title', 'text', { required: false }]
                 - ['og:url', 'text', { required: false }]
                 - ['og:type', 'text', { required: false }]
                 - ['og:image', 'text', { required: false }]
