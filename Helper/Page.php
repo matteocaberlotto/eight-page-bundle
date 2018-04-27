@@ -178,4 +178,15 @@ class Page
             }
         }
     }
+
+    public function getStaticBlocksAsArray()
+    {
+        $blocks = $this->container->get('doctrine')->getRepository('EightPageBundle:Block')->getStaticBlocks();
+
+        foreach ($blocks as $block) {
+            $return []= $block->asArray(true);
+        }
+
+        return $return;
+    }
 }

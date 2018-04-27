@@ -88,8 +88,12 @@ class PageCRUDController extends CRUDController
             ));
         }
 
+        $page_as_array = $object->toArray();
+
+        $page_as_array['static_blocks'] = $this->get('helper.page')->getStaticBlocksAsArray();
+
         $response->setContent(Yaml::dump(array('pages' => array(
-            $object->toArray()
+            $page_as_array
             )), 64));
 
         return $response;

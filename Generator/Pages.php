@@ -86,6 +86,10 @@ class Pages
         }
 
         $this->doctrine->flush();
+
+        if (isset($data['static_blocks'])) {
+            $this->createBlocks($data['static_blocks']);
+        }
     }
 
     protected function createTags($page, $tags)
@@ -108,7 +112,7 @@ class Pages
         }
     }
 
-    protected function createBlocks($blocks_data, $parent)
+    protected function createBlocks($blocks_data, $parent = null)
     {
         foreach ($blocks_data as $index => $block_data) {
 
@@ -127,6 +131,10 @@ class Pages
                     $prev->setBlock($parent);
                 } else if ($parent instanceof Page) {
                     $prev->setPage($parent);
+                }
+
+                if (!$parent) {
+                    $prev->setStatic(true);
                 }
 
                 $this->doctrine->persist($prev);
@@ -171,7 +179,12 @@ class Pages
                 ));
         }
 
-        throw new \Exception("Unable to handle block type for " . get_class($parent));
+        return $this->doctrine->getRepository('EightPageBundle:Block')->findOneBy(array(
+            'name' => $name,
+            'seq' => $position,
+            'static' => true,
+            'type' => $type,
+            ));
     }
 
     protected function createContents($block, $data)
