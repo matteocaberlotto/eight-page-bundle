@@ -20,6 +20,26 @@ services:
         tags:
             - { name: eight_page.widget }
 
+    navbar_item.widget:
+        class: Eight\PageBundle\Widget\NavItem
+        tags:
+            - { name: eight_page.widget }
+
+    navbar_dropdown.widget:
+        class: Eight\PageBundle\Widget\NavbarDropdown
+        tags:
+            - { name: eight_page.widget }
+
+    navbar_dropdown_item.widget:
+        class: Eight\PageBundle\Widget\NavbarDropdownItem
+        tags:
+            - { name: eight_page.widget }
+
+    navbar_dropdown_divider.widget:
+        class: Eight\PageBundle\Widget\NavbarDropdownDivider
+        tags:
+            - { name: eight_page.widget }
+
     one_column.widget:
         class: Eight\PageBundle\Widget\OneColumn
         tags:

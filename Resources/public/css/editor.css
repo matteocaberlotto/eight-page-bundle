@@ -192,6 +192,7 @@ body.toolkit {
 
 .toolkit .eight-block-decorator {
     min-height: 40px;
+    min-width: 120px;
 }
 
 .toolkit .block-wrapper:hover > .btn-remove-block,
