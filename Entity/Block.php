@@ -138,6 +138,7 @@ class Block implements BlockInterface
     public function getContent($name)
     {
         $contents = $this->contents;
+
         foreach ($contents as $content)
         {
             if ($content->getName() == $name) {
@@ -384,6 +385,17 @@ class Block implements BlockInterface
         return $iterator;
     }
 
+    public function getBlocksAsArray($with_content = false)
+    {
+        $return = array();
+
+        foreach ($this->getOrderedBlocks() as $block) {
+            $return []= $block->asArray($with_content);
+        }
+
+        return $return;
+    }
+
     /**
      * Set enabled
      *
@@ -417,9 +429,12 @@ class Block implements BlockInterface
         return $this->getEnabled();
     }
 
+    /**
+     * This is used to dump data inside editor markup.
+     */
     public function toArray()
     {
-        return array(
+        $return = array(
             'id' => $this->getId(),
             'page_id' => $this->getPage() ? $this->getPage()->getId() : null,
             'block_id' => $this->getBlock() ? $this->getBlock()->getId() : null,
@@ -430,5 +445,44 @@ class Block implements BlockInterface
             'enabled' => $this->getEnabled(),
             'static' => $this->getStatic(),
             );
+
+        return $return;
+    }
+
+    /**
+     * This is used to export page.
+     */
+    public function asArray($with_content = false)
+    {
+        $return = array(
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'type' => $this->getType(),
+            'enabled' => $this->getEnabled(),
+            'static' => $this->getStatic(),
+            );
+
+        if ($with_content && count($this->getContents())) {
+            $return['contents'] = $this->getContentsAsArray();
+        }
+
+        if ($with_content && $this->hasChildren()) {
+            $return['blocks'] = $this->getBlocksAsArray($with_content);
+        }
+
+        return $return;
+    }
+
+    public function getContentsAsArray()
+    {
+        $return = array();
+
+        foreach ($this->getContents() as $content) {
+
+            $return []= $content->toArray();
+        }
+
+        return $return;
+
     }
 }

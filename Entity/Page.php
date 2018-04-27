@@ -453,14 +453,20 @@ class Page implements PageInterface
         return $this->metas_http_equiv;
     }
 
-    public function getTagsAsCsv()
+    public function getTagsAsArray()
     {
         $return = array();
+
         foreach ($this->tags as $tag) {
             $return []= $tag->getName();
         }
 
-        return implode(', ', $return);
+        return $return;
+    }
+
+    public function getTagsAsCsv()
+    {
+        return implode(', ', $this->getTagsAsArray());
     }
 
     /**
@@ -613,10 +619,40 @@ class Page implements PageInterface
         return $iterator;
     }
 
+    public function getRootBlocks()
+    {
+        $return = array();
+
+        foreach ($this->getBlocks() as $block) {
+            if (!$block->getBlock()) {
+                $return []= $block;
+            }
+        }
+
+        return $return;
+    }
+
+    public function getBlocksAsArray()
+    {
+        $return = [];
+
+        foreach ($this->getOrderedBlocks() as $block) {
+            $return []= $block->asArray(true);
+        }
+
+        return $return;
+    }
+
     public function toArray()
     {
         return array(
             'id' => $this->getId(),
+            'url' => $this->getRoute()->getPath(),
+            'locale' => $this->getLocale(),
+            'controller' => $this->getRoute()->getController(),
+            'title' => $this->getTitle(),
+            'tags' => $this->getTagsAsArray(),
+            'blocks' => $this->getBlocksAsArray(),
             );
     }
 }
