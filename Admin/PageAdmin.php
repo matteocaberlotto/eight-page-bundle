@@ -103,6 +103,9 @@ class PageAdmin extends AbstractAdmin implements ContainerAwareInterface
             ->add('_action', 'actions', array(
                 'actions' => array(
                     'edit' => array(),
+                    'export_yml' => array(
+                        'template' => 'EightPageBundle:Admin:list__action_export_yml.html.twig',
+                        ),
                     'layout' => array(
                         'template' => 'EightPageBundle:Admin:list__action_layout.html.twig',
                         )
@@ -114,6 +117,7 @@ class PageAdmin extends AbstractAdmin implements ContainerAwareInterface
     {
         $collection->add('layout', $this->getRouterIdParameter() . '/layout');
         $collection->add('clone', $this->getRouterIdParameter() . '/clone');
+        $collection->add('export_yml', $this->getRouterIdParameter() . '/yml/export');
     }
 
     public function getTemplate($name)
