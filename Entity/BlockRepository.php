@@ -112,4 +112,22 @@ class BlockRepository extends EntityRepository
 
         return $q->getQuery()->getResult();
     }
+
+    public function getStaticBlocks()
+    {
+        $q = $this->createQueryBuilder('b');
+
+        $q
+            ->select('b')
+            ->where('b.static = :static')
+            ->andWhere('b.enabled = :enabled')
+            ->orderBy('b.seq', 'ASC')
+            ->setParameters(array(
+                'static' => true,
+                'enabled' => true,
+                ))
+            ;
+
+        return $q->getQuery()->getResult();
+    }
 }
