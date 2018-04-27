@@ -1,5 +1,3 @@
 <div {% if id is not empty %}id="{{ id }}"{% endif %}class="{{ html_classes }}">
-    <p>
-        {{ text|raw }}
-    </p>
+    {{ text|raw }}
 </div>
