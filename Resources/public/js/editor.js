@@ -69,7 +69,7 @@ var Editor = (function () {
                     callback();
                 }
 
-                if (vueApp.hasOwnProperty(callback)) {
+                if (window.hasOwnProperty('vueApp') && vueApp.hasOwnProperty(callback)) {
                     vueApp[callback]();
                 }
             });
