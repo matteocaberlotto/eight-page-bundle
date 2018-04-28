@@ -208,6 +208,11 @@ body.modal-open {
     padding-top: 30px;
 }
 
+.toolkit .eight-block-decorator:hover {
+    z-index: 100;
+    background: #e8f5ff !important;
+}
+
 .toolkit .block-wrapper:hover > .btn-remove-block,
 .toolkit .block-wrapper:hover > .btn-edit-variable,
 .toolkit .block-wrapper:hover > .btn-edit-block-layout,
@@ -315,6 +320,7 @@ body.modal-open {
     background: #3791d6;
     position: absolute;
     display: none;
+    z-index: 1000;
 }
 
 .eight-frame-title {
