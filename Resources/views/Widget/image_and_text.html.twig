@@ -1,5 +1,5 @@
-<div {% if id is not empty %}id="{{ id }}"{% endif %}class="row {{ html_classes }}">
-    <div class="col">
+<div {% if id is not empty %}id="{{ id }}"{% endif %}class="row">
+    <div class="col {{ html_classes }}">
         <img class="{{ image_classes }}" src="{{ image|imagine_filter('generic_thumbnail') }}" alt="{{ image_alt }}" title="{{ image_alt }}">
         {{ text|raw }}
     </div>
