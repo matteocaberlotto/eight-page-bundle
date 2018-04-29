@@ -2,23 +2,27 @@
 
 namespace Eight\PageBundle\Widget;
 
-class Footer extends AbstractWidget
+class Column extends AbstractWidget
 {
     public function getVars()
     {
         return array(
-            'label',
             'html_classes',
             );
     }
 
     public function getLayout()
     {
-        return 'EightPageBundle:Widget:footer.html.twig';
+        return 'EightPageBundle:Widget:column.html.twig';
     }
 
     public function getName()
     {
-        return 'footer';
+        return 'single_column';
+    }
+
+    public function getLabel()
+    {
+        return 'Single column';
     }
 }
