@@ -117,9 +117,19 @@ var Editor = (function () {
                 placement: 'bottom'
             });
 
+            $('.eight-block-modal form button').click(function () {
+                $(this).parents('form').find('button').removeClass('clicked');
+                $(this).addClass('clicked');
+            });
+
             $('.eight-block-modal form:not(.eight-ui-bound)')
                 .submit(function (e) {
                     e.preventDefault();
+
+                    var url = $(this).attr('action');
+                    if ($(this).find('.submit-enable-block-edit').hasClass('clicked')) {
+                        url += '&enable=true';
+                    }
 
                     var form = $(this);
                     var parent = form.parents('.eight-block-modal').eq(0);
@@ -130,7 +140,7 @@ var Editor = (function () {
 
                     $.ajax({
                         type: 'POST',
-                        url: $(this).attr('action'),
+                        url: url,
                         data: new FormData(form[0]),
                         processData: false,
                         contentType: false,

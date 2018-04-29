@@ -164,7 +164,7 @@ class BlockCRUDController extends CRUDController
 
             $data = $form->getData();
 
-            if ($form->has('save-enable') && $form->get('save-enable')->isClicked()) {
+            if ($request->get('enable') == 'true') {
                 $object->setEnabled(true);
             }
 
