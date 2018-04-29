@@ -7,6 +7,7 @@ class Header extends AbstractWidget
     public function getVars()
     {
         return array(
+            'html_classes',
             'brand',
             );
     }
