@@ -1,10 +1,14 @@
 <div class="container">
-    <div class="row">
+    <div class="row {{ html_classes }}">
         <div class="col-md-12">
-            <p>
-                FOOTER LINKS ETC.
-            </p>
-            <div class="col-4">
+            <div class="row">
+                <div class="col-12">
+                    <p>
+                        {{ label }}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
                 {{ render_inner_blocks(current_block) }}
             </div>
         </div>
