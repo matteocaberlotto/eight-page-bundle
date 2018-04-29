@@ -198,7 +198,8 @@ body.toolkit {
 
 .toolkit .eight-block-decorator:hover {
     z-index: 100;
-    background: #e8f5ff !important;
+    /*background: #e8f5ff !important;
+    color: #333 !important;*/
 }
 
 .toolkit .block-wrapper:hover > .btn-remove-block,
