@@ -4,22 +4,22 @@
 This bundle allows you to build cms editable pages within minutes without changing too much usual symfony development process.
 Supports Symfony 2+ up to 3.3 (symfony 4.0 is in roadmap). Just be sure to select the proper version.
 
-- ```1.0.x``` for Symfony ```2.x``` and Twitter Bootstrap ```3.3.x```
+- ```1.0.x``` for Symfony ```2.x/3.x``` and Twitter Bootstrap ```3.3.x```
 - ```1.3.x``` for Symfony ```3.x``` and Twitter Bootstrap ```4.x```
 
 ### Roadmap:
- - renderer tests
+ - some more tests
  - ease admin bundle switching
  - ease storage switching
  - symfony 4 compatibility
 
 
 ### Features:
- - fully editable page properties (title, url, meta, og, ...)
- - fully editable html layout, blocks tree with predefined widgets
+ - fully editable page properties (title, url, meta, og, ...) inside admin section
+ - fully editable html layout, blocks tree with predefined widgets inside admin section
  - auto form building for in-place content editing
- - yml content loader for programmatic page editing
- - very light!
+ - yml content loader/exporter for programmatic page editing
+ - very light and easy to admin!
 
 
 
@@ -31,10 +31,13 @@ Supports Symfony 2+ up to 3.3 (symfony 4.0 is in roadmap). Just be sure to selec
 
 
 2. install and configure dependencies (refer to each installation documentation)
-    - sonata admin bundle
-    - raindrop routing bundle
-    - fos user bundle
-    - twitter bootstrap assets (3.3.* for 1.0.* and 4.* for 1.3.*)
+    - sonata admin bundle (for admin structure/navigation)
+    - raindrop routing bundle (for dynamic routing)
+    - fos user bundle (this is not strictly required)
+    - symfony/templating (only for some symfony versions)
+    - symfony/assetic-bundle
+    - you will also need to manually include twitter bootstrap assets (3.3.* for 1.0.* and 4.* for 1.3.*)
+
 
 3. add following lines to config.yml if you need to configure one or more of the following features:
   - general encoding
@@ -90,6 +93,7 @@ Supports Symfony 2+ up to 3.3 (symfony 4.0 is in roadmap). Just be sure to selec
             http_equiv:
                 - ['Content-type', 'text', { required: false }]
 ```
+
 
 ### Creating pages:
 To create a page you need at least 1 layout and 1 block. A layout is simply a simfony page with at least 1 call to ```render_page_content()``` which is the twig function that dinamically appends blocks.
@@ -231,7 +235,7 @@ To sum up, widget creation consists of 3 steps:
 
 - create widget class
 - create widget layout
-- register wiget class with tagging
+- register widget class with tagging
 
 that's all.
 
@@ -257,9 +261,9 @@ Note that everything else works the same as symfony standard so you can mix stat
 - ```render_page_content(type)```: renders all page blocks of given type.
 - ```render_inner_blocks(block, type)```: renders all child blocks of given block and type.
 - ```render_static_blocks(type)```: renders all static page blocks of given type for current page.
-- ```eight_stylesheets(type)```: renders all stylesheets of the current page and child blocks.
-- ```eight_javascripts(type)```: renders all javascripts of the current page and child blocks.
-- ```eight_body_class(type)```: renders page body class.
+- ```eight_stylesheets()```: renders all stylesheets of the current page and child blocks.
+- ```eight_javascripts()```: renders all javascripts of the current page and child blocks.
+- ```eight_body_class()```: renders page body class.
 - ```is_current_path(name)```: returns 'active' if current path name is $name.
 - ```is_host(test)```: returns true if test is contained in the current host.
 - ```is_route(path)```: returns true if current path is equal to path or an index of it (accepts a label or an array).
