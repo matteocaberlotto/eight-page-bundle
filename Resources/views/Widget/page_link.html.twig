@@ -1,3 +1,5 @@
-{% if page %}
-    <a href="{{ i18n_path(page) }}">{{ i18n_title(page) }}</a>
-{% endif %}
+<div>
+    {% if target_page and target_page.id %}
+        <a href="{{ i18n_path(target_page) }}">{{ i18n_title(target_page) }}</a>
+    {% endif %}
+</div>

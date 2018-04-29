@@ -13,7 +13,7 @@ class PageLink extends AbstractWidget
             'html_icon_class' => new Config(array(
                 'type' => 'icon',
                 )),
-            'page' => new Config(array(
+            'target_page' => new Config(array(
                 'type' => 'entity',
                 'class' => 'Eight\PageBundle\Entity\Page',
                 )),
