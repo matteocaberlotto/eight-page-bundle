@@ -35,12 +35,25 @@ class RouteAdmin extends AbstractAdmin
     // Fields to be shown on create/edit forms
     protected function configureFormFields(FormMapper $formMapper)
     {
+        $em = $this->modelManager->getEntityManager('Raindrop\RoutingBundle\Entity\Route');
+
+        $query = $em->createQueryBuilder('r');
+
+        $query
+            ->select('r')
+            ->from('Raindrop\RoutingBundle\Entity\Route', 'r')
+            ->where('r.controller NOT LIKE :redirect_controller')
+            ->orderBy('r.id', 'DESC')
+            ->setParameter('redirect_controller', 'RaindropRoutingBundle:Generic:redirectRoute');
+            ;
+
         $formMapper
             ->add('path')
             ->add('content', 'sonata_type_model', array(
                 // 'btn_add' => true,
                 // 'mapped' => false,
                 'class' => 'Raindrop\RoutingBundle\Entity\Route',
+                'query' => $query,
                 ))
         ;
     }

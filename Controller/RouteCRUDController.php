@@ -5,16 +5,22 @@ namespace Eight\PageBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sonata\AdminBundle\Controller\CRUDController;
 
+use Symfony\Component\Form\FormRenderer;
+use Symfony\Component\Form\FormView;
+use Symfony\Bridge\Twig\AppVariable;
+use Symfony\Bridge\Twig\Extension\FormExtension;
+use Symfony\Bridge\Twig\Command\DebugCommand;
+use Symfony\Bridge\Twig\Form\TwigRenderer;
+
+
 class RouteCRUDController extends CRUDController
 {
     /**
      * Create action.
      *
-     * @param Request $request
+     * @throws AccessDeniedException If access is not granted
      *
      * @return Response
-     *
-     * @throws AccessDeniedException If access is not granted
      */
     public function createAction()
     {
@@ -39,43 +45,46 @@ class RouteCRUDController extends CRUDController
             );
         }
 
-        $object = $this->admin->getNewInstance();
+        $newObject = $this->admin->getNewInstance();
 
         /**
          * It is required to bind the content resolver, else the binding will silently fail (form fw bug?).
          */
-        $object->setResolver($this->container->get('raindrop_routing.content_resolver'));
+        $newObject->setResolver($this->container->get('raindrop_routing.content_resolver'));
+        $newObject->setName('');
 
-        $preResponse = $this->preCreate($request, $object);
+        $preResponse = $this->preCreate($request, $newObject);
         if ($preResponse !== null) {
             return $preResponse;
         }
 
-        $this->admin->setSubject($object);
+        $this->admin->setSubject($newObject);
 
         /** @var $form \Symfony\Component\Form\Form */
         $form = $this->admin->getForm();
-        $form->setData($object);
+        $form->setData($newObject);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
             //TODO: remove this check for 4.0
             if (method_exists($this->admin, 'preValidate')) {
-                $this->admin->preValidate($object);
+                $this->admin->preValidate($newObject);
             }
             $isFormValid = $form->isValid();
 
             // persist if the form was valid and if in preview mode the preview was approved
-            if ($isFormValid && (!$this->isInPreviewMode($request) || $this->isPreviewApproved($request))) {
-                $this->admin->checkAccess('create', $object);
+            if ($isFormValid && (!$this->isInPreviewMode() || $this->isPreviewApproved())) {
+                $submittedObject = $form->getData();
+                $this->admin->setSubject($submittedObject);
+                $this->admin->checkAccess('create', $submittedObject);
 
                 try {
-                    $object = $this->admin->create($object);
+                    $newObject = $this->admin->create($submittedObject);
 
                     if ($this->isXmlHttpRequest()) {
                         return $this->renderJson(array(
                             'result' => 'ok',
-                            'objectId' => $this->admin->getNormalizedIdentifier($object),
+                            'objectId' => $this->admin->getNormalizedIdentifier($newObject),
                         ), 200, array());
                     }
 
@@ -83,13 +92,13 @@ class RouteCRUDController extends CRUDController
                         'sonata_flash_success',
                         $this->trans(
                             'flash_create_success',
-                            array('%name%' => $this->escapeHtml($this->admin->toString($object))),
+                            array('%name%' => $this->escapeHtml($this->admin->toString($newObject))),
                             'SonataAdminBundle'
                         )
                     );
 
                     // redirect to edit mode
-                    return $this->redirectTo($object);
+                    return $this->redirectTo($newObject);
                 } catch (ModelManagerException $e) {
                     $this->handleModelManagerException($e);
 
@@ -104,7 +113,7 @@ class RouteCRUDController extends CRUDController
                         'sonata_flash_error',
                         $this->trans(
                             'flash_create_error',
-                            array('%name%' => $this->escapeHtml($this->admin->toString($object))),
+                            array('%name%' => $this->escapeHtml($this->admin->toString($newObject))),
                             'SonataAdminBundle'
                         )
                     );
@@ -116,15 +125,41 @@ class RouteCRUDController extends CRUDController
             }
         }
 
-        $view = $form->createView();
-
+        $formView = $form->createView();
         // set the theme for the current Admin Form
-        $this->get('twig')->getExtension('form')->renderer->setTheme($view, $this->admin->getFormTheme());
+        $this->setFormTheme($formView, $this->admin->getFormTheme());
 
         return $this->render($this->admin->getTemplate($templateKey), array(
             'action' => 'create',
-            'form' => $view,
-            'object' => $object,
+            'form' => $formView,
+            'object' => $newObject,
+            'objectId' => null,
         ), null);
+    }
+
+    /**
+     * Sets the admin form theme to form view. Used for compatibility between Symfony versions.
+     *
+     * @param string $theme
+     */
+    protected function setFormTheme(FormView $formView, $theme)
+    {
+        $twig = $this->get('twig');
+
+        // BC for Symfony < 3.2 where this runtime does not exists
+        if (!method_exists(AppVariable::class, 'getToken')) {
+            $twig->getExtension(FormExtension::class)->renderer->setTheme($formView, $theme);
+
+            return;
+        }
+
+        // BC for Symfony < 3.4 where runtime should be TwigRenderer
+        if (!method_exists(DebugCommand::class, 'getLoaderPaths')) {
+            $twig->getRuntime(TwigRenderer::class)->setTheme($formView, $theme);
+
+            return;
+        }
+
+        $twig->getRuntime(FormRenderer::class)->setTheme($formView, $theme);
     }
 }
