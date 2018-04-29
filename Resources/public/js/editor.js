@@ -44,18 +44,7 @@ var Editor = (function () {
         reload: function () {
             Editor.setupMarkers();
             Editor.setup();
-
-            if (globalUpdateEightAddButtonsPosition) {
-                setTimeout(function () {
-                    $('.add-item').each(function () {
-                        $(this).css({
-                            position: 'absolute',
-                            top: $(this).prev().position().top + $(this).prev().outerHeight(),
-                            left: $(this).prev().position().left
-                        });
-                    });
-                }, 1000);
-            }
+            Editor.repositionAddButtons();
         },
 
         confirmation: function (message, callback) {
@@ -447,29 +436,23 @@ var Editor = (function () {
 
                 if (variables['is_static']) {
                     var class_name = "add-item add-item-static";
-                    var html_content = ' STATIC (' + variables['slot-label'] + ')';
+                    var html_content = ' ' + variables['slot-label'];
                 } else {
                     var class_name = "add-item";
-                    var html_content = ' ' + label + ' (' + variables['slot-label'] + ')';
+                    var html_content = ' ' + variables['slot-label'];
                 }
 
                 var addNewItem = $('<a/>', {
                         "href": "javascript:;",
                         "class": class_name,
-                        "html": '<span class="fa fa-plus"></span>' + html_content
+                        "html": '<span class="fa fa-cubes"></span>' + html_content
                     })
                     ;
 
                 addNewItem.insertAfter(parent);
 
                 if (globalUpdateEightAddButtonsPosition) {
-                    setTimeout(function () {
-                        addNewItem.css({
-                            position: 'absolute',
-                            top: parent.position().top + parent.outerHeight(),
-                            left: parent.position().left
-                        });
-                    }, 300);
+                    Editor.repositionAddButtons();
                 }
 
                 $el.remove();
@@ -477,6 +460,31 @@ var Editor = (function () {
 
             if (globalUpdateEightAddButtonsPosition) {
                 $('.add-item').css('position', 'absolute');
+            }
+        },
+
+        repositionAddButtons: function () {
+            if (globalUpdateEightAddButtonsPosition) {
+                setTimeout(function () {
+
+                    $('.add-item').each(function () {
+
+                        if ($(this).prev().hasClass('dropdown-menu')) {
+                            var top = $(this).prev().prev().position().top + $(this).prev().prev().outerHeight();
+                            var left = $(this).prev().prev().position().left;
+                        } else {
+                            var top = $(this).prev().position().top + $(this).prev().outerHeight() + 30;
+                            var left = $(this).prev().position().left;
+                            $(this).parent().addClass('toolkit-relative');
+                        }
+
+                        $(this).css({
+                            position: 'absolute',
+                            top: top,
+                            left: left
+                        });
+                    });
+                }, 1000);
             }
         },
 

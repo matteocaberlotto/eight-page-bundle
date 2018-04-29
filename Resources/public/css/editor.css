@@ -415,11 +415,16 @@ body.toolkit {
     margin-bottom: 40px;
 }
 
+.toolkit .toolkit-relative,
+.toolkit.toolkit-relative {
+    position: relative;
+}
+
 .toolkit .eight-list-decorator {
     margin-top: 40px !important;
     border: dashed 2px #3791d6;
     padding-top: 60px !important;
-    margin-bottom: 40px !important;
+    /*margin-bottom: 40px !important;*/
     padding-bottom: 50px !important;
 }
 
