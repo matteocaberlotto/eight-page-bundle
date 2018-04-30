@@ -429,6 +429,10 @@ body.modal-open {
     position: relative;
 }
 
+.toolkit.toolkit-relative.modal-open {
+    position: static;
+}
+
 .toolkit .eight-list-decorator {
     margin-top: 40px !important;
     border: dashed 2px #3791d6;
