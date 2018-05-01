@@ -150,7 +150,7 @@ body.toolkit {
 }
 
 .toolkit .eight-block-decorator:hover {
-    z-index: 10;
+    z-index: 100;
 }
 
 .toolkit .block-wrapper:hover > .btn-remove-block,
@@ -225,7 +225,7 @@ body.toolkit {
     width: 1px;
     position: absolute;
     background: #3791d6;
-    z-index: 10;
+    z-index: 100;
     display: none;
 }
 
@@ -234,14 +234,14 @@ body.toolkit {
     background: #3791d6;
     position: absolute;
     display: none;
-    z-index: 10;
+    z-index: 100;
 }
 
 .eight-frame-title {
     height: 26px;
     position: absolute;
     background: #c9e7ff;
-    z-index: 10;
+    z-index: 100;
     text-align: center;
     /*text-transform: uppercase;*/
     line-height: 30px;
