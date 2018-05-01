@@ -104,6 +104,7 @@ var Editor = (function () {
                     var _curr_id = $(this).attr('id');
 
                     tinyMCE.init({
+                        height: 300,
                         selector: '#' + _curr_id,
                         auto_focus: _curr_id,
                         theme: 'modern',
