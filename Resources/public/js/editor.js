@@ -176,6 +176,7 @@ var Editor = (function () {
                 ;
 
             Editor.reloadPlugins();
+            Editor.repositionAddButtons();
         },
 
         addPlugin: function (callback) {
@@ -476,9 +477,7 @@ var Editor = (function () {
 
                 addNewItem.insertAfter(parent);
 
-                if (globalUpdateEightAddButtonsPosition) {
-                    Editor.repositionAddButtons();
-                }
+                Editor.repositionAddButtons();
 
                 $el.remove();
             });
@@ -649,6 +648,10 @@ var Editor = (function () {
 $(function () {
     Editor.init();
 });
+
+$(window).load(function () {
+    Editor.repositionAddButtons();
+})
 
 // https://stackoverflow.com/questions/18111582/tinymce-4-links-plugin-modal-in-not-editable
 $(document).on('focusin', function(e) {
