@@ -23,6 +23,7 @@ class Text extends AbstractVariable
                 'label' => $config->has('label') ? $config->get('label') : $name,
                 'required' => false,
                 'attr' => array(
+                    'rows' => $config->has('rows') ? $config->get('rows') : 10,
                     'class' => 'form-control' . $editor_class_append
                     )
                 ))
