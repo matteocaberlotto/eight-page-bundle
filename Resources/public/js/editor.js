@@ -45,6 +45,7 @@ var Editor = (function () {
             Editor.setupMarkers();
             Editor.setup();
             Editor.repositionAddButtons();
+            Editor.reloadPlugins();
         },
 
         confirmation: function (message, callback) {
