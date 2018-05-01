@@ -303,6 +303,10 @@ var Editor = (function () {
 
             var blockContent = $(element).data('editor-content');
 
+            if ($('.eight-frame-element-' + blockContent.id).length) {
+                return;
+            }
+
             var minWidth = element.outerWidth();
 
             if (minWidth < 120) {
@@ -313,8 +317,8 @@ var Editor = (function () {
             $('<div/>', { "class": "eight-frame-title " + (blockContent.static ? 'eight-static-frame-title' : '') + " eight-frame-element eight-frame-element-" + blockContent.id})
                 .css({
                     left: element.offset().left,
-                    top: element.offset().top - 30,
-                    width: minWidth
+                    top: element.offset().top - 26,
+                    maxWidth: minWidth
                 })
                 .html('<span class="' + element.data('widget-icon') + '"></span> ' + element.data('widget-label') + ' (id:' + blockContent.id + ')')
                 .appendTo('body')
@@ -335,6 +339,15 @@ var Editor = (function () {
                     right: $(window).width() - element.offset().left - minWidth,
                     top: element.offset().top,
                     height: element.outerHeight()
+                })
+                .appendTo($('body'));
+
+            // top
+            $('<div/>', { "class": "eight-frame-bottom eight-frame-element eight-frame-element-" + blockContent.id })
+                .css({
+                    left: element.offset().left,
+                    top: element.offset().top,
+                    width: minWidth
                 })
                 .appendTo($('body'));
 
@@ -480,7 +493,7 @@ var Editor = (function () {
                             var top = $(this).prev().prev().position().top + $(this).prev().prev().outerHeight();
                             var left = $(this).prev().prev().position().left;
                         } else {
-                            var top = $(this).prev().position().top + $(this).prev().outerHeight() + 30;
+                            var top = $(this).prev().position().top + $(this).prev().outerHeight();
                             var left = $(this).prev().position().left;
                             $(this).parent().addClass('toolkit-relative');
                         }
