@@ -84,7 +84,7 @@ body.toolkit {
 }
 
 #back-to-list-button {
-    left: 68px;
+    left: 46px;
     position: fixed;
     top: 10px;
     z-index: 1000;
@@ -313,19 +313,19 @@ body.toolkit {
 }
 
 .eight-frame-title {
-    height: 30px;
-    /*border: solid 1px #3791d6;*/
-    border-bottom: solid 1px #3791d6;
+    height: 26px;
     position: absolute;
     background: #c9e7ff;
     z-index: 1000;
     text-align: center;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     line-height: 30px;
     color: #3791d6;
-    font-weight: bold;
+    font-size: 11px;
     display: none;
     overflow-y: hidden;
+    padding-left: 6px;
+    padding-right: 6px;
 }
 
 .eight-frame-title.eight-static-frame-title {
@@ -339,7 +339,7 @@ body.toolkit {
 
 .add-item {
     position: relative;
-    border: 1px solid #3791d6 !important;
+    /*border: 1px solid #3791d6 !important;*/
     background: #c9e7ff none repeat scroll 0 0;
     border-radius: 2px;
     display: none;
@@ -426,10 +426,10 @@ body.toolkit {
 }
 
 .toolkit .eight-list-decorator {
-    margin-top: 40px !important;
-    border: dashed 2px #3791d6;
-    padding-top: 60px !important;
-    margin-bottom: 40px !important;
+    /*margin-top: 40px !important;*/
+    border: dashed 1px #3791d6;
+    /*padding-top: 60px !important;*/
+    /*margin-bottom: 40px !important;*/
     padding-bottom: 50px !important;
 }
 
