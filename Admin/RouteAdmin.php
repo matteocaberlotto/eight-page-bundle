@@ -49,6 +49,7 @@ class RouteAdmin extends AbstractAdmin
 
         $formMapper
             ->add('path')
+            ->add('permanent')
             ->add('content', 'sonata_type_model', array(
                 // 'btn_add' => true,
                 // 'mapped' => false,
@@ -71,6 +72,7 @@ class RouteAdmin extends AbstractAdmin
     {
         $listMapper
             ->add('path')
+            ->add('permanent')
             ->add('routeContent', null, array(
                 'label' => 'Redirects to...',
                 'template' => 'EightPageBundle:Admin:_route_content.html.twig',
