@@ -26,6 +26,8 @@ Supports Symfony 2+ up to 3.3 (symfony 4.0 is in roadmap). Just be sure to selec
 
 ### Installation
 
+You can clone the sandbox from its repository https://github.com/matteocaberlotto/eight-cms or follow instructions below if you need to install CMS on existing project.
+
 1. require via composer
     - composer require eight/page-bundle
 
@@ -94,6 +96,7 @@ Supports Symfony 2+ up to 3.3 (symfony 4.0 is in roadmap). Just be sure to selec
                 - ['Content-type', 'text', { required: false }]
 ```
 
+4. Update database with ```php bin/console doctrine:schema:update --force```
 
 ### Creating pages:
 To create a page you need at least 1 layout and 1 block. A layout is simply a simfony page with at least 1 call to ```render_page_content()``` which is the twig function that dinamically appends blocks.
@@ -283,3 +286,9 @@ EG: ```{{ i18n_path('homepage') }}``` will link to a page tagged "homepage.<loca
 Try to avoid adding new variables to existing widgets as this could lead to twig errors (though most are handled).
 A good habit could be to always add an ```html_classes``` variable to add custom classes to any block.
 
+
+## Sandbox
+Take a look at sandbox installation at https://github.com/matteocaberlotto/eight-cms.
+
+## Demo
+A working demo version with accessible admin interface is available at http://cms.eightweb.it
