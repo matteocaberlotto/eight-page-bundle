@@ -645,10 +645,6 @@ $(function () {
     Editor.init();
 });
 
-$(window).load(function () {
-    Editor.repositionAddButtons();
-})
-
 // https://stackoverflow.com/questions/18111582/tinymce-4-links-plugin-modal-in-not-editable
 $(document).on('focusin', function(e) {
     if ($(e.target).closest(".mce-window").length) {
