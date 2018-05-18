@@ -237,13 +237,17 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
             return $page->getLocale();
         }
 
-        $locale = $this->getRequest()->get('_locale');
+        $request = $this->getRequest();
 
-        if (empty($locale)) {
-            return $this->container->getParameter('locale');
+        if ($request) {
+            $locale = $request->get('_locale');
+
+            if (empty($locale)) {
+                return $this->container->getParameter('locale');
+            }
+
+            return $locale;
         }
-
-        return $locale;
     }
 
     public function isCurrentPath($label)
@@ -336,7 +340,11 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
 
     public function getPage()
     {
-        return $this->getRequest()->get('content');
+        $request = $this->getRequest();
+
+        if ($request) {
+            return $request->get('content');
+        }
     }
 
     /**
