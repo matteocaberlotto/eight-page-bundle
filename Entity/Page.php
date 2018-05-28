@@ -63,6 +63,21 @@ class Page implements PageInterface
     protected $metas_http_equiv;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $sitemap = false;
+
+    /**
+     * @ORM\Column(nullable=true)
+     */
+    protected $sitemap_priority = 0.5;
+
+    /**
+     * @ORM\Column(nullable=true)
+     */
+    protected $sitemap_change = 'monthly';
+
+    /**
      * @ORM\Column(type="datetime")
      */
     protected $created;
@@ -592,6 +607,67 @@ class Page implements PageInterface
     public function getBlocks()
     {
         return $this->blocks;
+    }
+
+    /**
+     * Set sitemap
+     *
+     * @param boolean $sitemap
+     */
+    public function setSitemap($sitemap)
+    {
+        $this->sitemap = $sitemap;
+    }
+
+    /**
+     * Get layout
+     *
+     * @return boolean
+     */
+    public function getSitemap()
+    {
+        return $this->sitemap;
+    }
+
+    /**
+     * Set sitemap_priority
+     *
+     * @param string $sitemap_priority
+     */
+    public function setSitemapPriority($sitemap_priority)
+    {
+        $this->sitemap_priority = $sitemap_priority;
+    }
+
+
+    /**
+     * Get layout
+     *
+     * @return string
+     */
+    public function getSitemapPriority()
+    {
+        return (float) $this->sitemap_priority;
+    }
+
+    /**
+     * Set sitemap_priority
+     *
+     * @param float $sitemap_change
+     */
+    public function setSitemapChange($sitemap_change)
+    {
+        $this->sitemap_change = $sitemap_change;
+    }
+
+    /**
+     * Get layout
+     *
+     * @return float
+     */
+    public function getSitemapChange()
+    {
+        return $this->sitemap_change;
     }
 
     public function getOrderedBlocks($type = 'default')

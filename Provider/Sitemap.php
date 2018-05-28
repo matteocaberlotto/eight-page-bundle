@@ -18,25 +18,18 @@ class Sitemap
         $locales = $this->container->getParameter('eight_page.locales');
 
         foreach ($locales as $locale) {
-            $pages = array_merge($pages, $this->container->get('eight.pages')->findPagesByLocale($locale));
+            $pages = array_merge($pages, $this->container->get('eight.pages')->findPagesForSitemapByLocale($locale));
         }
 
         $return = array();
 
         foreach ($pages as $page) {
 
-            $priority = 0.8;
-            foreach ($locales as $locale) {
-                if($page->hasTag('homepage.' . $locale)) {
-                    $priority = 1;
-                }
-            }
-
             $return []= array(
                 'loc' => substr($page->getRoute()->getPath(), 1),
                 'lastmod' => $page->getUpdated(),
-                'changefreq' => 'monthly',
-                'priority' => $priority
+                'changefreq' => $page->getSitemapChange() ?: 'monthly',
+                'priority' => $page->getSitemapPriority() ?: '0.5',
             );
         }
 

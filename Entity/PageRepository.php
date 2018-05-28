@@ -69,4 +69,16 @@ class PageRepository extends EntityRepository
             ;
         return $q->getQuery()->getResult();
     }
+
+    public function findPagesForSitemapByLocale($locale)
+    {
+        $q = $this->createQueryBuilder('p');
+        $q
+            ->select('p')
+            ->leftJoin('p.route', 'r')
+            ->where('r.locale = :locale AND p.sitemap = true')
+            ->setParameter('locale', $locale)
+            ;
+        return $q->getQuery()->getResult();
+    }
 }

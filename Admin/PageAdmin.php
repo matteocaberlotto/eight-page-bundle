@@ -47,7 +47,12 @@ class PageAdmin extends AbstractAdmin implements ContainerAwareInterface
                     'sonata_help' => 'Tagging can be used to retrieve pages',
                 ))->addModelTransformer($tagsTransformer)
             )
-            ->add('title')
+            ->end()
+            ->with('sitemap')
+                ->add('sitemap')
+                ->add('sitemap_priority')
+                ->add('sitemap_change')
+            ->end()
         ;
 
         $controllerMap = $this->container->get('layout.provider')->provideAll();
