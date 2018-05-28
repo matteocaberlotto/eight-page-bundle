@@ -20,6 +20,9 @@
                             <li {% if app.request.get('target') == 'meta' %}class="active"{% endif %}>
                                 <a data-toggle="tab" href="#tabMeta"><i class="glyphicon glyphicon-tag"></i> META</a>
                             </li>
+                            <li {% if app.request.get('target') == 'sitemap' %}class="active"{% endif %}>
+                                <a data-toggle="tab" href="#tabSitemap"><i class="fa fa-sitemap"></i> SITEMAP</a>
+                            </li>
                         </ul>
 
                         <div class="tab-content box-body">
@@ -35,27 +38,29 @@
                                 {% block sonata_pre_fieldsets %}{% endblock %}
 
                                 {% for name, form_group in admin.formgroups %}
-                                    <fieldset {% if form_group.collapsed %}class="sonata-ba-fieldset-collapsed"{% endif %}>
-                                        <legend{% if form_group.description != false %} class="sonata-ba-fieldset-collapsed-description"{% endif %}>
-                                            {% if form_group.collapsed %}
-                                                <a href="" class="sonata-ba-collapsed" title="{{ 'link_expand'|trans({}, 'SonataAdminBundle') }}">{{ name|trans({}, admin.translationdomain) }}</a>
-                                                {% else %}
-                                                {{ name|trans({}, admin.translationdomain) }}
-                                            {% endif %}
-                                        </legend>
-
-                                        <div class="sonata-ba-collapsed-fields">
-                                            {% if form_group.description != false %}
-                                                <p>{{ form_group.description|raw }}</p>
-                                            {% endif %}
-
-                                            {% for field_name in form_group.fields %}
-                                                {% if admin.formfielddescriptions[field_name] is defined %}
-                                                    {{ form_row(form[field_name])}}
+                                    {% if name != 'sitemap' %}
+                                        <fieldset {% if form_group.collapsed %}class="sonata-ba-fieldset-collapsed"{% endif %}>
+                                            <legend{% if form_group.description != false %} class="sonata-ba-fieldset-collapsed-description"{% endif %}>
+                                                {% if form_group.collapsed %}
+                                                    <a href="" class="sonata-ba-collapsed" title="{{ 'link_expand'|trans({}, 'SonataAdminBundle') }}">{{ name|trans({}, admin.translationdomain) }}</a>
+                                                    {% else %}
+                                                    {{ name|trans({}, admin.translationdomain) }}
                                                 {% endif %}
-                                            {% endfor %}
-                                        </div>
-                                    </fieldset>
+                                            </legend>
+
+                                            <div class="sonata-ba-collapsed-fields">
+                                                {% if form_group.description != false %}
+                                                    <p>{{ form_group.description|raw }}</p>
+                                                {% endif %}
+
+                                                {% for field_name in form_group.fields %}
+                                                    {% if admin.formfielddescriptions[field_name] is defined %}
+                                                        {{ form_row(form[field_name])}}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+                                        </fieldset>
+                                    {% endif %}
                                 {% endfor %}
 
                                 {{ form_row(form['url']) }}
@@ -64,9 +69,13 @@
 
                                 {% block sonata_post_fieldsets %}{% endblock %}
 
-
                             </div>
 
+                            <div class="tab-pane" id="tabSitemap">
+                                {{ form_row(form['sitemap']) }}
+                                {{ form_row(form['sitemap_priority']) }}
+                                {{ form_row(form['sitemap_change']) }}
+                            </div>
 
                             <div class="tab-pane {% if app.request.get('target') == 'meta' %}active{% endif %}" id="tabMeta">
                                 {{ form_rest(form) }}
