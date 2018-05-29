@@ -50,7 +50,9 @@ class PageAdmin extends AbstractAdmin implements ContainerAwareInterface
             ->end()
             ->with('sitemap')
                 ->add('sitemap')
-                ->add('sitemap_priority')
+                ->add('sitemap_priority', null, array(
+                    'sonata_help' => 'A number between 0 and 1 (highest priority is 1).',
+                    ))
                 ->add('sitemap_change')
             ->end()
         ;
