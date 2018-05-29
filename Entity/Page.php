@@ -639,11 +639,10 @@ class Page implements PageInterface
         $this->sitemap_priority = $sitemap_priority;
     }
 
-
     /**
      * Get layout
      *
-     * @return string
+     * @return float
      */
     public function getSitemapPriority()
     {
@@ -653,7 +652,7 @@ class Page implements PageInterface
     /**
      * Set sitemap_priority
      *
-     * @param float $sitemap_change
+     * @param string $sitemap_change
      */
     public function setSitemapChange($sitemap_change)
     {
@@ -663,7 +662,7 @@ class Page implements PageInterface
     /**
      * Get layout
      *
-     * @return float
+     * @return string
      */
     public function getSitemapChange()
     {
