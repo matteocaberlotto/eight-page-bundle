@@ -50,9 +50,9 @@ class AddRouteFieldSubscriber implements EventSubscriberInterface
         $form->add('url', 'text', array(
             'mapped' => false,
             'data' => $url,
-            'sonata_help' => 'Route label: ' . $name,
+            'sonata_help' => 'Generated route name: ' . $name,
             'attr' => array(
-                'class' => 'page-url'
+                'class' => 'page-url',
             ),
         ));
 
