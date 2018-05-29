@@ -70,7 +70,7 @@ class DefaultController extends Controller
 
         $uris = $this->container->get('bauer.sitemap.url_provider')->provide();
 
-        return $this->render('TeoCoreBundle:Default:sitemap.xml.twig', array(
+        return $this->render('EightPageBundle:Default:sitemap.xml.twig', array(
             'uris' => $uris
         ), $response);
     }
