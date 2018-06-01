@@ -22,6 +22,9 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->scalarNode('default_not_found_message')
+                    ->defaultValue('404: Page not found.')
+                ->end()
                 ->scalarNode('use_default_widgets')
                     ->defaultValue(false)
                 ->end()

@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 class DefaultController extends Controller
@@ -44,6 +45,11 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $page = $request->get('content');
+
+        if (!$page->getPublished()) {
+            throw new NotFoundHttpException($this->container->getParameter('eight_page.default_not_found_message'));
+        }
+
         $template = $this->get('layout.provider')->provide($page);
 
         $response = new Response();
