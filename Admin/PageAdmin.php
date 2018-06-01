@@ -33,6 +33,7 @@ class PageAdmin extends AbstractAdmin implements ContainerAwareInterface
         $tagsTransformer = new TagsToStringTransformer('Eight\PageBundle\Entity\Tag', $this->getModelManager());
 
         $formMapper
+            ->add('published')
             ->add('title')
             ->add('seq', null, array(
                 'label' => 'Position',
@@ -66,7 +67,6 @@ class PageAdmin extends AbstractAdmin implements ContainerAwareInterface
             ->addEventSubscriber(new AddRouteFieldSubscriber(null, $controllerMap, $locales))
             ->addEventSubscriber(new AddMetaFieldSubscriber($http_metas))
             ;
-
     }
 
     // Fields to be shown on lists

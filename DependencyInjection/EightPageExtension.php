@@ -61,5 +61,7 @@ class EightPageExtension extends Extension
         $container->setParameter('eight_page.edit_page_url', $config['edit_page_url']);
 
         $container->setParameter('eight_page.update_add_buttons_position', $config['update_add_buttons_position']);
+
+        $container->setParameter('eight_page.default_not_found_message', $config['default_not_found_message']);
     }
 }
