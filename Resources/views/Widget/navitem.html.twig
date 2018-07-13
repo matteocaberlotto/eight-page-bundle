@@ -1,5 +1,9 @@
 <li class="nav-item {{ html_classes }}">
     <a class="nav-link {% if page and page.id == target_page.id %}active{% endif %}" href="{{ target_page.id ? i18n_path(target_page) : '' }}">
-        {{ i18n_title(target_page) }}
+        {% if label is not empty %}
+            {{ label }}
+        {% else %}
+            {{ i18n_title(target_page) }}
+        {% endif %}
     </a>
 </li>
