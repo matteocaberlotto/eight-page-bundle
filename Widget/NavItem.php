@@ -10,6 +10,7 @@ class NavItem extends AbstractWidget
     {
         return array(
             'html_classes',
+            'label',
             'target_page' => new Config(array(
                 'type' => 'entity',
                 'class' => 'Eight\PageBundle\Entity\Page',
