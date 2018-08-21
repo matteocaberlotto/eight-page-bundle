@@ -2,6 +2,9 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-body">
+                <p>
+                    Edit <strong>{{ current_form_block.type }}</strong> (id: {{ current_form_block.id }})
+                </p>
                 {{ form(form) }}
             </div>
         </div>
