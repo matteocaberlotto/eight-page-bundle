@@ -462,16 +462,19 @@ var Editor = (function () {
 
                 if (variables['is_static']) {
                     var class_name = "add-item add-item-static";
-                    var html_content = ' ' + variables['slot-label'];
                 } else {
                     var class_name = "add-item";
-                    var html_content = ' ' + variables['slot-label'];
+                }
+
+                var html_content = ' ' + variables['subject-label'];
+                if (variables['slot-label'] !== 'default') {
+                    html_content += ' [' + variables['slot-label'] + ']';
                 }
 
                 var addNewItem = $('<a/>', {
                         "href": "javascript:;",
                         "class": class_name,
-                        "html": '<span class="fa fa-cubes"></span>' + html_content
+                        "html": '<span class="fa fa-plus"></span>' + html_content
                     })
                     ;
 
