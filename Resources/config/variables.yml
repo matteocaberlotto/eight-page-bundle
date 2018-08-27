@@ -74,3 +74,8 @@ services:
         tags:
             - { name: eight_page.variable }
 
+    eight.date:
+        class: Eight\PageBundle\Variable\Date
+        tags:
+            - { name: eight_page.variable }
+
