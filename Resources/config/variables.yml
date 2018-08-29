@@ -59,6 +59,13 @@ services:
         tags:
             - { name: eight_page.variable }
 
+    eight.file:
+        class: Eight\PageBundle\Variable\File
+        calls:
+            - ['setContainer', ['@service_container']]
+        tags:
+            - { name: eight_page.variable }
+
     eight.checkbox:
         class: Eight\PageBundle\Variable\Checkbox
         tags:
