@@ -90,6 +90,14 @@ class Pages
         if (isset($data['static_blocks'])) {
             $this->createBlocks($data['static_blocks']);
         }
+
+        if (isset($data['published']) && $data['published']) {
+            $page->setPublished(true);
+        }
+
+        $this->doctrine->flush();
+
+        return $page;
     }
 
     protected function createTags($page, $tags)
