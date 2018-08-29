@@ -175,7 +175,7 @@ class BlockCRUDController extends CRUDController
                 // if there is no value nor images attached, skip or delete if existing.
                 // TODO: find a way to delete images
                 if (empty($value)) {
-                    if ($prev && $type != 'image') {
+                    if ($prev && ($type != 'image' && $type != 'file')) {
                         $this->get('doctrine')->getManager()->remove($prev);
                     }
 
