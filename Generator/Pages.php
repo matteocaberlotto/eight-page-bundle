@@ -231,7 +231,11 @@ class Pages
                     ));
             }
 
-            $this->container->get('variable.provider')->get($c['type'])->saveValue($content, $c['content'], $c);
+            if ($c['type'] == 'image') {
+                $content->setContent($c['content']);
+            } else {
+                $this->container->get('variable.provider')->get($c['type'])->saveValue($content, $c['content'], $c);
+            }
         }
     }
 }
