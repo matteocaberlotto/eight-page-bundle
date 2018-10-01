@@ -81,4 +81,16 @@ class PageRepository extends EntityRepository
             ;
         return $q->getQuery()->getResult();
     }
+
+    public function findPagesByTag($tag)
+    {
+        $q = $this->createQueryBuilder('p');
+        $q
+            ->select('p')
+            ->leftJoin('p.tags', 't')
+            ->where('t.name = :name')
+            ->setParameter('name', $tag)
+            ;
+        return $q->getQuery()->getResult();
+    }
 }
