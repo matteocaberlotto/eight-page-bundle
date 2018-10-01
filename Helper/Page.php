@@ -97,6 +97,10 @@ class Page
         $cloned->setMetasProperty($page->getMetasProperty());
         $cloned->setMetasHttpEquiv($page->getMetasHttpEquiv());
 
+        foreach ($page->getTags() as $tag) {
+            $cloned->addTag($tag);
+        }
+
         $manager = $this->container->get('doctrine')->getManager();
         $manager->persist($cloned);
 
