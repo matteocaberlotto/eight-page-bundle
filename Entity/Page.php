@@ -41,7 +41,7 @@ class Page implements PageInterface
      * @ORM\ManyToMany(
      *   targetEntity="Tag",
      *   inversedBy="pages",
-     *   cascade={"persist", "remove"}
+     *   cascade={"persist"}
      * )
      * @ORM\JoinTable(name="page_tag_tag")
      */
