@@ -1,5 +1,5 @@
 <li>
-    <a class="{{ html_classes }}" href="{{ target_page.id ? i18n_path(target_page) : '' }}">
+    <a title="{{ i18n_title(target_page) }}" "class="{{ html_classes }}" href="{{ target_page.id ? i18n_path(target_page) : '' }}">
         {% if label %}
             {{ label }}
         {% else %}
