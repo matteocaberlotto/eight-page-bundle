@@ -449,6 +449,11 @@ class Block implements BlockInterface
         return $return;
     }
 
+    public function info()
+    {
+        return $this->toArray();
+    }
+
     /**
      * This is used to export page.
      */

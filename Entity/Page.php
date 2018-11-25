@@ -730,4 +730,18 @@ class Page implements PageInterface
             'blocks' => $this->getBlocksAsArray(),
             );
     }
+
+    /**
+     * Used inside editor.
+     */
+    public function info()
+    {
+        return array(
+            'id' => $this->getId(),
+            'url' => $this->getRoute()->getPath(),
+            'locale' => $this->getLocale(),
+            'controller' => $this->getRoute()->getController(),
+            'title' => $this->getTitle(),
+            );
+    }
 }
