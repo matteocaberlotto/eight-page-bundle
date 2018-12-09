@@ -30,6 +30,11 @@ services:
         tags:
             - { name: eight_page.widget }
 
+    navbar_item_ext.widget:
+        class: Eight\PageBundle\Widget\NavItemExt
+        tags:
+            - { name: eight_page.widget }
+
     navbar_dropdown.widget:
         class: Eight\PageBundle\Widget\NavbarDropdown
         tags:
@@ -37,6 +42,11 @@ services:
 
     navbar_dropdown_item.widget:
         class: Eight\PageBundle\Widget\NavbarDropdownItem
+        tags:
+            - { name: eight_page.widget }
+
+    navbar_dropdown_item_ext.widget:
+        class: Eight\PageBundle\Widget\NavbarDropdownItemExt
         tags:
             - { name: eight_page.widget }
 

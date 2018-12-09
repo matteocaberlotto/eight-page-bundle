@@ -4,32 +4,29 @@ namespace Eight\PageBundle\Widget;
 
 use Eight\PageBundle\Variable\Config\Config;
 
-class NavbarDropdownItem extends AbstractWidget
+class NavbarDropdownItemExt extends AbstractWidget
 {
     public function getVars()
     {
         return array(
             'html_classes',
             'label',
-            'target_page' => new Config(array(
-                'type' => 'entity',
-                'class' => 'Eight\PageBundle\Entity\Page',
-                )),
+            'external_link',
             );
     }
 
     public function getLayout()
     {
-        return 'EightPageBundle:Widget:nav_dropdown_item.html.twig';
+        return 'EightPageBundle:Widget:nav_dropdown_item_ext.html.twig';
     }
 
     public function getName()
     {
-        return 'nav_dropdown_item';
+        return 'nav_dropdown_item_ext';
     }
 
     public function getLabel()
     {
-        return 'Dropdown item';
+        return 'Dropdown item (ext)';
     }
 }
