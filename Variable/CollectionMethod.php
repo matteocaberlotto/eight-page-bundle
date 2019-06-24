@@ -23,7 +23,7 @@ class CollectionMethod extends AbstractVariable
 
     public function resolve(ContentInterface $variable, $config)
     {
-        $config = $this->getValue($variable);
+        $config = $this->getValue($variable, $config);
         $method = $config['method'];
         return $this->container->get('doctrine')->getRepository($config['class'])->$method();
     }
