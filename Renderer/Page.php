@@ -56,7 +56,7 @@ class Page
      */
     public function renderBlock($block, $edit_mode = false)
     {
-        $html = $this->get('templating')->render($this->getTemplate($block), $this->getVariables($block));
+        $html = $this->get('twig')->render($this->getTemplate($block), $this->getVariables($block));
 
         if ($edit_mode) {
             $html = $this->decorateHtml($html, 'block', $block);
@@ -214,7 +214,7 @@ class Page
 
         if ($block->loadsVariables()) {
             $form = $this->createFormForBlock($block);
-            $forms .= $this->container->get('templating')->render('EightPageBundle:Content:util/form.html.twig', array(
+            $forms .= $this->container->get('twig')->render('@EightPage/Content/util/form.html.twig', array(
                 'form' => $form->createView(),
                 'current_form_block' => $block,
                 ));
@@ -238,7 +238,7 @@ class Page
     {
         $template = $this->container->getParameter('eight_page.page_append');
 
-        return $this->container->get('templating')->render($template, array(
+        return $this->container->get('twig')->render($template, array(
             'update_add_buttons_position' => $this->container->getParameter('eight_page.update_add_buttons_position'),
             'widgets' => $this->get('widget.provider')->all(),
             ));
@@ -263,7 +263,7 @@ class Page
             'subject_label' => $subject instanceof BlockInterface ? $this->get('widget.provider')->get($subject->getName())->getLabel() : 'Main page',
         );
 
-        return $this->get('templating')->render($template, $variables);
+        return $this->get('twig')->render($template, $variables);
     }
 
     public function createFormForBlock($block)
@@ -376,7 +376,7 @@ class Page
             }
         }
 
-        return $this->get('templating')->render('EightPageBundle:Content:util/css.html.twig', array(
+        return $this->get('twig')->render('@EightPage/Content/util/css.html.twig', array(
             'css' => $css
             ));
     }
@@ -407,7 +407,7 @@ class Page
             }
         }
 
-        $html = $this->get('templating')->render('EightPageBundle:Content:util/js.html.twig', array(
+        $html = $this->get('twig')->render('@EightPage/Content/util/js.html.twig', array(
             'js' => $js
             ));
 

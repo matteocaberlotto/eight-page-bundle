@@ -30,7 +30,6 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
             "locale" => $this->getLocale(),
             "page" => $this->getPage(),
             "locales" => $this->container->getParameter('eight_page.locales'),
-            "assets_version" => md5(fileatime($this->container->getParameter('kernel.root_dir') . "/config/parameters.yml")),
         );
 
         return $defaults;

@@ -16,7 +16,7 @@ class EightPageBundle extends Bundle
 
         $container->loadFromExtension('twig', array(
             'form_themes' => array(
-                'EightPageBundle:Form:fields.html.twig',
+                '@EightPage/Form/fields.html.twig',
             ),
         ));
     }

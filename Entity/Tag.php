@@ -20,7 +20,7 @@ class Tag
     protected $id;
 
     /**
-     * @ORM\Column(unique=true)
+     * @ORM\Column(type="string",length=180,unique=true)
      */
     protected $name;
 

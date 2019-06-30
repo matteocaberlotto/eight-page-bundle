@@ -3,6 +3,7 @@ services:
     layout.provider:
         class: Eight\PageBundle\Provider\Layout
         arguments: ['@service_container']
+        public: true
 
     widget.provider:
         class: Eight\PageBundle\Provider\Widget
@@ -27,6 +28,7 @@ services:
     page.renderer:
         class: Eight\PageBundle\Renderer\Page
         arguments: ['@service_container']
+        public: true
 
     eight.seo.listener:
         class: Eight\PageBundle\HttpKernel\FilterControllerSeoPageEvent
@@ -42,6 +44,7 @@ services:
     eight.page.seo:
         class: Eight\PageBundle\Seo\SeoPage
         arguments: ['%eight_page.seo_title%', '%eight_page.seo_description%']
+        public: true
 
     eight.twig.extension:
         class: Eight\PageBundle\Twig\Extension
