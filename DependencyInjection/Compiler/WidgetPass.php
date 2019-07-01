@@ -10,11 +10,27 @@ class WidgetPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
+        $this->setupAdminBundle($container);
         $this->loadWidgets($container);
         $this->loadVariables($container);
     }
 
-    protected function loadWidgets($container)
+    protected function setupAdminBundle(ContainerBuilder $container)
+    {
+        if ($container->has('sonata.admin.pool')) {
+            $provider = $container->findDefinition('eight.twig.extension');
+
+            $provider->addMethodCall('setSonataAdminEnabled', []);
+        }
+
+        if ($container->has('easyadmin.config.manager')) {
+            $provider = $container->findDefinition('eight.twig.extension');
+
+            $provider->addMethodCall('setEasyAdminEnabled', []);
+        }
+    }
+
+    protected function loadWidgets(ContainerBuilder $container)
     {
         if (!$container->has('widget.provider')) {
             return;
@@ -34,7 +50,7 @@ class WidgetPass implements CompilerPassInterface
         }
     }
 
-    protected function loadVariables($container)
+    protected function loadVariables(ContainerBuilder $container)
     {
         if (!$container->has('variable.provider')) {
             return;

@@ -1,9 +1,14 @@
 services:
 
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
     eight.pages:
         class: Eight\PageBundle\Entity\PageRepository
         factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments: ['Eight\PageBundle\Entity\Page']
+        public: true
 
     eight.tags:
         class: Eight\PageBundle\Entity\TagRepository
@@ -14,9 +19,11 @@ services:
         class: Eight\PageBundle\Entity\BlockRepository
         factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments: ['Eight\PageBundle\Entity\Block']
+        public: true
 
     eight.content:
         class: Eight\PageBundle\Entity\BlockRepository
         factory: ["@doctrine.orm.default_entity_manager", getRepository]
         arguments: ['Eight\PageBundle\Entity\Content']
+        public: true
 

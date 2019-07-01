@@ -3,9 +3,11 @@
         <span class="fa fa-wrench"></span>
     </a>
 
-    <a data-toggle="tooltip" title="Back to pages listing" id="back-to-list-button" class="btn btn-primary btn-sm" href="{{ path('admin_eight_page_page_list') }}">
-        <span class="fa fa-home"></span>
-    </a>
+    {% if eight_page_sonata_admin_enabled %}
+        <a data-toggle="tooltip" title="Back to pages listing" id="back-to-list-button" class="btn btn-primary btn-sm" href="{{ path('admin_eight_page_page_list') }}">
+            <span class="fa fa-home"></span>
+        </a>
+    {% endif %}
 
     <span id="page-specs">{{ page|raw }} || path: {{ page.route.path }} || controller: {{ page.route.controller }} || layout: {{ page.layout ? page.layout : 'default' }}</span>
 </div>
@@ -82,15 +84,24 @@
 
 
 
-
 <script type="text/javascript">
-var globalAppendUrl = '{{ path('admin_eight_page_block_append') }}';
-var globalRemoveUrl = '{{ path('admin_eight_page_block_remove') }}';
-var globalReorderUrl = '{{ path('admin_eight_page_block_reorder') }}';
-var globalEnableUrl = '{{ path('admin_eight_page_block_enable') }}';
-var globalDisableUrl = '{{ path('admin_eight_page_block_disable') }}';
-var globalUpdateEightAddButtonsPosition = '{{ update_add_buttons_position }}';
+{% if eight_page_sonata_admin_enabled %}
+    var globalAppendUrl = '{{ path('admin_eight_page_block_append') }}';
+    var globalRemoveUrl = '{{ path('admin_eight_page_block_remove') }}';
+    var globalReorderUrl = '{{ path('admin_eight_page_block_reorder') }}';
+    var globalEnableUrl = '{{ path('admin_eight_page_block_enable') }}';
+    var globalDisableUrl = '{{ path('admin_eight_page_block_disable') }}';
+    var globalUpdateEightAddButtonsPosition = '{{ update_add_buttons_position }}';
+{% endif %}
 
+{% if eight_page_easy_admin_enabled %}
+    var globalAppendUrl = '{{ path('admin_eight_page_block_append') }}';
+    var globalRemoveUrl = '{{ path('admin_eight_page_block_remove') }}';
+    var globalReorderUrl = '{{ path('admin_eight_page_block_reorder') }}';
+    var globalEnableUrl = '{{ path('admin_eight_page_block_enable') }}';
+    var globalDisableUrl = '{{ path('admin_eight_page_block_disable') }}';
+    var globalUpdateEightAddButtonsPosition = '{{ update_add_buttons_position }}';
+{% endif %}
 
 {# this must be called before any plugin starts executing,
    to allow the library setting up DOM attributes and remove html markers #}

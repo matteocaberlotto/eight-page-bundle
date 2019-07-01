@@ -1,5 +1,9 @@
 services:
 
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
     layout.provider:
         class: Eight\PageBundle\Provider\Layout
         arguments: ['@service_container']
@@ -8,18 +12,22 @@ services:
     widget.provider:
         class: Eight\PageBundle\Provider\Widget
         arguments: ['@service_container']
+        public: true
 
     variable.provider:
         class: Eight\PageBundle\Provider\Variable
         arguments: ['@service_container']
+        public: true
 
     eight.form_builder:
         class: Eight\PageBundle\Renderer\FormBuilder
         arguments: ['@service_container']
+        public: true
 
     helper.page:
         class: Eight\PageBundle\Helper\Page
         arguments: ['@service_container']
+        public: true
 
     eight.page_generator:
         class: Eight\PageBundle\Generator\Pages
@@ -48,11 +56,12 @@ services:
 
     eight.twig.extension:
         class: Eight\PageBundle\Twig\Extension
-        arguments: ['@eight.page.seo']
         calls:
             - [ setContainer, ["@service_container"]]
         tags:
             - { name: twig.extension }
+        arguments:
+            $seopage: '@eight.page.seo'
 
     class_method_form_type:
         class: Eight\PageBundle\Form\CollectionMethodType

@@ -2,16 +2,21 @@
 
 namespace Eight\PageBundle\Renderer;
 
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
 use Eight\PageBundle\Form\CollectionMethodType;
 use Eight\PageBundle\Variable\Config\Normalizer;
+
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class FormBuilder
 {
     protected $container, $current_page;
 
-    public function __construct($container)
+    public function __construct($container, UrlGeneratorInterface $router)
     {
         $this->container = $container;
+        $this->router = $router;
     }
 
     public function getCurrentPage()
@@ -30,7 +35,7 @@ class FormBuilder
 
         $builder
             ->setMethod('post')
-            ->setAction($this->container->get('router')->generate('admin_eight_page_block_update', array('id' => $block->getId(), 'page_id' => $this->getCurrentPage()->getId())))
+            ->setAction($this->router->generate('admin_eight_page_block_update', array('id' => $block->getId(), 'page_id' => $this->getCurrentPage()->getId())))
             ;
 
         /**
@@ -53,7 +58,7 @@ class FormBuilder
         }
 
         $builder
-            ->add('save', 'submit', array(
+            ->add('save', SubmitType::class, array(
                 'attr' => array(
                     'class' => 'form-control btn-primary submit-block-edit'
                     )
@@ -62,7 +67,7 @@ class FormBuilder
 
         if (!$block->isEnabled()) {
             $builder
-                ->add('save-enable', 'submit', array(
+                ->add('save-enable', SubmitType::class, array(
                     'label' => 'Save and enable',
                     'attr' => array(
                         'class' => 'form-control btn-success submit-enable-block-edit'

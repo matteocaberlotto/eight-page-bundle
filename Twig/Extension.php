@@ -4,6 +4,9 @@ namespace Eight\PageBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+
+use Eight\PageBundle\Seo\SeoPage;
 use Eight\PageBundle\Model\PageInterface;
 
 class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface, ContainerAwareInterface
@@ -14,14 +17,18 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
 
     protected $container;
 
+    protected $sonata_admin_enabled = false;
+    protected $easy_admin_enabled = false;
+
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
     }
 
-    public function __construct($seopage)
+    public function __construct(SeoPage $seopage, UrlGeneratorInterface $router)
     {
         $this->seopage = $seopage;
+        $this->router = $router;
     }
 
     public function getGlobals()
@@ -30,6 +37,8 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
             "locale" => $this->getLocale(),
             "page" => $this->getPage(),
             "locales" => $this->container->getParameter('eight_page.locales'),
+            "eight_page_sonata_admin_enabled" => $this->sonata_admin_enabled,
+            "eight_page_easy_admin_enabled" => $this->easy_admin_enabled,
         );
 
         return $defaults;
@@ -70,6 +79,16 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
             new \Twig_SimpleFunction('get_breadcrumbs', array($this, 'getBreadcrumbs')),
             new \Twig_SimpleFunction('current_index', array($this, 'currentIndex')),
         );
+    }
+
+    public function setSonataAdminEnabled()
+    {
+        $this->sonata_admin_enabled = true;
+    }
+
+    public function setEasyAdminEnabled()
+    {
+        $this->easy_admin_enabled = true;
     }
 
     public function currentIndex($label, $increment = true)
@@ -125,7 +144,7 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
             return $page->getRoute()->getPath();
         }
 
-        return $this->container->get('router')->generate($this->getRequest()->get('_route'), $this->getRequest()->get('_route_params'));
+        return $this->router->generate($this->getRequest()->get('_route'), $this->getRequest()->get('_route_params'));
     }
 
     public function showWhenRouteMatch($routes, $string)
@@ -307,9 +326,19 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
 
         if ($page) {
             if ($this->editMode()) {
-                return $this->container->get('router')->generate($this->container->getParameter('eight_page.edit_page_url'), array('id' => $page->getId()));
+                if ($this->sonata_admin_enabled) {
+                    return $this->router->generate($this->container->getParameter('eight_page.edit_page_url'), ['id' => $page->getId()]);
+                }
+                
+                if ($this->easy_admin_enabled) {
+                    return $this->router->generate('easyadmin', [
+                        'entity' => 'Page',
+                        'action' => 'layout',
+                        'id' => $page->getId()
+                    ]);
+                }
             } else {
-                return $this->container->get('router')->generate($page->getRoute()->getName(), $params);
+                return $this->router->generate($page->getRoute()->getName(), $params);
             }
         }
     }
