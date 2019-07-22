@@ -3,6 +3,7 @@
 namespace Eight\PageBundle\Variable;
 
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use Eight\PageBundle\Model\ContentInterface;
 use Eight\PageBundle\Variable\AbstractVariable;
@@ -12,7 +13,7 @@ class Choices extends AbstractVariable
     public function buildForm(FormBuilderInterface $builder, $name, $config, ContentInterface $variable = null)
     {
         $builder
-            ->add($name, 'choice', array(
+            ->add($name, ChoiceType::class, array(
                 'label' => $config->has('label') ? $config->get('label') : $name,
                 'required' => $config->has('required') ? $config->get('required') : false,
                 'data' => $variable ? ($variable->getContent() ? $this->getValue($variable, $config) : $this->getDefaultValue($config)) : $this->getDefaultValue($config),

@@ -6,6 +6,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 use Eight\PageBundle\Model\ContentInterface;
 use Eight\PageBundle\Variable\AbstractVariable;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class Text extends AbstractVariable
 {
@@ -19,7 +20,7 @@ class Text extends AbstractVariable
         }
 
         $builder
-            ->add($name, 'textarea', array(
+            ->add($name, TextareaType::class, array(
                 'label' => $config->has('label') ? $config->get('label') : $name,
                 'required' => false,
                 'attr' => array(

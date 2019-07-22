@@ -3,6 +3,7 @@
 namespace Eight\PageBundle\Variable;
 
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 use Eight\PageBundle\Variable\AbstractVariable;
 use Eight\PageBundle\Model\ContentInterface;
@@ -24,7 +25,7 @@ class File extends AbstractVariable
     public function buildForm(FormBuilderInterface $builder, $name, $config, ContentInterface $variable = null)
     {
         $builder
-            ->add($name, 'file', array(
+            ->add($name, FileType::class, array(
                 'label' => $config->has('label') ? $config->get('label') : $name,
                 'data_class' => null,
                 'required' => false,
