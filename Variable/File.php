@@ -47,6 +47,10 @@ class File extends AbstractVariable
             $config->set('folder', 'default');
         }
 
+        if (!$config->has('base_upload_folder')) {
+            $config->set('base_upload_folder', 'public');
+        }
+
         $variable->setImagePath($content);
         $variable->manageFileUpload($config);
     }
