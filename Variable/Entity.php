@@ -4,6 +4,7 @@ namespace Eight\PageBundle\Variable;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use Eight\PageBundle\Model\ContentInterface;
 use Eight\PageBundle\Variable\AbstractVariable;
@@ -74,7 +75,7 @@ class Entity extends AbstractVariable
     public function buildForm(FormBuilderInterface $builder, $name, $config, ContentInterface $variable = null)
     {
         $builder
-            ->add($name, 'entity', array(
+            ->add($name, EntityType::class, array(
                 'label' => $config->has('label') ? $config->get('label') : $name,
                 'class' => $config->get('class'),
                 'placeholder' => 'Choose a model',

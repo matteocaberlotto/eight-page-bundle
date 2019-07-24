@@ -32,6 +32,7 @@ services:
     eight.page_generator:
         class: Eight\PageBundle\Generator\Pages
         arguments: ['@service_container']
+        public: true
 
     page.renderer:
         class: Eight\PageBundle\Renderer\Page
