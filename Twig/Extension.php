@@ -332,7 +332,7 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
                 
                 if ($this->easy_admin_enabled) {
                     return $this->router->generate('easyadmin', [
-                        'entity' => 'Page',
+                        'entity' => 'Pages',
                         'action' => 'layout',
                         'id' => $page->getId()
                     ]);
