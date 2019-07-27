@@ -93,6 +93,11 @@ class Page implements PageInterface
     protected $route;
 
     /**
+     * Helper not mapped
+     */
+    protected $url;
+
+    /**
      * @ORM\Column(nullable=true)
      */
     protected $layout;
@@ -716,6 +721,16 @@ class Page implements PageInterface
         }
 
         return $return;
+    }
+
+    public function getUrl()
+    {
+        return $this->getRoute()->getPath();
+    }
+
+    public function setUrl($url)
+    {
+        $this->url = $url;
     }
 
     public function toArray()

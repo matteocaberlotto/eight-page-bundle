@@ -2,9 +2,10 @@ easy_admin:
     entities:
         Pages:
             class: Eight\PageBundle\Entity\Page
-            edit:
+            form:
                 fields:
                     - title
+                    - description
                     -
                         property: locale
                         type: text
@@ -13,8 +14,6 @@ easy_admin:
                     -
                         property: url
                         type: text
-                        type_options:
-                            mapped: false
                     -
                         property: controller
                         type: text
@@ -24,7 +23,17 @@ easy_admin:
                     - layout
                     - published
                     - tags
+                    - sitemap
+                    - sitemap_priority
+                    - sitemap_change
             list:
                 actions: ['layout', 'clone']
+                fields:
+                    - title
+                    - route
+                    - route.path
+                    - route.locale
+                    - published
+                    - tags
         Tags:
             class: Eight\PageBundle\Entity\Tag
