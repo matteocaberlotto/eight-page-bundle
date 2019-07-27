@@ -1,0 +1,30 @@
+easy_admin:
+    entities:
+        Pages:
+            class: Eight\PageBundle\Entity\Page
+            edit:
+                fields:
+                    - title
+                    -
+                        property: locale
+                        type: text
+                        type_options:
+                            mapped: false
+                    -
+                        property: url
+                        type: text
+                        type_options:
+                            mapped: false
+                    -
+                        property: controller
+                        type: text
+                        type_options:
+                            mapped: false
+
+                    - layout
+                    - published
+                    - tags
+            list:
+                actions: ['layout', 'clone']
+        Tags:
+            class: Eight\PageBundle\Entity\Tag

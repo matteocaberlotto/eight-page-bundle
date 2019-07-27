@@ -6,7 +6,7 @@ use Eight\PageBundle\Model\PageInterface;
 use Eight\PageBundle\Entity\Block;
 use Eight\PageBundle\Entity\Content;
 use Eight\PageBundle\Entity\Page as PageEntity;
-
+use Raindrop\RoutingBundle\Entity\Route;
 
 /**
  * Generic helper to perfrom some common database operations.
@@ -192,5 +192,82 @@ class Page
         }
 
         return $return;
+    }
+
+    public function easyAdminBindRouteToPage($request, $page)
+    {
+        $query = $request->query->all();
+        $requestParams = $request->request->all();
+        $url = $requestParams['pages']['url'];
+
+        $manager = $this->container->get('doctrine')->getManager();
+
+        if (!empty($url)) {
+
+            $route = $page->getRoute();
+
+            $controller = !empty($requestParams['pages']['controller']) ? $requestParams['pages']['controller'] : $this->container->getParameter('eight_page.default_controller');
+
+            if ($route && $route->getPath() == $url) {
+
+                // check if locale has changed
+                $locale = $requestParams['pages']['locale'];
+
+                if ($locale !== $route->getLocale()) {
+                    $route->setLocale($locale);
+                    $manager->flush();
+                }
+
+                // check if controller has changed
+                if ($controller !== $route->getController()) {
+                    $route->setController($controller);
+                    $manager->flush();
+                }
+
+                // make sure page is bound to route
+                if (!$route->getContent() || $route->getContent() !== $page) {
+                    $route->setContent($page);
+                    $manager->flush();
+                }
+
+                return;
+            }
+
+            if (!$route) {
+                $route = new Route();
+                $route->setSchemes([]);
+                $route->setResolver($this->container->get('raindrop_routing.content_resolver'));
+                $route->setPath($url);
+                $route->setNameFromPath();
+
+                $route->setController($controller);
+                $route->setLocale($requestParams['pages']['locale']);
+                $manager->persist($route);
+            } else {
+                $route->setPath($url);
+                $route->setNameFromPath();
+                $route->setController($controller);
+                $route->setLocale($requestParams['pages']['locale']);
+            }
+
+            if (empty($route->getName())) {
+                // set "homepage" name when route name is empty ("/" root path)
+                $route->setName('homepage');
+            }
+
+            $page->setRoute($route);
+
+            $route->setContent($page);
+
+            if ($route->getController() != $controller) {
+                $route->setController($controller);
+            }
+
+            if ($route->getLocale() != $requestParams['pages']['locale']) {
+                $route->setLocale($requestParams['pages']['locale']);
+            }
+
+            $manager->flush();
+        }
     }
 }

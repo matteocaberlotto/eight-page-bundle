@@ -25,7 +25,7 @@ class EightPageExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
-        $loader->load('admin.yml');
+
         $loader->load('doctrine.yml');
         $loader->load('variables.yml');
         $loader->load('icons.yml');
