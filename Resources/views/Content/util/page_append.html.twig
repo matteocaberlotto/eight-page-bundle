@@ -9,6 +9,12 @@
         </a>
     {% endif %}
 
+    {% if eight_page_easy_admin_enabled %}
+        <a data-toggle="tooltip" title="Back to pages listing" id="back-to-list-button" class="btn btn-primary btn-sm" href="{{ path('easyadmin') }}">
+            <span class="fa fa-home"></span>
+        </a>
+    {% endif %}
+
     <span id="page-specs">{{ page|raw }} || path: {{ page.route.path }} || controller: {{ page.route.controller }} || layout: {{ page.layout ? page.layout : 'default' }}</span>
 </div>
 
