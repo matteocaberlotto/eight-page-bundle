@@ -725,7 +725,7 @@ class Page implements PageInterface
 
     public function getUrl()
     {
-        return $this->getRoute()->getPath();
+        return $this->getRoute() ? $this->getRoute()->getPath() : null;
     }
 
     public function setUrl($url)
