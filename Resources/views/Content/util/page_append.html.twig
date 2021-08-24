@@ -3,19 +3,19 @@
         <span class="fa fa-wrench"></span>
     </a>
 
-    {% if eight_page_sonata_admin_enabled %}
+    {% if eight_page_sonata_admin_enabled() %}
         <a data-toggle="tooltip" title="Back to pages listing" id="back-to-list-button" class="btn btn-primary btn-sm" href="{{ path('admin_eight_page_page_list') }}">
             <span class="fa fa-home"></span>
         </a>
     {% endif %}
 
-    {% if eight_page_easy_admin_enabled %}
-        <a data-toggle="tooltip" title="Back to pages listing" id="back-to-list-button" class="btn btn-primary btn-sm" href="{{ path('easyadmin') }}">
+    {% if eight_page_easy_admin_enabled() %}
+        <a data-toggle="tooltip" title="Back to pages listing" id="back-to-list-button" class="btn btn-primary btn-sm" href="{{ path('admin') }}">
             <span class="fa fa-home"></span>
         </a>
     {% endif %}
 
-    <span id="page-specs">{{ page|raw }} || path: {{ page.route.path }} || controller: {{ page.route.controller }} || layout: {{ page.layout ? page.layout : 'default' }}</span>
+    <span id="page-specs">Page: "{{ page|raw }}" || URI: {{ page.route.path }}</span>
 </div>
 
 <div id="add-block-modal" class="modal fade" tabindex="-1" role="dialog">
@@ -33,7 +33,7 @@
                 {% endfor %}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary add-block-btn">ADD</button>
             </div>
         </div>
@@ -66,15 +66,15 @@
 <div>
     <div class="eight-toolbar eight-frame-element">
         <a title="Edit block" class="eight-ui-button btn-edit-variable" href="javascript:;" data-toggle="tooltip">
-            <span class="fa fa-pencil"></span>
+            <span class="fa fa-pencil-alt"></span>
         </a>
 
         <a title="Sort block" class="eight-ui-button btn-sort-block" href="javascript:;" data-toggle="tooltip">
-            <span class="fa fa-arrows-v"></span>
+            <span class="fa fa-arrows-alt-v"></span>
         </a>
 
         <a title="Delete block" class="eight-ui-button btn-remove-block" href="javascript:;" data-toggle="tooltip">
-            <span class="fa fa-remove"></span>
+            <span class="fa fa-trash-alt"></span>
         </a>
 
         <a title="Disable block" class="eight-ui-button btn-disable-block" href="javascript:;" data-toggle="tooltip">
@@ -91,23 +91,23 @@
 
 
 <script type="text/javascript">
-{% if eight_page_sonata_admin_enabled %}
+{% if eight_page_sonata_admin_enabled() %}
     var globalAppendUrl = '{{ path('admin_eight_page_block_append') }}';
     var globalRemoveUrl = '{{ path('admin_eight_page_block_remove') }}';
     var globalReorderUrl = '{{ path('admin_eight_page_block_reorder') }}';
     var globalEnableUrl = '{{ path('admin_eight_page_block_enable') }}';
     var globalDisableUrl = '{{ path('admin_eight_page_block_disable') }}';
-    var globalUpdateEightAddButtonsPosition = '{{ update_add_buttons_position }}';
 {% endif %}
 
-{% if eight_page_easy_admin_enabled %}
+{% if eight_page_easy_admin_enabled() %}
     var globalAppendUrl = '{{ path('admin_eight_page_block_append') }}';
     var globalRemoveUrl = '{{ path('admin_eight_page_block_remove') }}';
     var globalReorderUrl = '{{ path('admin_eight_page_block_reorder') }}';
     var globalEnableUrl = '{{ path('admin_eight_page_block_enable') }}';
     var globalDisableUrl = '{{ path('admin_eight_page_block_disable') }}';
-    var globalUpdateEightAddButtonsPosition = '{{ update_add_buttons_position }}';
 {% endif %}
+
+var globalUpdateEightAddButtonsPosition = '{{ update_add_buttons_position }}';
 
 {# this must be called before any plugin starts executing,
    to allow the library setting up DOM attributes and remove html markers #}

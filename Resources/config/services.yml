@@ -4,6 +4,11 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
+    Eight\PageBundle\Controller\DefaultController:
+        arguments:
+            - '@layout.provider'
+        tags: ['controller.service_arguments']
+
     layout.provider:
         class: Eight\PageBundle\Provider\Layout
         arguments: ['@service_container']

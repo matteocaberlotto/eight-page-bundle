@@ -2,6 +2,10 @@
 
 namespace Eight\PageBundle\Twig;
 
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
+use Twig\TwigFilter;
+
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -9,7 +13,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Eight\PageBundle\Seo\SeoPage;
 use Eight\PageBundle\Model\PageInterface;
 
-class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterface, ContainerAwareInterface
+class Extension extends AbstractExtension
 {
     protected $seopage;
 
@@ -37,8 +41,6 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
             "locale" => $this->getLocale(),
             "page" => $this->getPage(),
             "locales" => $this->container->getParameter('eight_page.locales'),
-            "eight_page_sonata_admin_enabled" => $this->sonata_admin_enabled,
-            "eight_page_easy_admin_enabled" => $this->easy_admin_enabled,
         );
 
         return $defaults;
@@ -56,28 +58,36 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
      */
     public function getFunctions()
     {
+        $twig = $this;
+
         return array(
-            new \Twig_SimpleFunction('i18n_path', array($this, 'i18nPath')),
-            new \Twig_SimpleFunction('i18n_title', array($this, 'i18nTitle')),
-            new \Twig_SimpleFunction('route_name', array($this, 'routeName')),
-            new \Twig_SimpleFunction('render_title', array($this, 'renderTitle')),
-            new \Twig_SimpleFunction('render_encoding', array($this, 'renderEncoding')),
-            new \Twig_SimpleFunction('render_metadatas', array($this, 'renderMetadatas')),
-            new \Twig_SimpleFunction('is_current_path', array($this, 'isCurrentPath')),
-            new \Twig_SimpleFunction('render_page_content', array($this, 'renderPage'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('render_inner_blocks', array($this, 'renderBlocks'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('render_static_blocks', array($this, 'renderStaticBlocks'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('is_page', array($this, 'isPage')),
-            new \Twig_SimpleFunction('eight_stylesheets', array($this, 'stylesheets'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('eight_javascripts', array($this, 'javascripts'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('eight_body_class', array($this, 'bodyClass')),
-            new \Twig_SimpleFunction('is_host', array($this, 'isHost')),
-            new \Twig_SimpleFunction('is_route', array($this, 'isRoute')),
-            new \Twig_SimpleFunction('if_route', array($this, 'showWhenRouteMatch'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('get_widget', array($this, 'getWidget')),
-            new \Twig_SimpleFunction('get_page', array($this, 'findPage')),
-            new \Twig_SimpleFunction('get_breadcrumbs', array($this, 'getBreadcrumbs')),
-            new \Twig_SimpleFunction('current_index', array($this, 'currentIndex')),
+            new TwigFunction('i18n_path', array($this, 'i18nPath')),
+            new TwigFunction('i18n_title', array($this, 'i18nTitle')),
+            new TwigFunction('route_name', array($this, 'routeName')),
+            new TwigFunction('render_title', array($this, 'renderTitle')),
+            new TwigFunction('render_encoding', array($this, 'renderEncoding')),
+            new TwigFunction('render_metadatas', array($this, 'renderMetadatas')),
+            new TwigFunction('is_current_path', array($this, 'isCurrentPath')),
+            new TwigFunction('render_page_content', array($this, 'renderPage'), array('is_safe' => array('html'))),
+            new TwigFunction('render_inner_blocks', array($this, 'renderBlocks'), array('is_safe' => array('html'))),
+            new TwigFunction('render_static_blocks', array($this, 'renderStaticBlocks'), array('is_safe' => array('html'))),
+            new TwigFunction('is_page', array($this, 'isPage')),
+            new TwigFunction('eight_stylesheets', array($this, 'stylesheets'), array('is_safe' => array('html'))),
+            new TwigFunction('eight_javascripts', array($this, 'javascripts'), array('is_safe' => array('html'))),
+            new TwigFunction('eight_body_class', array($this, 'bodyClass')),
+            new TwigFunction('is_host', array($this, 'isHost')),
+            new TwigFunction('is_route', array($this, 'isRoute')),
+            new TwigFunction('if_route', array($this, 'showWhenRouteMatch'), array('is_safe' => array('html'))),
+            new TwigFunction('get_widget', array($this, 'getWidget')),
+            new TwigFunction('get_page', array($this, 'findPage')),
+            new TwigFunction('get_breadcrumbs', array($this, 'getBreadcrumbs')),
+            new TwigFunction('current_index', array($this, 'currentIndex')),
+            new TwigFunction('eight_page_sonata_admin_enabled', function () use ($twig) {
+                return $twig->sonata_admin_enabled;
+            }),
+            new TwigFunction('eight_page_easy_admin_enabled', function () use ($twig) {
+                return $twig->easy_admin_enabled;
+            }),
         );
     }
 
@@ -107,7 +117,7 @@ class Extension extends \Twig_Extension implements \Twig_Extension_GlobalsInterf
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('json_encode', 'json_encode'),
+            new TwigFilter('json_encode', 'json_encode'),
             );
     }
 

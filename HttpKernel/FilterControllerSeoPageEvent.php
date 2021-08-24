@@ -2,7 +2,7 @@
 
 namespace Eight\PageBundle\HttpKernel;
 
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Eight\PageBundle\Model\PageInterface;
 
@@ -20,7 +20,7 @@ class FilterControllerSeoPageEvent
         $this->container = $container;
     }
 
-    public function onKernelController(FilterControllerEvent $event)
+    public function onKernelController(ControllerEvent $event)
     {
         $request = $event->getRequest();
 
@@ -37,7 +37,7 @@ class FilterControllerSeoPageEvent
             $seoPage->setTitle($page->getTitle());
             $seoPage->setDescription($page->getDescription());
 
-            if (count($page->getMetasProperty())) {
+            if ($page->getMetasProperty() && count($page->getMetasProperty())) {
                 foreach ($page->getMetasProperty() as $name => $content) {
                     if (!empty($content)) {
                         $seoPage->addMeta('property', $name, $content);
@@ -45,7 +45,7 @@ class FilterControllerSeoPageEvent
                 }
             }
 
-            if (count($page->getMetasName())) {
+            if ($page->getMetasName() && count($page->getMetasName())) {
                 foreach ($page->getMetasName() as $name => $content) {
                     if (!empty($content)) {
                         $seoPage->addMeta('name', $name, $content);
@@ -53,7 +53,7 @@ class FilterControllerSeoPageEvent
                 }
             }
 
-            if (count($page->getMetasHttpEquiv())) {
+            if ($page->getMetasHttpEquiv() && count($page->getMetasHttpEquiv())) {
                 foreach ($page->getMetasHttpEquiv() as $name => $content) {
                     if (!empty($content)) {
                         $seoPage->addMeta('http-equiv', $name, $content);

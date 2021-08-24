@@ -3,16 +3,22 @@
 namespace Eight\PageBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class DefaultController extends Controller
+class DefaultController extends AbstractController
 {
+    public function __construct($layout_provider)
+    {
+        $this->layout_provider = $layout_provider;
+    }
+
     /**
      * @Route("/", name="home_redirect")
      */
@@ -40,22 +46,24 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/{_locale}", name="homepage", requirements={"_locale": "it|en|de|fr"})
+     * @Route("/{_locale}", name="eight_homepage", requirements={"_locale": "it|en|de|fr"})
      */
     public function indexAction(Request $request)
     {
         $page = $request->get('content');
 
-        if (!$page->getPublished()) {
+        if (!$page || !$page->getPublished()) {
             throw new NotFoundHttpException($this->container->getParameter('eight_page.default_not_found_message'));
         }
 
-        $template = $this->get('layout.provider')->provide($page);
+        $template = $this->layout_provider->provide($page);
 
         $response = new Response();
         $response->headers->setCookie(new Cookie("selected_language", $request->get('_locale')));
 
-        return $this->render($template, array(), $response);
+        return $this->render($template, [
+            'page' => $page,
+            ], $response);
     }
 
     public function sitemapAction(Request $request)

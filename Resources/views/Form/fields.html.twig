@@ -1,24 +1,22 @@
 {% block icon_choice_widget %}
-    {% spaceless %}
-        <div class="select-icon-container">
-            <span class="icon-preview {{ value }}"></span>
-            <a onclick="Editor.selectIconWindow(this)" class="btn btn-default btn-sm select-icon-btn" href="javascript:;">Select icon</a>
-            <div class="icon-selection-list d-none">
-                <a class="selection-close" href="javascript:;" onclick="Editor.closeIconWindow(this)">
-                    &times;
-                </a>
-                <div class="icon-selection-list-inner">
-                    {% for group_label, choice in choices %}
-                        <a class="icon-choice" href="javascript:;" onclick="Editor.selectIcon(this)" data-value="{{ choice.value }}" data-target="#{{ form.vars.id }}">
-                            <span class="{{ choice.value }}"></span>
-                            {{ choice.label }}
-                        </a>
-                    {% endfor %}
-                </div>
+    <div class="select-icon-container">
+        <span class="icon-preview {{ value }}"></span>
+        <a onclick="Editor.selectIconWindow(this)" class="btn btn-default btn-sm select-icon-btn" href="javascript:;">Select icon</a>
+        <div class="icon-selection-list d-none">
+            <a class="selection-close" href="javascript:;" onclick="Editor.closeIconWindow(this)">
+                &times;
+            </a>
+            <div class="icon-selection-list-inner">
+                {% for group_label, choice in choices %}
+                    <a class="icon-choice" href="javascript:;" onclick="Editor.selectIcon(this)" data-value="{{ choice.value }}" data-target="#{{ form.vars.id }}">
+                        <span class="{{ choice.value }}"></span>
+                        {{ choice.label }}
+                    </a>
+                {% endfor %}
             </div>
         </div>
-        <input type="hidden" name="{{ full_name }}" id="{{ form.vars.id }}" value="{{ value }}" />
-    {% endspaceless %}
+    </div>
+    <input type="hidden" name="{{ full_name }}" id="{{ form.vars.id }}" value="{{ value }}" />
 {% endblock %}
 
 {% block image_preview_widget %}
@@ -57,7 +55,6 @@
 
 
 {% block checkbox_widget %}
-{% spaceless %}
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <div class="input-group-text">
@@ -66,11 +63,9 @@
         </div>
         <label class="form-control" for="{{ id }}">{{ label|trans }}</label>
     </div>
-{% endspaceless %}
 {% endblock checkbox_widget %}
 
 {% block radio_widget %}
-{% spaceless %}
     <div class="input-group mb-3">
         <div class="input-group-prepend">
             <div class="input-group-text">
@@ -79,22 +74,19 @@
         </div>
         <label class="form-control" for="{{ id }}">{{ label|trans }}</label>
     </div>
-{% endspaceless %}
 {% endblock radio_widget %}
 
 {% block multiple_text_widget %}
-    {% spaceless %}
-        <br>
-        {% for val in value %}
-            <div class="form-group">
-                <input type="text" {{ block('widget_attributes') }} {% if val is not empty %}value="{{ val }}" {% endif %} />
-                <a href="javascript:;" onclick="$(this).parent().remove()" class="btn btn-danger">&times;</a>
-            </div>
-        {% endfor %}
+    <br>
+    {% for val in value %}
         <div class="form-group">
-            <input type="text" {{ block('widget_attributes') }} />
+            <input type="text" {{ block('widget_attributes') }} {% if val is not empty %}value="{{ val }}" {% endif %} />
             <a href="javascript:;" onclick="$(this).parent().remove()" class="btn btn-danger">&times;</a>
         </div>
-        <a class="btn btn-primary" href="javascript:;" onclick="$(this).prev().clone().insertAfter($(this).prev());">&plus;</a>
-    {% endspaceless %}
+    {% endfor %}
+    <div class="form-group">
+        <input type="text" {{ block('widget_attributes') }} />
+        <a href="javascript:;" onclick="$(this).parent().remove()" class="btn btn-danger">&times;</a>
+    </div>
+    <a class="btn btn-primary" href="javascript:;" onclick="$(this).prev().clone().insertAfter($(this).prev());">&plus;</a>
 {% endblock %}

@@ -239,6 +239,7 @@ class Page
         $template = $this->container->getParameter('eight_page.page_append');
 
         return $this->container->get('twig')->render($template, array(
+            'page' => $this->getPage(),
             'update_add_buttons_position' => $this->container->getParameter('eight_page.update_add_buttons_position'),
             'widgets' => $this->get('widget.provider')->all(),
             ));
@@ -370,6 +371,7 @@ class Page
 
         if ($this->editMode()) {
             $css []= '/bundles/eightpage/css/editor.css';
+            $css []= '/bundles/eightpage/richtexteditor/rte_theme_default.css';
 
             foreach ($this->container->getParameter('eight_page.admin_css') as $admin_css) {
                 $css []= $admin_css;
@@ -394,13 +396,14 @@ class Page
 
         if ($this->editMode()) {
             $js []= '/bundles/eightpage/js/jquery-ui.js';
-            $js []= '/bundles/eightpage/js/tinymce/tinymce.min.js';
         }
 
         $js = $this->appendAssets($js, 'js', $this->container->getParameter('eight_page.js'));
 
         if ($this->editMode()) {
             $js []= '/bundles/eightpage/js/editor.js';
+            $js []= '/bundles/eightpage/richtexteditor/rte.js';
+            $js []= '/bundles/eightpage/richtexteditor/plugins/all_plugins.js';
 
             foreach ($this->container->getParameter('eight_page.admin_js') as $admin_js) {
                 $js []= $admin_js;

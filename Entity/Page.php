@@ -70,7 +70,7 @@ class Page implements PageInterface
     /**
      * @ORM\Column(nullable=true)
      */
-    protected $sitemap_priority = 0.5;
+    protected $sitemap_priority = '0.5';
 
     /**
      * @ORM\Column(nullable=true)
@@ -651,7 +651,7 @@ class Page implements PageInterface
      */
     public function getSitemapPriority()
     {
-        return (float) $this->sitemap_priority;
+        return $this->sitemap_priority;
     }
 
     /**

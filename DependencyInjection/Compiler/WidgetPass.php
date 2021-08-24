@@ -23,7 +23,7 @@ class WidgetPass implements CompilerPassInterface
             $provider->addMethodCall('setSonataAdminEnabled', []);
         }
 
-        if ($container->has('easyadmin.config.manager')) {
+        if ($container->has('EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator')) {
             $provider = $container->findDefinition('eight.twig.extension');
 
             $provider->addMethodCall('setEasyAdminEnabled', []);
