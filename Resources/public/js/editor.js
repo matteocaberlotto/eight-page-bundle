@@ -5,37 +5,6 @@ var Editor = (function () {
     var api = {
         init: function () {
 
-            // $('.block-wrapper')
-            //     .each(function () {
-
-            //         // if the block has no height
-            //         // use a child to get positioning
-            //         if ($(this).height() == 0) {
-
-            //             var children = $(this).children();
-
-            //             var found = false;
-            //             children.each(function () {
-            //                 if (!found && $(this).height() > 0) {
-            //                     child = $(this);
-            //                     found = true;
-            //                 }
-            //             });
-
-            //             $(this)
-            //                 .clone()
-            //                 .find('> :not(.eight-ui-element)').remove().end()
-            //                 .css({
-            //                     position: child.css('position'),
-            //                     top: child.css('top'),
-            //                     left: child.css('left'),
-            //                     width: Math.min(child.outerWidth(), $(window).width()),
-            //                     height: child.outerHeight()
-            //                 })
-            //                 .appendTo($(this));
-            //         }
-            //     });
-
             $('body').addClass('toolkit');
 
             Editor.setup();
@@ -99,21 +68,15 @@ var Editor = (function () {
                 .addClass('eight-ui-bound')
                 ;
 
-            $('.eight-page-textarea:not(.eight-rich-editor-bound)')
-                .each(function () {
-                    var _curr_id = $(this).attr('id');
-
-                    tinyMCE.init({
-                        height: 300,
-                        selector: '#' + _curr_id,
-                        auto_focus: _curr_id,
-                        theme: 'modern',
-                        plugins: 'print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
-                        toolbar: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat'
-                    });
-                })
-                .addClass('eight-rich-editor-bound')
-            ;
+            $('.eight-block-modal').each(function () {
+                $(this).get(0).addEventListener('shown.bs.modal', function () {
+                    $el = $(this).find('textarea');
+                    if (!$el.hasClass('eight-rich-editor-bound')) {
+                        var editor = new RichTextEditor($el.get(0));
+                        $el.addClass('eight-rich-editor-bound');
+                    }
+                });
+            });
 
             $('[data-toggle="tooltip"]').tooltip({
                 placement: 'bottom'
@@ -154,7 +117,6 @@ var Editor = (function () {
                             $('body').append(rData.form);
                             form.find('.eight-rich-editor-bound').each(function () {
                                 var _curr_id = $(this).attr('id');
-                                tinymce.get(_curr_id).remove();
                             });
 
                             ref.remove();
@@ -357,7 +319,7 @@ var Editor = (function () {
             $('<div/>', { "class": "eight-frame-bottom eight-frame-element eight-frame-element-" + blockContent.id })
                 .css({
                     left: element.offset().left,
-                    top: element.offset().top + element.outerHeight(),
+                    top: element.offset().top + element.outerHeight() - 1,
                     width: minWidth
                 })
                 .appendTo($('body'));

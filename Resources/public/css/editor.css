@@ -76,9 +76,9 @@ body.modal-open {
 }
 
 #btn-edit-layout-mode {
-    left: 10px;
+    left: 1px;
     position: fixed;
-    top: 10px;
+    top: 1px;
     z-index: 1000;
     opacity: 0.2;
     background: #3791d6;
@@ -90,7 +90,7 @@ body.modal-open {
 #back-to-list-button {
     left: 46px;
     position: fixed;
-    top: 10px;
+    top: 1px;
     z-index: 1000;
     opacity: 0.2;
     background: #3791d6;
@@ -155,6 +155,7 @@ body.modal-open {
     min-height: 40px;
     min-width: 120px;
     padding-top: 30px;
+    border: dashed 1px #ddd;
 }
 
 .toolkit .eight-block-decorator:hover {
@@ -307,9 +308,11 @@ body.modal-open {
 .toolkit .eight-block-decorator .eight-ui-button {
     background: #3791d6 none repeat scroll 0 0;
     padding: 6px 8px;
+    min-width: 26px;
     font-size: 16px;
     color: #ffffff;
-    line-height: 1em;
+    line-height: 1em !important;
+    text-align: center;
 }
 
 .toolkit .eight-block-decorator .eight-ui-button span {
@@ -342,6 +345,8 @@ body.modal-open {
 
 .toolkit .add-item {
     display: block !important;
+    margin-bottom: 40px;
+    max-width: 360px;
 }
 
 .toolkit .toolkit-relative,
@@ -355,7 +360,7 @@ body.modal-open {
 
 .toolkit .eight-list-decorator {
     /*margin-top: 40px !important;*/
-    border: dashed 1px #3791d6;
+    /*border: dashed 1px #3791d6;*/
     /*padding-top: 60px !important;*/
     margin-bottom: 40px !important;
     padding-bottom: 50px !important;
