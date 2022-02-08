@@ -253,6 +253,7 @@ class Page
         $template = $this->container->getParameter('eight_page.decorator_' . $type);
 
         $variables = array(
+            'page' => $this->getPage(),
             'html' => $html,
             'type' => $type,
             'subject_class' => $subject ? get_class($subject) : null,

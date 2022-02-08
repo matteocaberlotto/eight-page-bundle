@@ -3,7 +3,7 @@
     data-add-classes="eight-list-decorator"
     data-subject-class="{{ subject_class }}"
     data-add-variables='{"page-id":"{{ page_id }}","slot-label":"{{ slot_label }}","title":"{{ title }}","subject-label":"{{ subject_label }}","is_static":true}'
-    data-add-content='{{ page.toArray|json_encode }}'
+    data-add-content='{{ page.info|json_encode|raw }}'
     >
 </span>
 
