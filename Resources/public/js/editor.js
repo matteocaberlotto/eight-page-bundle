@@ -42,6 +42,7 @@ var Editor = (function () {
         },
 
         reload: function () {
+            $('rte-floatpanel').remove();
             Editor.setupMarkers();
             Editor.setup();
             Editor.repositionAddButtons();
@@ -107,6 +108,10 @@ var Editor = (function () {
                         $el.addClass('eight-rich-editor-bound');
                     }
                 });
+
+                $(this).get(0).addEventListener('hidden.bs.modal', function () {
+                    $('rte-floatpanel').remove();
+                });
             });
 
             $('[data-toggle="tooltip"]').tooltip({
@@ -146,10 +151,6 @@ var Editor = (function () {
                             form.parents('.eight-block-modal').modal('hide');
                             $(rData.html).insertAfter(ref);
                             $('body').append(rData.form);
-                            form.find('.eight-rich-editor-bound').each(function () {
-                                var _curr_id = $(this).attr('id');
-                                // tinymce.get(_curr_id).remove();
-                            });
 
                             ref.remove();
                             parent.remove();
