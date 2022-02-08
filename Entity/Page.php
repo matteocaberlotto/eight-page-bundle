@@ -733,6 +733,11 @@ class Page implements PageInterface
         $this->url = $url;
     }
 
+    public function getMappedUrl()
+    {
+        return $this->url;
+    }
+
     public function toArray()
     {
         return array(
