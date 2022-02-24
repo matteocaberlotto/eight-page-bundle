@@ -20,6 +20,7 @@ class Choices extends AbstractVariable
                 'choices' => $config->get('choices'),
                 'expanded' => $config->has('expanded') ? $config->get('expanded') : null,
                 'multiple' => $config->has('multiple') ? $config->get('multiple') : null,
+                'compound' => $config->has('compound') ? $config->get('compound') : false,
                 'empty_data' => $config->has('empty_data') ? $config->get('empty_data') : null,
                 'attr' => array(
                     'class' => $config->get('multiple') ? 'form-group' : 'form-control',
