@@ -293,6 +293,22 @@ var Editor = (function () {
                 template.find('.btn-disable-block').remove();
             }
 
+            template.find('.btn-move-up-block')
+                .click(function (event) {
+                    $(element).insertBefore($(element).prev());
+                    var parent = $(element).parents('.eight-list-decorator').first();
+                    Editor.updateBlocksOrder(parent);
+                    Editor.reloadPlugins();
+                });
+
+            template.find('.btn-move-down-block')
+                .click(function (event) {
+                    $(element).insertAfter($(element).next());
+                    var parent = $(element).parents('.eight-list-decorator').first();
+                    Editor.updateBlocksOrder(parent);
+                    Editor.reloadPlugins();
+                });
+
             $(template).find('.eight-toolbar').appendTo(element);
         },
 
