@@ -7,6 +7,9 @@ services:
     Eight\PageBundle\Controller\DefaultController:
         arguments:
             - '@layout.provider'
+            - '@eight.sitemap'
+            - '%eight_page.redirect_home%'
+            - '%eight_page.default_not_found_message%'
         tags: ['controller.service_arguments']
 
     layout.provider:

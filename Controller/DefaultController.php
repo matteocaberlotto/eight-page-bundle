@@ -14,9 +14,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DefaultController extends AbstractController
 {
-    public function __construct($layout_provider)
+    public function __construct(
+        $layout_provider,
+        $sitemap_provider,
+        $home_redirect,
+        $not_found_message)
     {
         $this->layout_provider = $layout_provider;
+        $this->sitemap_provider = $sitemap_provider;
+        $this->home_redirect = $home_redirect;
+        $this->not_found_message = $not_found_message;
     }
 
     /**
@@ -42,7 +49,7 @@ class DefaultController extends AbstractController
             $redirect = $this->container->getParameter('locale');
         }
 
-        return $this->redirect($this->generateUrl($this->container->getParameter('eight_page.redirect_home'), array('_locale' => $redirect)));
+        return $this->redirect($this->generateUrl($this->home_redirect, array('_locale' => $redirect)));
     }
 
     /**
@@ -53,7 +60,7 @@ class DefaultController extends AbstractController
         $page = $request->get('content');
 
         if (!$page || !$page->getPublished()) {
-            throw new NotFoundHttpException($this->container->getParameter('eight_page.default_not_found_message'));
+            throw new NotFoundHttpException($this->not_found_message);
         }
 
         $template = $this->layout_provider->provide($page);
@@ -68,11 +75,9 @@ class DefaultController extends AbstractController
 
     public function sitemapAction(Request $request)
     {
-        $lastMod = $this->container->getParameter('last_modified');
-
         $response = new Response;
         $response->setPublic();
-        $response->setLastModified(new \DateTime($lastMod));
+        $response->setLastModified(new \DateTime());
 
         if ($response->isNotModified($request)) {
             // return the 304 Response immediately
@@ -82,7 +87,7 @@ class DefaultController extends AbstractController
         $response->headers->set('Content-Type', 'text/xml');
         $response->headers->set('Expires', gmdate("D, d M Y H:i:s", time() + 86400) . " GMT");
 
-        $uris = $this->container->get('bauer.sitemap.url_provider')->provide();
+        $uris = $this->sitemap_provider->provide();
 
         return $this->render('EightPageBundle:Default:sitemap.xml.twig', array(
             'uris' => $uris
