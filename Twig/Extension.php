@@ -341,7 +341,7 @@ class Extension extends AbstractExtension
                 }
                 
                 if ($this->easy_admin_enabled) {
-                    return $this->router->generate('easyadmin', [
+                    return $this->router->generate($this->container->getParameter('eight_page.easyadmin_base_path'), [
                         'entity' => 'Pages',
                         'action' => 'layout',
                         'id' => $page->getId()
