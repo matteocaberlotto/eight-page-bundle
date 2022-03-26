@@ -343,7 +343,7 @@ body.toolkit {
     position: absolute;
     height: 20px;
     position: absolute;
-    z-index: 1000;
+    z-index: 100000;
     display: none;
     right: 0;
     top: 0;
