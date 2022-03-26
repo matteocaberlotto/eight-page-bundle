@@ -149,7 +149,7 @@ body.toolkit {
 
 .toolkit .eight-block-decorator {
     min-height: 40px;
-    min-width: 120px;
+    min-width: 200px;
     padding-top: 30px;
     border: dashed 1px #ddd;
 }
