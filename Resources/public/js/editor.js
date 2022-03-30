@@ -5,37 +5,6 @@ var Editor = (function () {
     var api = {
         init: function () {
 
-            // $('.block-wrapper')
-            //     .each(function () {
-
-            //         // if the block has no height
-            //         // use a child to get positioning
-            //         if ($(this).height() == 0) {
-
-            //             var children = $(this).children();
-
-            //             var found = false;
-            //             children.each(function () {
-            //                 if (!found && $(this).height() > 0) {
-            //                     child = $(this);
-            //                     found = true;
-            //                 }
-            //             });
-
-            //             $(this)
-            //                 .clone()
-            //                 .find('> :not(.eight-ui-element)').remove().end()
-            //                 .css({
-            //                     position: child.css('position'),
-            //                     top: child.css('top'),
-            //                     left: child.css('left'),
-            //                     width: Math.min(child.outerWidth(), $(window).width()),
-            //                     height: child.outerHeight()
-            //                 })
-            //                 .appendTo($(this));
-            //         }
-            //     });
-
             $('body').addClass('toolkit');
 
             Editor.setup();
@@ -103,7 +72,7 @@ var Editor = (function () {
             $('.eight-block-modal').each(function () {
                 $(this).get(0).addEventListener('shown.bs.modal', function () {
                     $el = $(this).find('textarea');
-                    if (!$el.hasClass('eight-rich-editor-bound')) {
+                    if (!$el.hasClass('eight-rich-editor-bound') && $el.hasClass('eight-page-textarea')) {
                         var editor = new RichTextEditor($el.get(0));
                         $el.addClass('eight-rich-editor-bound');
                     }
