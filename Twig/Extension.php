@@ -218,7 +218,7 @@ class Extension extends AbstractExtension
 
     public function bodyClass()
     {
-        if ($this->getPage()) {
+        if ($this->getPage() && $this->getPage()->getRoute()) {
             return $this->getPage()->getRoute()->getName();
         }
 

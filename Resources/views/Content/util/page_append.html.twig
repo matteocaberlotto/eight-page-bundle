@@ -15,7 +15,7 @@
         </a>
     {% endif %}
 
-    <span id="page-specs">Page: "{{ page|raw }}" || URI: {{ page.route.path }}</span>
+    <span id="page-specs">Page: "{{ page|raw }}" || URI: {{ page.route ? page.route.path : '(this page has no route)' }}</span>
 </div>
 
 <div id="add-block-modal" class="modal fade" tabindex="-1" role="dialog">

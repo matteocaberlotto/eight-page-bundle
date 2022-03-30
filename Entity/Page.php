@@ -381,7 +381,9 @@ class Page implements PageInterface
     {
         $this->route = $route;
 
-        $this->route->setContent($this);
+        if ($this->route) {
+            $this->route->setContent($this);   
+        }
 
         return $this;
     }
@@ -742,9 +744,9 @@ class Page implements PageInterface
     {
         return array(
             'id' => $this->getId(),
-            'url' => $this->getRoute()->getPath(),
+            'url' => $this->getRoute() ? $this->getRoute()->getPath() : null,
             'locale' => $this->getLocale(),
-            'controller' => $this->getRoute()->getController(),
+            'controller' => $this->getRoute() ? $this->getRoute()->getController() : null,
             'title' => $this->getTitle(),
             'tags' => $this->getTagsAsArray(),
             'blocks' => $this->getBlocksAsArray(),
@@ -758,9 +760,9 @@ class Page implements PageInterface
     {
         return array(
             'id' => $this->getId(),
-            'url' => $this->getRoute()->getPath(),
+            'url' => $this->getRoute() ? $this->getRoute()->getPath() : null,
             'locale' => $this->getLocale(),
-            'controller' => $this->getRoute()->getController(),
+            'controller' => $this->getRoute() ? $this->getRoute()->getController() : null,
             'title' => $this->getTitle(),
             );
     }
