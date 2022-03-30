@@ -465,7 +465,7 @@ body.toolkit {
     bottom: 0;
     left: 0;
     right: 0;
-    z-index: 12000;
+    z-index: 120000;
     background: rgba(0,0,0,0.7);
 }
 
