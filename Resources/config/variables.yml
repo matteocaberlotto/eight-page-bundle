@@ -90,3 +90,7 @@ services:
         tags:
             - { name: eight_page.variable }
 
+    eight.integer:
+        class: Eight\PageBundle\Variable\Integer
+        tags:
+            - { name: eight_page.variable }
