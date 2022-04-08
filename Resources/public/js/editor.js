@@ -71,11 +71,13 @@ var Editor = (function () {
 
             $('.eight-block-modal').each(function () {
                 $(this).get(0).addEventListener('shown.bs.modal', function () {
-                    $el = $(this).find('textarea');
-                    if (!$el.hasClass('eight-rich-editor-bound') && $el.hasClass('eight-page-textarea')) {
-                        var editor = new RichTextEditor($el.get(0));
-                        $el.addClass('eight-rich-editor-bound');
-                    }
+                    $(this).find('textarea').each(function () {
+                        var $el = $(this);
+                        if (!$el.hasClass('eight-rich-editor-bound') && $el.hasClass('eight-page-textarea')) {
+                            var editor = new RichTextEditor($el.get(0));
+                            $el.addClass('eight-rich-editor-bound');
+                        }
+                    });
                 });
 
                 $(this).get(0).addEventListener('hidden.bs.modal', function () {
