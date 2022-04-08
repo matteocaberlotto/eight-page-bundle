@@ -77,3 +77,7 @@ services:
         tags:
             - { name: form.type }
 
+    eight.load_page_command:
+        class: Eight\PageBundle\Command\LoadPagesCommand
+        tags:
+            - { name: console.command }

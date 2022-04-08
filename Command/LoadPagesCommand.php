@@ -8,17 +8,17 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Yaml\Yaml;
 
 use Symfony\Component\Finder\Finder;
 
-class LoadPagesCommand extends ContainerAwareCommand
+class LoadPagesCommand extends Command
 {
+    protected static $defaultName = 'eight:load:pages';
+
     protected function configure()
     {
         $this
-            ->setName('eight:load:pages')
             ->setDescription('This command populates database with pages data')
             ->addArgument(
                 'bundle',
@@ -40,6 +40,8 @@ class LoadPagesCommand extends ContainerAwareCommand
 
         $output->writeln('Job done');
         $output->writeln('Elapsed time: ' . (microtime(true) - $start));
+
+        return Command::SUCCESS;
     }
 
     protected function createPages()
