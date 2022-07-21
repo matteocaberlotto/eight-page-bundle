@@ -70,6 +70,7 @@ class Extension extends AbstractExtension
             new TwigFunction('is_current_path', array($this, 'isCurrentPath')),
             new TwigFunction('render_page_content', array($this, 'renderPage'), array('is_safe' => array('html'))),
             new TwigFunction('render_inner_blocks', array($this, 'renderBlocks'), array('is_safe' => array('html'))),
+            new TwigFunction('render_block', array($this, 'renderBlock'), array('is_safe' => array('html'))),
             new TwigFunction('render_static_blocks', array($this, 'renderStaticBlocks'), array('is_safe' => array('html'))),
             new TwigFunction('is_page', array($this, 'isPage')),
             new TwigFunction('eight_stylesheets', array($this, 'stylesheets'), array('is_safe' => array('html'))),
@@ -245,9 +246,14 @@ class Extension extends AbstractExtension
         return $this->container->get('page.renderer')->renderStaticBlocks($type);
     }
 
-    public function renderBlocks($subject, $type = 'default')
+    public function renderBlocks($subject, $type = 'default', $template = null)
     {
-        return $this->container->get('page.renderer')->renderBlockChildren($subject, $type);
+        return $this->container->get('page.renderer')->renderBlockChildren($subject, $type, $template);
+    }
+
+    public function renderBlock($block, $edit_mode = false, $template = null)
+    {
+        return $this->container->get('page.renderer')->renderBlock($block, $edit_mode, $template);
     }
 
     public function renderPage($type = 'default')

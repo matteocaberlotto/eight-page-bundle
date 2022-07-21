@@ -54,9 +54,13 @@ class Page
     /**
      * Renders a single block
      */
-    public function renderBlock($block, $edit_mode = false)
+    public function renderBlock($block, $edit_mode = false, $template = null)
     {
-        $html = $this->get('twig')->render($this->getTemplate($block), $this->getVariables($block));
+        if (!$template) {
+            $template = $this->getTemplate($block);
+        }
+
+        $html = $this->get('twig')->render($template, $this->getVariables($block));
 
         if ($edit_mode) {
             $html = $this->decorateHtml($html, 'block', $block);
@@ -132,7 +136,7 @@ class Page
      * Renders all children of the subject (page or block)
      * of given type (slot_label = where to append inside the layout).
      */
-    public function renderBlockChildren($subject, $slot_label)
+    public function renderBlockChildren($subject, $slot_label, $template = null)
     {
         $editMode = $this->editMode();
         $html = '';
@@ -146,7 +150,7 @@ class Page
 
             foreach ($children as $sub) {
                 if ($sub->getType() == $slot_label) {
-                    $html .= $this->renderBlock($sub, $editMode);
+                    $html .= $this->renderBlock($sub, $editMode, $template);
                 }
             }
         }
