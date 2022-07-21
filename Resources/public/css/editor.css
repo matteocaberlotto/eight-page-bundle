@@ -155,7 +155,7 @@ body.toolkit {
 }
 
 .toolkit .eight-block-decorator:hover {
-    z-index: 100;
+    z-index: 1030;
 }
 
 .toolkit .block-wrapper:hover > .btn-remove-block,
@@ -244,7 +244,7 @@ body.toolkit {
     width: 1px;
     position: absolute;
     background: #3791d6;
-    z-index: 100;
+    z-index: 1030;
     display: none;
 }
 
@@ -253,14 +253,14 @@ body.toolkit {
     background: #3791d6;
     position: absolute;
     display: none;
-    z-index: 100;
+    z-index: 1030;
 }
 
 .eight-frame-title {
     height: 26px;
     position: absolute;
     background: #c9e7ff;
-    z-index: 100;
+    z-index: 1030;
     text-align: center;
     /*text-transform: uppercase;*/
     line-height: 30px;
@@ -288,7 +288,7 @@ body.toolkit {
     display: none;
     font-weight: bold;
     padding: 4px 8px;
-    z-index: 100;
+    z-index: 1030;
     color: #005282;
     clear: both;
     font-weight: normal;
