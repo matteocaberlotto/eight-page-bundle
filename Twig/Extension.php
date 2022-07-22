@@ -251,8 +251,9 @@ class Extension extends AbstractExtension
         return $this->container->get('page.renderer')->renderBlockChildren($subject, $type, $template);
     }
 
-    public function renderBlock($block, $edit_mode = false, $template = null)
+    public function renderBlock($block, $template = null)
     {
+        $edit_mode = $this->container->get('page.renderer')->editMode();
         return $this->container->get('page.renderer')->renderBlock($block, $edit_mode, $template);
     }
 
