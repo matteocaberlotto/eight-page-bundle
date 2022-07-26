@@ -68,10 +68,12 @@ class Extension extends AbstractExtension
             new TwigFunction('render_encoding', array($this, 'renderEncoding')),
             new TwigFunction('render_metadatas', array($this, 'renderMetadatas')),
             new TwigFunction('is_current_path', array($this, 'isCurrentPath')),
+            new TwigFunction('edit_mode', array($this, 'editMode')),
             new TwigFunction('render_page_content', array($this, 'renderPage'), array('is_safe' => array('html'))),
             new TwigFunction('render_inner_blocks', array($this, 'renderBlocks'), array('is_safe' => array('html'))),
             new TwigFunction('render_block', array($this, 'renderBlock'), array('is_safe' => array('html'))),
             new TwigFunction('render_static_blocks', array($this, 'renderStaticBlocks'), array('is_safe' => array('html'))),
+            new TwigFunction('render_add_button', array($this, 'renderAddButton'), array('is_safe' => array('html'))),
             new TwigFunction('is_page', array($this, 'isPage')),
             new TwigFunction('eight_stylesheets', array($this, 'stylesheets'), array('is_safe' => array('html'))),
             new TwigFunction('eight_javascripts', array($this, 'javascripts'), array('is_safe' => array('html'))),
@@ -255,6 +257,11 @@ class Extension extends AbstractExtension
     {
         $edit_mode = $this->container->get('page.renderer')->editMode();
         return $this->container->get('page.renderer')->renderBlock($block, $edit_mode, $template);
+    }
+
+    public function renderAddButton($block, $type = 'default')
+    {
+        return $this->container->get('page.renderer')->renderAddbutton($block, $type);
     }
 
     public function renderPage($type = 'default')

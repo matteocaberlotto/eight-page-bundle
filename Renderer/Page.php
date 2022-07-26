@@ -69,6 +69,17 @@ class Page
         return $html;
     }
 
+    public function renderAddbutton($block, $slot_label = 'default')
+    {
+        $html = '';
+
+        if ($this->editMode()) {
+            $html = $this->decorateHtml($html, 'list', $block, $slot_label);
+        }
+
+        return $html;
+    }
+
     /**
      * Load block assets.
      * There are 3 positions: head, default, bottom.
