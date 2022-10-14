@@ -35,7 +35,10 @@ class FormBuilder
 
         $builder
             ->setMethod('post')
-            ->setAction($this->router->generate('admin_eight_page_block_update', array('id' => $block->getId(), 'page_id' => $this->getCurrentPage()->getId())))
+            ->setAction($this->router->generate('admin_eight_page_block_update', array(
+                'id' => $block->getId(),
+                'page_id' => $this->getCurrentPage()->getId()
+                ), UrlGeneratorInterface::RELATIVE_PATH))
             ;
 
         /**
