@@ -387,7 +387,8 @@ class Page
 
         if ($this->editMode()) {
             $css []= '/bundles/eightpage/css/editor.css';
-            $css []= '/bundles/eightpage/richtexteditor/rte_theme_default.css';
+            $css []= '//cdn.quilljs.com/1.3.6/quill.snow.css';
+            $css []= '//cdn.quilljs.com/1.3.6/quill.bubble.css';
 
             foreach ($this->container->getParameter('eight_page.admin_css') as $admin_css) {
                 $css []= $admin_css;
@@ -418,8 +419,8 @@ class Page
 
         if ($this->editMode()) {
             $js []= '/bundles/eightpage/js/editor.js';
-            $js []= '/bundles/eightpage/richtexteditor/rte.js';
-            $js []= '/bundles/eightpage/richtexteditor/plugins/all_plugins.js';
+            $js []= '//cdn.quilljs.com/1.3.6/quill.js';
+            $js []= '//cdn.quilljs.com/1.3.6/quill.min.js';
 
             foreach ($this->container->getParameter('eight_page.admin_js') as $admin_js) {
                 $js []= $admin_js;

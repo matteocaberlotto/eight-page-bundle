@@ -6,7 +6,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 use Eight\PageBundle\Model\ContentInterface;
 use Eight\PageBundle\Variable\AbstractVariable;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 class Text extends AbstractVariable
 {
@@ -20,14 +20,12 @@ class Text extends AbstractVariable
         }
 
         $builder
-            ->add($name, TextareaType::class, array(
+            ->add($name, HiddenType::class, [
                 'label' => $config->has('label') ? $config->get('label') : $name,
                 'required' => false,
-                'attr' => array(
-                    'rows' => $config->has('rows') ? $config->get('rows') : 10,
-                    'class' => 'form-control' . $editor_class_append
-                    )
-                ))
+                'attr' => [
+                    'class' => 'eight-textarea' . $editor_class_append,
+                ]])
             ;
     }
 

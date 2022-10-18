@@ -1,6 +1,7 @@
 var Editor = (function () {
 
     var plugins = [];
+    var currentEditor = null;
 
     var api = {
         init: function () {
@@ -69,19 +70,66 @@ var Editor = (function () {
                 .addClass('eight-ui-bound')
                 ;
 
+            function htmlDecode(input) {
+                var doc = new DOMParser().parseFromString(input, "text/html");
+                return doc.documentElement.textContent;
+            }
+
             $('.eight-block-modal').each(function () {
                 $(this).get(0).addEventListener('shown.bs.modal', function () {
-                    $(this).find('textarea').each(function () {
+                    $(this).find('.eight-textarea').each(function () {
                         var $el = $(this);
                         if (!$el.hasClass('eight-rich-editor-bound') && $el.hasClass('eight-page-textarea')) {
-                            var editor = new RichTextEditor($el.get(0));
+                            var toolbarOptions = [
+                                ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+                                ['blockquote', 'code-block'],
+
+                                [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+                                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                                [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+                                [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+                                [{ 'direction': 'rtl' }],                         // text direction
+
+                                [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+                                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+                                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+                                [{ 'font': [] }],
+                                [{ 'align': [] }],
+
+                                ['clean']                                         // remove formatting button
+                            ];
+
+                            var options = {
+                                // debug: 'info',
+                                modules: {
+                                    toolbar: toolbarOptions
+                                },
+                                placeholder: 'Insert text here...',
+                                theme: 'snow'
+                            };
+
+                            var content = $el.val();
+                            var div = document.createElement('div');
+                            div.innerHTML = content;
+                            $(div).insertAfter($el);
+
+                            currentEditor = new Quill(div, options);
                             $el.addClass('eight-rich-editor-bound');
+
+                            currentEditor.on('text-change', function(delta, oldDelta, source) {
+                                if (source == 'api') {
+                                    // no actions required
+                                } else if (source == 'user') {
+                                    $el.val(currentEditor.root.innerHTML);
+                                }
+                            });
                         }
                     });
                 });
 
                 $(this).get(0).addEventListener('hidden.bs.modal', function () {
-                    $('rte-floatpanel').remove();
+                    // ...
                 });
             });
 
@@ -624,6 +672,10 @@ var Editor = (function () {
             var selectionWindow = $(element).parents('.select-icon-container').find('.icon-selection-list');
 
             selectionWindow.addClass('d-none');
+        },
+
+        getEditor: function () {
+            return currentEditor;
         }
     };
 
