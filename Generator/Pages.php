@@ -28,7 +28,7 @@ class Pages
             $data['controller'] = $this->container->getParameter('eight_page.default_controller');
         }
 
-        $route = $this->doctrine->getRepository('RaindropRoutingBundle:Route')->findOneBy(array(
+        $route = $this->doctrine->getRepository(Route::class)->findOneBy(array(
             'path' => $data['url']
         ));
 
@@ -103,7 +103,7 @@ class Pages
     protected function createTags($page, $tags)
     {
         foreach ($tags as $t) {
-            $tag = $this->doctrine->getRepository('EightPageBundle:Tag')->findOneBy(array(
+            $tag = $this->doctrine->getRepository(Tag::class)->findOneBy(array(
                 'name' => $t
             ));
 
@@ -170,7 +170,7 @@ class Pages
     protected function searchBlock($parent, $name, $position, $type)
     {
         if ($parent instanceof Page) {
-            return $this->doctrine->getRepository('EightPageBundle:Block')->findOneBy(array(
+            return $this->doctrine->getRepository(Block::class)->findOneBy(array(
                 'name' => $name,
                 'seq' => $position,
                 'page' => $parent,
@@ -179,7 +179,7 @@ class Pages
         }
 
         if ($parent instanceof Block) {
-            return $this->doctrine->getRepository('EightPageBundle:Block')->findOneBy(array(
+            return $this->doctrine->getRepository(Block::class)->findOneBy(array(
                 'name' => $name,
                 'seq' => $position,
                 'block' => $parent,
@@ -187,7 +187,7 @@ class Pages
                 ));
         }
 
-        return $this->doctrine->getRepository('EightPageBundle:Block')->findOneBy(array(
+        return $this->doctrine->getRepository(Block::class)->findOneBy(array(
             'name' => $name,
             'seq' => $position,
             'static' => true,
@@ -203,7 +203,7 @@ class Pages
                 $c['type'] = 'label';
             }
 
-            $content = $this->doctrine->getRepository('EightPageBundle:Content')->findOneBy(array(
+            $content = $this->doctrine->getRepository(Content::class)->findOneBy(array(
                 'name' => $c['name'],
                 'block' => $block
             ));
