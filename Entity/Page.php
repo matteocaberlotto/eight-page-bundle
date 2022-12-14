@@ -135,6 +135,8 @@ class Page implements PageInterface
 
     protected $edit_mode = false;
 
+    protected $temp_locale;
+
     public function __construct() {
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
         $this->blocks = new \Doctrine\Common\Collections\ArrayCollection();
@@ -463,6 +465,25 @@ class Page implements PageInterface
         if ($this->route) {
             return $this->route->getLocale();
         }
+    }
+
+    public function setLocale($locale)
+    {
+        if ($this->getRoute()) {
+            $this->getRoute()->setLocale($locale);
+        }
+    }
+
+    public function setTempLocale($temp_locale)
+    {
+        $this->temp_locale = $temp_locale;
+
+        return $this;
+    }
+
+    public function getTempLocale()
+    {
+        return $this->temp_locale ? $this->temp_locale : $this->getLocale();
     }
 
     /**
