@@ -264,40 +264,6 @@ class Content implements ContentInterface
         return $this->image_path;
     }
 
-    public function manageFileUpload($config)
-    {
-        if ($this->getImagePath()) {
-            $this->uploadImage($config);
-        }
-    }
-
-    /**
-     * Manages the copying of the file to the relevant place on the server
-     */
-    protected function uploadImage($config)
-    {
-        // the file property can be empty if the field is not required
-        if (null === $this->getImagePath()) {
-            return;
-        }
-
-        // we use the original file name here but you should
-        // sanitize it at least to avoid any security issues
-        $filename = md5(uniqid() . mt_rand(0, 10000)) . "." . $this->getImagePath()->getClientOriginalExtension();
-
-        // move takes the target directory and target filename as params
-        $this->getImagePath()->move(
-            $this->getUploadPath($config),
-            $filename
-        );
-
-        // set the path property to the filename where you've saved the file
-        $this->content = self::CMS_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $config->get('folder') . DIRECTORY_SEPARATOR . $filename;
-
-        // clean up the file property as you won't need it anymore
-        $this->setImagePath(null);
-    }
-
     protected function getUploadPath($config)
     {
         return __DIR__ . "/../../../../" . $config->get('base_upload_folder') . self::CMS_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $config->get('folder');
