@@ -263,9 +263,4 @@ class Content implements ContentInterface
     {
         return $this->image_path;
     }
-
-    protected function getUploadPath($config)
-    {
-        return __DIR__ . "/../../../../" . $config->get('base_upload_folder') . self::CMS_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $config->get('folder');
-    }
 }
