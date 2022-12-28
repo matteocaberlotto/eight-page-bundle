@@ -13,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Content implements ContentInterface
 {
-    const CMS_IMAGES_FOLDER = '/uploads/images/cms';
+    public const CMS_IMAGES_FOLDER = 'uploads/images/cms';
 
     /**
      * @ORM\Id

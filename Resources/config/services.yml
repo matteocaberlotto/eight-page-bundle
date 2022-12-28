@@ -81,3 +81,7 @@ services:
         class: Eight\PageBundle\Command\LoadPagesCommand
         tags:
             - { name: console.command }
+
+    eight.s3_uploader:
+        class: Eight\PageBundle\Helper\UploadS3
+        public: true

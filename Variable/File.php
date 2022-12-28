@@ -34,12 +34,18 @@ class File extends AbstractVariable
                     'class' => 'form-control'
                     ),
                 ))
-            ;
+        ;
     }
 
     public function resolve(ContentInterface $variable, $config)
     {
-        return $variable->getImage();
+        if ($this->container->getParameter('eight_page.s3_upload') == true) {
+            return $_SERVER['EIGHT_S3_URL'] . DIRECTORY_SEPARATOR .
+                ($_SERVER['EIGHT_S3_PATH'] ? $_SERVER['EIGHT_S3_PATH'] . DIRECTORY_SEPARATOR : '') .
+                $variable->getImage();
+        } else {
+            return $variable->getImage();
+        }
     }
 
     public function saveValue(ContentInterface $variable, $content, $config)
@@ -76,15 +82,24 @@ class File extends AbstractVariable
         // we use the original file name here but you should
         // sanitize it at least to avoid any security issues
         $filename = md5(uniqid() . mt_rand(0, 10000)) . "." . $variable->getImagePath()->getClientOriginalExtension();
+        $filepath = Content::CMS_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $config->get('folder') . DIRECTORY_SEPARATOR . $filename;
 
-        // move takes the target directory and target filename as params
-        $variable->getImagePath()->move(
-            $this->getUploadPath($config),
-            $filename
-        );
+        if ($this->container->getParameter('eight_page.s3_upload') == true) {
+            // load the file on aws s3
+            $this->container->get('eight.s3_uploader')->upload(
+                $variable->getImagePath()->getRealPath(),
+                $filepath
+            );
+        } else {
+            // move takes the target directory and target filename as params
+            $variable->getImagePath()->move(
+                $this->getUploadPath($config),
+                $filename
+            );
+        }
 
         // set the path property to the filename where you've saved the file
-        $variable->setContent(Content::CMS_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $config->get('folder') . DIRECTORY_SEPARATOR . $filename);
+        $variable->setContent($filepath);
 
         // clean up the file property as you won't need it anymore
         $variable->setImagePath(null);
@@ -92,7 +107,7 @@ class File extends AbstractVariable
 
     protected function getUploadPath($config)
     {
-        return __DIR__ . "/../../../../" . $config->get('base_upload_folder') . Content::CMS_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $config->get('folder');
+        return __DIR__ . "/../../../../" . $config->get('base_upload_folder') . DIRECTORY_SEPARATOR . Content::CMS_IMAGES_FOLDER . DIRECTORY_SEPARATOR . $config->get('folder');
     }
 
     public function getName()
