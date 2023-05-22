@@ -186,6 +186,7 @@ class Page
     public function getStaticBlocksAsArray()
     {
         $blocks = $this->container->get('doctrine')->getRepository(Block::class)->getStaticBlocks();
+        $return = [];
 
         foreach ($blocks as $block) {
             $return []= $block->asArray(true);
