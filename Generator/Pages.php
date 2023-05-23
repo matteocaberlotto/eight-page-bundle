@@ -91,8 +91,8 @@ class Pages
             $this->createBlocks($data['static_blocks']);
         }
 
-        if (isset($data['published']) && $data['published']) {
-            $page->setPublished(true);
+        if (isset($data['published'])) {
+            $page->setPublished($data['published']);
         }
 
         $this->doctrine->flush();
