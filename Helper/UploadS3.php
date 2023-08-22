@@ -30,11 +30,13 @@ class UploadS3
     public function upload($source, $filepath)
     {
         try {
+            $this->logger->info('Uploading ' . $source . ' as ' . mime_content_type($source));
             $result = $this->s3->putObject([
                 'Bucket' => $_SERVER['EIGHT_S3_BUCKET'],
                 'Key'    => ($_SERVER['EIGHT_S3_PATH'] ? $_SERVER['EIGHT_S3_PATH'] . DIRECTORY_SEPARATOR : '') . $filepath,
                 'SourceFile' => $source,
                 'ACL'        => 'public-read',
+                'ContentType' => mime_content_type($source),
             ]);
         } catch(\Exception $e) {
             $this->logger->error('EightPage upload to S3 failed:  ' . $e->getMessage());
