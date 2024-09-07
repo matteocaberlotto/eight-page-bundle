@@ -61,6 +61,7 @@ class Extension extends AbstractExtension
         $twig = $this;
 
         return array(
+            new TwigFunction('current_page', array($this, 'getPage')),
             new TwigFunction('i18n_path', array($this, 'i18nPath')),
             new TwigFunction('i18n_title', array($this, 'i18nTitle')),
             new TwigFunction('route_name', array($this, 'routeName')),

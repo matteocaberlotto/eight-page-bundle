@@ -1,17 +1,13 @@
 # EightPageBundle
 
 
-This bundle allows you to build cms editable pages within minutes without changing too much usual symfony development process.
-Supports Symfony 2+ up to 3.3 (symfony 4.0 is in roadmap). Just be sure to select the proper version.
+This bundle allows you to build cms editable pages within minutes without changing much of the usual development process.
 
-- ```1.0.x``` for Symfony ```2.x/3.x``` and Twitter Bootstrap ```3.3.x```
-- ```1.3.x``` for Symfony ```3.x``` and Twitter Bootstrap ```4.x```
 
 ### Roadmap:
  - some more tests
  - ease admin bundle switching
  - ease storage switching
- - symfony 4 compatibility
 
 
 ### Features:
@@ -20,6 +16,7 @@ Supports Symfony 2+ up to 3.3 (symfony 4.0 is in roadmap). Just be sure to selec
  - auto form building for in-place content editing
  - yml content loader/exporter for programmatic page editing
  - very light and easy to admin!
+ - no migrations required (only initial setup)
 
 
 
@@ -31,12 +28,12 @@ Supports Symfony 2+ up to 3.3 (symfony 4.0 is in roadmap). Just be sure to selec
 
 
 2. install and configure dependencies (refer to each installation documentation)
-    - sonata admin bundle (for admin structure/navigation)
+    - sonata admin or easy admin bundle (for admin structure/navigation)
     - raindrop routing bundle (for dynamic routing)
     - fos user bundle (this is not strictly required)
     - symfony/templating (only for some symfony versions)
     - symfony/assetic-bundle
-    - you will also need to manually include twitter bootstrap assets (3.3.* for 1.0.* and 4.* for 1.3.*)
+    - you will also need to manually include twitter bootstrap assets because some CMS elements relies on few css rules
 
 
 3. add following lines to config.yml if you need to configure one or more of the following features:
